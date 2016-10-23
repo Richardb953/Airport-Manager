@@ -91,6 +91,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>3.6.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>${javax.persistance.version}</version>
+        </dependency>
 
 
     </dependencies>
@@ -107,6 +112,7 @@
         <org.mockito.version>1.10.19</org.mockito.version>
         <java.inject.version>1</java.inject.version>
         <postgres.version>9.3-1100-jdbc41</postgres.version>
+        <javax.persistance.version>1.0</javax.persistance.version>
     </properties>
 
 </project>
