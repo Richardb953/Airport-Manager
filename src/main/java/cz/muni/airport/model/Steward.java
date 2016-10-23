@@ -50,4 +50,26 @@ public class Steward {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	@Override
+    public int hashCode() {
+        return (id == null) ? 0 : id.hashCode();
+	}
+
+	@Override
+    public boolean equals(Object obj) {
+		if ((obj == null) || !(obj instanceof Steward)) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+		}
+
+        Steward steward = (Steward) obj;
+		if (id != null) {
+			return id.equals(steward.getId());
+		} else {
+			return steward.getId() == null;
+		}
+	}
 }
