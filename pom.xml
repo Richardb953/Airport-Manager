@@ -89,7 +89,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate.core}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -100,28 +100,38 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.6.10.Final</version>
+            <version>${hibernate.entity}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
-            <version>3.2.0.Final</version>
+            <version>${hibernate.annotation}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <version>${hibernate.javax}</version>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
-            <version>1.1</version>
+            <version>${javax.transaction}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>1.1.1.Final</version>
+            <version>${hibernate.model}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${apache.derby}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.encache}</version>
         </dependency>
     </dependencies>
 
@@ -138,6 +148,14 @@
         <java.inject.version>1</java.inject.version>
         <postgres.version>9.3-1100-jdbc41</postgres.version>
         <javax.persistance.version>1.0</javax.persistance.version>
+        <hibernate.core>4.3.5.Final</hibernate.core>
+        <hibernate.entity>3.6.10.Final</hibernate.entity>
+        <hibernate.annotation>3.2.0.Final</hibernate.annotation>
+        <hibernate.javax>1.0.1.Final</hibernate.javax>
+        <javax.transaction>1.1</javax.transaction>
+        <hibernate.model>1.1.1.Final</hibernate.model>
+        <apache.derby>10.10.2.0</apache.derby>
+        <hibernate.encache>4.2.13.Final</hibernate.encache>
     </properties>
 
 </project>
