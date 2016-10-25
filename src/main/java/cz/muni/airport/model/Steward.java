@@ -1,5 +1,6 @@
 package cz.muni.airport.model;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Column;
@@ -52,24 +53,40 @@ public class Steward {
     }
 
 	@Override
-    public int hashCode() {
-        return (id == null) ? 0 : id.hashCode();
+	public int hashCode() {
+		int hash = 7;
+		hash = 13 * hash + Objects.hashCode(this.id);
+		return hash;
 	}
 
 	@Override
-    public boolean equals(Object obj) {
-		if ((obj == null) || !(obj instanceof Steward)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
 		}
-
-        Steward steward = (Steward) obj;
-		if (id != null) {
-			return id.equals(steward.getId());
-		} else {
-			return steward.getId() == null;
+		if (obj == null) {
+			return false;
 		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Steward other = (Steward) obj;
+		if (!Objects.equals(this.firstName, other.firstName)) {
+			return false;
+		}
+		if (!Objects.equals(this.lastName, other.lastName)) {
+			return false;
+		}
+		if (!Objects.equals(this.id, other.id)) {
+			return false;
+		}
+		return true;
+	}	
+	
+	@Override
+	public String toString() {
+		return "Steward{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + '}';
 	}
+	
+	
 }
