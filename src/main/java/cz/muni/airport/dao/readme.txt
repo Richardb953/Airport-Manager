@@ -1,0 +1,1 @@
+Folder contains Data Access Objects - https://en.wikipedia.org/wiki/Data_access_object
