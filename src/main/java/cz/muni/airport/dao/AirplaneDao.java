@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface AirplaneDao {
     public List<Airplane> getAllAirplanes();
+    public Airplane getAirplaneById(Long id);
     public Airplane getAirplaneByName(String name);
     
     public void addAirplane(Airplane airplane);
