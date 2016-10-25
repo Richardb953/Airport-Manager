@@ -1,6 +1,6 @@
-package java.cz.muni.airport.dao;
+package cz.muni.airport.dao;
 
-import java.cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Flight;
 import java.util.List;
 
 /**

@@ -1,10 +1,10 @@
-package java.cz.muni.airport.services.impl;
+package cz.muni.airport.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.cz.muni.airport.dao.FlightDao;
-import java.cz.muni.airport.services.FlightService;
+import cz.muni.airport.dao.FlightDao;
+import cz.muni.airport.services.FlightService;
 
 /**
  * @author rba on 23.10.2016.

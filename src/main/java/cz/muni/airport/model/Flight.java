@@ -1,6 +1,7 @@
-package java.cz.muni.airport.model;
+package cz.muni.airport.model;
 
-import javafx.util.converter.DateTimeStringConverter;
+import cz.muni.airport.model.Airplane;
+import cz.muni.airport.model.Airport;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,8 +42,10 @@ public class Flight {
 
     @Column
     private Date departure;
-
+/*
     private List<Steward> stewards;
+*/
 
-
+    public Flight() {
+    }
 }
