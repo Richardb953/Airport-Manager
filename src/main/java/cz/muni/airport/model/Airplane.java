@@ -14,6 +14,7 @@ import java.util.Objects;
 
 @Entity
 public class Airplane {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,13 +1,14 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.FlightDao;
+import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Flight;
+
 import java.util.List;
 
 /**
  * @author rba on 23.10.2016.
  */
-public class FlightDaoImpl implements FlightDao {
+public class FlightDAOImpl implements FlightDAO {
 
     @Override public Flight addFlight(Flight flight) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -31,6 +32,10 @@ public class FlightDaoImpl implements FlightDao {
     }
 
     @Override public List<Flight> getAllFlights() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override public Flight updatePassengersByConst(Flight flight, Integer passengerConst) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
