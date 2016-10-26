@@ -1,18 +1,23 @@
 package cz.muni.airport.dao.impl;
 
 import cz.muni.airport.dao.StewardDao;
+import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  *
- * @author Andrea Navrátilová
+ * @author Andrea Navrï¿½tilovï¿½
  */
-public class StewardDaoImpl implements StewardDao {
+@Repository("stewardDAO")
+public class StewardDaoImpl extends Connection implements StewardDao {
 
 	@Override
 	public Steward addSteward(Steward steward) {
-		throw new UnsupportedOperationException("Not supported yet."); 
+		getHibernateTemplate().save(steward);
+		return steward;
 	}
 
 	@Override

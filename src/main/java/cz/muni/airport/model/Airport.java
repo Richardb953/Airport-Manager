@@ -1,11 +1,11 @@
 package cz.muni.airport.model;
 
-import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Locale;
 
 /**
  * @author Jiri Krejci
@@ -15,6 +15,7 @@ public class Airport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(nullable = false, unique = true)

@@ -1,9 +1,15 @@
 package cz.muni.airport.services;
 
+import cz.muni.airport.model.Steward;
+
 /**
  *
- * @author Andrea Navrátilová
+ * @author Andrea Navrï¿½tilovï¿½
  */
+
 public interface StewardService {
+
+    void save(Steward steward);
+
 	
 }

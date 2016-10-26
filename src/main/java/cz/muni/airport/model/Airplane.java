@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,6 +19,7 @@ public class Airplane {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Long id;
     
     @Column
@@ -27,6 +30,9 @@ public class Airplane {
     
     @Column
     private PlaneType type;
+
+    @OneToMany(mappedBy = "airplane")
+    private List<Flight> flights;
 
     public Airplane() {
     }
@@ -63,6 +69,13 @@ public class Airplane {
         this.type = type;
     }
 
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
+    }
     @Override
     public int hashCode() {
         int hash = 7;
@@ -101,9 +114,5 @@ public class Airplane {
     public String toString() {
         return "Airplane{" + "id=" + id + ", name=" + name + ", capacity=" + capacity + ", type=" + type + '}';
     }
-    
-    
-    
-    
-    
+
 }

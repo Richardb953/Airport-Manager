@@ -1,29 +1,35 @@
 package cz.muni.airport.model;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
- * @author Andrea Navrátilová
+ * @author Andrea Navrï¿½tilovï¿½
  */
 
 @Entity
 public class Steward {
 	
-	@Id
+		@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+		@Column(unique = true, nullable = false)
+		private Long id;
 
     @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)
     private String lastName;
+
+		@ManyToMany()
+		private List<Flight> flights;
 
     public Steward() {
     }
@@ -44,7 +50,7 @@ public class Steward {
         this.firstName = firstName;
     }
 	
-	public String getLastName() {
+		public String getLastName() {
         return lastName;
     }
 
@@ -52,41 +58,49 @@ public class Steward {
         this.lastName = lastName;
     }
 
-	@Override
-	public int hashCode() {
-		int hash = 7;
-		hash = 13 * hash + Objects.hashCode(this.id);
-		return hash;
-	}
+		public List<Flight> getFlights() {
+			return flights;
+		}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+		public void setFlights(List<Flight> flights) {
+			this.flights = flights;
+		}
+
+		@Override
+		public int hashCode() {
+			int hash = 7;
+			hash = 13 * hash + Objects.hashCode(this.id);
+			return hash;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			final Steward other = (Steward) obj;
+			if (!Objects.equals(this.firstName, other.firstName)) {
+				return false;
+			}
+			if (!Objects.equals(this.lastName, other.lastName)) {
+				return false;
+			}
+			if (!Objects.equals(this.id, other.id)) {
+				return false;
+			}
 			return true;
 		}
-		if (obj == null) {
-			return false;
+
+		@Override
+		public String toString() {
+			return "Steward{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + '}';
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Steward other = (Steward) obj;
-		if (!Objects.equals(this.firstName, other.firstName)) {
-			return false;
-		}
-		if (!Objects.equals(this.lastName, other.lastName)) {
-			return false;
-		}
-		if (!Objects.equals(this.id, other.id)) {
-			return false;
-		}
-		return true;
-	}	
-	
-	@Override
-	public String toString() {
-		return "Steward{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + '}';
-	}
 	
 	
 }

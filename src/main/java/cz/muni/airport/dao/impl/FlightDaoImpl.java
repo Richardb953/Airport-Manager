@@ -2,16 +2,31 @@ package cz.muni.airport.dao.impl;
 
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Flight;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author rba on 23.10.2016.
  */
-public class FlightDAOImpl implements FlightDAO {
 
+@Repository("flightDAO")
+public class FlightDAOImpl implements FlightDAO {
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
     @Override public Flight addFlight(Flight flight) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.persist(flight);
+        tx.commit();
+        session.close();
+        return flight;
     }
 
     @Override public Flight getFlight(Long id) {
