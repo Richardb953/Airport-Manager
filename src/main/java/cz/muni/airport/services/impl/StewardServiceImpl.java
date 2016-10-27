@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Andrea Navr�tilov�
+ * @author Andrea Navratilova
  */
 @Service("stewardService")
 public class StewardServiceImpl implements StewardService {

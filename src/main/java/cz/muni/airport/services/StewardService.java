@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 /**
  *
- * @author Andrea Navr�tilov�
+ * @author Andrea Navratilova
  */
 
 @Transactional
