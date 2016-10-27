@@ -15,6 +15,5 @@ import javax.transaction.Transactional;
 public interface StewardService {
 
     void save(Steward steward);
-
 	
 }
