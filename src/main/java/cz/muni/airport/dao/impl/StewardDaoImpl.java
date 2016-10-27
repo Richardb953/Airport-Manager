@@ -3,6 +3,7 @@ package cz.muni.airport.dao.impl;
 import cz.muni.airport.dao.StewardDao;
 import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +17,10 @@ public class StewardDaoImpl extends Connection implements StewardDao {
 
 	@Override
 	public Steward addSteward(Steward steward) {
-		getHibernateTemplate().save(steward);
+		HibernateTemplate session;
+		session = getHibernateTemplate();
+		session.setCheckWriteOperations(false);
+		session.save(steward);
 		return steward;
 	}
 
