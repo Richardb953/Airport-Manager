@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Date;
@@ -23,6 +25,9 @@ import java.util.List;
  */
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Flight.findAll", query = "from Flight "),
+    @NamedQuery(name = "Flight.findByName", query = "FROM Flight WHERE name = :login")
+})
 public class Flight {
 
     @Id
