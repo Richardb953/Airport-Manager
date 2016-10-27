@@ -45,16 +45,6 @@ public class StewardDaoImpl implements StewardDao {
 	}
 
 	@Override
-	public List<Steward> getStewardsByFirstName(String firstName) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public List<Steward> getStewardsByLastName(String lastName) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
 	public List<Steward> getStewardByName(String firstName, String lastName) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
