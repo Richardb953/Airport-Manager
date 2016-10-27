@@ -8,7 +8,7 @@ import java.util.Locale;
  *
  * @author Jiri Krejci
  */
-public interface IAirportDao {
+public interface AirportDAO {
 
     void create(Airport airport) throws IllegalArgumentException;
 

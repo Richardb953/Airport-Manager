@@ -1,9 +1,19 @@
 package cz.muni.airport.services;
 
+import cz.muni.airport.model.Steward;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
 /**
  *
- * @author Andrea Navrátilová
+ * @author Andrea Navrï¿½tilovï¿½
  */
+
+@Transactional
+@Service
 public interface StewardService {
+
+    void save(Steward steward);
 	
 }

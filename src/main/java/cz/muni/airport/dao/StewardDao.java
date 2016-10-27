@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author Andrea Navrátilová
+ * @author Andrea Navrï¿½tilovï¿½
  */
 public interface StewardDao {
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.muni</groupId>
@@ -39,15 +41,43 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.contex.version}</version>
-            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.10.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${org.slf4j.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -65,11 +95,6 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>${java.inject.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.contex.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -90,7 +115,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.core}</version>
-            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.3.Final</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -121,7 +150,16 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate.model}</version>
-            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.4</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
@@ -138,23 +176,28 @@
             <artifactId>ehcache</artifactId>
             <version>2.8.3</version>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
-        <spring.contex.version>4.1.9.RELEASE</spring.contex.version>
-        <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+        <spring.contex.version>4.2.5.RELEASE</spring.contex.version>
+        <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
         <junit.version>4.8.2</junit.version>
         <org.slf4j.version>1.7.9</org.slf4j.version>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <aspect.version>1.7.3</aspect.version>
         <org.mockito.version>1.10.19</org.mockito.version>
         <java.inject.version>1</java.inject.version>
         <postgres.version>9.3-1100-jdbc41</postgres.version>
         <javax.persistance.version>1.0</javax.persistance.version>
         <hibernate.core>4.3.5.Final</hibernate.core>
-        <hibernate.entity>3.6.10.Final</hibernate.entity>
+        <hibernate.entity>4.3.5.Final</hibernate.entity>
         <hibernate.annotation>3.2.0.Final</hibernate.annotation>
         <hibernate.javax>1.0.1.Final</hibernate.javax>
         <javax.transaction>1.1</javax.transaction>

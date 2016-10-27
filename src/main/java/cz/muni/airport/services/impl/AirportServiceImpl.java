@@ -1,8 +1,8 @@
 package cz.muni.airport.services.impl;
 
-import cz.muni.airport.dao.IAirportDao;
 import cz.muni.airport.services.IAirportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import cz.muni.airport.dao.AirportDAO;
 
 /**
  *
@@ -11,6 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AirportServiceImpl implements IAirportService {
     
     @Autowired
-    private IAirportDao airportDao;
+    private AirportDAO airportDao;
 
 }

@@ -48,11 +48,4 @@ public interface FlightDAO {
      */
     List<Flight> getAllFlights();
 
-    /**
-     * UPDATE CAPACITY BY CONST
-     * @param flight entity of flight object
-     * @param passengerConst const for update passengers can be possitive or negative
-     * @return Flight update flight object
-     */
-    Flight updatePassengersByConst(Flight flight, Integer passengerConst);
 }

@@ -1,15 +1,15 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.IAirportDao;
 import cz.muni.airport.model.Airport;
 import java.util.List;
 import java.util.Locale;
+import cz.muni.airport.dao.AirportDAO;
 
 /**
  *
  * @author Jiri Krejci
  */
-public class AirportDaoImpl implements IAirportDao {
+public class AirportDAOImpl implements AirportDAO {
 
     @Override
     public void create(Airport airport) throws IllegalArgumentException {

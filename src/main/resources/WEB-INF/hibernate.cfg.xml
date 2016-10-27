@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<!-- File contains database configuration as url, user, password -->
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+        <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url" value="jdbc:derby:memory:testdb"/>
+        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+        <mapping class="cz.muni.airport.model.Steward"/>
+        <mapping class="cz.muni.airport.model.Airplane"/>
+        <mapping class="cz.muni.airport.model.Airport"/>
+        <mapping class="cz.muni.airport.model.Flight"/>
+
+
+    </session-factory>
+</hibernate-configuration>
