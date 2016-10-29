@@ -2,9 +2,6 @@ package cz.muni.airport.services;
 
 import cz.muni.airport.model.Steward;
 import java.util.List;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 /**
  *

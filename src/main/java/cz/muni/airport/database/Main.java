@@ -2,6 +2,7 @@ package cz.muni.airport.database;
 
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.StewardService;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,5 +25,9 @@ public class Main {
 
         stewardService.addSteward(steward);
 
+		List<Steward> stewards = stewardService.getStewardByName("Jano", "Mrkva");
+        for(Steward s : stewards) {
+			System.out.println(s.toString());
+        }
     }
 }
