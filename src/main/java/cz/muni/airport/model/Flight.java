@@ -25,8 +25,9 @@ import java.util.List;
  */
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Flight.findAll", query = "from Flight "),
-    @NamedQuery(name = "Flight.findByName", query = "FROM Flight WHERE name = :login")
+@NamedQueries({
+        @NamedQuery(name = "Flight.findAll", query = "from Flight"),
+        @NamedQuery(name = "Flight.findByName", query = "FROM Flight WHERE name = :name")
 })
 public class Flight {
 
@@ -151,5 +152,19 @@ public class Flight {
 
     @Override public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", arrival=" + arrival +
+                ", departure=" + departure +
+                ", passagers=" + passagers +
+                ", airplane=" + airplane +
+                ", destinationPort=" + destinationPort +
+                ", sourcePort=" + sourcePort +
+                '}';
     }
 }

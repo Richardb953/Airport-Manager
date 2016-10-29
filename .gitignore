@@ -2,6 +2,7 @@
 ### Maven template
 target/
 lib/
+*.log
 
 pom.xml.tag
 pom.xml.releaseBackup
@@ -90,3 +91,4 @@ tmp/
 .recommenders/
 
 /target/
+/src/main/resources/properties/database.properties
