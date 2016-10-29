@@ -72,7 +72,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.10.1.RELEASE</version>
+            <version>${spring.data}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.2.3.Final</version>
+            <version>${hibernate.validator}</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -154,12 +154,12 @@
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
-            <version>2.2.4</version>
+            <version>${javax.el}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
-            <version>2.2.4</version>
+            <version>${javax.el}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
@@ -174,17 +174,12 @@
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>2.8.3</version>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>1.6.2</version>
+            <version>${encache}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring.contex.version}</version>
         </dependency>
     </dependencies>
 
@@ -192,6 +187,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <spring.contex.version>4.2.5.RELEASE</spring.contex.version>
+        <spring.data>1.10.1.RELEASE</spring.data>
         <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
         <junit.version>4.8.2</junit.version>
         <org.slf4j.version>1.7.9</org.slf4j.version>
@@ -201,14 +197,17 @@
         <java.inject.version>1</java.inject.version>
         <postgres.version>9.3-1100-jdbc41</postgres.version>
         <javax.persistance.version>1.0</javax.persistance.version>
+        <javax.el>2.2.4</javax.el>
         <hibernate.core>4.3.5.Final</hibernate.core>
         <hibernate.entity>4.3.5.Final</hibernate.entity>
         <hibernate.annotation>3.2.0.Final</hibernate.annotation>
         <hibernate.javax>1.0.1.Final</hibernate.javax>
+        <hibernate.validator>5.2.3.Final</hibernate.validator>
         <javax.transaction>1.1</javax.transaction>
         <hibernate.model>1.1.1.Final</hibernate.model>
         <apache.derby>10.10.2.0</apache.derby>
         <hibernate.encache>4.2.13.Final</hibernate.encache>
+        <encache>2.8.3</encache>
     </properties>
 
 </project>
