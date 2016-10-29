@@ -25,12 +25,8 @@
         <property name="airplaneDAO" ref="airplaneDao"/>
     </bean>
 
-    <bean id="stewardDAO" class="cz.muni.airport.dao.impl.StewardDaoImpl">
+    <bean id="stewardDAO" class="cz.muni.airport.dao.impl.StewardDAOImpl">
         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="stewardService" class="cz.muni.airport.services.impl.StewardServiceImpl">
-        <property name="stewardDao" ref="stewardDAO" />
     </bean>
    
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

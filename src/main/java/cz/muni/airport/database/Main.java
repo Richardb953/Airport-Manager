@@ -23,11 +23,12 @@ public class Main {
         ApplicationContext context =
             new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
 
-        createPlane(context);
+       // createPlane(context);
         createSteward(context);
-        createFlight(context);
+       // createFlight(context);
 
     }
+
    private static void createPlane(ApplicationContext context) {
         // retrieve configured instance
         AirplaneService airplaneService = (AirplaneService) context.getBean("airplaneService");
@@ -51,7 +52,7 @@ public class Main {
             System.out.println(plane.toString());
         }
 
-        String name = "Dumbo";
+        String name = "Dumbo";;
         System.out.println("BY NAME: "+name+"..............................");
         System.out.println(airplaneService.getAirplaneByName(name).toString());
         List<Airplane> found = airplaneService.getAirplaneByName(name);
@@ -60,17 +61,7 @@ public class Main {
         }
    }
 
-    private static void createSteward(ApplicationContext context){
-        StewardService stewardService =  context.getBean("stewardService", StewardService.class);
-
-        Steward steward = new Steward();
-        steward.setFirstName("Jano");
-        steward.setLastName("Mrkva");
-        stewardService.save(steward);
-
-    }
-
-    private static void createFlight(ApplicationContext context){
+    private static void createFlight(ApplicationContext context) {
         FlightService flightService = context.getBean("flightServiceImpl", FlightService.class);
 
         Flight flight = new Flight();
@@ -100,14 +91,30 @@ public class Main {
         flightService.saveFlight(flight2);
 
         System.out.println("Vsetky:");
-        for(Flight flight3 : flightService.findAllFlights()){
+        for (Flight flight3 : flightService.findAllFlights()) {
             System.out.println(flight3.getName());
         }
 
         System.out.println("let 266..:");
 
-        for(Flight flight3 : flightService.findFlightByName("leto cislo 26681861866")){
+        for (Flight flight3 : flightService.findFlightByName("leto cislo 26681861866")) {
             System.out.println(flight3.getName());
+        }
+    }
+
+    private static void createSteward(ApplicationContext context){
+        StewardService stewardService =  context.getBean("stewardService", StewardService.class);
+
+        Steward steward = new Steward();
+        steward.setFirstName("Jano");
+        steward.setLastName("Mrkva");
+
+        stewardService.addSteward(steward);
+        stewardService.addSteward(steward);
+
+		List<Steward> stewards = stewardService.getStewardByName("Jano", "Mrkva");
+        for(Steward s : stewards) {
+			System.out.println(s.toString());
         }
     }
 }

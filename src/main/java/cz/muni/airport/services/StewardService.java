@@ -1,19 +1,18 @@
 package cz.muni.airport.services;
 
 import cz.muni.airport.model.Steward;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  *
- * @author Andrea Navr�tilov�
+ * @author Andrea Navratilova
  */
-
-@Transactional
-@Service
 public interface StewardService {
 
-    void save(Steward steward);
-	
+	public Steward addSteward(Steward steward);
+	public void removeSteward(Steward steward);
+	public Steward updateSteward(Steward steward);
+	public Steward getSteward(Long id);
+	public List<Steward> getAllStewards();
+	public List<Steward> getStewardByName(String firstName, String lastName);
 }
