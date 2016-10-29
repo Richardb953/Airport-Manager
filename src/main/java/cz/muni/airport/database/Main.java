@@ -7,7 +7,6 @@ import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.FlightService;
 import cz.muni.airport.services.StewardService;
-import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

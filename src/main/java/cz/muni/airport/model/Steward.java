@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Steward entity
  * @author Andrea Navratilova
  */
 

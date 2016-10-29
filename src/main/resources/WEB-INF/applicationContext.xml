@@ -28,10 +28,6 @@
     <bean id="stewardDAO" class="cz.muni.airport.dao.impl.StewardDAOImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-
-    <bean id="stewardService" class="cz.muni.airport.services.impl.StewardServiceImpl">
-        <property name="stewardDAO" ref="stewardDAO" />
-    </bean>
    
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
