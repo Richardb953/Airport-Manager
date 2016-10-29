@@ -2,53 +2,57 @@ package cz.muni.airport.dao.impl;
 
 import cz.muni.airport.model.Airport;
 import java.util.List;
-import java.util.Locale;
 import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.database.Connection;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Jiri Krejci
  */
-public class AirportDAOImpl implements AirportDAO {
+@Repository("airportDAO")
+public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
-    public void create(Airport airport) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Airport addAirport(Airport airport) {
+        getHibernateTemplate().save(airport);
+        return airport;
     }
 
     @Override
-    public void update(Airport airport) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Airport updateAirport(Airport airport) {
+        getHibernateTemplate().update(airport);
+        return airport;
     }
 
     @Override
-    public void remove(Airport airport) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Airport getAirport(Long id) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeAirport(Airport airport) {
+        getHibernateTemplate().delete(airport);
     }
 
     @Override
     public List<Airport> getAllAirports() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findAll");
     }
 
     @Override
-    public List<Airport> getAirportsByCity(String city) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Airport getAirportById(Long id)  {
+        return getHibernateTemplate().get(Airport.class, id);
+    }
+
+    @Override
+    public List<Airport> getAirportsByCity(String city) {
+        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByCity","city", city);
+    }
+
+    @Override
+    public List<Airport> getAirportsByName(String name) throws IllegalArgumentException {
+        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByName","name", name);
     }
 
     @Override
     public List<Airport> getAirportsByCountry(String country) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByCountry","country", country   );
     }
 
-    @Override
-    public List<Airport> getAirportsByCountry(Locale locale) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Sat Oct 29 14:41:45 CEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-1075-cc90-0000031aa640 
-on database directory memory:/home/karbo/PA165 - Java/Airport Manager/Airport-Manager/testdb with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
-Loaded from file:/home/karbo/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+Sat Oct 29 17:29:49 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-110f-a952-0000061aa508 
+on database directory memory:C:\Users\Jirka\Documents\MU\_FI_PA165_Java_III\Airport-Manager\testdb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/Jirka/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_91-8u91-b14-3ubuntu1~16.04.1-b14
-user.dir=/home/karbo/PA165 - Java/Airport Manager/Airport-Manager
-os.name=Linux
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Users\Jirka\Documents\MU\_FI_PA165_Java_III\Airport-Manager
+os.name=Windows 7
 os.arch=amd64
-os.version=4.4.0-42-generic
+os.version=6.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

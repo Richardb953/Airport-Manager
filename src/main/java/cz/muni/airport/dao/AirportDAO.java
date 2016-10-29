@@ -10,20 +10,15 @@ import java.util.Locale;
  */
 public interface AirportDAO {
 
-    void create(Airport airport) throws IllegalArgumentException;
-
-    void update(Airport airport) throws IllegalArgumentException;
-
-    void remove(Airport airport) throws IllegalArgumentException;
-
-    Airport getAirport(Long id) throws IllegalArgumentException;
+    Airport addAirport(Airport airport) throws IllegalArgumentException;
+    Airport updateAirport(Airport airport) throws IllegalArgumentException;
+    void removeAirport(Airport airport) throws IllegalArgumentException;
 
     List<Airport> getAllAirports();
-
+    
+    Airport getAirportById(Long id) throws IllegalArgumentException;
     List<Airport> getAirportsByCity(String city) throws IllegalArgumentException;
-
+    List<Airport> getAirportsByName(String name) throws IllegalArgumentException;
     List<Airport> getAirportsByCountry(String country) throws IllegalArgumentException;
-
-    List<Airport> getAirportsByCountry(Locale locale) throws IllegalArgumentException;
 
 }

@@ -5,12 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Locale;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author Jiri Krejci
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Airport.findAll", query = "FROM Airport"),
+    @NamedQuery(name = "Airport.findByName", query = "FROM Airport WHERE name = :name"),
+    @NamedQuery(name = "Airport.findByCity", query = "FROM Airport WHERE city = :city"),
+    @NamedQuery(name = "Airport.findByCountry", query = "FROM Airport WHERE country = :country"),
+})
 public class Airport {
 
     @Id
@@ -22,7 +29,7 @@ public class Airport {
     private String name;
 
     @Column(nullable = false)
-    private Locale country;
+    private String country;
 
     @Column(nullable = false)
     private String city;
@@ -46,26 +53,12 @@ public class Airport {
         this.name = name;
     }
 
-    public Locale getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    /**
-     * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-     *
-     * @param country
-     */
-    public void setCountry(Locale country) {
+    public void setCountry(String country) {
         this.country = country;
-    }
-
-    /**
-     *
-     * @param language
-     * @param country
-     */
-    public void setCountry(String language, String country) {
-        this.setCountry(new Locale(language, country));
     }
 
     public String getCity() {
@@ -76,12 +69,13 @@ public class Airport {
         this.city = city;
     }
 
+
     @Override
     public String toString() {
         return "Airport {"
                 + "id=" + getId()
                 + ", name='" + name + "'"
-                + ", country='" + country.getDisplayCountry() + " (" + country.getCountry() + ")'"
+                + ", country='" + country + "'"
                 + ", city='" + city + "'"
                 + "}";
     }
