@@ -33,10 +33,10 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
     }
 
     @Override public List<Flight> getFlightsByName(String name) {
-       return (List<Flight>) getHibernateTemplate().findByNamedQuery("Flight.findByName","name", name);
+       return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
     }
 
     @Override public List<Flight> getAllFlights() {
-        return (List<Flight>) getHibernateTemplate().findByNamedQuery("Flight.findByName");
+        return (List<Flight>) getHibernateTemplate().findByNamedQuery("Flight.findAll");
     }
 }

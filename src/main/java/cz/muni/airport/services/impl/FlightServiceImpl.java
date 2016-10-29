@@ -5,6 +5,7 @@ import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,29 +17,41 @@ import java.util.List;
 public class FlightServiceImpl implements FlightService {
 
     @Autowired
-    FlightDAO flightDao;
+    private FlightDAO flightDao;
 
-    @Override public Flight saveFlight(Flight flight) {
+    @Override
+    @Transactional
+    public Flight saveFlight(Flight flight) {
        return flightDao.addFlight(flight);
     }
 
-    @Override public Flight updateFlight(Flight flight) {
+    @Override
+    @Transactional
+    public Flight updateFlight(Flight flight) {
         return flightDao.updateFlight(flight);
     }
 
-    @Override public void removeFlight(Flight flight) {
+    @Override
+    @Transactional
+    public void removeFlight(Flight flight) {
         flightDao.removeFlight(flight);
     }
 
-    @Override public Flight getFlight(Long id) {
+    @Override
+    @Transactional
+    public Flight getFlight(Long id) {
         return flightDao.getFlight(id);
     }
 
-    @Override public List<Flight> findAllFlights() {
+    @Override
+    @Transactional
+    public List<Flight> findAllFlights() {
         return flightDao.getAllFlights();
     }
 
-    @Override public List<Flight> findFlightByName(String name) {
+    @Override
+    @Transactional
+    public List<Flight> findFlightByName(String name) {
         return flightDao.getFlightsByName(name);
     }
 }
