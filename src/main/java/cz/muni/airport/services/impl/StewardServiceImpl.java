@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
  *
  * @author Andrea Navratilova
  */
-@Service
+@Service("stewardService")
 public class StewardServiceImpl implements StewardService {
     @Autowired
     StewardDAO stewardDAO;
+	
+	public void setStewardDAO(StewardDAO stewardDAO) {
+        this.stewardDAO = stewardDAO;
+	}
 
     @Override public Steward addSteward(Steward steward) {
         return stewardDAO.addSteward(steward);

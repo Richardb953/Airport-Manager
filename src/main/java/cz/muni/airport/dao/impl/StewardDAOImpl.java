@@ -3,7 +3,6 @@ package cz.muni.airport.dao.impl;
 import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,35 +12,37 @@ import java.util.List;
  * @author Andrea Navratilova
  */
 @Repository("stewardDAO")
-public class StewardDAOImpl implements StewardDAO {
+public class StewardDAOImpl extends Connection implements StewardDAO {
 
 	@Override
 	public Steward addSteward(Steward steward) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getHibernateTemplate().save(steward);
+		return steward;
 	}
 
 	@Override
 	public void removeSteward(Steward steward) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getHibernateTemplate().delete(steward);
 	}
 
 	@Override
 	public Steward updateSteward(Steward steward) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getHibernateTemplate().update(steward);
+		return steward;
 	}
 
 	@Override
-	public Steward getSteward(Long id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public Steward getSteward(Long stewardId) {
+		return getHibernateTemplate().get(Steward.class, stewardId);
 	}
 
 	@Override
 	public List<Steward> getAllStewards() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return (List<Steward>) getHibernateTemplate().find("from Steward");
 	}
 
 	@Override
 	public List<Steward> getStewardByName(String firstName, String lastName) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return (List<Steward>) getHibernateTemplate().find("from Steward where firstName = '" + firstName +"' and lastName = '" + lastName + "'");
 	}
 }
