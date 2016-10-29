@@ -27,7 +27,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override public void removeFlight(Flight flight) {
-        flightDao.removeFlight(flight.getId());
+        flightDao.removeFlight(flight);
     }
 
     @Override public Flight getFlight(Long id) {

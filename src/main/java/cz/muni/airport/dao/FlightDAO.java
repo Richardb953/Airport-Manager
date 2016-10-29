@@ -31,9 +31,9 @@ public interface FlightDAO {
 
     /**
      * DELETE FLIGHT
-     * @param id Long value of flight id
+     * @param flight Long value of flight id
      */
-    void removeFlight(Long id);
+    void removeFlight(Flight flight);
 
     /**
      * FIND FLIGHT BY NAME

@@ -28,8 +28,8 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
         return flight;
     }
 
-    @Override public void removeFlight(Long id) {
-        getHibernateTemplate().delete(getFlight(id));
+    @Override public void removeFlight(Flight flight) {
+        getHibernateTemplate().delete(flight);
     }
 
     @Override public List<Flight> getFlightsByName(String name) {
