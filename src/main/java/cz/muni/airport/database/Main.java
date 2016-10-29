@@ -22,7 +22,7 @@ public class Main {
         steward.setFirstName("Jano");
         steward.setLastName("Mrkva");
 
-        stewardService.save(steward);
+        stewardService.addSteward(steward);
 
     }
 }

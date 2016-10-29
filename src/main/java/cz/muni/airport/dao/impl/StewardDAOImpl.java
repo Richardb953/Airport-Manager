@@ -1,6 +1,6 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.StewardDao;
+import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -13,15 +13,11 @@ import java.util.List;
  * @author Andrea Navratilova
  */
 @Repository("stewardDAO")
-public class StewardDaoImpl implements StewardDao {
+public class StewardDAOImpl implements StewardDAO {
 
 	@Override
 	public Steward addSteward(Steward steward) {
-		HibernateTemplate session;
-        session = getHibernateTemplate();
-        session.setCheckWriteOperations(false);
-        session.save(steward);
-        return steward;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override

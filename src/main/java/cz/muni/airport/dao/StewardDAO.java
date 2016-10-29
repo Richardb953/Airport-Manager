@@ -8,7 +8,7 @@ import java.util.List;
  * DAO for Steward entity
  * @author Andrea Navratilova
  */
-public interface StewardDao {
+public interface StewardDAO {
 
 	/**
 	 *
