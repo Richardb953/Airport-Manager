@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sat Oct 29 17:29:49 CEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-110f-a952-0000061aa508 
+Sat Oct 29 19:16:29 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-1171-52a5-00000612e228 
 on database directory memory:C:\Users\Jirka\Documents\MU\_FI_PA165_Java_III\Airport-Manager\testdb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Jirka/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
