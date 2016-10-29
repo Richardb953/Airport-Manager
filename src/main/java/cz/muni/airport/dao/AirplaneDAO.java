@@ -12,13 +12,13 @@ import java.util.List;
  *
  * @author Karolína Božková
  */
-public interface AirplaneDao {
+public interface AirplaneDAO {
     public List<Airplane> getAllAirplanes();
     public Airplane getAirplaneById(Long id);
-    public Airplane getAirplaneByName(String name);
+    public List<Airplane> getAirplaneByName(String name);
     
-    public void addAirplane(Airplane airplane);
-    public void updateAirplane(Airplane airplane);
+    public Airplane addAirplane(Airplane airplane);
+    public Airplane updateAirplane(Airplane airplane);
     public void removeAirplane(Airplane airplane);
     
 }

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Oct 29 14:41:45 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-1075-cc90-0000031aa640 
+on database directory memory:/home/karbo/PA165 - Java/Airport Manager/Airport-Manager/testdb with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
+Loaded from file:/home/karbo/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-8u91-b14-3ubuntu1~16.04.1-b14
+user.dir=/home/karbo/PA165 - Java/Airport Manager/Airport-Manager
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-42-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
