@@ -13,36 +13,32 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jiri Krejci
  */
 @Repository("airportDAO")
+@Transactional
 public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
-    @Transactional
     public Airport addAirport(Airport airport) {
         getHibernateTemplate().save(airport);
         return airport;
     }
 
     @Override
-    @Transactional
     public Airport updateAirport(Airport airport) {
         getHibernateTemplate().update(airport);
         return airport;
     }
 
     @Override
-    @Transactional
     public void removeAirport(Airport airport) {
         getHibernateTemplate().delete(airport);
     }
 
     @Override
-    @Transactional
     public List<Airport> getAllAirports() {
         return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findAll");
     }
 
     @Override
-    @Transactional
     public Airport getAirportById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Id can't be null");
@@ -51,7 +47,6 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
     }
 
     @Override
-    @Transactional
     public List<Airport> getAirportsByCity(String city) {
         if (city == null) {
             throw new IllegalArgumentException("City can't be null");
@@ -60,7 +55,6 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
     }
 
     @Override
-    @Transactional
     public List<Airport> getAirportsByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name can't be null");
@@ -69,7 +63,6 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
     }
 
     @Override
-    @Transactional
     public List<Airport> getAirportsByCountry(String country) {
         if (country == null) {
             throw new IllegalArgumentException("Country can't be null");
