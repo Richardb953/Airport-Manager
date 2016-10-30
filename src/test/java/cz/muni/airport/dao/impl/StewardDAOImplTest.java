@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package cz.muni.airport.dao.impl;
-
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Steward;
 import java.util.List;
@@ -18,8 +16,9 @@ import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureExcep
 import org.springframework.test.context.ContextConfiguration;
 
 /**
+ * This class tests all methods of StewardDAOImpl.
  *
- * @author Karolína Božková
+ * @author Karolína Božková 
  */
 //@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
 public class StewardDAOImplTest {
@@ -33,7 +32,8 @@ public class StewardDAOImplTest {
     }
 
     /**
-     * Test of addSteward method, of class StewardDAOImpl.
+     * Tests wether addSteward() adds steward into the database. 
+     * Database is empty, after adding tests if it has one entry.
      */
     @Test
     public void testAddSteward() {
@@ -48,7 +48,7 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of addNullSteward method, of class StewardDAOImpl.
+     * Tests if addSteward() throws IllegalArgumentException when given null parameter. 
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddSteward_null() {
@@ -58,7 +58,7 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * 
+     * Tests if removeSteward() throws IllegalArgumentException when given null parameter. 
      */
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveSteward_null(){
@@ -67,7 +67,8 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of removeSteward method, of class StewardDAOImpl.
+     * Tests if removeSteward() removes entry from database. 
+     * Database is set up with two entities, after remove operation only one entry is expected.
      */
     @Test
     public void testRemoveSteward() {
@@ -87,10 +88,10 @@ public class StewardDAOImplTest {
     }
 
     /**
-     * Test of updateSteward method, of class StewardDAOImpl.
+     * Tests if updateSteward() allows to change ID. Exception is expected. Id must not be changed.
      */
     @Test(expected = HibernateOptimisticLockingFailureException.class)
-    public void testUpdateSteward_ID() {   System.out.println("testUpdateStewardID()------------------");   
+    public void testUpdateSteward_ID() {   System.out.println("testUpdateStewardID()");   
         //setup
         Steward s1 = new Steward();
         s1.setFirstName("Alice");
@@ -110,7 +111,8 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * 
+     * Tests if updateSteward() works properly on all attributes except from id and flights and if it 
+     * does not change unwanted entries.
      */
     @Test()
     public void testUpdateSteward() {   System.out.println("testUpdateSteward()------------------");   
@@ -144,6 +146,9 @@ public class StewardDAOImplTest {
                 
     }
     
+    /**
+     * Tests if updateSteward() throws IllegalArgumentException if given null parameter.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateSteward_Null(){ System.out.println("testUpdateStewardNull()");
         Steward s = null;
@@ -151,7 +156,7 @@ public class StewardDAOImplTest {
     }
 
     /**
-     * Test of getSteward method, of class StewardDAOImpl.
+     * Tests if getSteward() throws IllegalArgumentException if given null parameter.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetSteward_Null() { System.out.println("testGetStewardNull()");
@@ -159,6 +164,10 @@ public class StewardDAOImplTest {
         Steward steward = stewardDAO.getSteward(id);
     }
     
+    /**
+     * Tests behavior of getSteward() when searching for entry that is not in the database.
+     * Expexted result is null object.
+     */
     @Test
     public void testGetSteward_nonexistent(){ System.out.println("testGetStewardNonexistent()");
         //empty db
@@ -167,6 +176,9 @@ public class StewardDAOImplTest {
         
     }
     
+    /**
+     * Tests proper behaviour of getSteward() method. 
+     */
     @Test
     public void testGetSteward(){ System.out.println("testGetSteward()");
         //setup
@@ -179,6 +191,7 @@ public class StewardDAOImplTest {
         Steward alice = stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
         
+        //test
         Steward aliceDB = stewardDAO.getSteward(alice.getId());
         
         assertEquals(alice, aliceDB);
@@ -188,6 +201,7 @@ public class StewardDAOImplTest {
 
     /**
      * Test of getAllStewards method, of class StewardDAOImpl.
+     * On empty database empty list of results expected.
      */
     @Test
     public void testGetAllStewards() { System.out.println("testGetAllStewards()");
@@ -218,7 +232,7 @@ public class StewardDAOImplTest {
         s1.setFirstName("Alice");
         s1.setLastName("Dunham");
         Steward s2 = new Steward();
-        s2.setFirstName("Dylan");
+        s2.setFirstName("Alice");
         s2.setLastName("Bob");
         Steward alice = stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
@@ -230,7 +244,7 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of getStewardByName method, of class StewardDAOImpl.
+     * Tests if getStewardByName method throws exception if one of the parameters is null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_firstNull() {
@@ -250,7 +264,7 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of getStewardByName method, of class StewardDAOImpl.
+     * Tests if getStewardByName method throws exception if one of the parameters is null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_secondNull() {
@@ -267,7 +281,7 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of getStewardByName method, of class StewardDAOImpl.
+     * Tests if getStewardByName method throws exception if both parameters are null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_bothNull() {
@@ -276,7 +290,8 @@ public class StewardDAOImplTest {
     }
     
     /**
-     * Test of getStewardByName method, of class StewardDAOImpl.
+     * Tests behaviour of getStewardByName method if given entry is not in the database.
+     * Expected result is empty list. 
      */
     @Test
     public void testGetStewardByName_nonexistent() {
