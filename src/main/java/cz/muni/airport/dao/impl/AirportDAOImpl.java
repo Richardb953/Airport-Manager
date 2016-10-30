@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jiri Krejci
  */
-@Transactional
 @Repository("airportDAO")
 @Transactional
 public class AirportDAOImpl extends Connection implements AirportDAO {
