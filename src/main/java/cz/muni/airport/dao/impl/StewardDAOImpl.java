@@ -4,6 +4,7 @@ import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
  *
  * @author Andrea Navratilova
  */
+
+@Transactional
 @Repository("stewardDAO")
 public class StewardDAOImpl extends Connection implements StewardDAO {
 

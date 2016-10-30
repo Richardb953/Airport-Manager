@@ -27,9 +27,9 @@ public class Main {
         ApplicationContext context
                 = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
 
-//         createPlane(context);
-//        createSteward(context);
-//         createFlight(context);
+        createPlane(context);
+        createSteward(context);
+        createFlight(context);
         createAirport(context);
 
     }
@@ -50,6 +50,8 @@ public class Main {
 
         airplaneService.saveAirplane(airplane);
         airplaneService.saveAirplane(airplane2);
+
+        airplaneService.getAirplaneById(null);
 
         System.out.println("ALL AIRPLANES.........................");
         List<Airplane> planes = airplaneService.getAllAirplanes();
@@ -127,7 +129,7 @@ public class Main {
         AirportService airportService = (AirportService) context.getBean("airportService");
 
         Airport a = new Airport();
-        a.setName("Letištì V. Havla");
+        a.setName("Letisko V. Havla");
         a.setCity("Brno");
         a.setCountry("CZ");
 

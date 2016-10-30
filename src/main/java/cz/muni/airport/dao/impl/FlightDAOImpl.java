@@ -4,6 +4,7 @@ import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Flight;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author rba on 23.10.2016.
  */
 
+@Transactional
 @Repository("flightDAO")
 public class FlightDAOImpl extends Connection implements FlightDAO {
 
@@ -33,7 +35,8 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
     }
 
     @Override public List<Flight> getFlightsByName(String name) {
-       return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
+        if(name == null) throw new IllegalArgumentException("Name can not be null");
+        return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
     }
 
     @Override public List<Flight> getAllFlights() {
