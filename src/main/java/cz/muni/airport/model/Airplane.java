@@ -23,7 +23,7 @@ public class Airplane {
     @Column(unique = true, nullable = false)
     private Long id;
     
-    @Column
+    @Column(nullable = false)
     private String name;
     
     /**
@@ -91,6 +91,7 @@ public class Airplane {
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
     }
+
     @Override
     public int hashCode() {
         int hash = 7;
