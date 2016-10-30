@@ -5,12 +5,14 @@ import java.util.List;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.database.Connection;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of Airport DAO interface
  * 
  * @author Jiri Krejci
  */
+@Transactional
 @Repository("airportDAO")
 public class AirportDAOImpl extends Connection implements AirportDAO {
 

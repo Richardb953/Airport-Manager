@@ -29,12 +29,12 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <bean id="airportDao" class="cz.muni.airport.dao.impl.AirportDAOImpl">
+    <bean id="airportDAO" class="cz.muni.airport.dao.impl.AirportDAOImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
     <bean id="airportService" class="cz.muni.airport.services.impl.AirportServiceImpl">
-        <property name="airportDAO" ref="airportDao"/>
+        <property name="airportDAO" ref="airportDAO"/>
     </bean>
    
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
