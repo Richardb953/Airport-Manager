@@ -58,7 +58,7 @@ public class AirportDAOImplTest {
 		assertEquals(1, airportDAO.getAllAirports().size());
 		assertEquals(airport, airportDAO.getAirportsByName("Brno letištì").get(0));
 	}
-
+	
 	/**
 	 * Test of updateAirport method, of class AirportDAOImpl.
 	 */
