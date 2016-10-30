@@ -4,26 +4,27 @@ import cz.muni.airport.model.Steward;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * This class tests all methods of StewardDAOImpl.
  *
  * @author Karolína Božková 
  */
-//@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
 public class StewardDAOImplTest {
     
-    //@Autowired(required = true)
+    @Autowired(required = true)
     private StewardDAO stewardDAO;
     
     public StewardDAOImplTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:WEB-INF/applicationContext.xml");
-        stewardDAO = ctx.getBean(StewardDAO.class);
     }
 
     /**
