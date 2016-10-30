@@ -92,3 +92,4 @@ tmp/
 
 /target/
 /src/main/resources/properties/database.properties
+/nbproject/
