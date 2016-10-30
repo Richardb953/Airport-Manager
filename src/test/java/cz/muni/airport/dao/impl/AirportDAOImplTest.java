@@ -80,7 +80,7 @@ public class AirportDAOImplTest {
 		
 		assertEquals("Paris Aéroport", airportDAO.getAirportById(airportUpdate.getId()).getName());
 		assertEquals("France", airportDAO.getAirportById(airportUpdate.getId()).getCountry());
-		assertEquals("Paris Aéroport", airportDAO.getAirportById(airportUpdate.getId()).getCity());
+		assertEquals("Paris", airportDAO.getAirportById(airportUpdate.getId()).getCity());
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class AirportDAOImplTest {
 		
 		airportDAO.removeAirport(airport1);
 		assertEquals(1, airportDAO.getAllAirports().size());
-		assertEquals("Paris Aéroport", airportDAO.getAllAirports().get(0));
+		assertEquals("Paris Aéroport", airportDAO.getAllAirports().get(0).getName());
 	}
 
 	/**
