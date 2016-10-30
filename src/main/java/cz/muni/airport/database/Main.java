@@ -29,8 +29,8 @@ public class Main {
 
 //         createPlane(context);
 //        createSteward(context);
-//         createFlight(context);
-        createAirport(context);
+         createFlight(context);
+//        createAirport(context);
 
     }
 

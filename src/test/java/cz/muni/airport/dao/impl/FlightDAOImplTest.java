@@ -84,26 +84,46 @@ public class FlightDAOImplTest {
     @Test()
     public void testUpdateFlight() {
 
-        Flight f1 = createFlight1();
-        flightDAO.addFlight(f1);
+        Flight flight = flightDAO.addFlight(createFlight1());
 
-        Flight chenged = f1;
+        Calendar newArrival = Calendar.getInstance();
+        newArrival.set(2015, Calendar.JANUARY, 21, 11, 12);
+        Calendar newDeparture = Calendar.getInstance();
+        newDeparture.set(2017, Calendar.FEBRUARY, 21, 10, 10);
 
-        Calendar arrival = Calendar.getInstance();
-        arrival.set(2015, Calendar.JANUARY, 21, 11, 12);
-        Calendar departure = Calendar.getInstance();
-        departure.set(2017, Calendar.FEBRUARY, 21, 10, 10);
+        Airport newDestination = new Airport();
+        newDestination.setCity("Vienna");
+        newDestination.setCountry("D");
+        newDestination.setName("Vienna airport");
+        newDestination = airportDAO.addAirport(newDestination);
 
-        chenged.setName("FlightChanged");
-        chenged.setArrival(arrival.getTime());
-        chenged.setDeparture(departure.getTime());
-        chenged.setPassagers(10);
+        Airport newSource = new Airport();
+        newSource.setCity("Kosice");
+        newSource.setCountry("SK");
+        newSource.setName("Letisko Kosice");
+        newSource = airportDAO.addAirport(newSource);
 
-        f1 = flightDAO.updateFlight(f1);
-        assertEquals("FlightChanged", flightDAO.getFlight(f1.getId()).getName());
-        assertEquals(arrival.getTime(), flightDAO.getFlight(f1.getId()).getArrival());
-        assertEquals(departure.getTime(), flightDAO.getFlight(f1.getId()).getDeparture());
-        assertEquals(new Integer(10), flightDAO.getFlight(f1.getId()).getPassagers());
+        Airplane newAirplane = new Airplane();
+        newAirplane.setCapacity(30);
+        newAirplane.setName("Kane");
+        newAirplane.setType(PlaneType.HELICOPTER);
+        newAirplane = airplaneDAO.addAirplane(newAirplane);
+
+        flight.setName("FlightChanged");
+        flight.setArrival(newArrival.getTime());
+        flight.setDeparture(newDeparture.getTime());
+        flight.setPassagers(10);
+        flight.setDestinationPort(newDestination);
+        flight.setSourcePort(newSource);
+        flight.setAirplane(newAirplane);
+
+        flight = flightDAO.updateFlight(flight);
+
+        assertEquals("FlightChanged", flightDAO.getFlight(flight.getId()).getName());
+        assertEquals(newArrival.getTime(), flightDAO.getFlight(flight.getId()).getArrival());
+        assertEquals(newDeparture.getTime(), flightDAO.getFlight(flight.getId()).getDeparture());
+        assertEquals(new Integer(10), flightDAO.getFlight(flight.getId()).getPassagers());
+        assertEquals(newAirplane, flightDAO.getFlight(flight.getId()).getAirplane());
 
     }
 
@@ -196,19 +216,19 @@ public class FlightDAOImplTest {
         airplane.setFlights(null);
         airplane.setName("Boeing 747");
         airplane.setType(PlaneType.BUSINESS_JET);
-        airplaneDAO.addAirplane(airplane);
+        airplane = airplaneDAO.addAirplane(airplane);
 
         Airport destination = new Airport();
         destination.setCity("Brno");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
-        airportDAO.addAirport(destination);
+        destination = airportDAO.addAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Praha");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
-        airportDAO.addAirport(source);
+        source = airportDAO.addAirport(source);
 
         Flight flight = new Flight();
         flight.setName("Flight1");
