@@ -1,6 +1,7 @@
 package cz.muni.airport.dao.impl;
 
 import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
@@ -30,9 +31,12 @@ public class FlightDAOImplTest {
     @Autowired(required = true)
     private FlightDAO flightDAO;
 
-//    @Autowired(required = true)
-//    private AirplaneDAO airplaneDAO;
-    
+    @Autowired(required = true)
+    private AirplaneDAO airplaneDAO;
+
+    @Autowired(required = true)
+    private AirportDAO airportDAO;
+
     public FlightDAOImplTest() {
     }
 
@@ -161,72 +165,24 @@ public class FlightDAOImplTest {
         assertEquals(addedToDB, flights.get(0));
 
     }
-//    
-//    /**
-//     * Tests if getStewardByName method throws exception if one of the parameters is null.
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testGetStewardByName_firstNull() {
-//        //setup
-//        Steward s1 = new Steward();
-//        s1.setFirstName("Alice");
-//        s1.setLastName("Dunham");
-//        Steward s2 = new Steward();
-//        s2.setFirstName("Dylan");
-//        s2.setLastName("Bob");
-//        stewardDAO.addSteward(s1);
-//        stewardDAO.addSteward(s2);
-//        
-//        stewardDAO.getStewardByName(null, "Bob");
-//        
-//        
-//    }
-//    
-//    /**
-//     * Tests if getStewardByName method throws exception if one of the parameters is null.
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testGetStewardByName_secondNull() {
-//        Steward s1 = new Steward();
-//        s1.setFirstName("Alice");
-//        s1.setLastName("Dunham");
-//        Steward s2 = new Steward();
-//        s2.setFirstName("Dylan");
-//        s2.setLastName("Bob");
-//        stewardDAO.addSteward(s1);
-//        stewardDAO.addSteward(s2);
-//        
-//        stewardDAO.getStewardByName("Alice", null);
-//    }
-//    
-//    /**
-//     * Tests if getStewardByName method throws exception if both parameters are null.
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testGetStewardByName_bothNull() {
-//        stewardDAO.getStewardByName(null, null);
-//        
-//    }
-//    
-//    /**
-//     * Tests behaviour of getStewardByName method if given entry is not in the database.
-//     * Expected result is empty list. 
-//     */
-//    @Test
-//    public void testGetStewardByName_nonexistent() {
-//        //setup
-//        Steward s1 = new Steward();
-//        s1.setFirstName("Alice");
-//        s1.setLastName("Dunham");
-//        Steward s2 = new Steward();
-//        s2.setFirstName("Dylan");
-//        s2.setLastName("Bob");
-//        stewardDAO.addSteward(s1);
-//        stewardDAO.addSteward(s2);
-//        
-//        List<Steward> gottenByName = stewardDAO.getStewardByName("Tom", "Hardy");
-//        assertTrue(gottenByName.isEmpty());
-//}
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetFlightByNameNull() {
+
+        Flight f1 = createFlight1();
+        flightDAO.addFlight(f1);
+
+        flightDAO.getFlightsByName(null);
+
+    }
+
+    @Test
+    public void testGetStewardByName_nonexistent() {
+        flightDAO.addFlight(createFlight1());
+
+        List<Flight> flights = flightDAO.getFlightsByName("FlightX");
+        assertTrue(flights.isEmpty());
+    }
 
     private Flight createFlight1() {
         Calendar arrival = Calendar.getInstance();
@@ -240,16 +196,19 @@ public class FlightDAOImplTest {
         airplane.setFlights(null);
         airplane.setName("Boeing 747");
         airplane.setType(PlaneType.BUSINESS_JET);
+        airplaneDAO.addAirplane(airplane);
 
         Airport destination = new Airport();
         destination.setCity("Brno");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
+        airportDAO.addAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Praha");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
+        airportDAO.addAirport(source);
 
         Flight flight = new Flight();
         flight.setName("Flight1");
@@ -257,6 +216,8 @@ public class FlightDAOImplTest {
         flight.setDeparture(departure.getTime());
         flight.setPassagers(50);
         flight.setAirplane(airplane);
+        flight.setDestinationPort(destination);
+        flight.setSourcePort(source);
 
         return flight;
     }
@@ -273,24 +234,28 @@ public class FlightDAOImplTest {
         airplane.setFlights(null);
         airplane.setName("Boeing 757");
         airplane.setType(PlaneType.BUSINESS_JET);
-//        airplaneDAO.addAirplane(airplane);
+        airplaneDAO.addAirplane(airplane);
 
         Airport destination = new Airport();
         destination.setCity("Bratislava");
         destination.setCountry("SK");
         destination.setName("Letiste Blava");
+        airportDAO.addAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Milano");
         source.setCountry("IT");
         source.setName("Milano airport");
+        airportDAO.addAirport(source);
 
         Flight flight = new Flight();
         flight.setName("Flight2");
         flight.setArrival(arrival.getTime());
         flight.setDeparture(departure.getTime());
         flight.setPassagers(90);
-//        flight.setAirplane(airplane);
+        flight.setAirplane(airplane);
+        flight.setDestinationPort(destination);
+        flight.setSourcePort(source);
 
         return flight;
     }

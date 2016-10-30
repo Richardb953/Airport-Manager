@@ -42,7 +42,7 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
 
     @Override
     @Transactional
-    public List<Flight> getFlightsByName(String name) {
+    public List<Flight> getFlightsByName(String name) throws IllegalArgumentException {
         return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
     }
 
