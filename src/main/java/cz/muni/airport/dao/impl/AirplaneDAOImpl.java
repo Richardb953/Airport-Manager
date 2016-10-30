@@ -5,7 +5,16 @@ import java.util.List;
 import cz.muni.airport.dao.AirplaneDAO;
 import org.springframework.stereotype.Repository;
 import cz.muni.airport.database.Connection;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementation of AirplaneDAO. This Data Access Object provides access 
+ * to Airplane antries ant Airplane related data.
+ * 
+ * @author Karolína Božková 
+ * @see AirplaneDAO documentation.
+ */
+@Transactional
 @Repository("airplaneDAO")
 public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
 

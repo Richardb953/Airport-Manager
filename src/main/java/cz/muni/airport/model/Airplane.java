@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Class representing the Airplane entity.
+ * 
  * @author Karolína Božková
  */
 
@@ -25,15 +26,29 @@ public class Airplane {
     @Column
     private String name;
     
+    /**
+     * Maximum number of passangers it can take.
+     */
     @Column
     private int capacity;
     
+    /**
+     * Specifies type of plane.
+     * @see PlaneType
+     */
     @Column
     private PlaneType type;
 
+    /**
+     * Airplane can have many noninterfering flights.
+     */
     @OneToMany(mappedBy = "airplane")
     private List<Flight> flights;
-
+    
+    /**
+     * Constructor of class Airplane. 
+     * No parameters - everything set by setters.
+     */
     public Airplane() {
     }
 
