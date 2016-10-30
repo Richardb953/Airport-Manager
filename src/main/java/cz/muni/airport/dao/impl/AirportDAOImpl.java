@@ -43,17 +43,17 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
     public List<Airport> getAirportsByCity(String city) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByCity","city", city);
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCity","city", city);
     }
 
     @Override
     public List<Airport> getAirportsByName(String name) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByName","name", name);
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByName","name", name);
     }
 
     @Override
     public List<Airport> getAirportsByCountry(String country) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findByCountry","country", country   );
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry","country", country   );
     }
 
 }
