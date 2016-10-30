@@ -4,33 +4,34 @@ import cz.muni.airport.model.Steward;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * This class tests all methods of StewardDAOImpl.
  *
  * @author Karolína Božková 
  */
-//@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
+@DirtiesContext
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
 public class StewardDAOImplTest {
     
-    //@Autowired(required = true)
+    @Autowired(required = true)
     private StewardDAO stewardDAO;
     
     public StewardDAOImplTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:WEB-INF/applicationContext.xml");
-        stewardDAO = ctx.getBean(StewardDAO.class);
     }
 
     /**
      * Tests wether addSteward() adds steward into the database. 
      * Database is empty, after adding tests if it has one entry.
      */
-    @Test
+    @Test@DirtiesContext
     public void testAddSteward() {
         System.out.println("testAddSteward()");
         Steward steward = new Steward();
@@ -65,7 +66,7 @@ public class StewardDAOImplTest {
      * Tests if removeSteward() removes entry from database. 
      * Database is set up with two entities, after remove operation only one entry is expected.
      */
-    @Test
+    @Test@DirtiesContext
     public void testRemoveSteward() {
         //setup
         Steward s1 = new Steward();
@@ -85,7 +86,7 @@ public class StewardDAOImplTest {
     /**
      * Tests if updateSteward() allows to change ID. Exception is expected. Id must not be changed.
      */
-    @Test(expected = HibernateOptimisticLockingFailureException.class)
+    @Test(expected = HibernateOptimisticLockingFailureException.class)@DirtiesContext
     public void testUpdateSteward_ID() {   System.out.println("testUpdateStewardID()");   
         //setup
         Steward s1 = new Steward();
@@ -109,7 +110,7 @@ public class StewardDAOImplTest {
      * Tests if updateSteward() works properly on all attributes except from id and flights and if it 
      * does not change unwanted entries.
      */
-    @Test()
+    @Test()@DirtiesContext
     public void testUpdateSteward() {   System.out.println("testUpdateSteward()------------------");   
         //setup
         Steward s1 = new Steward();
@@ -174,7 +175,7 @@ public class StewardDAOImplTest {
     /**
      * Tests proper behaviour of getSteward() method. 
      */
-    @Test
+    @Test@DirtiesContext
     public void testGetSteward(){ System.out.println("testGetSteward()");
         //setup
         Steward s1 = new Steward();
@@ -198,7 +199,7 @@ public class StewardDAOImplTest {
      * Test of getAllStewards method, of class StewardDAOImpl.
      * On empty database empty list of results expected.
      */
-    @Test
+    @Test@DirtiesContext
     public void testGetAllStewards() { System.out.println("testGetAllStewards()");
         // emty db
         assertEquals(0, stewardDAO.getAllStewards().size());
@@ -220,7 +221,7 @@ public class StewardDAOImplTest {
     /**
      * Test of getStewardByName method, of class StewardDAOImpl.
      */
-    @Test
+    @Test@DirtiesContext
     public void testGetStewardByName() { System.out.println("testGetStewardByName()");
     //setup
         Steward s1 = new Steward();
@@ -241,6 +242,7 @@ public class StewardDAOImplTest {
     /**
      * Tests if getStewardByName method throws exception if one of the parameters is null.
      */
+    @DirtiesContext
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_firstNull() {
         //setup
@@ -261,6 +263,7 @@ public class StewardDAOImplTest {
     /**
      * Tests if getStewardByName method throws exception if one of the parameters is null.
      */
+    @DirtiesContext
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_secondNull() {
         Steward s1 = new Steward();
@@ -289,6 +292,7 @@ public class StewardDAOImplTest {
      * Expected result is empty list. 
      */
     @Test
+    @DirtiesContext
     public void testGetStewardByName_nonexistent() {
         //setup
         Steward s1 = new Steward();
