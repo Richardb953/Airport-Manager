@@ -25,11 +25,13 @@ public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
     
     @Override
     public Airplane getAirplaneById(Long id) {
+        if(id == null) throw new IllegalArgumentException("id is null");
         return getHibernateTemplate().get(Airplane.class, id);
     }
     
     @Override
     public List<Airplane> getAirplaneByName(String name) {
+        if(name == null) throw new IllegalArgumentException("name is null");
         return (List<Airplane>) getHibernateTemplate().find("from Airplane where name = '" +name+"'");
     }
 
