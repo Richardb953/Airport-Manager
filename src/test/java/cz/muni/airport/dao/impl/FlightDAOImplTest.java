@@ -1,15 +1,16 @@
 package cz.muni.airport.dao.impl;
 
+import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.PlaneType;
 import java.util.Calendar;
+
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -29,11 +30,13 @@ public class FlightDAOImplTest {
     @Autowired(required = true)
     private FlightDAO flightDAO;
 
+//    @Autowired(required = true)
+//    private AirplaneDAO airplaneDAO;
+    
     public FlightDAOImplTest() {
     }
 
     @Test
-    @DirtiesContext
     public void testAddFlight() {
 
         flightDAO.addFlight(createFlight1());
@@ -55,7 +58,6 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    @DirtiesContext
     public void testRemoveFlight() {
 
         Flight f1 = createFlight1();
@@ -76,7 +78,6 @@ public class FlightDAOImplTest {
     }
 
     @Test()
-    @DirtiesContext
     public void testUpdateFlight() {
 
         Flight f1 = createFlight1();
@@ -122,7 +123,6 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    @DirtiesContext
     public void testGetSteward() {
 
         Flight f1 = createFlight1();
@@ -137,7 +137,6 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    @DirtiesContext
     public void testGetAllFlight() {
 
         assertEquals(0, flightDAO.getAllFlights().size());
@@ -150,7 +149,6 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    @DirtiesContext
     public void testGetFlightByName() {
 
         Flight f = createFlight1();
@@ -258,6 +256,7 @@ public class FlightDAOImplTest {
         flight.setArrival(arrival.getTime());
         flight.setDeparture(departure.getTime());
         flight.setPassagers(50);
+        flight.setAirplane(airplane);
 
         return flight;
     }
@@ -274,6 +273,7 @@ public class FlightDAOImplTest {
         airplane.setFlights(null);
         airplane.setName("Boeing 757");
         airplane.setType(PlaneType.BUSINESS_JET);
+//        airplaneDAO.addAirplane(airplane);
 
         Airport destination = new Airport();
         destination.setCity("Bratislava");
@@ -290,6 +290,7 @@ public class FlightDAOImplTest {
         flight.setArrival(arrival.getTime());
         flight.setDeparture(departure.getTime());
         flight.setPassagers(90);
+//        flight.setAirplane(airplane);
 
         return flight;
     }
