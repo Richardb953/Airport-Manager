@@ -29,8 +29,8 @@ public class Main {
 
 //         createPlane(context);
 //        createSteward(context);
-         createFlight(context);
-//        createAirport(context);
+//         createFlight(context);
+        createAirport(context);
 
     }
 
@@ -127,7 +127,7 @@ public class Main {
         AirportService airportService = (AirportService) context.getBean("airportService");
 
         Airport a = new Airport();
-        a.setName("LetiötÏ V. Havla");
+        a.setName("Leti≈°t√¨ V. Havla");
         a.setCity("Brno");
         a.setCountry("CZ");
 
