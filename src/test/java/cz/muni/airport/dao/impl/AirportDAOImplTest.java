@@ -11,11 +11,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
+import org.springframework.test.annotation.DirtiesContext;
 
 /**
  * Tests for AirportDAOImpl class
  * @author Andrea Navratilova
  */
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AirportDAOImplTest {
 	
 	//@Autowired(required = true)
@@ -60,6 +63,14 @@ public class AirportDAOImplTest {
 	}
 	
 	/**
+	 * Test of addAirport method, of class AirportDAOImpl, with null given.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddAirportWithNull() {
+		airportDAO.addAirport(null);
+	}
+	
+	/**
 	 * Test of updateAirport method, of class AirportDAOImpl.
 	 */
 	@Test
@@ -81,6 +92,30 @@ public class AirportDAOImplTest {
 		assertEquals("Paris Aéroport", airportDAO.getAirportById(airportUpdate.getId()).getName());
 		assertEquals("France", airportDAO.getAirportById(airportUpdate.getId()).getCountry());
 		assertEquals("Paris", airportDAO.getAirportById(airportUpdate.getId()).getCity());
+	}
+	
+	/**
+	 * Test of updateAirport method, of class AirportDAOImpl, with null given.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testUpdateAirportWithNull() {
+		airportDAO.updateAirport(null);
+	}
+	
+	/**
+	 * Test of removeAirport method, of class AirportDAOImpl.
+	 */
+	@Test(expected = HibernateOptimisticLockingFailureException.class)
+	public void testUpdateAirportId() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		Airport airportUpdate = airportDAO.getAirportsByName("Brno letištì").get(0);
+		airportUpdate.setId(new Long(10));
+		airportDAO.updateAirport(airportUpdate);
 	}
 
 	/**
@@ -105,6 +140,14 @@ public class AirportDAOImplTest {
 		airportDAO.removeAirport(airport1);
 		assertEquals(1, airportDAO.getAllAirports().size());
 		assertEquals("Paris Aéroport", airportDAO.getAllAirports().get(0).getName());
+	}
+	
+	/**
+	 * Test of removeAirport method, of class AirportDAOImpl, with null given.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveAirportWithNull() {
+		airportDAO.removeAirport(null);
 	}
 
 	/**
@@ -144,6 +187,28 @@ public class AirportDAOImplTest {
 		
 		assertEquals(result, airportDAO.getAirportById(result.getId()));
 	}
+	
+	/**
+	 * Test of getAirportById method, of class AirportDAOImpl, with null given.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetAirportByIdWithNull() {
+		airportDAO.getAirportById(null);
+	}
+	
+	/**
+	 * Test of getAirportById method, of class AirportDAOImpl, with nonexisting id given.
+	 */
+	@Test
+	public void testGetAirportByIdWithNonexistingId() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertNull(airportDAO.getAirportById(new Long(10)));
+	}
 
 	/**
 	 * Test of getAirportsByCity method, of class AirportDAOImpl.
@@ -167,6 +232,34 @@ public class AirportDAOImplTest {
 		assertEquals(airport1, airportDAO.getAirportsByCity("Brno").get(0));
 		assertEquals(1, airportDAO.getAirportsByCity("Brno").size());
 	}
+	
+	/**
+	 * Test of getAirportsByCity method, of class AirportDAOImpl, with null given.
+	 */
+	@Test
+	public void testGetAirportsByCityWithNull() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByCity(null).size());
+	}
+	
+	/**
+	 * Test of getAirportsByCity method, of class AirportDAOImpl, with nonexisting city given.
+	 */
+	@Test
+	public void testGetAirportsByCityWithNonexisting() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByCity("Praha").size());
+	}
 
 	/**
 	 * Test of getAirportsByName method, of class AirportDAOImpl.
@@ -189,6 +282,34 @@ public class AirportDAOImplTest {
 		
 		assertEquals(airport1, airportDAO.getAirportsByName("Brno letištì").get(0));
 		assertEquals(1, airportDAO.getAirportsByName("Brno letištì").size());
+	}
+	
+	/**
+	 * Test of getAirportsByName method, of class AirportDAOImpl, with null given.
+	 */
+	@Test
+	public void testGetAirportsByNameWithNull() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByName(null).size());
+	}
+	
+	/**
+	 * Test of getAirportsByName method, of class AirportDAOImpl, with nonexisting name given.
+	 */
+	@Test
+	public void testGetAirportsByNameWithNonexisting() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByName("Praha letištì").size());
 	}
 
 	/**
@@ -214,4 +335,31 @@ public class AirportDAOImplTest {
 		assertEquals(1, airportDAO.getAirportsByCountry("Èeská republika").size());
 	}
 	
+	/**
+	 * Test of getAirportsByCountry method, of class AirportDAOImpl, with null given.
+	 */
+	@Test
+	public void testGetAirportsByCountryWithNull() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByCountry(null).size());
+	}
+	
+	/**
+	 * Test of getAirportsByCountry method, of class AirportDAOImpl, with nonexisting country given.
+	 */
+	@Test
+	public void testGetAirportsByCountryWithNonexisting() {
+		Airport airport = new Airport();
+		airport.setName("Brno letištì");
+		airport.setCountry("Èeská republika");
+		airport.setCity("Brno");
+		airportDAO.addAirport(airport);
+		
+		assertEquals(0, airportDAO.getAirportsByCountry("Germany").size());
+	}
 }
