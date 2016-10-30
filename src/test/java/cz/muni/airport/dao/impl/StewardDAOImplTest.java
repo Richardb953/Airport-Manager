@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.airport.dao.impl;
 import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Steward;
@@ -65,7 +60,7 @@ public class StewardDAOImplTest {
         Steward steward = null;
         stewardDAO.removeSteward(steward);
     }
-    
+      
     /**
      * Tests if removeSteward() removes entry from database. 
      * Database is set up with two entities, after remove operation only one entry is expected.
