@@ -32,7 +32,7 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
         getHibernateTemplate().delete(flight);
     }
 
-    @Override public List<Flight> getFlightsByName(String name) throws IllegalArgumentException {
+    @Override public List<Flight> getFlightsByName(String name) {
         return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
     }
 
