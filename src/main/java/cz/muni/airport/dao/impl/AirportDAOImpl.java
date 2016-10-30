@@ -5,6 +5,7 @@ import java.util.List;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.database.Connection;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of Airport DAO interface
@@ -15,12 +16,14 @@ import org.springframework.stereotype.Repository;
 public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
+    @Transactional
     public Airport addAirport(Airport airport) {
         getHibernateTemplate().save(airport);
         return airport;
     }
 
     @Override
+    @Transactional
     public Airport updateAirport(Airport airport) {
         getHibernateTemplate().update(airport);
         return airport;

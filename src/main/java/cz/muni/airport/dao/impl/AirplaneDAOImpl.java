@@ -5,6 +5,7 @@ import java.util.List;
 import cz.muni.airport.dao.AirplaneDAO;
 import org.springframework.stereotype.Repository;
 import cz.muni.airport.database.Connection;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("airplaneDAO")
 public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
@@ -25,6 +26,7 @@ public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
     }
 
     @Override
+    @Transactional
     public Airplane addAirplane(Airplane airplane) {
         getHibernateTemplate().save(airplane);
         return airplane;
