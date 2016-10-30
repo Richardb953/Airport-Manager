@@ -5,13 +5,15 @@ import java.util.List;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.database.Connection;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of Airport DAO interface
- * 
+ *
  * @author Jiri Krejci
  */
 @Repository("airportDAO")
+@Transactional
 public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
@@ -37,23 +39,35 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
     }
 
     @Override
-    public Airport getAirportById(Long id)  {
+    public Airport getAirportById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id can't be null");
+        }
         return getHibernateTemplate().get(Airport.class, id);
     }
 
     @Override
     public List<Airport> getAirportsByCity(String city) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCity","city", city);
+        if (city == null) {
+            throw new IllegalArgumentException("City can't be null");
+        }
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCity", "city", city);
     }
 
     @Override
     public List<Airport> getAirportsByName(String name) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByName","name", name);
+        if (name == null) {
+            throw new IllegalArgumentException("Name can't be null");
+        }
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByName", "name", name);
     }
 
     @Override
     public List<Airport> getAirportsByCountry(String country) {
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry","country", country   );
+        if (country == null) {
+            throw new IllegalArgumentException("Country can't be null");
+        }
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry", "country", country);
     }
 
 }
