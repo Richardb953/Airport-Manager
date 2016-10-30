@@ -1,18 +1,20 @@
-package cz.muni.airport.dao;
+package cz.muni.airport.services;
 
 import cz.muni.airport.model.Airport;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
- * DAO interface for Airport entity
+ * Interface for Airport service
  * 
  * @author Jiri Krejci
  */
-public interface AirportDAO {
+@Service
+public interface AirportService {
 
     /**
-     * Create airport
-     * @param airport Airport object to be created
+     * Add airport
+     * @param airport Airport object to be added
      * @return Airport object
      */
     Airport addAirport(Airport airport);
