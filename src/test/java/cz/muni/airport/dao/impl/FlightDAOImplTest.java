@@ -124,7 +124,10 @@ public class FlightDAOImplTest {
         assertEquals(newDeparture.getTime(), flightDAO.getFlightById(flight.getId()).getDeparture());
         assertEquals(new Integer(10), flightDAO.getFlightById(flight.getId()).getPassagers());
         assertEquals(newAirplane, flightDAO.getFlightById(flight.getId()).getAirplane());
-
+        assertEquals(newSource, flightDAO.getFlightById(flight.getId()).getSourcePort());
+        assertEquals(newDestination, flightDAO.getFlightById(flight.getId()).getDestinationPort());
+        assertEquals(flight, flightDAO.getFlightById(flight.getId()));
+        
     }
 
     @Test(expected = IllegalArgumentException.class)
