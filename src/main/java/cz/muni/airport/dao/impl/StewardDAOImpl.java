@@ -35,7 +35,7 @@ public class StewardDAOImpl extends Connection implements StewardDAO {
 	}
 
 	@Override
-	public Steward getSteward(Long stewardId) {
+	public Steward getStewardById(Long stewardId) {
 		return getHibernateTemplate().get(Steward.class, stewardId);
 	}
 

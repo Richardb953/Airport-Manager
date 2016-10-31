@@ -35,7 +35,7 @@ public interface StewardDAO {
 	 * @param id the id of steward object
 	 * @return steward object by id
 	 */
-	public Steward getSteward(Long id);
+	public Steward getStewardById(Long id);
 
 	/**
 	 *

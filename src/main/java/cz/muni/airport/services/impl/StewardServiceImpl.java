@@ -37,7 +37,7 @@ public class StewardServiceImpl implements StewardService {
 	
 	@Override
 	public Steward getSteward(Long stewardId) {
-        return stewardDAO.getSteward(stewardId);
+        return stewardDAO.getStewardById(stewardId);
     }
 	
 	@Override

@@ -130,15 +130,15 @@ public class StewardDAOImplTest {
         //firstName
         toChange.setFirstName("Don");
         stewardDAO.updateSteward(toChange);
-        assertEquals("Don", stewardDAO.getSteward(toChangeID).getFirstName());
+        assertEquals("Don", stewardDAO.getStewardById(toChangeID).getFirstName());
         
         //lastName
         toChange.setLastName("Qichote");
         stewardDAO.updateSteward(toChange);
-        assertEquals("Qichote", stewardDAO.getSteward(toChangeID).getLastName());
+        assertEquals("Qichote", stewardDAO.getStewardById(toChangeID).getLastName());
         
         //others unchanged
-        assertEquals(unchanged, stewardDAO.getSteward(unchangedID));
+        assertEquals(unchanged, stewardDAO.getStewardById(unchangedID));
                 
     }
     
@@ -152,31 +152,31 @@ public class StewardDAOImplTest {
     }
 
     /**
-     * Tests if getSteward() throws IllegalArgumentException if given null parameter.
+     * Tests if getStewardById() throws IllegalArgumentException if given null parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testGetSteward_Null() { System.out.println("testGetStewardNull()");
+    public void testGetStewardById_Null() { System.out.println("testGetStewardNull()");
         Long id = null;
-        Steward steward = stewardDAO.getSteward(id);
+        Steward steward = stewardDAO.getStewardById(id);
     }
     
     /**
-     * Tests behavior of getSteward() when searching for entry that is not in the database.
+     * Tests behavior of getStewardById() when searching for entry that is not in the database.
      * Expexted result is null object.
      */
     @Test
-    public void testGetSteward_nonexistent(){ System.out.println("testGetStewardNonexistent()");
+    public void testGetStewardById_nonexistent(){ System.out.println("testGetStewardNonexistent()");
         //empty db
-        Steward s = stewardDAO.getSteward((long) 3 );
+        Steward s = stewardDAO.getStewardById((long) 3 );
         assertNull(s);
         
     }
     
     /**
-     * Tests proper behaviour of getSteward() method. 
+     * Tests proper behaviour of getStewardById() method. 
      */
     @Test
-    public void testGetSteward(){ System.out.println("testGetSteward()");
+    public void testGetStewardById(){ System.out.println("testGetSteward()");
         //setup
         Steward s1 = new Steward();
         s1.setFirstName("Alice");
@@ -188,7 +188,7 @@ public class StewardDAOImplTest {
         stewardDAO.addSteward(s2);
         
         //test
-        Steward aliceDB = stewardDAO.getSteward(alice.getId());
+        Steward aliceDB = stewardDAO.getStewardById(alice.getId());
         
         assertEquals(alice, aliceDB);
         

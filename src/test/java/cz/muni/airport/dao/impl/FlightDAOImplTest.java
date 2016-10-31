@@ -119,49 +119,49 @@ public class FlightDAOImplTest {
 
         flight = flightDAO.updateFlight(flight);
 
-        assertEquals("FlightChanged", flightDAO.getFlight(flight.getId()).getName());
-        assertEquals(newArrival.getTime(), flightDAO.getFlight(flight.getId()).getArrival());
-        assertEquals(newDeparture.getTime(), flightDAO.getFlight(flight.getId()).getDeparture());
-        assertEquals(new Integer(10), flightDAO.getFlight(flight.getId()).getPassagers());
-        assertEquals(newAirplane, flightDAO.getFlight(flight.getId()).getAirplane());
+        assertEquals("FlightChanged", flightDAO.getFlightById(flight.getId()).getName());
+        assertEquals(newArrival.getTime(), flightDAO.getFlightById(flight.getId()).getArrival());
+        assertEquals(newDeparture.getTime(), flightDAO.getFlightById(flight.getId()).getDeparture());
+        assertEquals(new Integer(10), flightDAO.getFlightById(flight.getId()).getPassagers());
+        assertEquals(newAirplane, flightDAO.getFlightById(flight.getId()).getAirplane());
 
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testUpdateFlight_Null() {
+    public void testUpdateFlight_null() {
         Flight flight = null;
         flightDAO.updateFlight(flight);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetFlight_Null() {
+    public void testGetFlightById_null() {
         Long id = null;
-        flightDAO.getFlight(id);
+        flightDAO.getFlightById(id);
     }
 
     @Test
-    public void testGetFlight_nonexistent() {
-        Flight flight = flightDAO.getFlight((long) 2);
+    public void testGetFlightById_nonexistent() {
+        Flight flight = flightDAO.getFlightById((long) 2);
         assertNull(flight);
 
     }
 
     @Test
-    public void testGetSteward() {
+    public void testGetFlightById() {
 
         Flight f1 = createFlight1();
         Flight f2 = createFlight2();
         Flight added = flightDAO.addFlight(f1);
         flightDAO.addFlight(f2);
 
-        Flight retrived = flightDAO.getFlight(added.getId());
+        Flight retrived = flightDAO.getFlightById(added.getId());
 
         assertEquals(added, retrived);
 
     }
 
     @Test
-    public void testGetAllFlight() {
+    public void testGetAllFlights() {
 
         assertEquals(0, flightDAO.getAllFlights().size());
 
@@ -187,7 +187,7 @@ public class FlightDAOImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetFlightByNameNull() {
+    public void testGetFlightByName_null() {
 
         Flight f1 = createFlight1();
         flightDAO.addFlight(f1);
