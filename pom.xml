@@ -24,6 +24,7 @@
                             <directory>src/main/resources</directory>
                         </resource>
                     </resources>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -33,6 +34,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>
@@ -208,6 +210,7 @@
         <apache.derby>10.10.2.0</apache.derby>
         <hibernate.encache>4.2.13.Final</hibernate.encache>
         <encache>2.8.3</encache>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>
