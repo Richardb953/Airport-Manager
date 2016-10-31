@@ -124,6 +124,13 @@ public class FlightDAOImplTest {
         assertEquals(newDeparture.getTime(), flightDAO.getFlightById(flight.getId()).getDeparture());
         assertEquals(new Integer(10), flightDAO.getFlightById(flight.getId()).getPassagers());
         assertEquals(newAirplane, flightDAO.getFlightById(flight.getId()).getAirplane());
+//        assertEquals(newSource, flightDAO.getFlightById(flight.getId()).getSourcePort());
+        assertEquals(flight, flightDAO.getFlightById(flight.getId()));
+        
+        System.out.println("------- Flight ---------");
+        System.out.println(flight);
+        System.out.println("------- Flight from db ---------");
+        System.out.println(flightDAO.getFlightById(flight.getId()));
 
     }
 
