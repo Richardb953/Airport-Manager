@@ -20,7 +20,7 @@ public interface FlightDAO {
      * @param id Long value of flight id
      * @return Flight object
      */
-    Flight getFlight(Long id);
+    Flight getFlightById(Long id);
 
     /**
      * UPDATE FLIGHT

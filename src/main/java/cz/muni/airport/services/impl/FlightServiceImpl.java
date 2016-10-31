@@ -40,7 +40,7 @@ public class FlightServiceImpl implements FlightService {
     @Override
     @Transactional
     public Flight getFlight(Long id) {
-        return flightDao.getFlight(id);
+        return flightDao.getFlightById(id);
     }
 
     @Override

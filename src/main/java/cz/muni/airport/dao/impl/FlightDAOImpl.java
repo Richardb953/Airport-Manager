@@ -21,7 +21,7 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
         return flight;
     }
 
-    @Override public Flight getFlight(Long id) {
+    @Override public Flight getFlightById(Long id) {
         return getHibernateTemplate().get(Flight.class, id);
     }
 
