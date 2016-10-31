@@ -129,7 +129,7 @@ public class Main {
         AirportService airportService = (AirportService) context.getBean("airportService");
 
         Airport a = new Airport();
-        a.setName("Letisko V. Havla");
+        a.setName("Letiště V. Havla");
         a.setCity("Brno");
         a.setCountry("CZ");
 
