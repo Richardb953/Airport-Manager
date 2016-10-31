@@ -46,6 +46,7 @@ public class StewardDAOImpl extends Connection implements StewardDAO {
 
 	@Override
 	public List<Steward> getStewardByName(String firstName, String lastName) {
+		if(firstName == null || lastName == null) throw new IllegalArgumentException("Firstname and lastname params can't be null");
 		return (List<Steward>) getHibernateTemplate().find("from Steward where firstName = '" + firstName +"' and lastName = '" + lastName + "'");
 	}
 }
