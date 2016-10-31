@@ -52,17 +52,9 @@ public class Flight {
     private Airplane airplane;
 
     @OneToOne()
-<<<<<<< HEAD
-//    @PrimaryKeyJoinColumn
     private Airport destinationPort;
 
     @OneToOne()
-//    @PrimaryKeyJoinColumn
-=======
-    private Airport destinationPort;
-
-    @OneToOne()
->>>>>>> 62b86b3a5ae0499638b08cb3eba8c54e61f0769c
     private Airport sourcePort;
 
     @ManyToMany(mappedBy = "flights")
