@@ -1,4 +1,4 @@
-package cz.muni.airport.database;
+package cz.muni.airport;
 
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
@@ -27,10 +27,10 @@ public class Main {
         ApplicationContext context
                 = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
 
-        createPlane(context);
-        createSteward(context);
+        //createPlane(context);
+        //createSteward(context);
         createFlight(context);
-        createAirport(context);
+        //createAirport(context);
 
     }
 
