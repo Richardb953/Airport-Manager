@@ -34,9 +34,9 @@ public class Main {
 
         ApplicationContext context  = new ClassPathXmlApplicationContext("WEB-INF/applicationContextDao.xml", "WEB-INF/applicationContext.xml");
 
-        //createPlane(context);
+        createPlane(context);
         //createSteward(context);
-        createFlight(context);
+        //createFlight(context);
         //createAirport(context);
 
     }
@@ -57,8 +57,6 @@ public class Main {
 
         airplaneService.saveAirplane(airplane);
         airplaneService.saveAirplane(airplane2);
-
-        airplaneService.getAirplaneById(null);
 
         System.out.println("ALL AIRPLANES.........................");
         List<Airplane> planes = airplaneService.getAllAirplanes();
