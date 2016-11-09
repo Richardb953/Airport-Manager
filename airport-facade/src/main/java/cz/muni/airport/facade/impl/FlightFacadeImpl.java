@@ -3,7 +3,7 @@ package cz.muni.airport.facade.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cz.muni.airport.dto.FlightDTO;
-import cz.muni.airport.facedeApi.FlightFacade;
+import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.FlightService;
 /**

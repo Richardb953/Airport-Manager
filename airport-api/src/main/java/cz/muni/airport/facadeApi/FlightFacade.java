@@ -1,4 +1,4 @@
-package cz.muni.airport.facedeApi;
+package cz.muni.airport.facadeApi;
 
 import cz.muni.airport.dto.FlightDTO;
 
