@@ -9,8 +9,12 @@ import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.FlightService;
 import cz.muni.airport.services.StewardService;
+
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextLoader;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,12 +24,15 @@ import java.util.List;
  *
  * @author rba on 15.10.2016.
  */
+
+
 public class Main {
 
     public static void main(final String[] args) throws Exception {
         // create and configure beans
-        ApplicationContext context
-                = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
+
+
+        ApplicationContext context  = new ClassPathXmlApplicationContext("WEB-INF/applicationContextDao.xml", "WEB-INF/applicationContext.xml");
 
         //createPlane(context);
         //createSteward(context);

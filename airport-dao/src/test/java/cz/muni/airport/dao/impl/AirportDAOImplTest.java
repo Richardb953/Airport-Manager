@@ -25,7 +25,7 @@ public class AirportDAOImplTest {
 	private AirportDAO airportDAO;
 	
 	public AirportDAOImplTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:WEB-INF/applicationContext.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:WEB-INF/applicationContextDao.xml");
         airportDAO = ctx.getBean(AirportDAO.class);
 	}
 	

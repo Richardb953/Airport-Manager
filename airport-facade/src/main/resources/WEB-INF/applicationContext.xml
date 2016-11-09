@@ -11,7 +11,6 @@
             http://www.springframework.org/schema/tx/spring-tx.xsd"
        xmlns:tx="http://www.springframework.org/schema/tx">
 
-
     <bean id="airplaneService" class="cz.muni.airport.services.impl.AirplaneServiceImpl">
         <property name="airplaneDAO" ref="airplaneDao"/>
     </bean>
@@ -23,5 +22,5 @@
     <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <tx:annotation-driven transaction-manager="transactionManager" />
-    <context:component-scan base-package="cz.muni.airport" />
+    <context:component-scan base-package="cz.muni.airport" annotation-config="true"/>
 </beans>

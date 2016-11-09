@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContextDao.xml"})
 public class StewardDAOImplTest {
     
     @Autowired(required = true)
