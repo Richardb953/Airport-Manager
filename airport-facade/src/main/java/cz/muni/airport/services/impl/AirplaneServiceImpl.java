@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of AirplaneServiceInterface.
- * @author Karolína Božková 
+ * @author Karolína Božková, github name: Kayeeec 
  * @see AirplaneService documentation.
  */
 @Service("airplaneService")

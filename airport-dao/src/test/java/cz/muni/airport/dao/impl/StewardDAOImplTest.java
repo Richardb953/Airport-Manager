@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * This class tests all methods of StewardDAOImpl.
  *
- * @author Karolína Božková 
+ * @author Karolína Božková, github name: Kayeeec 
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)

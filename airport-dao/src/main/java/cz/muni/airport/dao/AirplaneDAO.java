@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * <p> Contains basic CRUD operations.</p>
  *
- * @author Karolína Božková
+ * @author Karolína Božková, github name: Kayeeec 
  */
 public interface AirplaneDAO {
     /**

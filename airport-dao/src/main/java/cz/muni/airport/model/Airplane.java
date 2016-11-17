@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Class representing the Airplane entity.
  * 
- * @author Karolína Božková
+ * @author Karolína Božková, github name: Kayeeec
  */
 
 @Entity
