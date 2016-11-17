@@ -1,6 +1,7 @@
 package cz.muni.airport.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class representing the Airplane entity.
@@ -102,6 +104,13 @@ public class Airplane {
                 + getFlights().hashCode();
         return hash;
     }
+    
+   private boolean listEqualsNoOrder(List<Flight> l1, List<Flight> l2) {
+    final Set<Flight> s1 = new HashSet<>(l1);
+    final Set<Flight> s2 = new HashSet<>(l2);
+
+    return s1.equals(s2);
+}
 
     @Override
     public boolean equals(Object obj) {
@@ -110,10 +119,10 @@ public class Airplane {
         
         final Airplane other = (Airplane) obj;
         
-        if (this.getCapacity() != other.getCapacity()) return false;
+        if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
         if (!Objects.equals(this.getName(), other.getName())) return false;
-        if (this.getType() != other.getType()) return false;
-        if (!(this.getFlights().equals(other.getFlights()))) return false;
+        if (!Objects.equals(this.getType(), other.getType())) return false;
+//        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
         
         return true;
     }
