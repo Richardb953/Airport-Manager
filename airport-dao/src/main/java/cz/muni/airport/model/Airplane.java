@@ -1,5 +1,6 @@
 package cz.muni.airport.model;
 
+import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -85,7 +86,7 @@ public class Airplane {
     }
 
     public List<Flight> getFlights() {
-        return flights;
+        return Collections.unmodifiableList(flights);
     }
 
     public void setFlights(List<Flight> flights) {
@@ -95,34 +96,25 @@ public class Airplane {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + getName().hashCode()
+                + Objects.hashCode(getCapacity()) 
+                + getType().toString().hashCode()
+                + getFlights().hashCode();
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+        if (obj == null) return false;
+        if (!(obj instanceof Airplane)) return false; 
+        
         final Airplane other = (Airplane) obj;
-        if (this.capacity != other.capacity) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (this.type != other.type) {
-            return false;
-        }
+        
+        if (this.getCapacity() != other.getCapacity()) return false;
+        if (!Objects.equals(this.getName(), other.getName())) return false;
+        if (this.getType() != other.getType()) return false;
+        if (!(this.getFlights().equals(other.getFlights()))) return false;
+        
         return true;
     }
 
