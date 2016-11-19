@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * Steward entity
- * @author Andrea Navratilova
+ * @author Andrea Navratilova, github name: andrea-n
  */
 
 @Entity
@@ -68,8 +68,10 @@ public class Steward {
 
 	@Override
 	public int hashCode() {
-		int hash = 7;
-		hash = 13 * hash + Objects.hashCode(this.id);
+		int hash = 5;
+		hash = 29 * hash + Objects.hashCode(this.id);
+		hash = 29 * hash + Objects.hashCode(this.firstName);
+		hash = 29 * hash + Objects.hashCode(this.lastName);
 		return hash;
 	}
 

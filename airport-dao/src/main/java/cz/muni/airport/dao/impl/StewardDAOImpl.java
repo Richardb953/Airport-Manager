@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Andrea Navratilova
+ * @author Andrea Navratilova, github name: andrea-n
  */
 
 @Transactional
