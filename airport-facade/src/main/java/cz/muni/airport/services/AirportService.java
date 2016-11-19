@@ -44,6 +44,13 @@ public interface AirportService {
      * @return Airport object
      */
     Airport getAirportById(Long id);
+    
+    /**
+     * Get Airport
+     * @param iata String airport iata identifier
+     * @return Airport object
+     */
+    Airport getAirportByIata(String iata);
 
     /**
      * Get all airports with given city

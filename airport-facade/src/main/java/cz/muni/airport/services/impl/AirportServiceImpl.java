@@ -68,4 +68,9 @@ public class AirportServiceImpl implements AirportService {
         return airportDAO.getAirportsByCountry(country);
     }
 
+    @Override
+    public Airport getAirportByIata(String iata) {
+        return airportDAO.getAirportByIata(iata);
+    }
+
 }
