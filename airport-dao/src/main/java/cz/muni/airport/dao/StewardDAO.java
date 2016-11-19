@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * DAO for Steward entity
- * @author Andrea Navratilova
+ * @author Andrea Navratilova (andrea-n)
  */
 public interface StewardDAO {
 
