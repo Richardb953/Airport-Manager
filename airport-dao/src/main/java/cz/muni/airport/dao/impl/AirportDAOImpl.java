@@ -71,11 +71,11 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
     }
 
     @Override
-    public Airport getAirportByIata(String iata) {
+    public List<Airport> getAirportsByIata(String iata) {
         if (iata == null) {
             throw new IllegalArgumentException("Iata can't be null");
         }
-        return getHibernateTemplate().get(Airport.class, iata);
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByIata", "iata", iata);
     }
 
 }

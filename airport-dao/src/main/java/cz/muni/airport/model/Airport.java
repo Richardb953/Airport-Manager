@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Airport.findAll", query = "FROM Airport"),
+    @NamedQuery(name = "Airport.findByIata", query = "FROM Airport WHERE iata = :iata"),
     @NamedQuery(name = "Airport.findByName", query = "FROM Airport WHERE name = :name"),
     @NamedQuery(name = "Airport.findByCity", query = "FROM Airport WHERE city = :city"),
     @NamedQuery(name = "Airport.findByCountry", query = "FROM Airport WHERE country = :country"),})

@@ -46,9 +46,9 @@ public interface AirportDAO {
     /**
      * Get Airport
      * @param iata String airport iata identifier
-     * @return Airport object
+     * @return List<Airport> of Airport objects
      */
-    Airport getAirportByIata(String iata);
+    List<Airport> getAirportsByIata(String iata);
 
     /**
      * Get all airports with given city

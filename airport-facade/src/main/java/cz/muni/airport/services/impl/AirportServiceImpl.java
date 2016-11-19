@@ -70,7 +70,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public Airport getAirportByIata(String iata) {
-        return airportDAO.getAirportByIata(iata);
+        return airportDAO.getAirportsByIata(iata);
     }
 
 }
