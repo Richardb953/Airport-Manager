@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 /**
  * Airport entity class
  *
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Entity
 @NamedQueries({

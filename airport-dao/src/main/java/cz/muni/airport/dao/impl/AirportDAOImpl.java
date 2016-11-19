@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of Airport DAO interface
  *
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Repository("airportDAO")
 @Transactional

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * DAO interface for Airport entity
  * 
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 public interface AirportDAO {
 

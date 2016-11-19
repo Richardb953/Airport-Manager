@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * Tests all methods of FlightDAOImpl.
  *
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)
