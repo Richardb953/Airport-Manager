@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * Steward entity
- * @author Andrea Navratilova (andrea-n)
+ * @author Andrea Navratilova, github name: andrea-n
  */
 
 @Entity

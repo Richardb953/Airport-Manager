@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 /**
  * Tests for AirportDAOImpl class
- * @author Andrea Navratilova (andrea-n)
+ * @author Andrea Navratilova, github name: andrea-n
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AirportDAOImplTest {
