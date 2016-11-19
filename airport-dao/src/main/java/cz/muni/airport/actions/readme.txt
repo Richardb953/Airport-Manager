@@ -1,1 +1,0 @@
-Folder contains prensentation layer, handling data with are going into templates
