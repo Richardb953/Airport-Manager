@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * DAO interface for Airport entity
  * 
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 public interface AirportDAO {
 
@@ -42,6 +42,13 @@ public interface AirportDAO {
      * @return Airport object
      */
     Airport getAirportById(Long id);
+    
+    /**
+     * Get Airport
+     * @param iata String airport iata identifier
+     * @return List<Airport> of Airport objects
+     */
+    List<Airport> getAirportsByIata(String iata);
 
     /**
      * Get all airports with given city

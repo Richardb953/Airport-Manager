@@ -10,22 +10,25 @@ import javax.persistence.NamedQuery;
 
 /**
  * Airport entity class
- * 
- * @author Jiri Krejci
+ *
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Airport.findAll", query = "FROM Airport"),
+    @NamedQuery(name = "Airport.findByIata", query = "FROM Airport WHERE iata = :iata"),
     @NamedQuery(name = "Airport.findByName", query = "FROM Airport WHERE name = :name"),
     @NamedQuery(name = "Airport.findByCity", query = "FROM Airport WHERE city = :city"),
-    @NamedQuery(name = "Airport.findByCountry", query = "FROM Airport WHERE country = :country"),
-})
+    @NamedQuery(name = "Airport.findByCountry", query = "FROM Airport WHERE country = :country"),})
 public class Airport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String iata;
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -37,6 +40,14 @@ public class Airport {
     private String city;
 
     public Airport() {
+    }
+
+    public String getIata() {
+        return iata;
+    }
+
+    public void setIata(String iata) {
+        this.iata = iata;
     }
 
     public Long getId() {
@@ -71,11 +82,11 @@ public class Airport {
         this.city = city;
     }
 
-
     @Override
     public String toString() {
         return "Airport {"
-                + "id=" + getId()
+                + "id=" + id
+                + ", IATA='" + iata + "'"
                 + ", name='" + name + "'"
                 + ", country='" + country + "'"
                 + ", city='" + city + "'"
@@ -95,18 +106,61 @@ public class Airport {
         }
 
         Airport other = (Airport) obj;
-        if (id == null) {
-            if (other.id != null) {
+
+        if (getId() == null) {
+            if (other.getId() != null) {
                 return false;
             }
-        } else if (!id.equals(other.getId())) {
-            return false;
+            if (!getId().equals(other.getId())) {
+                return false;
+            }
         }
+
+        if (getIata() == null) {
+            if (other.getIata() != null) {
+                return false;
+            }
+            if (!getIata().equals(other.getIata())) {
+                return false;
+            }
+        }
+
+        if (getName() == null) {
+            if (other.getName() != null) {
+                return false;
+            }
+            if (!getName().equals(other.getName())) {
+                return false;
+            }
+        }
+
+        if (getCountry() == null) {
+            if (other.getCountry() != null) {
+                return false;
+            }
+            if (!getCountry().equals(other.getCountry())) {
+                return false;
+            }
+        }
+
+        if (getCity() == null) {
+            if (other.getCity() != null) {
+                return false;
+            }
+            if (!getCity().equals(other.getCity())) {
+                return false;
+            }
+        }
+
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        final int primeNumber = 47;
+        int hashCode = 13;
+        hashCode = primeNumber * hashCode + (getName() != null ? getName().hashCode() : 0);
+        hashCode = primeNumber * hashCode + (getIata() != null ? getIata().hashCode() : 0);
+        return hashCode;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of Airport DAO interface
  *
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Repository("airportDAO")
 @Transactional
@@ -68,6 +68,14 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
             throw new IllegalArgumentException("Country can't be null");
         }
         return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry", "country", country);
+    }
+
+    @Override
+    public List<Airport> getAirportsByIata(String iata) {
+        if (iata == null) {
+            throw new IllegalArgumentException("Iata can't be null");
+        }
+        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByIata", "iata", iata);
     }
 
 }

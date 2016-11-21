@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of Airport Service
  * 
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Service("airportService")
 public class AirportServiceImpl implements AirportService {
@@ -66,6 +66,11 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public List<Airport> getAirportsByCountry(String country) {
         return airportDAO.getAirportsByCountry(country);
+    }
+
+    @Override
+    public List<Airport> getAirportByIata(String iata) {
+        return airportDAO.getAirportsByIata(iata);
     }
 
 }

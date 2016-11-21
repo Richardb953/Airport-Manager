@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * Tests all methods of FlightDAOImpl.
  *
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -93,12 +93,14 @@ public class FlightDAOImplTest {
 
         Airport newDestination = new Airport();
         newDestination.setCity("Vienna");
+        newDestination.setIata("VIE");
         newDestination.setCountry("D");
         newDestination.setName("Vienna airport");
         newDestination = airportDAO.addAirport(newDestination);
 
         Airport newSource = new Airport();
         newSource.setCity("Kosice");
+        newSource.setIata("LKO");
         newSource.setCountry("SK");
         newSource.setName("Letisko Kosice");
         newSource = airportDAO.addAirport(newSource);
@@ -223,12 +225,14 @@ public class FlightDAOImplTest {
 
         Airport destination = new Airport();
         destination.setCity("Brno");
+        destination.setIata("BRN");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
         destination = airportDAO.addAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Praha");
+        source.setIata("PRG");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
         source = airportDAO.addAirport(source);
@@ -263,12 +267,14 @@ public class FlightDAOImplTest {
         destination.setCity("Bratislava");
         destination.setCountry("SK");
         destination.setName("Letiste Blava");
+        destination.setIata("LBR");
         airportDAO.addAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Milano");
         source.setCountry("IT");
         source.setName("Milano airport");
+        source.setIata("MLO");
         airportDAO.addAirport(source);
 
         Flight flight = new Flight();

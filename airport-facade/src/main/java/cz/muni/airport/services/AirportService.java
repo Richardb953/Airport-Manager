@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * Interface for Airport service
  * 
- * @author Jiri Krejci
+ * @author Jiri Krejci, github name: xkrejci7
  */
 @Service
 public interface AirportService {
@@ -44,6 +44,13 @@ public interface AirportService {
      * @return Airport object
      */
     Airport getAirportById(Long id);
+    
+    /**
+     * Get Airport
+     * @param iata String airport iata identifier
+     * @return Airport object
+     */
+    List<Airport> getAirportByIata(String iata);
 
     /**
      * Get all airports with given city
