@@ -1,8 +1,9 @@
 package cz.muni.airport.dto;
 
 /**
- * Created by richard bariny on 9.11.2016.
+ * Created by Richard Bariny on 9.11.2016.
  * Data transfer object between flights layers
+ * @author github:Richardb953
  */
 public class FlightDTO {
     public int id;

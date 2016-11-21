@@ -4,8 +4,11 @@ import cz.muni.airport.model.Flight;
 import java.util.List;
 
 /**
- * @author rba on 23.10.2016.
+ * DAO Flight interface
+ * created by Richard Bariny on 25.10.2016
+ * @author github:Richardb953
  */
+
 public interface FlightDAO {
 
     /**
@@ -31,7 +34,7 @@ public interface FlightDAO {
 
     /**
      * DELETE FLIGHT
-     * @param flight Long value of flight id
+     * @param flight flight entity of flight object
      */
     void removeFlight(Flight flight);
 

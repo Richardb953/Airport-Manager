@@ -16,12 +16,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Richard Bariny on 23.10.2016.
+ * Created by Richard Bariny on 23.10.2016.
  *
  * Entity of Flight
  * Contains 2 Airports as Destination and source, airplane which is going to be used and basic parameters
  * about fligth as Times
  *
+ * @author github:Richardb953
  */
 
 @Entity

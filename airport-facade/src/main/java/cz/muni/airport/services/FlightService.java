@@ -5,7 +5,11 @@ import cz.muni.airport.model.Flight;
 import java.util.List;
 
 /**
- * @author rba on 23.10.2016.
+ * Created by Richard Bariny on 23.10.2016
+ * @author github:Richardb953
+ *
+ * Service layer interface for Flight object
+ *
  */
 
 public interface FlightService {
