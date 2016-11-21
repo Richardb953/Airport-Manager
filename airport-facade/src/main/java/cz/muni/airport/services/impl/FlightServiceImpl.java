@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @author rba on 23.10.2016.
+ *
+ * Service layer from Flight object
+ * Created by Richard Bariny on 21.10.2016
+ * @author github:Richardb953
  */
 
 @Service
