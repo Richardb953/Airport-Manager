@@ -1,12 +1,12 @@
 package cz.muni.airport.dto;
 
 /**
- * Data transfer object between flights layers
- * Created by Richard Bariny on 9.11.2016.
- * @author github:Richardb953
+ * Created by Richard Bariny on 22.11.2016.
+ *
+ * @author Richard Bariny, github name:Richardb953
  */
-public class FlightDTO {
-    private int id;
+public class FlightCreateDTO {
+
     private String name;
     private int arrival;
     private int departure;
@@ -15,15 +15,7 @@ public class FlightDTO {
     private int destinationport;
     private int sourceport;
 
-    public FlightDTO() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public FlightCreateDTO() {
     }
 
     public String getName() {
@@ -87,21 +79,19 @@ public class FlightDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FlightDTO flightDTO = (FlightDTO) o;
+        FlightCreateDTO that = (FlightCreateDTO) o;
 
-        if (id != flightDTO.id) return false;
-        if (arrival != flightDTO.arrival) return false;
-        if (departure != flightDTO.departure) return false;
-        if (destinationport != flightDTO.destinationport) return false;
-        if (sourceport != flightDTO.sourceport) return false;
-        return name != null ? name.equals(flightDTO.name) : flightDTO.name == null;
+        if (arrival != that.arrival) return false;
+        if (departure != that.departure) return false;
+        if (destinationport != that.destinationport) return false;
+        if (sourceport != that.sourceport) return false;
+        return name != null ? name.equals(that.name) : that.name == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + arrival;
         result = 31 * result + departure;
         result = 31 * result + destinationport;
@@ -111,9 +101,8 @@ public class FlightDTO {
 
     @Override
     public String toString() {
-        return "FlightDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "FlightCreateDTO{" +
+                "name='" + name + '\'' +
                 ", arrival=" + arrival +
                 ", departure=" + departure +
                 ", passagers=" + passagers +
