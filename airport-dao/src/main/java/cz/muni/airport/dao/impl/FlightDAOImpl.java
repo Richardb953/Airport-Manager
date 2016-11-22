@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @author rba on 23.10.2016.
+ * DAO Flight object
+ * created by Richard Bariny on 25.10.2016
+ * @author Richard Bariny, github name: Richardb953
  */
 
 @Transactional

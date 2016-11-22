@@ -7,8 +7,10 @@ import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.FlightService;
 /**
- * Created by richard Bariny on 9.11.2016.
+ * Created by Richard Bariny on 9.11.2016.
  * Implementation of Facade interface
+ *
+ * @author Richard Bariny, github name: Richardb953
  */
 public class FlightFacadeImpl implements FlightFacade {
 

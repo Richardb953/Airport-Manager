@@ -5,8 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
- * @author rba on 15.10.2016.
+ * Connection class handling session
+ *
+ * Created by Richard Bariny on 25.10.2016
+ * @author Richard Bariny, github name: Richardb953
  */
+
 
 public abstract class Connection extends HibernateDaoSupport
 {

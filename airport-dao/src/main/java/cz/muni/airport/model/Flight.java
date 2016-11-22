@@ -12,16 +12,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 /**
- * @author Richard Bariny on 23.10.2016.
+ * Created by Richard Bariny on 23.10.2016.
  *
  * Entity of Flight
  * Contains 2 Airports as Destination and source, airplane which is going to be used and basic parameters
  * about fligth as Times
  *
+ * @author Richard Bariny, github name: Richardb953
  */
 
 @Entity
@@ -129,7 +132,7 @@ public class Flight {
     }
 
     public List<Steward> getStewards() {
-        return stewards;
+        return Collections.unmodifiableList(stewards);
     }
 
     public void setStewards(List<Steward> stewards) {

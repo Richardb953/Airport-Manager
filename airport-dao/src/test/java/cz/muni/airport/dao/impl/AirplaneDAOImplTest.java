@@ -15,6 +15,9 @@ import static org.junit.Assert.assertNull;
 
 /**
  * Created by Richard Bariny on 30.10.2016.
+ * @author Richard Bariny, github name: Richardb953
+ *
+ * Test for Airplane DAO class
  *
  */
 
