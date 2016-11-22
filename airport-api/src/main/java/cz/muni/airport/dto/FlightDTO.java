@@ -1,5 +1,8 @@
 package cz.muni.airport.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Data transfer object between flights layers
  * Created by Richard Bariny on 9.11.2016.
@@ -14,6 +17,7 @@ public class FlightDTO {
     private int airplane;
     private int destinationport;
     private int sourceport;
+    private List<StewardDTO> stewards = new ArrayList<StewardDTO>();
 
     public FlightDTO() {
     }
@@ -80,6 +84,14 @@ public class FlightDTO {
 
     public void setSourceport(int sourceport) {
         this.sourceport = sourceport;
+    }
+
+    public List<StewardDTO> getStewards() {
+        return stewards;
+    }
+
+    public void setStewards(List<StewardDTO> stewards) {
+        this.stewards = stewards;
     }
 
     @Override

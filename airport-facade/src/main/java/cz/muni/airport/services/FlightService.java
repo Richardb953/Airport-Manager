@@ -1,6 +1,7 @@
 package cz.muni.airport.services;
 
 import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
 
 import java.util.List;
 
@@ -54,6 +55,9 @@ public interface FlightService {
      */
     List<Flight> findAllFlights();
 
-
-
+    /**
+     * Add steward to flight
+     * @return List of Flight objects
+     */
+    Flight addStewardToFlight(Flight flight, Steward steward);
 }
