@@ -8,7 +8,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  * Connection class handling session
  *
  * Created by Richard Bariny on 25.10.2016
- * @author github:Richardb953
+ * @author Richard Bariny, github name: Richardb953
  */
 
 

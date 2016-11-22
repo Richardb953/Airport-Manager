@@ -5,7 +5,7 @@ import cz.muni.airport.dto.FlightDTO;
 /**
  * Created by Richard Bariny on 9.11.2016.
  * Facade Interface of Flight entity
- * @author github:Richardb953
+ * @author Richard Bariny, github name: Richardb953
  */
 public interface FlightFacade {
 

@@ -24,7 +24,7 @@ import java.util.List;
  * Contains 2 Airports as Destination and source, airplane which is going to be used and basic parameters
  * about fligth as Times
  *
- * @author github:Richardb953
+ * @author Richard Bariny, github name: Richardb953
  */
 
 @Entity

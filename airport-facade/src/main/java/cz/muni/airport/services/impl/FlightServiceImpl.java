@@ -13,7 +13,7 @@ import java.util.List;
  *
  * Service layer from Flight object
  * Created by Richard Bariny on 21.10.2016
- * @author github:Richardb953
+ * @author Richard Bariny, github name: Richardb953
  */
 
 @Service
