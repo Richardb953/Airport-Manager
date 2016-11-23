@@ -13,7 +13,7 @@
     
     <artifactId>airport-dao</artifactId>
     <packaging>jar</packaging>
-    <name>Dao layer of airport system</name>
+    <!--<name>Dao layer of airport system</name>-->
 	
     <dependencies>
         <dependency>

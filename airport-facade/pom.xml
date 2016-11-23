@@ -11,7 +11,8 @@
 
     <artifactId>airport-facade</artifactId>
     <packaging>jar</packaging>
-    <name>Facade and service layer of airport system</name>
+    <!--<name>Facade and service layer of airport system</name>-->
+    <name>airport-facade_and_service</name>
 
     <dependencies>
         <dependency>
