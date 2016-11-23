@@ -1,5 +1,7 @@
 package cz.muni.airport.model;
 
+import java.util.Collections;
+import java.util.HashSet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class representing the Airplane entity.
  * 
- * @author Karolína Božková
+ * @author Karolína Božková, github name: Kayeeec
  */
 
 @Entity
@@ -85,7 +88,7 @@ public class Airplane {
     }
 
     public List<Flight> getFlights() {
-        return flights;
+        return Collections.unmodifiableList(flights);
     }
 
     public void setFlights(List<Flight> flights) {
@@ -95,34 +98,32 @@ public class Airplane {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + getName().hashCode()
+                + Objects.hashCode(getCapacity()) 
+                + getType().toString().hashCode()
+                + getFlights().hashCode();
         return hash;
     }
+    
+   private boolean listEqualsNoOrder(List<Flight> l1, List<Flight> l2) {
+    final Set<Flight> s1 = new HashSet<>(l1);
+    final Set<Flight> s2 = new HashSet<>(l2);
+
+    return s1.equals(s2);
+}
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+        if (obj == null) return false;
+        if (!(obj instanceof Airplane)) return false; 
+        
         final Airplane other = (Airplane) obj;
-        if (this.capacity != other.capacity) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (this.type != other.type) {
-            return false;
-        }
+        
+        if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
+        if (!Objects.equals(this.getName(), other.getName())) return false;
+        if (!Objects.equals(this.getType(), other.getType())) return false;
+//        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
+        
         return true;
     }
 

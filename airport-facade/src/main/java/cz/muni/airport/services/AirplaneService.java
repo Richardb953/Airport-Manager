@@ -7,7 +7,7 @@ import java.util.List;
  * Interface of service that provides access to Airplane entries and 
  * Airplane related data.
  *
- * @author Karolína Božková
+ * @author Karolína Božková, github name: Kayeeec
  */
 public interface AirplaneService {
     
