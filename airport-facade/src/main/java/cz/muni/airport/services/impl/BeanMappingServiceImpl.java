@@ -1,4 +1,3 @@
-
 package cz.muni.airport.services.impl;
 
 import org.dozer.Mapper;

@@ -139,6 +139,10 @@ public class Flight {
         this.stewards = stewards;
     }
 
+    public void addSteward(Steward steward){
+        this.stewards.add(steward);
+    }
+
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;

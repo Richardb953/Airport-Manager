@@ -2,6 +2,7 @@ package cz.muni.airport.services.impl;
 
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,12 @@ public class FlightServiceImpl implements FlightService {
     @Transactional
     public List<Flight> findAllFlights() {
         return flightDao.getAllFlights();
+    }
+
+    @Override
+    public  Flight addStewardToFlight(Flight flight, Steward steward) {
+        flight.addSteward(steward);
+        return updateFlight(flight);
     }
 
     @Override
