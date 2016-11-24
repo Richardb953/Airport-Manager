@@ -7,6 +7,7 @@ import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.PlaneType;
+import cz.muni.airport.model.enums.FlightState;
 import java.util.Calendar;
 
 import java.util.List;
@@ -118,6 +119,7 @@ public class FlightDAOImplTest {
         flight.setDestinationPort(newDestination);
         flight.setSourcePort(newSource);
         flight.setAirplane(newAirplane);
+        flight.setFlightState(FlightState.ACCEPTED);
 
         flight = flightDAO.updateFlight(flight);
 
@@ -129,6 +131,7 @@ public class FlightDAOImplTest {
         assertEquals(newSource, flightDAO.getFlightById(flight.getId()).getSourcePort());
         assertEquals(newDestination, flightDAO.getFlightById(flight.getId()).getDestinationPort());
         assertEquals(flight, flightDAO.getFlightById(flight.getId()));
+        assertEquals(FlightState.ACCEPTED, flightDAO.getFlightById(flight.getId()).getFlightState());
         
     }
 
@@ -245,6 +248,7 @@ public class FlightDAOImplTest {
         flight.setAirplane(airplane);
         flight.setDestinationPort(destination);
         flight.setSourcePort(source);
+        flight.setFlightState(FlightState.OPEN);
 
         return flight;
     }
@@ -285,6 +289,7 @@ public class FlightDAOImplTest {
         flight.setAirplane(airplane);
         flight.setDestinationPort(destination);
         flight.setSourcePort(source);
+        flight.setFlightState(FlightState.OPEN);
 
         return flight;
     }
