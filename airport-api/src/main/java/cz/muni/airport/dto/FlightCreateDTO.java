@@ -1,5 +1,9 @@
 package cz.muni.airport.dto;
 
+import java.util.Objects;
+
+import cz.muni.airport.enums.FlightState;
+
 /**
  * Created by Richard Bariny on 22.11.2016.
  *
@@ -8,11 +12,12 @@ package cz.muni.airport.dto;
 public class FlightCreateDTO {
 
     private String name;
-    private int arrival;
-    private int departure;
+    private Long arrival;
+    private Long departure;
     private int passagers;
-    private int destinationport;
-    private int sourceport;
+    private FlightState flightState = FlightState.OPEN;
+    private AirportDTO destinationport;
+    private AirportDTO sourceport;
 
     public FlightCreateDTO() {
     }
@@ -25,19 +30,19 @@ public class FlightCreateDTO {
         this.name = name;
     }
 
-    public int getArrival() {
+    public Long getArrival() {
         return arrival;
     }
 
-    public void setArrival(int arrival) {
+    public void setArrival(Long arrival) {
         this.arrival = arrival;
     }
 
-    public int getDeparture() {
+    public Long getDeparture() {
         return departure;
     }
 
-    public void setDeparture(int departure) {
+    public void setDeparture(Long departure) {
         this.departure = departure;
     }
 
@@ -49,20 +54,28 @@ public class FlightCreateDTO {
         this.passagers = passagers;
     }
 
-    public int getDestinationport() {
+    public AirportDTO getDestinationport() {
         return destinationport;
     }
 
-    public void setDestinationport(int destinationport) {
+    public void setDestinationport(AirportDTO destinationport) {
         this.destinationport = destinationport;
     }
 
-    public int getSourceport() {
+    public AirportDTO getSourceport() {
         return sourceport;
     }
 
-    public void setSourceport(int sourceport) {
+    public void setSourceport(AirportDTO sourceport) {
         this.sourceport = sourceport;
+    }
+
+    public FlightState getFlightState() {
+        return flightState;
+    }
+
+    public void setFlightState(FlightState flightState) {
+        this.flightState = flightState;
     }
 
     @Override
@@ -72,8 +85,8 @@ public class FlightCreateDTO {
 
         FlightCreateDTO that = (FlightCreateDTO) o;
 
-        if (arrival != that.arrival) return false;
-        if (departure != that.departure) return false;
+        if (!Objects.equals(arrival, that.arrival)) return false;
+        if (!Objects.equals(departure, that.departure)) return false;
         if (destinationport != that.destinationport) return false;
         if (sourceport != that.sourceport) return false;
         return name != null ? name.equals(that.name) : that.name == null;
@@ -83,10 +96,9 @@ public class FlightCreateDTO {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + arrival;
-        result = 31 * result + departure;
-        result = 31 * result + destinationport;
-        result = 31 * result + sourceport;
+        result = 31 * result + ((name == null) ? 0 : name.hashCode());
+        result = 31 * result + destinationport.hashCode();
+        result = 31 * result + sourceport.hashCode();
         return result;
     }
 
@@ -97,8 +109,7 @@ public class FlightCreateDTO {
                 ", arrival=" + arrival +
                 ", departure=" + departure +
                 ", passagers=" + passagers +
-                ", destinationport=" + destinationport +
-                ", sourceport=" + sourceport +
                 '}';
     }
+
 }
