@@ -11,7 +11,6 @@ public class FlightCreateDTO {
     private int arrival;
     private int departure;
     private int passagers;
-    private int airplane;
     private int destinationport;
     private int sourceport;
 
@@ -48,14 +47,6 @@ public class FlightCreateDTO {
 
     public void setPassagers(int passagers) {
         this.passagers = passagers;
-    }
-
-    public int getAirplane() {
-        return airplane;
-    }
-
-    public void setAirplane(int airplane) {
-        this.airplane = airplane;
     }
 
     public int getDestinationport() {
@@ -106,7 +97,6 @@ public class FlightCreateDTO {
                 ", arrival=" + arrival +
                 ", departure=" + departure +
                 ", passagers=" + passagers +
-                ", airplane=" + airplane +
                 ", destinationport=" + destinationport +
                 ", sourceport=" + sourceport +
                 '}';
