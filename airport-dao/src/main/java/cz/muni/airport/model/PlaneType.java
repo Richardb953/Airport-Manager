@@ -2,7 +2,7 @@ package cz.muni.airport.model;
 
 /**
  *
- * @author Karolína Božková
+ * @author Karolína Božková, github name: Kayeeec
  */
 public enum PlaneType {
     BUSINESS_JET("Business Jet"),

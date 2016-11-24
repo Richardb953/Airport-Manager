@@ -10,7 +10,9 @@
     </parent>
 
     <artifactId>airport-facade</artifactId>
-    <name>Facade and service layer of airport system</name>
+    <packaging>jar</packaging>
+    <!--<name>Facade and service layer of airport system</name>-->
+    <name>airport-facade_and_service</name>
 
     <dependencies>
         <dependency>

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Implementation of AirplaneDAO. This Data Access Object provides access 
  * to Airplane antries ant Airplane related data.
  * 
- * @author Karolína Božková 
+ * @author Karolína Božková, github name: Kayeeec 
  * @see AirplaneDAO documentation.
  */
 @Transactional
