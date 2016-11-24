@@ -1,6 +1,7 @@
 package cz.muni.airport.config;
 
 import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;

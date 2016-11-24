@@ -1,35 +1,107 @@
 package cz.muni.airport.facade.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
+import cz.muni.airport.model.Airport;
+import cz.muni.airport.model.enums.FlightState;
 import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
 import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
+
+
 /**
  * Created by Richard Bariny on 9.11.2016.
  * Implementation of Facade interface
  *
  * @author Richard Bariny, github name: Richardb953
  */
+
+@Service
 public class FlightFacadeImpl implements FlightFacade {
 
     @Inject
-    FlightService flightService;
+    private FlightService flightService;
+
+    @Inject
+    private AirportService airportService;
+
+    @Inject
+    private AirplaneService airplaneService;
+
+    @Inject
+    private StewardService stewardService;
 
     @Autowired
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long createFlight(FlightDTO flightDTO) {
-        return null;
+    public Long createFlight(FlightDTO flightCreateDTO) {
+        Flight flight = beanMappingService.mapTo(flightCreateDTO, Flight.class);
+
+        FlightState flightState = convertFlightState(flightCreateDTO.getFlightState());
+
+        //todo premysliet ci moze byt letisko null ak ano state by nemal byt validated --skor vyhodit excptn
+        Airport destAirport = flightCreateDTO.getDestinationport() == null ? null :  airportService.getAirportById(flightCreateDTO.getDestinationport().getId());
+        Airport sourcAirport = flightCreateDTO.getSourceport() == null ? null :  airportService.getAirportById(flightCreateDTO.getSourceport().getId());
+
+        flight.setDestinationPort(destAirport);
+        flight.setSourcePort(sourcAirport);
+
+        flight.setAirplane(
+                airplaneService.getAirplaneById(flightCreateDTO.getAirplane().getId()));
+        List<Steward> stewards = new ArrayList<>(flightCreateDTO.getStewards().size());
+        for(StewardDTO stewardDTO : flightCreateDTO.getStewards()){
+            stewards.add(stewardService.getSteward(stewardDTO.getId()));
+        }
+
+        flight.setStewards(stewards);
+
+        Date departure = new Date(flightCreateDTO.getDeparture());
+        Date arrival = new Date(flightCreateDTO.getArrival());
+        flight.setArrival(arrival);
+        flight.setDeparture(departure);
+        flight.setFlightState(flightState);
+
+        Flight flight1 = flightService.saveFlight(flight);
+
+        return flight1.getId();    }
+
+    @Override
+    public Long createNewFlight(FlightCreateDTO flightCreateDTO) {
+        Flight flight = beanMappingService.mapTo(flightCreateDTO, Flight.class);
+
+        FlightState flightState = convertFlightState(flightCreateDTO.getFlightState());
+
+        Airport destAirport = flightCreateDTO.getDestinationport() == null ? null :  airportService.getAirportById(flightCreateDTO.getDestinationport().getId());
+        Airport sourcAirport = flightCreateDTO.getSourceport() == null ? null :  airportService.getAirportById(flightCreateDTO.getSourceport().getId());
+
+        flight.setDestinationPort(destAirport);
+        flight.setSourcePort(sourcAirport);
+
+        Date departure = new Date(flightCreateDTO.getDeparture());
+        Date arrival = new Date(flightCreateDTO.getArrival());
+        flight.setArrival(arrival);
+        flight.setDeparture(departure);
+        flight.setFlightState(flightState);
+
+        Flight flight1 = flightService.saveFlight(flight);
+
+        return flight1.getId();
     }
 
     @Override
@@ -64,5 +136,15 @@ public class FlightFacadeImpl implements FlightFacade {
         Steward steward = beanMappingService.mapTo(stewardDTO, Steward.class);
 
         return beanMappingService.mapTo(flightService.addStewardToFlight(flight, steward), FlightDTO.class);
+    }
+
+    private FlightState convertFlightState(cz.muni.airport.enums.FlightState flightState){
+        switch (flightState) {
+            case OPEN:  return FlightState.OPEN;
+            case ACCEPTED: return FlightState.ACCEPTED;
+            case IN_VERIFY: return FlightState.IN_VERIFY;
+            case DECLINED: return FlightState.DECLINED;
+        }
+        return FlightState.OPEN;
     }
 }

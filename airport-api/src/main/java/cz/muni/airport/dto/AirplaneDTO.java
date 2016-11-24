@@ -6,7 +6,8 @@
 package cz.muni.airport.dto;
 
 import java.util.List;
-import cz.muni.airport.model.PlaneType;
+
+import cz.muni.airport.enums.PlaneType;
 
 /**
  *

@@ -2,6 +2,7 @@ package cz.muni.airport.services.impl;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +15,8 @@ import cz.muni.airport.services.BeanMappingService;
  *
  * @author Richard Bariny, github name:Richardb953
  */
+
+@Service
 public class BeanMappingServiceImpl implements BeanMappingService{
     @Autowired
     private Mapper dozer;
