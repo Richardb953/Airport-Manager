@@ -1,5 +1,7 @@
 package cz.muni.airport.config;
 
+import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.dto.FlightCreateDTO;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -7,7 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.dto.StewardDTO;
+import cz.muni.airport.model.Airplane;
+import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.impl.FlightServiceImpl;
 
 /**
@@ -28,15 +34,14 @@ public class ServiceConfiguration {
         return dozer;
     }
 
-    /**
-     * Custom config for Dozer if needed
-     * @author nguyen
-     *
-     */
     public class DozerCustomConfig extends BeanMappingBuilder {
         @Override
         protected void configure() {
             mapping(Flight.class, FlightDTO.class);
+            mapping(Airplane.class, AirplaneDTO.class);
+            mapping(Steward.class, StewardDTO.class);
+            mapping(Airport.class, AirportDTO.class);
+            mapping(Flight.class, FlightCreateDTO.class);
         }
     }
 }
