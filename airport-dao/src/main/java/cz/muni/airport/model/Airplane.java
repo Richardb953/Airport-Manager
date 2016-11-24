@@ -1,6 +1,7 @@
 package cz.muni.airport.model;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -131,5 +132,43 @@ public class Airplane {
     public String toString() {
         return "Airplane{" + "id=" + id + ", name=" + name + ", capacity=" + capacity + ", type=" + type + '}';
     }
+    
+    private boolean dateIntervalsInterfere(Date oldDeparture, Date oldArrival, Date newDeparture, Date newArrival){
+        //oldD..newD..newA..oldA
+        //oldD..newD........oldA..newA
+        if (oldDeparture.before(newDeparture) && newDeparture.before(oldArrival)) return true;
+        //newD..oldD..oldA..newA
+        //newD..oldD........newA..oldA
+        if (newDeparture.before(oldDeparture) && oldDeparture.before(newArrival)) return true;
+        //newD=oldD..........
+        if (oldDeparture.equals(newDeparture) || oldArrival.equals(newArrival)) return true;
+        //newD..newA==oldD...oldA OR oldD..oldA==newD...newA
+        if (newArrival.equals(oldDeparture) || oldArrival.equals(newDeparture)) return true;
+        
+        return false;      
+    }
+    
+    public boolean checkIfAvailable(Flight flight){
+        if(flight.getSourcePort() == null 
+                || flight.getDestinationPort() == null 
+                || flight.getDeparture() == null 
+                || flight.getArrival() == null){
+            throw new IllegalArgumentException("One of sourcePort, destinationPort, departure, arrival in given flight is null.");
+        }
+        //sort
+        List<Flight> theseFlights = this.getFlights();
+        
+        //find time slot
+        
+        //checkt destination and arrival locations
+        
+        
+        
+    }
+
+
+
+    
+    
 
 }
