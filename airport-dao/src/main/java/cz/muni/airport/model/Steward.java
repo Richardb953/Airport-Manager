@@ -17,10 +17,10 @@ import java.util.Objects;
 @Entity
 public class Steward {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
-	private Long id;
+    @Column(unique = true, nullable = false)
+    private Long id;
 
     @Column(nullable = false)
     private String firstName;
@@ -28,8 +28,8 @@ public class Steward {
     @Column(nullable = false)
     private String lastName;
 
-	@ManyToMany()
-	private List<Flight> flights;
+    @ManyToMany()
+    private List<Flight> flights;
 
     public Steward() {
     }
