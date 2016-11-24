@@ -10,7 +10,9 @@
     </parent>
 
     <artifactId>airport-facade</artifactId>
-    <name>Facade and service layer of airport system</name>
+    <packaging>jar</packaging>
+    <!--<name>Facade and service layer of airport system</name>-->
+    <name>airport-facade_and_service</name>
 
     <dependencies>
         <dependency>
@@ -22,6 +24,11 @@
             <groupId>cz.muni</groupId>
             <artifactId>airport-api</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.4.0</version>
         </dependency>
     </dependencies>
 
