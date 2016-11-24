@@ -1,6 +1,8 @@
 package cz.muni.airport.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import javax.persistence.Column;
@@ -133,20 +135,69 @@ public class Airplane {
         return "Airplane{" + "id=" + id + ", name=" + name + ", capacity=" + capacity + ", type=" + type + '}';
     }
     
-    private boolean dateIntervalsInterfere(Date oldDeparture, Date oldArrival, Date newDeparture, Date newArrival){
-        //oldD..newD..newA..oldA
-        //oldD..newD........oldA..newA
-        if (oldDeparture.before(newDeparture) && newDeparture.before(oldArrival)) return true;
-        //newD..oldD..oldA..newA
-        //newD..oldD........newA..oldA
-        if (newDeparture.before(oldDeparture) && oldDeparture.before(newArrival)) return true;
-        //newD=oldD..........
-        if (oldDeparture.equals(newDeparture) || oldArrival.equals(newArrival)) return true;
-        //newD..newA==oldD...oldA OR oldD..oldA==newD...newA
-        if (newArrival.equals(oldDeparture) || oldArrival.equals(newDeparture)) return true;
-        
-        return false;      
+    /*
+        projde seřazený seznam letů a snaží se najít místo kam by let časově zapadl
+            - dalo by se to udělat efektivněji 
+    */
+    private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
+        List<Flight> result = new ArrayList<>(2);
+        //test zda se vejde před hned první let
+        Flight first = flights.get(0);
+        if(first.getDeparture().after(flight.getArrival())){
+            result.set(0, null);
+            result.set(1, first);
+            return result;
+        }
+        //test ostatních letů
+        Flight prev, next;
+        int i = 1;
+        while(i < flights.size()){
+            prev = flights.get(i-1);
+            next = flights.get(i);
+            if(prev.getArrival().before(flight.getDeparture()) && next.getDeparture().after(flight.getArrival())){
+                result.set(0, prev);
+                result.set(1, next);
+                return result;
+            }
+            i++;
+        }
+        //zda se vejde za poslední let
+        Flight last = flights.get(i);
+        if(last.getArrival().before(flight.getDeparture())){
+            result.set(0, last);
+            result.set(1, null);
+            return result;
+        }
+        //nevejde se nikam -> vrací null
+        return null;
     }
+    
+//    private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
+//        List<Flight> result = new ArrayList<>(2);
+//        Flight prev, next, candidate = null;
+//        int i = 0;
+//        while (i < flights.size()) {
+//            candidate = flights.get(i);
+//            if(flight.getArrival().before(candidate.getDeparture())){
+//                next = candidate;
+//                break;
+//            }
+//            i++;           
+//        }
+//        if (i == 0){
+//            result.set(0, null);
+//            result.set(1, next);
+//            return result;
+//        }
+//        if (next == null){ 
+//            result.set(0, next);
+//            result.set(1, null);
+//            return result;
+//        }
+//        
+//        
+//        
+//    }
     
     public boolean checkIfAvailable(Flight flight){
         if(flight.getSourcePort() == null 
@@ -155,14 +206,33 @@ public class Airplane {
                 || flight.getArrival() == null){
             throw new IllegalArgumentException("One of sourcePort, destinationPort, departure, arrival in given flight is null.");
         }
-        //sort
+        
         List<Flight> theseFlights = this.getFlights();
+        //when no flights
+        if (theseFlights.isEmpty()) return true;
+        
+        //sort flights
+        Collections.sort(theseFlights, (Flight o1, Flight o2) -> o1.getArrival().compareTo(o2.getArrival()));
         
         //find time slot
+        List<Flight> slot = findTimeSlot(theseFlights, flight);
+        if (slot == null) return false;
         
-        //checkt destination and arrival locations
+        //check destination and arrival locations
+        Flight prev = slot.get(0);
+        Flight next = slot.get(1);
         
-        
+        if (prev == null){ //could be first
+            if(flight.getDestinationPort().equals(next.getSourcePort())) return true;
+        }
+        if (next == null){ //could be last
+            if(flight.getSourcePort().equals(prev.getDestinationPort())) return true;
+        }
+        if(prev.getDestinationPort().equals(flight.getSourcePort()) 
+                && flight.getDestinationPort().equals(next.getSourcePort())){
+            return true;
+        }
+        return false;
         
     }
 
