@@ -26,5 +26,7 @@ public interface AirportFacade {
     void removeAirport(Long id);
 
     AirportDTO updateAirport(AirportDTO airportDTO);
+    
+    boolean hasValidIAta(AirportDTO airportDTO);
 
 }
