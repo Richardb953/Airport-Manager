@@ -50,7 +50,7 @@ public class Airplane {
      * Airplane can have many noninterfering flights.
      */
     @OneToMany(mappedBy = "airplane")
-    private List<Flight> flights;
+    private List<Flight> flights = new ArrayList<>();
     
     /**
      * Constructor of class Airplane. 
@@ -97,6 +97,10 @@ public class Airplane {
 
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
+    }
+
+    public void addFlight(Flight flight){
+        this.flights.add(flight);
     }
 
     @Override

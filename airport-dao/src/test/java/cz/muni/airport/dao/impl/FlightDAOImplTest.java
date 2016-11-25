@@ -42,7 +42,7 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    public void testAddFlight() {
+    public void testAddFlight() throws Exception {
 
         flightDAO.addFlight(createFlight1());
         assertEquals(1, flightDAO.getAllFlights().size());
@@ -50,20 +50,20 @@ public class FlightDAOImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddFlight_null() {
+    public void testAddFlight_null() throws Exception {
         Flight flight = null;
         flightDAO.addFlight(flight);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testRemoveFlight_null() {
+    public void testRemoveFlight_null() throws Exception {
         Flight flight = null;
         flightDAO.removeFlight(flight);
     }
 
     @Test
-    public void testRemoveFlight() {
+    public void testRemoveFlight() throws Exception {
 
         Flight f1 = createFlight1();
         Flight f2 = createFlight2();
@@ -83,7 +83,7 @@ public class FlightDAOImplTest {
     }
 
     @Test()
-    public void testUpdateFlight() {
+    public void testUpdateFlight() throws Exception {
 
         Flight flight = flightDAO.addFlight(createFlight1());
 
@@ -136,26 +136,26 @@ public class FlightDAOImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testUpdateFlight_null() {
+    public void testUpdateFlight_null() throws Exception {
         Flight flight = null;
         flightDAO.updateFlight(flight);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetFlightById_null() {
+    public void testGetFlightById_null() throws Exception {
         Long id = null;
         flightDAO.getFlightById(id);
     }
 
     @Test
-    public void testGetFlightById_nonexistent() {
+    public void testGetFlightById_nonexistent() throws Exception {
         Flight flight = flightDAO.getFlightById((long) 2);
         assertNull(flight);
 
     }
 
     @Test
-    public void testGetFlightById() {
+    public void testGetFlightById() throws Exception {
 
         Flight f1 = createFlight1();
         Flight f2 = createFlight2();
@@ -169,7 +169,7 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    public void testGetAllFlights() {
+    public void testGetAllFlights() throws Exception {
 
         assertEquals(0, flightDAO.getAllFlights().size());
 
@@ -181,7 +181,7 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    public void testGetFlightByName() {
+    public void testGetFlightByName() throws Exception {
 
         Flight f = createFlight1();
         f.setName("Flight123");
@@ -195,7 +195,7 @@ public class FlightDAOImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetFlightByName_null() {
+    public void testGetFlightByName_null() throws Exception {
 
         Flight f1 = createFlight1();
         flightDAO.addFlight(f1);
@@ -205,7 +205,7 @@ public class FlightDAOImplTest {
     }
 
     @Test
-    public void testGetStewardByName_nonexistent() {
+    public void testGetStewardByName_nonexistent() throws Exception {
         flightDAO.addFlight(createFlight1());
 
         List<Flight> flights = flightDAO.getFlightsByName("FlightX");

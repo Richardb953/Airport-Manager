@@ -24,6 +24,8 @@ public class FlightDAOImpl extends Connection implements FlightDAO {
     }
 
     @Override public Flight getFlightById(Long id) {
+        if(id == null) throw new IllegalArgumentException("id is null");
+
         return getHibernateTemplate().get(Flight.class, id);
     }
 

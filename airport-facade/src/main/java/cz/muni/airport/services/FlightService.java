@@ -1,5 +1,7 @@
 package cz.muni.airport.services;
 
+import org.springframework.dao.DataAccessException;
+
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
@@ -29,7 +31,7 @@ public interface FlightService {
      * @param id Long value of flight id
      * @return Flight object
      */
-    Flight getFlight(Long id);
+    Flight getFlight(Long id) throws DataAccessException;
 
     /**
      * UPDATE FLIGHT - update existing entity
@@ -49,7 +51,7 @@ public interface FlightService {
      * @param name String value of flight name
      * @return List of Flight objects
      */
-    List<Flight> findFlightByName(String name);
+    List<Flight> findFlightByName(String name) throws DataAccessException;
 
     /**
      * FIND ALL FLIGHTS - find all entities
