@@ -1,5 +1,6 @@
 package cz.muni.airport.model;
 
+import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,6 +65,49 @@ public class Steward {
 
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
+	}
+
+	/**
+	 * Check if steward is available for given flight
+	 * Steward is available if the flight can be inserted in his flight list
+	 * @param flight to check - departure, arrival, source port and destination port are required
+	 * @return boolean if available
+	 */
+	public boolean isAvailable(Flight flight) {
+		if(flight.getDeparture() == null || flight.getArrival() == null || flight.getSourcePort() == null || flight.getDestinationPort() == null) {
+			throw new IllegalArgumentException("Some required arguments are null");
+		}
+
+		if(this.flights.isEmpty()) {
+			return true;
+		}
+
+		List<Flight> stewardFlights = this.flights;
+		Collections.sort(stewardFlights, (Flight flight1, Flight flight2) -> flight1.getArrival().compareTo(flight2.getArrival()));
+
+		return isCompatible(flight, stewardFlights);
+	}
+	
+	private boolean isCompatible(Flight flight, List<Flight> flights) {
+		Flight prev, next;
+		for(int i = 0; i <= flights.size(); i++) {
+			boolean departure = true, arrival = true;
+			// if there is previous flight in list, check if its arrival is before the departure of flight to add
+			if(i != 0) {
+				prev = flights.get(i-1);
+				departure = prev.getArrival().before(flight.getDeparture()) && prev.getDestinationPort() == flight.getSourcePort();
+			}
+			// if there is next flight in list, check if its departure is after the arrival of flight to add
+			if(i != flights.size()) {
+				next = flights.get(i);
+				arrival = next.getDeparture().after(flight.getArrival()) && next.getSourcePort() == flight.getDestinationPort();
+			}
+
+			if(departure && arrival) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
