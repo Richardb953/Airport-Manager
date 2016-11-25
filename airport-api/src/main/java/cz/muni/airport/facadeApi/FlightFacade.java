@@ -2,6 +2,7 @@ package cz.muni.airport.facadeApi;
 
 import java.util.List;
 
+import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 
@@ -10,18 +11,26 @@ import cz.muni.airport.dto.StewardDTO;
  * Facade Interface of Flight entity
  * @author Richard Bariny, github name: Richardb953
  */
+
 public interface FlightFacade {
 
     /**
-     * Create new Flight
+     * Create Flight
      * @param flightDTO Flight object as DTO
      * @return id of created object
      */
     Long createFlight(FlightDTO flightDTO);
 
     /**
+     * Create new FlightCreate with opne state without stewards and Airplane
+     * @param flightCreateDTO Flight Create object as DTO
+     * @return id of created object
+     */
+    Long createNewFlight(FlightCreateDTO flightCreateDTO);
+
+    /**
      * Get All Flights
-     * @return retunr list of all Flights as DTO objects
+     * @return list of all Flights as DTO objects
      */
     List<FlightDTO> getAllFlights();
 

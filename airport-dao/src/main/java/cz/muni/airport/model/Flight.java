@@ -4,6 +4,7 @@ package cz.muni.airport.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,19 +57,18 @@ public class Flight {
     private Integer passagers;
 
     @Enumerated
-    @NotNull
     private FlightState flightState;
 
     @ManyToOne()
     private Airplane airplane;
 
-    @OneToOne()
+    @OneToOne(optional = true)
     private Airport destinationPort;
 
-    @OneToOne()
+    @OneToOne(optional = true)
     private Airport sourcePort;
 
-    @ManyToMany(mappedBy = "flights")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "flights")
     private List<Steward> stewards;
 
 
@@ -151,6 +151,14 @@ public class Flight {
         this.stewards.add(steward);
     }
 
+    public FlightState getFlightState() {
+        return flightState;
+    }
+
+    public void setFlightState(FlightState flightState) {
+        this.flightState = flightState;
+    }
+
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -181,11 +189,4 @@ public class Flight {
                 '}';
     }
 
-    public FlightState getFlightState() {
-        return flightState;
-    }
-
-    public void setFlightState(FlightState flightState) {
-        this.flightState = flightState;
-    }
 }
