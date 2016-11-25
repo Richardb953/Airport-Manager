@@ -23,6 +23,9 @@ public class AirportFacadeImpl implements AirportFacade {
 
     @Override
     public AirportDTO createAirport(AirportDTO airportDTO) {
+        
+//        if (airportDTO.)
+        
         Airport airport = beanMappingService.mapTo(airportDTO, Airport.class);
         Airport created = airportService.saveAirport(airport);
         return beanMappingService.mapTo(created, AirportDTO.class);

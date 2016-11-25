@@ -84,6 +84,14 @@ public interface AirportService {
      * @return List<Airport> of Airport objects
      */
     List<Airport> findAirportsByCountry(String country);
+    
+    /**
+     * Chcecks if airport has valid IATA code
+     * IATA code is valid if it has form of three-capital-letter code
+     * @param airport
+     * @return true if airport has valid IATA code
+     */
+    public boolean hasValidIata(Airport airport);
 
 //    /**
 //     * Get all available stewards for given flight

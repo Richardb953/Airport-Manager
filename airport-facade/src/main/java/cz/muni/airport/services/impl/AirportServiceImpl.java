@@ -26,13 +26,10 @@ public class AirportServiceImpl implements AirportService {
 
 //    @Autowired
 //    private StewardService stewardService;
-
 //    @Autowired
 //    private AirplaneService airplaneService;
-
 //    @Autowired
 //    private FlightDAO flightDAO;
-
     public void setAirportDAO(AirportDAO airportDAO) {
         this.airportDAO = airportDAO;
     }
@@ -48,7 +45,6 @@ public class AirportServiceImpl implements AirportService {
 //    public void setFlightDAO(FlightDAO flightDAO) {
 //        this.flightDAO = flightDAO;
 //    }
-
     @Override
     public Airport saveAirport(Airport airport) {
         try {
@@ -173,5 +169,14 @@ public class AirportServiceImpl implements AirportService {
 //        return airplanes;
 //
 //    }
+    @Override
+    public boolean hasValidIata(Airport airport) {
+        try {
+            return airport.getIata().length() == 3 && airport.getIata().toUpperCase().equals(airport.getIata());
+        } catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {
+            };
+        }
+    }
 
 }
