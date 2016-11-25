@@ -138,68 +138,34 @@ public class Airplane {
     /*
         projde seřazený seznam letů a snaží se najít místo kam by let časově zapadl
             - dalo by se to udělat efektivněji 
-    */
+    */    
     private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
         List<Flight> result = new ArrayList<>(2);
-        //test zda se vejde před hned první let
-        Flight first = flights.get(0);
-        if(first.getDeparture().after(flight.getArrival())){
-            result.set(0, null);
-            result.set(1, first);
-            return result;
-        }
-        //test ostatních letů
-        Flight prev, next;
-        int i = 1;
-        while(i < flights.size()){
-            prev = flights.get(i-1);
-            next = flights.get(i);
-            if(prev.getArrival().before(flight.getDeparture()) && next.getDeparture().after(flight.getArrival())){
-                result.set(0, prev);
-                result.set(1, next);
-                return result;
+        Flight prev = null, next = null, candidate = null;
+        int i = 0;
+        while (i < flights.size()) { 
+            candidate = flights.get(i);
+            if(flight.getArrival().before(candidate.getDeparture())){
+                next = candidate;
+                break;
             }
-            i++;
+            i++;           
         }
-        //zda se vejde za poslední let
-        Flight last = flights.get(i);
-        if(last.getArrival().before(flight.getDeparture())){
-            result.set(0, last);
+        if ( next == null && candidate.getArrival().before(flight.getDeparture()) ){ //could be last
+            result.set(0, candidate);
             result.set(1, null);
             return result;
         }
-        //nevejde se nikam -> vrací null
+        prev = flights.get(i-1); 
+        if(prev.getArrival().before(flight.getDeparture())){
+            result.set(0, prev);
+            result.set(0, next);
+            return result;
+        }
         return null;
     }
     
-//    private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
-//        List<Flight> result = new ArrayList<>(2);
-//        Flight prev, next, candidate = null;
-//        int i = 0;
-//        while (i < flights.size()) {
-//            candidate = flights.get(i);
-//            if(flight.getArrival().before(candidate.getDeparture())){
-//                next = candidate;
-//                break;
-//            }
-//            i++;           
-//        }
-//        if (i == 0){
-//            result.set(0, null);
-//            result.set(1, next);
-//            return result;
-//        }
-//        if (next == null){ 
-//            result.set(0, next);
-//            result.set(1, null);
-//            return result;
-//        }
-//        
-//        
-//        
-//    }
-    
-    public boolean checkIfAvailable(Flight flight){
+    public boolean isAvailable(Flight flight){
         if(flight.getSourcePort() == null 
                 || flight.getDestinationPort() == null 
                 || flight.getDeparture() == null 
@@ -236,9 +202,5 @@ public class Airplane {
         
     }
 
-
-
-    
-    
 
 }
