@@ -1,36 +1,28 @@
 package cz.muni.airport.service;
 
 import org.hibernate.service.spi.ServiceException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.IllegalFormatCodePointException;
+import java.util.Collections;
 import java.util.List;
 
-import cz.muni.airport.config.ServiceConfiguration;
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.enums.PlaneType;
-import cz.muni.airport.services.AirplaneService;
-import cz.muni.airport.services.FlightService;
 import cz.muni.airport.services.impl.AirplaneServiceImpl;
 import cz.muni.airport.services.impl.FlightServiceImpl;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -180,7 +172,8 @@ public class AirplaneServiceImplTest {
         flight.setSourcePort(bratiska);
         flight.setDestinationPort(kosice);
 
-        when(airplaneService.getAllAirplanes()).thenReturn(allAirplanes);
+
+        when(airplaneService.getAllAirplanes()).thenReturn( Collections.unmodifiableList(allAirplanes));
         Assert.assertEquals(airplaneService.getAvailableAirplanes(flight).size(), 1);
 
     }
