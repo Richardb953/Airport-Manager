@@ -1,5 +1,6 @@
 package cz.muni.airport.facadeApi;
 
+import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 import java.util.List;
 
@@ -49,4 +50,11 @@ public interface StewardFacade {
      * @return list of all stewards
      */
     List<StewardDTO> getAllStewards();
+	
+	/**
+	 * Get list of all available stewards for given flight
+	 * @param flightDTO the flight to find available stewards
+	 * @return available stewards for given flight
+	 */
+	public List<StewardDTO> getAvailableStewards(FlightDTO flightDTO);
 }
