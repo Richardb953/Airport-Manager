@@ -25,7 +25,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     @Transactional
-    public Airport addAirport(Airport airport) {
+    public Airport saveAirport(Airport airport) {
         airportDAO.addAirport(airport);
         return airport;
     }
@@ -44,32 +44,32 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public List<Airport> getAllAirports() {
+    public List<Airport> findAllAirports() {
         return airportDAO.getAllAirports();
     }
 
     @Override
-    public Airport getAirportById(Long id) {
+    public Airport findAirportById(Long id) {
         return airportDAO.getAirportById(id);
     }
 
     @Override
-    public List<Airport> getAirportsByCity(String city) {
+    public List<Airport> findAirportsByCity(String city) {
         return airportDAO.getAirportsByCity(city);
     }
 
     @Override
-    public List<Airport> getAirportsByName(String name) {
+    public List<Airport> findAirportsByName(String name) {
         return airportDAO.getAirportsByName(name);
     }
 
     @Override
-    public List<Airport> getAirportsByCountry(String country) {
+    public List<Airport> findAirportsByCountry(String country) {
         return airportDAO.getAirportsByCountry(country);
     }
 
     @Override
-    public List<Airport> getAirportByIata(String iata) {
+    public List<Airport> findAirportByIata(String iata) {
         return airportDAO.getAirportsByIata(iata);
     }
 

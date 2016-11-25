@@ -157,9 +157,9 @@ public class Main {
         a.setCity("Brno");
         a.setCountry("CZ");
 
-        airportService.addAirport(a);
+        airportService.saveAirport(a);
 
-        List<Airport> ports = airportService.getAllAirports();
+        List<Airport> ports = airportService.findAllAirports();
         for (Airport plane : ports) {
             System.out.println(plane.toString());
         }
