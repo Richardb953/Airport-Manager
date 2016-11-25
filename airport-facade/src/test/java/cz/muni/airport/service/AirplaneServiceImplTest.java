@@ -61,6 +61,7 @@ public class AirplaneServiceImplTest {
     private List<Flight> allFlights = new ArrayList<>(2);
     Calendar arrival;
     Calendar departure;
+
     @BeforeMethod
     public void prepareObjects() {
 
