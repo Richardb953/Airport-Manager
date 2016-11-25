@@ -1,7 +1,9 @@
 package cz.muni.airport.facade.impl;
 
+import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
+import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.StewardService;
 import cz.muni.airport.services.BeanMappingService;
@@ -56,5 +58,12 @@ public class StewardFacadeImpl implements StewardFacade {
     @Override
     public List<StewardDTO> getAllStewards() {
         return beanMappingService.mapTo(stewardService.getAllStewards(), StewardDTO.class);
+    }
+	
+	@Override
+    public List<StewardDTO> getAvailableStewards(FlightDTO flightDTO) {
+		Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+		List<Steward> stewards = stewardService.getAvailableStewards(flight);
+		return beanMappingService.mapTo(stewards, StewardDTO.class);
     }
 }
