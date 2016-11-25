@@ -1,4 +1,4 @@
-package cz.muni.airport.model;
+package cz.muni.airport.model.enums;
 
 /**
  *

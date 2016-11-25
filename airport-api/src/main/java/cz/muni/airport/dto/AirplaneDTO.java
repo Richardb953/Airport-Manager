@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.airport.dto;
 
 import java.util.List;
-
-import cz.muni.airport.enums.PlaneType;
+import cz.muni.airport.model.enums.PlaneType;
+import java.util.Objects;
 
 /**
  *
@@ -62,6 +57,32 @@ public class AirplaneDTO {
     public void setFlights(List<FlightDTO> flights) {
         this.flights = flights;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.getName());
+        hash = 53 * hash + this.getCapacity();
+        hash = 53 * hash + Objects.hashCode(this.getType());
+        hash = 53 * hash + Objects.hashCode(this.getFlights());
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof AirplaneDTO)) return false; 
+        
+        final AirplaneDTO other = (AirplaneDTO) obj;
+        
+        if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
+        if (!Objects.equals(this.getName(), other.getName())) return false;
+        if (!Objects.equals(this.getType(), other.getType())) return false;
+//        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
+        
+        return true;
+    }
+    
     
     
     
