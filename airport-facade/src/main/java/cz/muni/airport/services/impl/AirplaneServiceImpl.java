@@ -6,6 +6,7 @@ import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.AirplaneService;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -95,7 +96,7 @@ public class AirplaneServiceImpl implements AirplaneService {
             - null pokud se let nikam nevejde
     */    
     private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
-        List<Flight> result = new ArrayList<>(2);
+        List<Flight> result = new ArrayList<Flight>(3);
         Flight prev = null, next = null, candidate = null;
         int i = 0;
         while (i < flights.size()) { //solves first by design
@@ -130,10 +131,11 @@ public class AirplaneServiceImpl implements AirplaneService {
         List<Flight> theseFlights = airplane.getFlights();
         //when no flights
         if (theseFlights.isEmpty()) return true;
-        
+
         //sort flights
-        Collections.sort(theseFlights, (Flight o1, Flight o2) -> o1.getArrival().compareTo(o2.getArrival()));
-        
+        List<Flight> modifiableList = new ArrayList<Flight>(theseFlights);
+        Collections.sort(modifiableList, (Flight o1, Flight o2) -> o1.getArrival().compareTo(o2.getArrival()));
+
         //find time slot
         List<Flight> slot = findTimeSlot(theseFlights, flight);
         if (slot == null) return false;
