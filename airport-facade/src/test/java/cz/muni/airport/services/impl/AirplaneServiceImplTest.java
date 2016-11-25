@@ -1,4 +1,4 @@
-package cz.muni.airport.service;
+package cz.muni.airport.services.impl;
 
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -173,7 +173,7 @@ public class AirplaneServiceImplTest {
         flight.setDestinationPort(kosice);
 
 
-        when(airplaneService.getAllAirplanes()).thenReturn( Collections.unmodifiableList(allAirplanes));
+        when(airplaneService.getAllAirplanes()).thenReturn(Collections.unmodifiableList(allAirplanes));
         Assert.assertEquals(airplaneService.getAvailableAirplanes(flight).size(), 1);
 
     }

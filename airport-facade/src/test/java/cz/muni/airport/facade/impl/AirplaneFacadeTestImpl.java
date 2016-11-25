@@ -1,4 +1,4 @@
-package cz.muni.airport.facade;
+package cz.muni.airport.facade.impl;
 
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Test;
