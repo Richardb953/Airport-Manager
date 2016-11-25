@@ -121,7 +121,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
     
     @Override
-    public boolean isAvailable(Airplane airplane, Flight flight){
+    public boolean isAvailable(Airplane airplane, Flight flight) {
         if(flight.getSourcePort() == null || flight.getDestinationPort() == null 
             || flight.getDeparture() == null || flight.getArrival() == null){
             throw new IllegalArgumentException("One of sourcePort, destinationPort, departure, arrival in given flight is null.");
