@@ -1,5 +1,6 @@
 package cz.muni.airport.model;
 
+import cz.muni.airport.model.enums.PlaneType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -137,13 +138,17 @@ public class Airplane {
     
     /*
         projde seřazený seznam letů a snaží se najít místo kam by let časově zapadl
-            - dalo by se to udělat efektivněji 
+        vrací: 
+            - dvojici letů - předcházející a následující let
+                    * předcházející je null -> náš let může být první   result[0]
+                    * následující je null -> náš let může být poslední  result[1]
+            - null pokud se let nikam nevejde
     */    
     private List<Flight> findTimeSlot(List<Flight> flights, Flight flight){
         List<Flight> result = new ArrayList<>(2);
         Flight prev = null, next = null, candidate = null;
         int i = 0;
-        while (i < flights.size()) { 
+        while (i < flights.size()) { //solves first by design
             candidate = flights.get(i);
             if(flight.getArrival().before(candidate.getDeparture())){
                 next = candidate;
@@ -156,7 +161,7 @@ public class Airplane {
             result.set(1, null);
             return result;
         }
-        prev = flights.get(i-1); 
+        prev = flights.get(i-1); //prev for readability
         if(prev.getArrival().before(flight.getDeparture())){
             result.set(0, prev);
             result.set(0, next);
@@ -164,12 +169,14 @@ public class Airplane {
         }
         return null;
     }
-    
+    /**
+     * This method chcecks if airplane is available for given flight.
+     * @param flight    
+     * @return  true if flight is available, false othervise
+     */
     public boolean isAvailable(Flight flight){
-        if(flight.getSourcePort() == null 
-                || flight.getDestinationPort() == null 
-                || flight.getDeparture() == null 
-                || flight.getArrival() == null){
+        if(flight.getSourcePort() == null || flight.getDestinationPort() == null 
+            || flight.getDeparture() == null || flight.getArrival() == null){
             throw new IllegalArgumentException("One of sourcePort, destinationPort, departure, arrival in given flight is null.");
         }
         
@@ -185,21 +192,18 @@ public class Airplane {
         if (slot == null) return false;
         
         //check destination and arrival locations
-        Flight prev = slot.get(0);
-        Flight next = slot.get(1);
-        
+        Flight prev = slot.get(0), next = slot.get(1); //readability
         if (prev == null){ //could be first
-            if(flight.getDestinationPort().equals(next.getSourcePort())) return true;
+            if( flight.getDestinationPort().equals(next.getSourcePort()) ) return true;
         }
         if (next == null){ //could be last
-            if(flight.getSourcePort().equals(prev.getDestinationPort())) return true;
+            if( prev.getDestinationPort().equals(flight.getSourcePort()) ) return true;
         }
-        if(prev.getDestinationPort().equals(flight.getSourcePort()) 
-                && flight.getDestinationPort().equals(next.getSourcePort())){
+        if( prev.getDestinationPort().equals(flight.getSourcePort()) 
+                && flight.getDestinationPort().equals(next.getSourcePort()) ){
             return true;
         }
         return false;
-        
     }
 
 
