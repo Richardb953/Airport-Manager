@@ -6,7 +6,7 @@ import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.PlaneType;
+import cz.muni.airport.model.enums.PlaneType;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.AirportService;
