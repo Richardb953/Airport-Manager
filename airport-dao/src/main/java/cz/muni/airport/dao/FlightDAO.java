@@ -16,7 +16,7 @@ public interface FlightDAO {
      * @param flight entity of flight object
      * @return Flight object
      */
-    Flight addFlight(Flight flight) throws Exception;
+    Flight addFlight(Flight flight);
 
     /**
      * READ FLIGHT
@@ -24,20 +24,20 @@ public interface FlightDAO {
      * @return Flight object
      * @throws IllegalArgumentException if id is null
      */
-    Flight getFlightById(Long id) throws Exception ;
+    Flight getFlightById(Long id) ;
 
     /**
      * UPDATE FLIGHT
      * @param flight entity of flight object
      * @return Flight object
      */
-    Flight updateFlight(Flight flight) throws Exception;
+    Flight updateFlight(Flight flight);
 
     /**
      * DELETE FLIGHT
      * @param flight flight entity of flight object
      */
-    void removeFlight(Flight flight) throws Exception;
+    void removeFlight(Flight flight);
 
     /**
      * FIND FLIGHT BY NAME
@@ -45,12 +45,12 @@ public interface FlightDAO {
      * @return List of Flight objects
      * @throws IllegalArgumentException if name is null
      */
-    List<Flight> getFlightsByName(String name) throws Exception;
+    List<Flight> getFlightsByName(String name);
 
     /**
      * FIND ALL FLIGHTS
      * @return List of Flight objects
      */
-    List<Flight> getAllFlights() throws Exception;
+    List<Flight> getAllFlights();
 
 }
