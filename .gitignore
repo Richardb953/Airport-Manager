@@ -94,3 +94,4 @@ tmp/
 /target/
 /src/main/resources/properties/database.properties
 /nbproject/
+/airport-facade/nbproject/
