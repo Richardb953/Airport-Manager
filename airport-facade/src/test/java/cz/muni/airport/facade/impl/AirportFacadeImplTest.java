@@ -38,22 +38,22 @@ public class AirportFacadeImplTest {
 	}
 
 	private AirportDTO createAirportDTO1(){
-        AirportDTO airportDTO = new AirportDTO();
-        airportDTO.setCity("Brno");
+		AirportDTO airportDTO = new AirportDTO();
+		airportDTO.setCity("Brno");
 		airportDTO.setIata("BRN");
 		airportDTO.setCountry("Czech republic");
 		airportDTO.setName("Brno letiste");
 		return airportDTO;
-    }
-    private Airport createAirport1(){
-        Airport airport = new Airport();
-        airport.setCity("Brno");
+	}
+	private Airport createAirport1(){
+		Airport airport = new Airport();
+		airport.setCity("Brno");
 		airport.setIata("BRN");
 		airport.setCountry("Czech republic");
 		airport.setName("Brno letiste");
 		return airport;
-    }
-	
+	}
+
 	@Before
 	public void setUp() {
 	}
@@ -221,7 +221,15 @@ public class AirportFacadeImplTest {
 	@Test
 	public void testRemoveAirport() {
 		System.out.println("removeAirport");
-		
+		Airport airport = createAirport1();
+		AirportDTO airportDTO = createAirportDTO1();
+        
+		when(beanMapperService.mapTo(airportDTO, Airport.class)).thenReturn(airport);
+		when(beanMapperService.mapTo(airport, AirportDTO.class)).thenReturn(airportDTO);
+
+		airportFacade.removeAirport(Long.MIN_VALUE);
+		verify(beanMapperService).mapTo(airportDTO, Airport.class);
+		verify(airportService).removeAirport(airport);
 	}
 
 	/**
