@@ -216,23 +216,6 @@ public class AirportFacadeImplTest {
 	}
 
 	/**
-	 * Test of removeAirport method, of class AirportFacadeImpl.
-	 */
-	@Test
-	public void testRemoveAirport() {
-		System.out.println("removeAirport");
-		Airport airport = createAirport1();
-		AirportDTO airportDTO = createAirportDTO1();
-        
-		when(beanMapperService.mapTo(airportDTO, Airport.class)).thenReturn(airport);
-		when(beanMapperService.mapTo(airport, AirportDTO.class)).thenReturn(airportDTO);
-
-		airportFacade.removeAirport(Long.MIN_VALUE);
-		verify(beanMapperService).mapTo(airportDTO, Airport.class);
-		verify(airportService).removeAirport(airport);
-	}
-
-	/**
 	 * Test of updateAirport method, of class AirportFacadeImpl.
 	 */
 	@Test
