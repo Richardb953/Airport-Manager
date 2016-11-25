@@ -1,5 +1,8 @@
 package cz.muni.airport;
 
+import cz.muni.airport.dto.FlightCreateDTO;
+import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
@@ -36,9 +39,25 @@ public class Main {
 
         createPlane(context);
         //createSteward(context);
-        //createFlight(context);
+        createFlight(context);
         //createAirport(context);
+        createFlightFacade(context);
 
+    }
+
+    private static void createFlightFacade(ApplicationContext context) {
+        FlightFacade flightFacade = context.getBean("flightFacadeImpl", FlightFacade.class);
+
+        FlightDTO flightDTO =  flightFacade.getFlightById(1L);
+        System.out.print("FLIGHT DTO " + flightDTO.toString());
+
+        FlightCreateDTO flightDTO1 = new FlightCreateDTO();
+        flightDTO1.setName("pka");
+        flightDTO1.setArrival(216818616L);
+        flightDTO1.setDeparture(216818655L);
+        flightDTO1.setPassagers(10);
+
+        flightFacade.createNewFlight(flightDTO1);
     }
 
     private static void createPlane(ApplicationContext context) {

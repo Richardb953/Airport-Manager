@@ -3,6 +3,8 @@ package cz.muni.airport.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +14,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import cz.muni.airport.model.enums.FlightState;
 
 /**
  * Created by Richard Bariny on 23.10.2016.
@@ -51,16 +56,19 @@ public class Flight {
     @Column
     private Integer passagers;
 
+    @Enumerated
+    private FlightState flightState;
+
     @ManyToOne()
     private Airplane airplane;
 
-    @OneToOne()
+    @OneToOne(optional = true)
     private Airport destinationPort;
 
-    @OneToOne()
+    @OneToOne(optional = true)
     private Airport sourcePort;
 
-    @ManyToMany(mappedBy = "flights")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "flights")
     private List<Steward> stewards;
 
 
@@ -143,6 +151,14 @@ public class Flight {
         this.stewards.add(steward);
     }
 
+    public FlightState getFlightState() {
+        return flightState;
+    }
+
+    public void setFlightState(FlightState flightState) {
+        this.flightState = flightState;
+    }
+
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -172,4 +188,5 @@ public class Flight {
                 ", sourcePort=" + sourcePort +
                 '}';
     }
+
 }

@@ -2,6 +2,9 @@ package cz.muni.airport.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import cz.muni.airport.enums.FlightState;
 
 /**
  * Data transfer object between flights layers
@@ -9,24 +12,25 @@ import java.util.List;
  * @author github:Richardb953
  */
 public class FlightDTO {
-    private int id;
+    private Long id;
     private String name;
-    private int arrival;
-    private int departure;
+    private Long arrival;
+    private Long departure;
     private int passagers;
-    private int airplane;
-    private int destinationport;
-    private int sourceport;
+    private FlightState flightState;
+    private AirplaneDTO airplane;
+    private AirportDTO destinationport;
+    private AirportDTO sourceport;
     private List<StewardDTO> stewards = new ArrayList<StewardDTO>();
 
     public FlightDTO() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,19 +42,19 @@ public class FlightDTO {
         this.name = name;
     }
 
-    public int getArrival() {
+    public Long getArrival() {
         return arrival;
     }
 
-    public void setArrival(int arrival) {
+    public void setArrival(Long arrival) {
         this.arrival = arrival;
     }
 
-    public int getDeparture() {
+    public Long getDeparture() {
         return departure;
     }
 
-    public void setDeparture(int departure) {
+    public void setDeparture(Long departure) {
         this.departure = departure;
     }
 
@@ -62,27 +66,27 @@ public class FlightDTO {
         this.passagers = passagers;
     }
 
-    public int getAirplane() {
+    public AirplaneDTO getAirplane() {
         return airplane;
     }
 
-    public void setAirplane(int airplane) {
+    public void setAirplane(AirplaneDTO airplane) {
         this.airplane = airplane;
     }
 
-    public int getDestinationport() {
+    public AirportDTO getDestinationport() {
         return destinationport;
     }
 
-    public void setDestinationport(int destinationport) {
+    public void setDestinationport(AirportDTO destinationport) {
         this.destinationport = destinationport;
     }
 
-    public int getSourceport() {
+    public AirportDTO getSourceport() {
         return sourceport;
     }
 
-    public void setSourceport(int sourceport) {
+    public void setSourceport(AirportDTO sourceport) {
         this.sourceport = sourceport;
     }
 
@@ -94,6 +98,14 @@ public class FlightDTO {
         this.stewards = stewards;
     }
 
+    public FlightState getFlightState() {
+        return flightState;
+    }
+
+    public void setFlightState(FlightState flightState) {
+        this.flightState = flightState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,9 +113,9 @@ public class FlightDTO {
 
         FlightDTO flightDTO = (FlightDTO) o;
 
-        if (id != flightDTO.id) return false;
-        if (arrival != flightDTO.arrival) return false;
-        if (departure != flightDTO.departure) return false;
+        if (!Objects.equals(id, flightDTO.id)) return false;
+        if (!Objects.equals(arrival, flightDTO.arrival)) return false;
+        if (!Objects.equals(departure, flightDTO.departure)) return false;
         if (destinationport != flightDTO.destinationport) return false;
         if (sourceport != flightDTO.sourceport) return false;
         return name != null ? name.equals(flightDTO.name) : flightDTO.name == null;
@@ -112,12 +124,12 @@ public class FlightDTO {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + arrival;
-        result = 31 * result + departure;
-        result = 31 * result + destinationport;
-        result = 31 * result + sourceport;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode())
+                + ((destinationport == null) ? 0 : destinationport.hashCode())
+                + ((sourceport == null) ? 0 : sourceport.hashCode())
+                + ((airplane == null) ? 0 : airplane.hashCode());
         return result;
     }
 
@@ -129,9 +141,7 @@ public class FlightDTO {
                 ", arrival=" + arrival +
                 ", departure=" + departure +
                 ", passagers=" + passagers +
-                ", airplane=" + airplane +
-                ", destinationport=" + destinationport +
-                ", sourceport=" + sourceport +
                 '}';
     }
+
 }
