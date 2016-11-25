@@ -1,5 +1,7 @@
 package cz.muni.airport.services;
 
+import cz.muni.airport.dto.FlightCreateDTO;
+import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 
@@ -60,4 +62,12 @@ public interface FlightService {
      * @return List of Flight objects
      */
     Flight addStewardToFlight(Flight flight, Steward steward);
+
+    /**
+     * Validate Flight parameters - steward availibility, airplane availibility and time
+     * @param flight validated Flight object
+     * @return validation true or false if do not pass
+     */
+    boolean validateFlight(Flight flight);
+
 }

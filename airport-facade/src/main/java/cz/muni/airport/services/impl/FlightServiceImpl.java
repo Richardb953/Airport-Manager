@@ -1,14 +1,20 @@
 package cz.muni.airport.services.impl;
 
 import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.dto.FlightCreateDTO;
+import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
+import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  *
@@ -22,6 +28,9 @@ public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightDAO flightDao;
+
+    @Inject
+    private AirplaneService airplaneService;
 
     @Override
     @Transactional
@@ -58,6 +67,30 @@ public class FlightServiceImpl implements FlightService {
         flight.addSteward(steward);
         return updateFlight(flight);
     }
+
+    @Override
+    public boolean validateFlight(Flight flight) {
+        if(flight.getDeparture().before(flight.getArrival())){
+            return false;
+        }
+
+        if(flight.getAirplane() != null){
+            boolean airplateValidation = airplaneService.isAvailable(flight.getAirplane(), flight);
+            if(!airplateValidation){
+                return false;
+            }
+        }
+
+        for(Steward steward : flight.getStewards()){
+            boolean stewardValidation = steward.isAvailable(flight);
+            if(!stewardValidation){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     @Override
     @Transactional

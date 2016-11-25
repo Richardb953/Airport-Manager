@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
@@ -127,7 +128,8 @@ public class FlightFacadeImpl implements FlightFacade {
 
     @Override
     public boolean validateFlight(FlightDTO flightDTO) {
-        return false;
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        return flightService.validateFlight(flight);
     }
 
     @Override
@@ -136,6 +138,14 @@ public class FlightFacadeImpl implements FlightFacade {
         Steward steward = beanMappingService.mapTo(stewardDTO, Steward.class);
 
         return beanMappingService.mapTo(flightService.addStewardToFlight(flight, steward), FlightDTO.class);
+    }
+
+    @Override
+    public FlightDTO changeFlightState(FlightDTO flightDTO, FlightState newFlightState) {
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        flight.setFlightState(newFlightState);
+        flight = flightService.updateFlight(flight);
+        return beanMappingService.mapTo(flight, FlightDTO.class);
     }
 
     private FlightState convertFlightState(cz.muni.airport.enums.FlightState flightState){
