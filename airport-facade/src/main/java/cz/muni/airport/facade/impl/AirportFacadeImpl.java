@@ -25,13 +25,16 @@ public class AirportFacadeImpl implements AirportFacade {
     public AirportDTO createAirport(AirportDTO airportDTO) {
 
         Airport airport = beanMappingService.mapTo(airportDTO, Airport.class);
-        if (airportService.hasValidIata(airport)) {
+        /*if (airportService.hasValidIata(airport)) {
 
             Airport created = airportService.saveAirport(airport);
             return beanMappingService.mapTo(created, AirportDTO.class);
         } else {
             throw new IllegalArgumentException("IATA code is invalid");
-        }
+        }*/
+		
+		Airport created = airportService.saveAirport(airport);
+        return beanMappingService.mapTo(created, AirportDTO.class);
     }
 
     @Override
