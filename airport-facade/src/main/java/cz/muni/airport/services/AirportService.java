@@ -17,7 +17,7 @@ public interface AirportService {
      * @param airport Airport object to be added
      * @return Airport object
      */
-    Airport addAirport(Airport airport);
+    Airport saveAirport(Airport airport);
 
     /**
      * Update airport
@@ -36,41 +36,41 @@ public interface AirportService {
      * Get all airports
      * @return List<Airport> of Airport objects
      */
-    List<Airport> getAllAirports();
+    List<Airport> findAllAirports();
 
     /**
      * Get Airport
      * @param id Long airport id
      * @return Airport object
      */
-    Airport getAirportById(Long id);
+    Airport findAirportById(Long id);
     
     /**
      * Get Airport
      * @param iata String airport iata identifier
      * @return Airport object
      */
-    List<Airport> getAirportByIata(String iata);
+    List<Airport> findAirportByIata(String iata);
 
     /**
      * Get all airports with given city
      * @param city String value of city
      * @return List<Airport> of Airport objects
      */
-    List<Airport> getAirportsByCity(String city);
+    List<Airport> findAirportsByCity(String city);
 
     /**
      * Get all airports with given name
      * @param name String value of name
      * @return List<Airport> of Airport objects
      */
-    List<Airport> getAirportsByName(String name);
+    List<Airport> findAirportsByName(String name);
 
     /**
      * Get all airports with given country
      * @param country String value of country
      * @return List<Airport> of Airport objects
      */
-    List<Airport> getAirportsByCountry(String country);
+    List<Airport> findAirportsByCountry(String country);
 
 }
