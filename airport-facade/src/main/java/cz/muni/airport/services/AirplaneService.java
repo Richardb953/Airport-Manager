@@ -1,6 +1,7 @@
 package cz.muni.airport.services;
 
 import cz.muni.airport.model.Airplane;
+import cz.muni.airport.model.Flight;
 import java.util.List;
 
 /**
@@ -62,6 +63,14 @@ public interface AirplaneService {
      * @throws IllegalArgumentException     If name is null or not String.
      */
     List<Airplane> getAirplaneByName(String name);
+    
+    /**
+     * This method chcecks if airplane is available for given flight.
+     * @param airplane
+     * @param flight    
+     * @return  true if flight is available, false othervise
+     */
+    public boolean isAvailable(Airplane airplane, Flight flight);
     
         
             
