@@ -1,8 +1,10 @@
 package cz.muni.airport.facade.impl;
 
 import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.facadeApi.AirplaneFacade;
 import cz.muni.airport.model.Airplane;
+import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.BeanMappingService;
 import java.util.List;
@@ -55,6 +57,20 @@ public class AirplaneFacadeImpl implements AirplaneFacade{
     public AirplaneDTO getAirplaneById(Long id) {
         Airplane airplane = airplaneService.getAirplaneById(id);
         return (airplane == null) ? null : beanMappingService.mapTo(airplane, AirplaneDTO.class);
+    }
+
+    @Override
+    public boolean isAvailable(AirplaneDTO airplaneDTO, FlightDTO flightDTO) {
+        Airplane airplane = beanMappingService.mapTo(airplaneDTO, Airplane.class);
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        return airplaneService.isAvailable(airplane, flight);
+    }
+
+    @Override
+    public List<AirplaneDTO> getAvailableAirplanes(FlightDTO flightDTO) {
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        List<Airplane> airplanes = airplaneService.getAvailableAirplanes(flight);
+        return beanMappingService.mapTo(airplanes, AirplaneDTO.class);
     }
     
 }
