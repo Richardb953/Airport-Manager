@@ -5,6 +5,7 @@ import cz.muni.airport.model.Airplane;
 import cz.muni.airport.services.AirplaneService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,36 +26,61 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     @Transactional
     public Airplane saveAirplane(Airplane airplane) {
-        airplaneDAO.addAirplane(airplane);
-        return airplane;
+        try {
+            return airplaneDAO.addAirplane(airplane);
+        } catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {};
+        }        
     }
 
     @Override
     @Transactional
     public Airplane updateAirplane(Airplane airplane) {
-        airplaneDAO.updateAirplane(airplane);
-        return airplane;
+        try {
+            return airplaneDAO.updateAirplane(airplane);
+        } catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {};
+        } 
     }
 
     @Override
     @Transactional
     public void removeAirplane(Airplane airplane) {
-        airplaneDAO.removeAirplane(airplane);
+        try {
+            airplaneDAO.removeAirplane(airplane);
+        } catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {};
+        } 
     }
 
     @Override
     public Airplane getAirplaneById(Long id) {
-        return airplaneDAO.getAirplaneById(id);
+        try { 
+            return airplaneDAO.getAirplaneById(id); 
+        }
+        catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {};
+        }
     }
 
     @Override
     public List<Airplane> getAirplaneByName(String name) {
-        return airplaneDAO.getAirplaneByName(name);
+        try { 
+            return airplaneDAO.getAirplaneByName(name); 
+        }
+        catch (Exception e){
+            throw new DataAccessException(e.getMessage(), e) {};
+        }
     }
 
     @Override
     public List<Airplane> getAllAirplanes() {
-        return airplaneDAO.getAllAirplanes();
+        try {
+            return airplaneDAO.getAllAirplanes();
+        } 
+        catch (Exception e) {
+            throw new DataAccessException(e.getMessage(), e) {};
+        }
     }
 
     
