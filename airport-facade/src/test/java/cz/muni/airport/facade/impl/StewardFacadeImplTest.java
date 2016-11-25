@@ -2,7 +2,6 @@ package cz.muni.airport.facade.impl;
 
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
-import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.BeanMappingService;
 import cz.muni.airport.services.impl.StewardServiceImpl;
@@ -10,17 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
@@ -34,17 +27,10 @@ public class StewardFacadeImplTest {
     private BeanMappingService beanMapperService;
     @InjectMocks
     private StewardFacade stewardFacade = new StewardFacadeImpl();
-    
-    List<Steward> data;
-    
+        
     public StewardFacadeImplTest() {
     }
-    
-    @Before 
-    public void initialize() { 
-        data = new ArrayList<>();
-    }
-    
+        
     @Test
     public void shouldAutowireDependencies() {
         assertNotNull(stewardFacade);
