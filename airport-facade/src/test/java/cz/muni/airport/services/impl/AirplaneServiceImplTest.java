@@ -162,22 +162,6 @@ public class AirplaneServiceImplTest {
     public void isAvailableCheck(){
         Assert.assertEquals(airplaneService.isAvailable(airplane2, flight2), true);
     }
-/*
-    @Test
-    public void getAvailableAirplanes(){
-        Flight flight = new Flight();
-        flight.setName("letCisloAvailable");
-        departure.add(Calendar.HOUR, 20);
-        flight.setDeparture(departure.getTime());
-        arrival.add(Calendar.HOUR, 20);
-        flight.setArrival(arrival.getTime());
-        flight.setSourcePort(bratiska);
-        flight.setDestinationPort(kosice);
 
-
-        when(airplaneService.getAllAirplanes()).thenReturn(allAirplanes);
-        Assert.assertEquals(airplaneService.getAvailableAirplanes(flight).size(), 1);
-
-    }*/
 
 }
