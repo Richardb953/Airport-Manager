@@ -4,6 +4,7 @@ import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.BeanMappingService;
+import cz.muni.airport.services.StewardService;
 import cz.muni.airport.services.impl.StewardServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class StewardFacadeImplTest {
     @Mock
-    private StewardServiceImpl stewardServiceImpl;
+    private StewardService stewardService;
     @Mock
     private BeanMappingService beanMapperService;
     @InjectMocks
@@ -61,11 +62,12 @@ public class StewardFacadeImplTest {
         
         when(beanMapperService.mapTo(sDTO1, Steward.class)).thenReturn(s1);
         when(beanMapperService.mapTo(s1, StewardDTO.class)).thenReturn(sDTO1);
-        when(stewardServiceImpl.addSteward(s1)).thenReturn(s1);
+        when(stewardService.addSteward(s1)).thenReturn(s1);
         
         StewardDTO created = stewardFacade.createSteward(sDTO1);
        
         assertEquals(sDTO1, created);
+        verify(stewardService).addSteward(s1);
     }
 
     /**
@@ -80,11 +82,12 @@ public class StewardFacadeImplTest {
         
         when(beanMapperService.mapTo(sDTO1, Steward.class)).thenReturn(s1);
         when(beanMapperService.mapTo(s1, StewardDTO.class)).thenReturn(sDTO1);
-        when(stewardServiceImpl.updateSteward(s1)).thenReturn(s1);
+        when(stewardService.updateSteward(s1)).thenReturn(s1);
         
         StewardDTO updated = stewardFacade.updateSteward(sDTO1);
        
         assertEquals(sDTO1, updated);
+        verify(stewardService).updateSteward(s1);
    
     }
 
@@ -104,7 +107,7 @@ public class StewardFacadeImplTest {
         stewardFacade.deleteSteward(sDTO1);
         
         verify(beanMapperService).mapTo(sDTO1, Steward.class);
-        verify(stewardServiceImpl).removeSteward(s1);
+        verify(stewardService).removeSteward(s1);
     }
 
     /**
@@ -119,12 +122,12 @@ public class StewardFacadeImplTest {
         
         when(beanMapperService.mapTo(sDTO1, Steward.class)).thenReturn(s1);
         when(beanMapperService.mapTo(s1, StewardDTO.class)).thenReturn(sDTO1);
-        when(stewardServiceImpl.getSteward(anyLong())).thenReturn(s1);
+        when(stewardService.getSteward(anyLong())).thenReturn(s1);
         
         StewardDTO result = stewardFacade.getSteward(Long.MIN_VALUE);
         
         verify(beanMapperService).mapTo(s1, StewardDTO.class);
-        verify(stewardServiceImpl).getSteward(Long.MIN_VALUE);
+        verify(stewardService).getSteward(Long.MIN_VALUE);
    
     }
 
@@ -144,12 +147,12 @@ public class StewardFacadeImplTest {
         
         when(beanMapperService.mapTo(sDTO1, Steward.class)).thenReturn(s1);
         when(beanMapperService.mapTo(s1, StewardDTO.class)).thenReturn(sDTO1);
-        when(stewardServiceImpl.getStewardByName(name, last)).thenReturn(res);
+        when(stewardService.getStewardByName(name, last)).thenReturn(res);
         
         List<StewardDTO> result = stewardFacade.getStewardByName(name, last);
         
         verify(beanMapperService).mapTo(res, StewardDTO.class);
-        verify(stewardServiceImpl).getStewardByName(name, last);
+        verify(stewardService).getStewardByName(name, last);
         
     }
 
@@ -167,12 +170,12 @@ public class StewardFacadeImplTest {
         
         when(beanMapperService.mapTo(sDTO1, Steward.class)).thenReturn(s1);
         when(beanMapperService.mapTo(s1, StewardDTO.class)).thenReturn(sDTO1);
-        when(stewardServiceImpl.getAllStewards()).thenReturn(res);
+        when(stewardService.getAllStewards()).thenReturn(res);
         
         List<StewardDTO> result = stewardFacade.getAllStewards();
          
         verify(beanMapperService).mapTo(res, StewardDTO.class);
-        verify(stewardServiceImpl).getAllStewards(); 
+        verify(stewardService).getAllStewards(); 
         
     }
     
