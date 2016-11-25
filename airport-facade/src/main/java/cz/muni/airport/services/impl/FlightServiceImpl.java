@@ -7,6 +7,7 @@ import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,9 @@ public class FlightServiceImpl implements FlightService {
 
     @Inject
     private AirplaneService airplaneService;
+    
+    @Inject
+    private StewardService stewardService;
 
     @Override
     @Transactional
@@ -82,7 +86,7 @@ public class FlightServiceImpl implements FlightService {
         }
 
         for(Steward steward : flight.getStewards()){
-            boolean stewardValidation = steward.isAvailable(flight);
+            boolean stewardValidation = stewardService.isAvailable(steward, flight);
             if(!stewardValidation){
                 return false;
             }
