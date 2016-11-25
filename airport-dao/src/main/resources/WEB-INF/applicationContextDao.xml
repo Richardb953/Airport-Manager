@@ -38,5 +38,5 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
     <context:component-scan base-package="cz.muni.airport" annotation-config="true"/>
-   
+
 </beans>

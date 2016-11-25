@@ -9,13 +9,19 @@ import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.impl.AirplaneServiceImpl;
+import cz.muni.airport.services.impl.AirportServiceImpl;
 import cz.muni.airport.services.impl.FlightServiceImpl;
+import cz.muni.airport.services.impl.StewardServiceImpl;
 
 /**
  * Created by Richard Bariny on 22.11.2016.
@@ -24,7 +30,7 @@ import cz.muni.airport.services.impl.FlightServiceImpl;
  */
 
 @Configuration
-@ComponentScan(basePackageClasses={FlightServiceImpl.class})
+@ComponentScan(basePackageClasses={FlightServiceImpl.class, AirportServiceImpl.class, AirplaneServiceImpl.class, StewardServiceImpl.class})
 public class ServiceConfiguration {
 
 

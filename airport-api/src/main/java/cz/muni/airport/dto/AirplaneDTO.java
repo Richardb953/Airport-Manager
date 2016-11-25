@@ -1,5 +1,6 @@
 package cz.muni.airport.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import cz.muni.airport.model.enums.PlaneType;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class AirplaneDTO {
     private String name;
     private int capacity;
     private PlaneType type;
-    private List<FlightDTO> flights;
+    private List<FlightDTO> flights = new ArrayList<>();
 
     public AirplaneDTO() {
     }
@@ -56,6 +57,10 @@ public class AirplaneDTO {
 
     public void setFlights(List<FlightDTO> flights) {
         this.flights = flights;
+    }
+
+    public void addFlight(FlightDTO flightDTO){
+        this.flights.add(flightDTO);
     }
 
     @Override
