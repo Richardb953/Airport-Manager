@@ -6,6 +6,7 @@
 package cz.muni.airport.facadeApi;
 
 import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.dto.FlightDTO;
 import java.util.List;
 
 /**
@@ -19,5 +20,9 @@ public interface AirplaneFacade {
     List<AirplaneDTO> getAllAirplanes();
     List<AirplaneDTO> getAirplaneByName(String name);
     AirplaneDTO getAirplaneById(Long id);
+    
+    public boolean isAvailable(AirplaneDTO airplaneDTO, FlightDTO flightDTO);
+    
+    public List<AirplaneDTO> getAvailableAirplanes(FlightDTO flightDTO);
     
 }

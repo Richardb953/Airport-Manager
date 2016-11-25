@@ -72,6 +72,8 @@ public interface AirplaneService {
      */
     public boolean isAvailable(Airplane airplane, Flight flight);
     
+    public List<Airplane> getAvailableAirplanes(Flight flight);
+    
         
             
     

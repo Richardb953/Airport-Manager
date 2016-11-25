@@ -152,6 +152,15 @@ public class AirplaneServiceImpl implements AirplaneService {
         }
         return false;
     }
+    
+    @Override
+    public List<Airplane> getAvailableAirplanes(Flight flight){
+        List<Airplane> airplanes = new ArrayList<>();
+        for ( Airplane airplane : getAllAirplanes() ) {
+            if ( isAvailable(airplane, flight) ) airplanes.add(airplane); 
+        }
+        return airplanes;
+    }
 
     
     
