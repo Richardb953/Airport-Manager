@@ -1,20 +1,27 @@
 package cz.muni.airport.services.impl;
 
-import cz.muni.airport.dao.StewardDAO;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
+
+import cz.muni.airport.dao.StewardDAO;
+import cz.muni.airport.model.Airport;
+import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
+import cz.muni.airport.services.StewardService;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -25,8 +32,9 @@ public class StewardServiceImplTest {
     
     @Mock
     private StewardDAO stewardDAO;
+
     @InjectMocks
-    private StewardServiceImpl stewardService = new StewardServiceImpl();
+    private StewardService stewardService = new StewardServiceImpl();
     
     public StewardServiceImplTest() {
     }

@@ -1,12 +1,13 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.StewardDAO;
-import cz.muni.airport.database.Connection;
-import cz.muni.airport.model.Steward;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import cz.muni.airport.dao.StewardDAO;
+import cz.muni.airport.database.Connection;
+import cz.muni.airport.model.Steward;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @Transactional
-@Repository("stewardDAO")
+@Repository("StewardDAO")
 public class StewardDAOImpl extends Connection implements StewardDAO {
 
 	@Override

@@ -1,20 +1,25 @@
 package cz.muni.airport.facade.impl;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.BeanMappingService;
 import cz.muni.airport.services.StewardService;
-import cz.muni.airport.services.impl.StewardServiceImpl;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -24,8 +29,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class StewardFacadeImplTest {
     @Mock
     private StewardService stewardService;
+
     @Mock
     private BeanMappingService beanMapperService;
+
     @InjectMocks
     private StewardFacade stewardFacade = new StewardFacadeImpl();
         

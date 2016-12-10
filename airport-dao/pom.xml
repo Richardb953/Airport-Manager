@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -163,7 +162,6 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
-        <spring.contex.version>4.2.5.RELEASE</spring.contex.version>
         <spring.data>1.10.1.RELEASE</spring.data>
         <junit.version>4.9</junit.version>
         <org.slf4j.version>1.7.9</org.slf4j.version>
@@ -183,6 +181,7 @@
         <apache.derby>10.10.2.0</apache.derby>
         <hibernate.encache>4.2.13.Final</hibernate.encache>
         <encache>2.8.3</encache>
+        <spring.contex.version>4.2.5.RELEASE</spring.contex.version>
     </properties>
 
 </project>

@@ -1,18 +1,26 @@
 package cz.muni.airport.services.impl;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Calendar;
+
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
-import java.util.Calendar;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.AirportService;
+import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -25,13 +33,16 @@ public class FlightServiceImplTest {
     private FlightDAO flightDAO;
     
     @Mock
-    private AirplaneServiceImpl airplaneServiceImpl;
+    private AirplaneService airplaneServiceImpl;
     
     @Mock
-    private AirportServiceImpl airportServiceImpl;
+    private AirportService airportServiceImpl;
+
+    @Mock
+    private StewardService stewardService;
     
     @InjectMocks
-    private FlightServiceImpl flightService = new FlightServiceImpl();
+    private FlightService flightService = new FlightServiceImpl();
     
     public FlightServiceImplTest() {
     }

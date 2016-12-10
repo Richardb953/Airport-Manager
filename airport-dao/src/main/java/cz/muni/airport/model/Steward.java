@@ -1,14 +1,14 @@
 package cz.muni.airport.model;
 
-import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Steward entity

@@ -16,7 +16,7 @@ import java.util.List;
 
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
-import cz.muni.airport.facade.impl.AirplaneFacadeImpl;
+import cz.muni.airport.facadeApi.AirplaneFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.enums.PlaneType;
@@ -36,6 +36,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AirplaneFacadeTestImpl {
+
     @Mock
     private AirplaneService airplaneService;
 
@@ -46,7 +47,7 @@ public class AirplaneFacadeTestImpl {
     private BeanMappingService beanMapperService;
 
     @InjectMocks
-    private AirplaneFacadeImpl airplaneFacade = new AirplaneFacadeImpl();
+    private AirplaneFacade airplaneFacade = new AirplaneFacadeImpl();
 
     public AirplaneFacadeTestImpl() {
     }

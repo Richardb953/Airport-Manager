@@ -1,21 +1,26 @@
 package cz.muni.airport.facade.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
-import cz.muni.airport.services.StewardService;
 import cz.muni.airport.services.BeanMappingService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.muni.airport.services.StewardService;
 
 /**
  * Steward facade implementation
  * 
  * @author Andrea Navratilova, github name: andrea-n
  */
-public class StewardFacadeImpl implements StewardFacade {
+
+@Service
+class StewardFacadeImpl implements StewardFacade {
     @Autowired
     private StewardService stewardService;
 

@@ -1,8 +1,9 @@
 package cz.muni.airport.services;
 
+import java.util.List;
+
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
-import java.util.List;
 
 /**
  *

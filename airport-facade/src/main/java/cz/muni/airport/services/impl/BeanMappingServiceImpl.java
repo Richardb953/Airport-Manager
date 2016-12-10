@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import cz.muni.airport.services.BeanMappingService;
 
 /**
@@ -17,9 +19,13 @@ import cz.muni.airport.services.BeanMappingService;
  */
 
 @Service
-public class BeanMappingServiceImpl implements BeanMappingService{
-    @Autowired
-    private Mapper dozer;
+class BeanMappingServiceImpl implements BeanMappingService{
+    private final Mapper dozer;
+
+    @Inject
+    public BeanMappingServiceImpl(Mapper dozer) {
+        this.dozer = dozer;
+    }
 
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
         List<T> mappedCollection = new ArrayList<>();

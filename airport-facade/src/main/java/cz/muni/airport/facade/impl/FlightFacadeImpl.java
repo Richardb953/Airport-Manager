@@ -9,15 +9,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.enums.FlightState;
 import cz.muni.airport.facadeApi.FlightFacade;
+import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
+import cz.muni.airport.model.enums.FlightState;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
@@ -33,18 +32,18 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Service
-public class FlightFacadeImpl implements FlightFacade {
+class FlightFacadeImpl implements FlightFacade {
 
-    @Inject
+    @Autowired
     private FlightService flightService;
 
-    @Inject
+    @Autowired
     private AirportService airportService;
 
-    @Inject
+    @Autowired
     private AirplaneService airplaneService;
 
-    @Inject
+    @Autowired
     private StewardService stewardService;
 
     @Autowired

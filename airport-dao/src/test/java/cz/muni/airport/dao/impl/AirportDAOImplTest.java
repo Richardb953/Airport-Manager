@@ -1,18 +1,21 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.model.Airport;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
+
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.model.Airport;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests for AirportDAOImpl class
@@ -21,7 +24,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AirportDAOImplTest {
 	
-	//@Autowired(required = true)
+	@Autowired(required = true)
 	private AirportDAO airportDAO;
 	
 	public AirportDAOImplTest() {

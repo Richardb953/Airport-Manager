@@ -2,7 +2,6 @@ package cz.muni.airport.facadeApi;
 
 import java.util.List;
 
-import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;

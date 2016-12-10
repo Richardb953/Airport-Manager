@@ -1,19 +1,21 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.model.Airport;
-import java.util.List;
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.database.Connection;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.database.Connection;
+import cz.muni.airport.model.Airport;
 
 /**
  * Implementation of Airport DAO interface
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-@Repository("airportDAO")
 @Transactional
+@Repository("AirportDAO")
 public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override

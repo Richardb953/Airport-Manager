@@ -1,11 +1,10 @@
 package cz.muni.airport.services;
 
-import cz.muni.airport.model.Airplane;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import cz.muni.airport.model.Airport;
 
 /**
  * Interface for Airport service

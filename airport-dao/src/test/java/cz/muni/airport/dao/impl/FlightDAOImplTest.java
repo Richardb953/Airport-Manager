@@ -1,23 +1,27 @@
 package cz.muni.airport.dao.impl;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Calendar;
+import java.util.List;
+
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.enums.PlaneType;
 import cz.muni.airport.model.enums.FlightState;
-import java.util.Calendar;
+import cz.muni.airport.model.enums.PlaneType;
 
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests all methods of FlightDAOImpl.

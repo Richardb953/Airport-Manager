@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>airport</artifactId>
+        <groupId>cz.muni</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>airport-mvc</artifactId>
+    <name>Airport MVC</name>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <!-- dependency on AIRPORT  data, other airport parts are imported by transitive dependencies of this one-->
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-data</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-api</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-spec</artifactId>
+            <version>${taglibs-standard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-impl</artifactId>
+            <version>${taglibs-standard.version}</version>
+        </dependency>
+
+        <!-- validator for bean properties -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator}</version>
+        </dependency>
+        <!-- must provide logging implementation, this is a runnable project -->
+        <!-- see viz http://docs.spring.io/platform/docs/1.1.4.RELEASE/reference/htmlsingle/#getting-started-logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <version>${spring.logging}</version>
+        </dependency>
+        <!-- Spring MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.contex.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <taglibs-standard.version>1.2.5</taglibs-standard.version>
+        <tomcat.version>8.5.5</tomcat.version>
+        <spring.contex.version>4.2.5.RELEASE</spring.contex.version>
+        <hibernate.validator>5.2.3.Final</hibernate.validator>
+        <javax.validation>1.1.0.Final</javax.validation>
+        <spring.logging>1.4.1.RELEASE</spring.logging>
+        <tomcat.http.port>8081</tomcat.http.port>
+    </properties>
+
+    <build>
+        <!-- what to do when only "mvn" is run -->
+        <defaultGoal>tomcat7:run</defaultGoal>
+        <plugins>
+            <!-- Servlet 3.0 allows no web.xml deployment descriptor -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!--  embedded tomcat -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/pa165</path>
+                    <port>${tomcat.http.port}</port>
+                    <useTestClasspath>true</useTestClasspath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

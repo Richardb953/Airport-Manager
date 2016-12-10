@@ -1,22 +1,23 @@
 package cz.muni.airport.services.impl;
 
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.model.Airport;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.model.Airport;
+import cz.muni.airport.services.AirportService;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.mockito.runners.MockitoJUnitRunner;
-import static org.springframework.http.ResponseEntity.created;
 
 /**
  *
@@ -29,7 +30,7 @@ public class AirportServiceImplTest {
 	private AirportDAO airportDAO;
 
 	@InjectMocks
-	private AirportServiceImpl airportService = new AirportServiceImpl();
+	private AirportService airportService = new AirportServiceImpl();
 
 	
 	public AirportServiceImplTest() {

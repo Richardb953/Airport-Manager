@@ -1,23 +1,20 @@
 package cz.muni.airport.services.impl;
 
-import cz.muni.airport.dao.FlightDAO;
-import cz.muni.airport.dto.FlightCreateDTO;
-import cz.muni.airport.model.Airplane;
-import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
-import cz.muni.airport.services.AirplaneService;
-import cz.muni.airport.services.FlightService;
-import cz.muni.airport.services.StewardService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
 
 /**
  *
@@ -26,16 +23,16 @@ import javax.inject.Inject;
  * @author Richard Bariny, github name: Richardb953
  */
 
-@Service
-public class FlightServiceImpl implements FlightService {
+@Service("FlightService")
+class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightDAO flightDao;
 
-    @Inject
+    @Autowired
     private AirplaneService airplaneService;
 
-    @Inject
+    @Autowired
     private StewardService stewardService;
 
     @Override

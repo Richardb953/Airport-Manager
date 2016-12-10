@@ -2,12 +2,10 @@ package cz.muni.airport.services;
 
 import org.springframework.dao.DataAccessException;
 
-import cz.muni.airport.dto.FlightCreateDTO;
-import cz.muni.airport.model.Airplane;
+import java.util.List;
+
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
-
-import java.util.List;
 
 /**
  * Created by Richard Bariny on 23.10.2016

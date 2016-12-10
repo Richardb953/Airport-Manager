@@ -1,7 +1,8 @@
 package cz.muni.airport.dao;
 
-import cz.muni.airport.model.Airport;
 import java.util.List;
+
+import cz.muni.airport.model.Airport;
 
 /**
  * DAO interface for Airport entity

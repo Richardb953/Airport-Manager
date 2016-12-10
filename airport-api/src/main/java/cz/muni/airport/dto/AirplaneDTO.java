@@ -2,8 +2,9 @@ package cz.muni.airport.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import cz.muni.airport.model.enums.PlaneType;
 import java.util.Objects;
+
+import cz.muni.airport.model.enums.PlaneType;
 
 /**
  *

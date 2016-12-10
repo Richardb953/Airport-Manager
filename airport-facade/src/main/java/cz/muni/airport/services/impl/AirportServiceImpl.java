@@ -1,51 +1,49 @@
 package cz.muni.airport.services.impl;
 
-import cz.muni.airport.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.dao.FlightDAO;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.services.AirplaneService;
-import cz.muni.airport.services.StewardService;
-import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.model.Airport;
+import cz.muni.airport.services.AirportService;
 
 /**
  * Implementation of Airport Service
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-@Service("airportService")
-@Transactional
-public class AirportServiceImpl implements AirportService {
+@Service("AirportService")
+class AirportServiceImpl implements AirportService {
 
     @Autowired
-    private AirportDAO airportDAO;
+    private  AirportDAO airportDAO;
 
-//    @Autowired
-//    private StewardService stewardService;
-//    @Autowired
-//    private AirplaneService airplaneService;
-//    @Autowired
-//    private FlightDAO flightDAO;
-    public void setAirportDAO(AirportDAO airportDAO) {
-        this.airportDAO = airportDAO;
-    }
+    //    @Autowired
+    //    private StewardService stewardService;
+    //    @Autowired
+    //    private AirplaneService airplaneService;
+    //    @Autowired
+    //    private FlightDAO flightDAO;
 
-//    public void setStewardService(StewardService stewardService) {
-//        this.stewardService = stewardService;
-//    }
-//
-//    public void setAirplaneService(AirplaneService airplaneService) {
-//        this.airplaneService = airplaneService;
-//    }
-//
-//    public void setFlightDAO(FlightDAO flightDAO) {
-//        this.flightDAO = flightDAO;
-//    }
+    //    public void setStewardService(StewardService stewardService) {
+    //        this.stewardService = stewardService;
+    //    }
+    //
+    //    public void setAirplaneService(AirplaneService airplaneService) {
+    //        this.airplaneService = airplaneService;
+    //    }
+    //
+    //    public void setFlightDAO(FlightDAO flightDAO) {
+    //        this.flightDAO = flightDAO;
+    //    }
     @Override
+    @Transactional
     public Airport saveAirport(Airport airport) {
         try {
             airportDAO.addAirport(airport);
@@ -57,6 +55,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    @Transactional
     public Airport updateAirport(Airport airport) {
         try {
             airportDAO.updateAirport(airport);
@@ -68,6 +67,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    @Transactional
     public void removeAirport(Airport airport) {
         try {
             airportDAO.removeAirport(airport);

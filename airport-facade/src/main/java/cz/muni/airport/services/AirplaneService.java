@@ -1,8 +1,9 @@
 package cz.muni.airport.services;
 
+import java.util.List;
+
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
-import java.util.List;
 
 /**
  * Interface of service that provides access to Airplane entries and 

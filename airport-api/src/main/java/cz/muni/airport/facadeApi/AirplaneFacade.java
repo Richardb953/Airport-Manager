@@ -5,9 +5,10 @@
  */
 package cz.muni.airport.facadeApi;
 
+import java.util.List;
+
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
-import java.util.List;
 
 /**
  *

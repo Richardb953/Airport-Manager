@@ -1,11 +1,13 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.model.Airplane;
-import java.util.List;
-import cz.muni.airport.dao.AirplaneDAO;
 import org.springframework.stereotype.Repository;
-import cz.muni.airport.database.Connection;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.database.Connection;
+import cz.muni.airport.model.Airplane;
 
 /**
  * Implementation of AirplaneDAO. This Data Access Object provides access 
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @see AirplaneDAO documentation.
  */
 @Transactional
-@Repository("airplaneDAO")
+@Repository("AirplaneDAO")
 public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
 
     @Override

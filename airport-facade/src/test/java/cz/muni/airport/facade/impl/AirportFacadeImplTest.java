@@ -1,23 +1,26 @@
 package cz.muni.airport.facade.impl;
 
-import cz.muni.airport.dto.AirportDTO;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.services.AirportService;
-import cz.muni.airport.services.BeanMappingService;
-import cz.muni.airport.services.impl.AirportServiceImpl;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.anyLong;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.muni.airport.dto.AirportDTO;
+import cz.muni.airport.facadeApi.AirportFacade;
+import cz.muni.airport.model.Airport;
+import cz.muni.airport.services.AirportService;
+import cz.muni.airport.services.BeanMappingService;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  *
@@ -32,7 +35,7 @@ public class AirportFacadeImplTest {
     private BeanMappingService beanMapperService;
 
     @InjectMocks
-    private AirportFacadeImpl airportFacade = new AirportFacadeImpl();
+    private AirportFacade airportFacade = new AirportFacadeImpl();
 
 	public AirportFacadeImplTest() {
 	}

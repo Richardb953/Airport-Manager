@@ -1,12 +1,13 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.dao.FlightDAO;
-import cz.muni.airport.database.Connection;
-import cz.muni.airport.model.Flight;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.database.Connection;
+import cz.muni.airport.model.Flight;
 
 /**
  * DAO Flight object
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 @Transactional
-@Repository("flightDAO")
+@Repository("FlightDAO")
 public class FlightDAOImpl extends Connection implements FlightDAO {
 
     @Override public Flight addFlight(Flight flight) {

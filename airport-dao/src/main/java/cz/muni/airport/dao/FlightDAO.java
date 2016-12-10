@@ -1,7 +1,8 @@
 package cz.muni.airport.dao;
 
-import cz.muni.airport.model.Flight;
 import java.util.List;
+
+import cz.muni.airport.model.Flight;
 
 /**
  * DAO Flight interface

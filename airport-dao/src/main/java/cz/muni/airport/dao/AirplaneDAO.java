@@ -1,7 +1,8 @@
 package cz.muni.airport.dao;
 
-import cz.muni.airport.model.Airplane;
 import java.util.List;
+
+import cz.muni.airport.model.Airplane;
 
 /**
  * Interface of Data Access Object class that allows access to Airplane 
