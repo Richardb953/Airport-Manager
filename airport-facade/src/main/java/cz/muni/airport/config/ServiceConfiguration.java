@@ -12,6 +12,9 @@ import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
+import cz.muni.airport.facadeApi.AirplaneFacade;
+import cz.muni.airport.facadeApi.FlightFacade;
+import cz.muni.airport.facadeApi.StewardFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
@@ -28,7 +31,9 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Configuration
-@ComponentScan(basePackageClasses={FlightService.class, AirportService.class, AirplaneService.class, StewardService.class})
+@ComponentScan(basePackageClasses={FlightService.class, AirportService.class, AirplaneService.class, StewardService.class,
+        FlightFacade.class, AirplaneFacade.class, AirplaneFacade.class, StewardFacade.class
+})
 public class ServiceConfiguration {
 
 

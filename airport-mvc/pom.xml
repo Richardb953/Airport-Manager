@@ -21,6 +21,26 @@
             <artifactId>airport-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-rest</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.tomcat</groupId>

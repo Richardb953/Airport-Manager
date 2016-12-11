@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -33,12 +34,13 @@ import cz.muni.airport.config.ServiceConfiguration;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@ComponentScan(basePackages = "cz.muni.fi.pa165.mvc.controllers")
+@ComponentScan(basePackages = "cz.muni.airport.mvc")
+@EnableTransactionManagement
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
 
-    public static final String TEXTS = "Texts";
+    private static final String TEXTS = "Translations";
 
     /**
      * Maps the main page to a specific view.
@@ -66,11 +68,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         log.debug("registering JSP in /WEB-INF/jsp/ as views");
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/jsp/");
-        viewResolver.setSuffix(".jsp");
+        viewResolver.setPrefix("/WEB-INF/");
         return viewResolver;
     }
-
     /**
      * Provides localized messages.
      */

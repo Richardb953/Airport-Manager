@@ -1,9 +1,32 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://github.com/dandelion/datatables"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+</head>
+
+<div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div id="task-panel" class="list-panel">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>name</th>
+                    </tr>
+                    <tr th:each="prod: ${flights}">
+                        <td th:text="${prod.id}">Oranges</td>
+                        <td th:text="${prod.name}">0.99</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 
 
+</div>
 </html>
