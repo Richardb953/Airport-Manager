@@ -2,6 +2,7 @@ package cz.muni.airport.facade.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import cz.muni.airport.services.BeanMappingService;
  * @author Karolína Božková, github name: Kayeeec
  */
 @Service
+@Transactional
 class AirplaneFacadeImpl implements AirplaneFacade{
 
     @Autowired

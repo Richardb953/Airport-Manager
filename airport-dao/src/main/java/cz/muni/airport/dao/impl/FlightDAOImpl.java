@@ -16,7 +16,7 @@ import cz.muni.airport.model.Flight;
  */
 
 @Transactional
-@Repository("FlightDAO")
+@Repository
 public class FlightDAOImpl extends Connection implements FlightDAO {
 
     @Override public Flight addFlight(Flight flight) {

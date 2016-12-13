@@ -22,6 +22,6 @@
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <tx:annotation-driven transaction-manager="transactionManager" />
-    <context:component-scan base-package="cz.muni.airport" annotation-config="true"/>
+    <context:component-scan base-package="cz.muni.airport.dao" annotation-config="true"/>
 
 </beans>

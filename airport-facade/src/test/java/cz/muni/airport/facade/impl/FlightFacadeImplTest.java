@@ -1,13 +1,9 @@
 package cz.muni.airport.facade.impl;
 
-import junit.framework.TestCase;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -29,7 +25,6 @@ import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
 import cz.muni.airport.services.FlightService;
 import cz.muni.airport.services.StewardService;
-import cz.muni.airport.services.impl.AirplaneServiceImplTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -83,7 +78,7 @@ public class FlightFacadeImplTest {
         airplane.setCapacity(100);
         airplane.setFlights(null);
         airplane.setName("Boeing 747");
-        airplane.setType(cz.muni.airport.model.enums.PlaneType.CARGO);
+        airplane.setType(cz.muni.airport.enums.PlaneType.CARGO);
         airplaneFacade.createAirplane(airplane);
 
         AirportDTO destination = new AirportDTO();

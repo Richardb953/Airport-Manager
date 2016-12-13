@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
@@ -23,7 +21,7 @@ import cz.muni.airport.services.StewardService;
  * @author Richard Bariny, github name: Richardb953
  */
 
-@Service("FlightService")
+@Service
 class FlightServiceImpl implements FlightService {
 
     @Autowired

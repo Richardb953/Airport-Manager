@@ -2,13 +2,11 @@ package cz.muni.airport.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Flight;
@@ -19,7 +17,7 @@ import cz.muni.airport.services.StewardService;
  *
  * @author Andrea Navratilova
  */
-@Service("StewardService")
+@Service
 class StewardServiceImpl implements StewardService {
 
 	@Autowired

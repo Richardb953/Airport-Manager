@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.muni.airport.facadeApi.FlightFacade;
-import cz.muni.airport.mvc.conf.MvcConfig;
 
 /**
  * Created by Richard Bariny on 10.12.2016.
@@ -19,12 +18,8 @@ import cz.muni.airport.mvc.conf.MvcConfig;
 @RequestMapping("/flight")
 public class FlightController {
 
-    private final FlightFacade flightFacade;
-
     @Autowired
-    public FlightController(FlightFacade flightFacade) {
-        this.flightFacade = flightFacade;
-    }
+    private FlightFacade flightFacade;
 
     /**
      * Shows a list of products with the ability to add, delete or edit.

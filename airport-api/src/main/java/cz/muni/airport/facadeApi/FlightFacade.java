@@ -5,7 +5,7 @@ import java.util.List;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
-import cz.muni.airport.model.enums.FlightState;
+import cz.muni.airport.enums.FlightState;
 
 /**
  * Created by Richard Bariny on 9.11.2016.

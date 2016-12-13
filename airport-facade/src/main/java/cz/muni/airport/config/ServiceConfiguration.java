@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightCreateDTO;
@@ -31,9 +35,6 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Configuration
-@ComponentScan(basePackageClasses={FlightService.class, AirportService.class, AirplaneService.class, StewardService.class,
-        FlightFacade.class, AirplaneFacade.class, AirplaneFacade.class, StewardFacade.class
-})
 public class ServiceConfiguration {
 
 

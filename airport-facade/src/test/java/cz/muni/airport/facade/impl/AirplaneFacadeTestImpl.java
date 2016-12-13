@@ -79,7 +79,7 @@ public class AirplaneFacadeTestImpl {
         airplaneDTO.setId(1L);
         airplaneDTO.setName("Boening-477");
         airplaneDTO.setCapacity(50);
-        airplaneDTO.setType(PlaneType.AIRLINER);
+        airplaneDTO.setType(cz.muni.airport.enums.PlaneType.AIRLINER);
 
 
         allAirplanes.add(airplane);

@@ -15,7 +15,7 @@ import cz.muni.airport.model.Steward;
  */
 
 @Transactional
-@Repository("StewardDAO")
+@Repository
 public class StewardDAOImpl extends Connection implements StewardDAO {
 
 	@Override

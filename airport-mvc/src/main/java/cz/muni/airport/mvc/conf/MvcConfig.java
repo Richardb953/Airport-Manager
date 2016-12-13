@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -21,6 +23,19 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 
 import cz.muni.airport.config.ServiceConfiguration;
+import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.dao.StewardDAO;
+import cz.muni.airport.facadeApi.AirplaneFacade;
+import cz.muni.airport.facadeApi.FlightFacade;
+import cz.muni.airport.facadeApi.StewardFacade;
+import cz.muni.airport.model.Steward;
+import cz.muni.airport.mvc.controller.FlightController;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.AirportService;
+import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
 
 /**
  * The central Spring context and Spring MVC configuration.
@@ -34,11 +49,10 @@ import cz.muni.airport.config.ServiceConfiguration;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@ComponentScan(basePackages = "cz.muni.airport.mvc")
 @EnableTransactionManagement
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-    final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
+    private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
 
     private static final String TEXTS = "Translations";
 
@@ -68,7 +82,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         log.debug("registering JSP in /WEB-INF/jsp/ as views");
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/");
+        viewResolver.setPrefix("/WEB-INF/templates/");
+        viewResolver.setSuffix(".html");
         return viewResolver;
     }
     /**

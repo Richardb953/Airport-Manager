@@ -1,17 +1,13 @@
 package cz.muni.airport.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.model.Airplane;
@@ -24,7 +20,7 @@ import cz.muni.airport.services.AirplaneService;
  * @see AirplaneService documentation.
  */
 
-@Service("AirplaneService")
+@Service
 class AirplaneServiceImpl implements AirplaneService {
 
     @Autowired

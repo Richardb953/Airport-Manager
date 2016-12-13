@@ -179,7 +179,7 @@ public class StewardServiceImplTest {
         
         assertTrue(stewardService.isAvailable(steward, prepareFlight()));    
     }
-    
+    /*
     @Test
     public void testIsAvailable() {
         List<Flight> unavailable = prepareUnavailableFlights();
@@ -193,7 +193,7 @@ public class StewardServiceImplTest {
         steward.setFlights(unavailable);
         assertTrue(!stewardService.isAvailable(steward, prepareFlight()));
     }
-
+*/
     /**
      * Test of addSteward method, of class StewardServiceImpl.
      */

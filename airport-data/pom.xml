@@ -15,12 +15,11 @@
     <name>Airport imported data</name>
     <packaging>jar</packaging>
 
-<dependencies>
-    <dependency>
-        <groupId>cz.muni</groupId>
-        <artifactId>airport-facade</artifactId>
-        <version>${project.version}</version>
-    </dependency>
-
-</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-facade</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

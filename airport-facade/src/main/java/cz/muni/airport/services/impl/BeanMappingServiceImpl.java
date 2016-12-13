@@ -1,7 +1,6 @@
 package cz.muni.airport.services.impl;
 
 import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
@@ -32,7 +30,7 @@ import cz.muni.airport.services.StewardService;
  * @author Richard Bariny, github name: Richardb953
  */
 
-@Service("FlightFacade")
+@Service
 @Transactional
 class FlightFacadeImpl implements FlightFacade {
 
@@ -142,9 +140,9 @@ class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightDTO changeFlightState(FlightDTO flightDTO, FlightState newFlightState) {
+    public FlightDTO changeFlightState(FlightDTO flightDTO, cz.muni.airport.enums.FlightState newFlightState) {
         Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
-        flight.setFlightState(newFlightState);
+        flight.setFlightState(convertFlightState(newFlightState));
         flight = flightService.updateFlight(flight);
         return beanMappingService.mapTo(flight, FlightDTO.class);
     }

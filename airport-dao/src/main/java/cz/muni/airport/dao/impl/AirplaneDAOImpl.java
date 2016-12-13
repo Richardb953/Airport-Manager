@@ -17,7 +17,7 @@ import cz.muni.airport.model.Airplane;
  * @see AirplaneDAO documentation.
  */
 @Transactional
-@Repository("AirplaneDAO")
+@Repository
 public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
 
     @Override

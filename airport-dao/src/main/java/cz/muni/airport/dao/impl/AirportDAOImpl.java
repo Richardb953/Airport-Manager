@@ -15,7 +15,7 @@ import cz.muni.airport.model.Airport;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @Transactional
-@Repository("AirportDAO")
+@Repository
 public class AirportDAOImpl extends Connection implements AirportDAO {
 
     @Override
