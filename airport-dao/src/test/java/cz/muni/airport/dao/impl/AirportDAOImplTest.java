@@ -1,17 +1,23 @@
 package cz.muni.airport.dao.impl;
 
+import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.database.Config;
 import cz.muni.airport.model.Airport;
 
 import static org.junit.Assert.assertEquals;
@@ -22,15 +28,19 @@ import static org.junit.Assert.assertNull;
  * @author Andrea Navratilova, github name: andrea-n
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {Config.class})
+@AutoConfigureMockMvc
+@Import(Config.class)
+
 public class AirportDAOImplTest {
 	
-	@Autowired(required = true)
+	@Autowired()
 	private AirportDAO airportDAO;
-	
-	public AirportDAOImplTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:applicationContextDao.xml");
-        airportDAO = ctx.getBean(AirportDAO.class);
-	}
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
 	
 	@BeforeClass
 	public static void setUpClass() {

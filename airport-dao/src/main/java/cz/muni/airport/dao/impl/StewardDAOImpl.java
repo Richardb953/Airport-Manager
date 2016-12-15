@@ -1,12 +1,15 @@
 package cz.muni.airport.dao.impl;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import cz.muni.airport.dao.StewardDAO;
-import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Steward;
 
 /**
@@ -15,10 +18,13 @@ import cz.muni.airport.model.Steward;
  */
 
 @Transactional
-@Repository
-public class StewardDAOImpl extends Connection implements StewardDAO {
+@Repository("stewardDAO")
+public class StewardDAOImpl extends HibernateDaoSupport implements StewardDAO {
 
-	@Override
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Override
 	public Steward addSteward(Steward steward) {
 		getHibernateTemplate().save(steward);
 		return steward;

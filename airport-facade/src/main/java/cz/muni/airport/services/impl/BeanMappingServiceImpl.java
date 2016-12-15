@@ -18,7 +18,7 @@ import cz.muni.airport.services.BeanMappingService;
  */
 
 @Service
-class BeanMappingServiceImpl implements BeanMappingService{
+public class BeanMappingServiceImpl implements BeanMappingService{
     private final Mapper dozer;
 
     @Inject

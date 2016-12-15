@@ -18,7 +18,7 @@ import cz.muni.airport.services.StewardService;
  * @author Andrea Navratilova
  */
 @Service
-class StewardServiceImpl implements StewardService {
+public class StewardServiceImpl implements StewardService {
 
 	@Autowired
     private StewardDAO stewardDAO;

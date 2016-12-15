@@ -1,6 +1,9 @@
-package cz.muni.airport;
+package cz.muni.airport.mvc;
 
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Calendar;
@@ -14,6 +17,7 @@ import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.model.enums.PlaneType;
+import cz.muni.airport.mvc.conf.MvcConfig;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.FlightService;
@@ -25,14 +29,20 @@ import cz.muni.airport.services.StewardService;
  * @author rba on 15.10.2016.
  */
 
+@Import(MvcConfig.class)
+public class Main extends SpringBootServletInitializer {
 
-public class Main {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Main.class);
+    }
 
     public static void main(final String[] args) throws Exception {
         // create and configure beans
 
 
-        ApplicationContext context  = new ClassPathXmlApplicationContext("src/main/webapp/applicationContextDao.xml", "src/main/webapp/applicationContext.xml");
+        ApplicationContext context  = new ClassPathXmlApplicationContext("src/main/webapp/applicationContextDao.xml");
 
         createPlane(context);
         //createSteward(context);

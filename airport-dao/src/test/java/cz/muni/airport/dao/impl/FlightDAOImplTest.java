@@ -1,11 +1,15 @@
 package cz.muni.airport.dao.impl;
 
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Calendar;
 import java.util.List;
@@ -13,6 +17,7 @@ import java.util.List;
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.database.Config;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
@@ -29,8 +34,10 @@ import static org.junit.Assert.assertTrue;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContextDao.xml"})
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {Config.class})
+@AutoConfigureMockMvc
+@Import(Config.class)
 public class FlightDAOImplTest {
 
     @Autowired(required = true)
@@ -42,8 +49,8 @@ public class FlightDAOImplTest {
     @Autowired(required = true)
     private AirportDAO airportDAO;
 
-    public FlightDAOImplTest() {
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Test
     public void testAddFlight() throws Exception {

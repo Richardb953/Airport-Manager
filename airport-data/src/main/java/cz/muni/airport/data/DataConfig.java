@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
-import cz.muni.airport.config.ServiceConfiguration;
+import cz.muni.airport.database.Config;
 
 /**
  * Created by Richard Bariny on 10.12.2016.
@@ -18,7 +18,7 @@ import cz.muni.airport.config.ServiceConfiguration;
  */
 
 @Configuration
-@Import(ServiceConfiguration.class)
+@Import(Config.class)
 @ComponentScan(basePackageClasses = {LoadFacadeImpl.class})
 public class DataConfig {
 

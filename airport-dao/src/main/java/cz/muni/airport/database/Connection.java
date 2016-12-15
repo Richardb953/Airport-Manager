@@ -1,7 +1,5 @@
 package cz.muni.airport.database;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
@@ -12,11 +10,18 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  */
 
 
-public abstract class Connection extends HibernateDaoSupport
+public class Connection extends HibernateDaoSupport
 {
-    @Autowired
-    public void anyMethodName(SessionFactory sessionFactory)
-    {
-        setSessionFactory(sessionFactory);
-    }
+//   private final
+//   SessionFactory sessionFactory;
+//
+//    @Autowired
+//    public Connection(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
+//
+//    @Override
+//    protected HibernateTemplate createHibernateTemplate(SessionFactory sessionFactory) {
+//        return new HibernateTemplate(this.sessionFactory);
+//    }
 }

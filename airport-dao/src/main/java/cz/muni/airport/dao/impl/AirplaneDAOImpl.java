@@ -1,12 +1,15 @@
 package cz.muni.airport.dao.impl;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import cz.muni.airport.dao.AirplaneDAO;
-import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Airplane;
 
 /**
@@ -17,8 +20,12 @@ import cz.muni.airport.model.Airplane;
  * @see AirplaneDAO documentation.
  */
 @Transactional
-@Repository
-public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
+@Repository("airplaneDAO")
+public class AirplaneDAOImpl extends HibernateDaoSupport implements AirplaneDAO {
+//
+    @Autowired
+    private SessionFactory sessionFactory;
+
 
     @Override
     public List<Airplane> getAllAirplanes() {

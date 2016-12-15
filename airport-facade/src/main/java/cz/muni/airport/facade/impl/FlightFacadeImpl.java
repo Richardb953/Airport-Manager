@@ -32,7 +32,7 @@ import cz.muni.airport.services.StewardService;
 
 @Service
 @Transactional
-class FlightFacadeImpl implements FlightFacade {
+public class FlightFacadeImpl implements FlightFacade {
 
     @Autowired
     private FlightService flightService;

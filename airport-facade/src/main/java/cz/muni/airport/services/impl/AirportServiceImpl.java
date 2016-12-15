@@ -17,7 +17,7 @@ import cz.muni.airport.services.AirportService;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @Service
-class AirportServiceImpl implements AirportService {
+public class AirportServiceImpl implements AirportService {
 
     @Autowired
     private  AirportDAO airportDAO;

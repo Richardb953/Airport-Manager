@@ -21,7 +21,7 @@ import cz.muni.airport.services.AirplaneService;
  */
 
 @Service
-class AirplaneServiceImpl implements AirplaneService {
+public class AirplaneServiceImpl implements AirplaneService {
 
     @Autowired
     private AirplaneDAO airplaneDAO;

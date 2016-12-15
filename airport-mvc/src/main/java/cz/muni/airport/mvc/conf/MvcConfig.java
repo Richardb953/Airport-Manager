@@ -4,17 +4,13 @@ package cz.muni.airport.mvc.conf;
 import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
 import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
 
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,8 +24,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.validation.Validator;
 
-import cz.muni.airport.config.ServiceConfiguration;
-import cz.muni.airport.database.InMemoryDatabaseSpring;
+import cz.muni.airport.database.Config;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 /**
@@ -43,8 +38,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @EnableWebMvc
 @Configuration
-@Import({ServiceConfiguration.class})
-@ContextConfiguration(locations = {"classpath*:applicationContextDao.xml"})
+@Import(Config.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
@@ -72,7 +66,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         log.debug("enabling default servlet for static files");
         configurer.enable();
-        new AnnotationConfigApplicationContext(InMemoryDatabaseSpring.class);
     }
 
     @Bean

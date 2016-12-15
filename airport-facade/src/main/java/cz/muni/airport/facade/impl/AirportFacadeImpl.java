@@ -18,7 +18,7 @@ import cz.muni.airport.services.BeanMappingService;
  */
 @Service
 @Transactional
-class AirportFacadeImpl implements AirportFacade {
+public class AirportFacadeImpl implements AirportFacade {
 
     @Autowired
     private AirportService airportService;

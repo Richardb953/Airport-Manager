@@ -1,9 +1,8 @@
 package cz.muni.airport.mvc.conf;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -21,11 +20,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Import(MvcConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Value("${config.security.disable}")
-	public boolean disableSecurity = false;
-	
+
 	/**
 	 * minimal strength is 4.
 	 * http://en.wikipedia.org/wiki/Bcrypt

@@ -20,7 +20,7 @@ import cz.muni.airport.services.BeanMappingService;
  */
 @Service
 @Transactional
-class AirplaneFacadeImpl implements AirplaneFacade{
+public class AirplaneFacadeImpl implements AirplaneFacade{
 
     @Autowired
     private AirplaneService airplaneService;

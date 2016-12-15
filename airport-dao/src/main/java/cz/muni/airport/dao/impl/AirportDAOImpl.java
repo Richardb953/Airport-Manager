@@ -1,12 +1,15 @@
 package cz.muni.airport.dao.impl;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.database.Connection;
 import cz.muni.airport.model.Airport;
 
 /**
@@ -15,8 +18,11 @@ import cz.muni.airport.model.Airport;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @Transactional
-@Repository
-public class AirportDAOImpl extends Connection implements AirportDAO {
+@Repository("airportDAO")
+public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public Airport addAirport(Airport airport) {

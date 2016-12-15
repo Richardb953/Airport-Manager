@@ -22,7 +22,7 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Service
-class FlightServiceImpl implements FlightService {
+public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightDAO flightDao;
