@@ -36,9 +36,7 @@ public class Init extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
         encodingFilter.setEncoding("utf-8");
-        return new Filter[]{encodingFilter,
-                new OpenSessionInViewFilter()
-        };
+        return new Filter[]{encodingFilter};
     }
 
     @Override

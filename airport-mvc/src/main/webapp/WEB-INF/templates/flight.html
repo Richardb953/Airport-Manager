@@ -4,12 +4,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-<head>
-    <title>Good Thymes Virtual Grocery</title>
-</head>
 
 <div>
-    <div class="row">
+    <p layout:fragment="content">
+    <div  class="row">
         <div class="col-md-12 col-xs-12">
             <div id="task-panel" class="list-panel">
                 <table>
@@ -24,8 +22,8 @@
                 </table>
             </div>
         </div>
-    </div>
-
+</div>
+    </p>
 
 </div>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title>UEFIS</title>
+  	</head>
+	
+	<body>
+		<!-- #wrap -->
+		<div id="wrap" class="container-fluid">
+			<!-- /#top -->
+			
+			<!-- #left -->
+			<div class="row">
+
+				<!-- #content -->
+				<div id="content" class="col-xs-12 col-sm-10">
+					<div class="outer">
+						<div class="inner">
+							<div class="row">
+								<div layout:fragment="content">Default content</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /#content -->
+			</div>
+		<!-- /#wrap -->
+		</div>
+	</body>
+
+</html>
