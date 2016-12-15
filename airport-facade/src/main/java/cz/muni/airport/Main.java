@@ -32,7 +32,7 @@ public class Main {
         // create and configure beans
 
 
-        ApplicationContext context  = new ClassPathXmlApplicationContext("WEB-INF/applicationContextDao.xml", "WEB-INF/applicationContext.xml");
+        ApplicationContext context  = new ClassPathXmlApplicationContext("src/main/webapp/applicationContextDao.xml", "src/main/webapp/applicationContext.xml");
 
         createPlane(context);
         //createSteward(context);

@@ -36,8 +36,6 @@ import cz.muni.airport.services.StewardService;
 
 @Configuration
 public class ServiceConfiguration {
-
-
     @Bean
     public Mapper dozer(){
         DozerBeanMapper dozer = new DozerBeanMapper();

@@ -1,41 +1,35 @@
 package cz.muni.airport.mvc.conf;
 
 
+import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
+import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
+
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.validation.Validator;
 
 import cz.muni.airport.config.ServiceConfiguration;
-import cz.muni.airport.dao.AirplaneDAO;
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.dao.FlightDAO;
-import cz.muni.airport.dao.StewardDAO;
-import cz.muni.airport.facadeApi.AirplaneFacade;
-import cz.muni.airport.facadeApi.FlightFacade;
-import cz.muni.airport.facadeApi.StewardFacade;
-import cz.muni.airport.model.Steward;
-import cz.muni.airport.mvc.controller.FlightController;
-import cz.muni.airport.services.AirplaneService;
-import cz.muni.airport.services.AirportService;
-import cz.muni.airport.services.FlightService;
-import cz.muni.airport.services.StewardService;
+import cz.muni.airport.database.InMemoryDatabaseSpring;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 /**
  * The central Spring context and Spring MVC configuration.
@@ -49,12 +43,11 @@ import cz.muni.airport.services.StewardService;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@EnableTransactionManagement
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
 
-    private static final String TEXTS = "Translations";
+    private static final String TEXTS = "translations";
 
     /**
      * Maps the main page to a specific view.
@@ -65,6 +58,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("home");
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/WEB-INF/assets/**").addResourceLocations("/WEB-INF/assets/");
+    }
 
     /**
      * Enables default Tomcat servlet that serves static files.
@@ -73,19 +70,65 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         log.debug("enabling default servlet for static files");
         configurer.enable();
+        new AnnotationConfigApplicationContext(InMemoryDatabaseSpring.class);
+    }
+
+    @Bean
+    public LayoutDialect getLayoutDialect() {
+        LayoutDialect dialect = new LayoutDialect();
+        return dialect;
+    }
+
+    @Bean
+    public DataTablesDialect getDataTablesDialect() {
+        DataTablesDialect dialect = new DataTablesDialect();
+        return dialect;
+    }
+
+    @Bean
+    public DandelionDialect getDandelionDialect() {
+        DandelionDialect dialect = new DandelionDialect();
+        return dialect;
+    }
+
+    @Bean
+    public SpringSecurityDialect getSpringSecurityDialect() {
+        SpringSecurityDialect dialect = new SpringSecurityDialect();
+        return dialect;
+    }
+
+    @Bean
+    public SpringTemplateEngine getSpringTemplateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(getServletContextTtemplateResolver());
+        templateEngine.addDialect(getLayoutDialect());
+        templateEngine.addDialect(getDandelionDialect());
+        templateEngine.addDialect(getDataTablesDialect());
+        templateEngine.addDialect(getSpringSecurityDialect());
+        return templateEngine;
+    }
+
+    @Bean
+    public ServletContextTemplateResolver getServletContextTtemplateResolver() {
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(false);
+        return templateResolver;
     }
 
     /**
-     * Provides mapping from view names to JSP pages in WEB-INF/jsp directory.
+     * Setup prefix and sufix (destination) of views JSP files.
      */
     @Bean
-    public ViewResolver viewResolver() {
-        log.debug("registering JSP in /WEB-INF/jsp/ as views");
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/jsp/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
+    public ThymeleafViewResolver getInternalResourceViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(getSpringTemplateEngine());
+        resolver.setCharacterEncoding("UTF-8");
+        return resolver;
     }
+
     /**
      * Provides localized messages.
      */
@@ -105,6 +148,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         log.debug("registering JSR-303 validator");
         return new LocalValidatorFactoryBean();
     }
-
-
 }

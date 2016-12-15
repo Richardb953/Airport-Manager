@@ -30,6 +30,6 @@ public class FlightController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("flights", flightFacade.getAllFlights());
-        return "/templates/flight/list";
+        return "flight";
     }
 }

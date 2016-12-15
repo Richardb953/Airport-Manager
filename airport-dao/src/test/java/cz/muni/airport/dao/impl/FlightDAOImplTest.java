@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContextDao.xml"})
+@ContextConfiguration(locations = {"classpath*:applicationContextDao.xml"})
 public class FlightDAOImplTest {
 
     @Autowired(required = true)
