@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:/application.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories
+@SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
 public class Config {
 
     final static Logger log = LoggerFactory.getLogger(Config.class);
