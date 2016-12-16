@@ -11,13 +11,6 @@
         <connection>scm:git:ssh://git@github.com:Richardb953/Airport-Manager.git</connection>
     </scm>
 
-    <parent>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>Athens-RELEASE</version>
-        <relativePath/>
-    </parent>
-
     <properties>
 		<java.version>8</java.version>
 		<postgres.version>9.3-1100-jdbc41</postgres.version>

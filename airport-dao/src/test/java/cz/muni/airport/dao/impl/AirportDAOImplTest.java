@@ -1,6 +1,5 @@
 package cz.muni.airport.dao.impl;
 
-import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -8,13 +7,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.database.Config;
@@ -28,20 +25,15 @@ import static org.junit.Assert.assertNull;
  * @author Andrea Navratilova, github name: andrea-n
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Config.class})
-@AutoConfigureMockMvc
+@ContextConfiguration(classes = {Config.class})
 @Import(Config.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 
 public class AirportDAOImplTest {
 	
 	@Autowired()
 	private AirportDAO airportDAO;
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-	
 	@BeforeClass
 	public static void setUpClass() {
 	}

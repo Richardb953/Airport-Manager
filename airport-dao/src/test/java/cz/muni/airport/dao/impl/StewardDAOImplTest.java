@@ -1,16 +1,13 @@
 package cz.muni.airport.dao.impl;
 
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
+import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -28,17 +25,14 @@ import static org.junit.Assert.assertTrue;
  * @author Karolína Božková, github name: Kayeeec 
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Config.class})
-@AutoConfigureMockMvc
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {Config.class})
 @Import(Config.class)
 public class StewardDAOImplTest {
     
     @Autowired(required = true)
     private StewardDAO stewardDAO;
 
-    @Autowired
-    private SessionFactory sessionFactory;
     /**
      * Tests wether addSteward() adds steward into the database. 
      * Database is empty, after adding tests if it has one entry.

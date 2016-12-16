@@ -1,13 +1,12 @@
 package cz.muni.airport.dao.impl;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.model.Airport;
@@ -17,33 +16,35 @@ import cz.muni.airport.model.Airport;
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-@Transactional
-@Repository("airportDAO")
-public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+@Repository
+public class AirportDAOImpl implements AirportDAO {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Airport addAirport(Airport airport) {
-        getHibernateTemplate().save(airport);
+        entityManager.persist(airport);
         return airport;
     }
 
     @Override
+    @Transactional
     public Airport updateAirport(Airport airport) {
-        getHibernateTemplate().update(airport);
+        entityManager.merge(airport);
         return airport;
     }
 
     @Override
+    @Transactional
     public void removeAirport(Airport airport) {
-        getHibernateTemplate().delete(airport);
+        entityManager.remove(airport);
     }
 
     @Override
     public List<Airport> getAllAirports() {
-        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findAll");
+        return entityManager.createNamedQuery("Airport.findAll", Airport.class).getResultList();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
         if (id == null) {
             throw new IllegalArgumentException("Id can't be null");
         }
-        return getHibernateTemplate().get(Airport.class, id);
+        return entityManager.find(Airport.class, id);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
         if (city == null) {
             throw new IllegalArgumentException("City can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCity", "city", city);
+        return entityManager.createNamedQuery("Airport.findByCity", Airport.class).setParameter("city", city).getResultList();
     }
 
     @Override
@@ -67,7 +68,7 @@ public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
         if (name == null) {
             throw new IllegalArgumentException("Name can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByName", "name", name);
+        return entityManager.createNamedQuery("Airport.findByName", Airport.class).setParameter("name", name).getResultList();
     }
 
     @Override
@@ -75,7 +76,7 @@ public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
         if (country == null) {
             throw new IllegalArgumentException("Country can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry", "country", country);
+        return entityManager.createNamedQuery("Airport.findByCountry", Airport.class).setParameter("country", country).getResultList();
     }
 
     @Override
@@ -83,7 +84,7 @@ public class AirportDAOImpl extends HibernateDaoSupport implements AirportDAO {
         if (iata == null) {
             throw new IllegalArgumentException("Iata can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByIata", "iata", iata);
+        return entityManager.createNamedQuery("Airport.findByIata", Airport.class).setParameter("iata", iata).getResultList();
     }
 
 }

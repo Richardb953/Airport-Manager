@@ -15,17 +15,14 @@ import cz.muni.airport.services.StewardService;
  * Load Data to the database at the application start
  * @author Richard Bariny, github name:Richardb953
  */
-@Component
-@Transactional
+
 public class LoadFacadeImpl implements LoadFacade {
-    @Autowired
-    StewardService stewardService;
 
     @Override
     public void loadData() throws IOException {
-        Steward steward = new Steward();
-        steward.setLastName("a");
-        steward.setFirstName("v");
-        stewardService.addSteward(steward);
+     //   Steward steward = new Steward();
+     //   steward.setLastName("a");
+     //   steward.setFirstName("v");
+       // stewardService.addSteward(steward);
     }
 }

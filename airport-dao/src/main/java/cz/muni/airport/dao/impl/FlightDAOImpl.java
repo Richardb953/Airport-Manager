@@ -1,13 +1,12 @@
 package cz.muni.airport.dao.impl;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.model.Flight;
@@ -18,39 +17,46 @@ import cz.muni.airport.model.Flight;
  * @author Richard Bariny, github name: Richardb953
  */
 
-@Transactional
-@Repository("flightDAO")
-public class FlightDAOImpl extends HibernateDaoSupport implements FlightDAO {
+@Repository
+public class FlightDAOImpl implements FlightDAO {
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    @Override public Flight addFlight(Flight flight) {
-        getHibernateTemplate().save(flight);
+    @Override
+    @Transactional
+    public Flight addFlight(Flight flight) {
+        entityManager.persist(flight);
         return flight;
     }
 
-    @Override public Flight getFlightById(Long id) {
+    @Override
+    public Flight getFlightById(Long id) {
         if(id == null) throw new IllegalArgumentException("id is null");
 
-        return getHibernateTemplate().get(Flight.class, id);
+        return entityManager.find(Flight.class, id);
     }
 
-    @Override public Flight updateFlight(Flight flight) {
-        getHibernateTemplate().update(flight);
+    @Override
+    @Transactional
+    public Flight updateFlight(Flight flight) {
+        entityManager.merge(flight);
         return flight;
     }
 
-    @Override public void removeFlight(Flight flight) {
-        getHibernateTemplate().delete(flight);
+    @Override
+    @Transactional
+    public void removeFlight(Flight flight) {
+        entityManager.remove(flight);
     }
 
-    @Override public List<Flight> getFlightsByName(String name) {
+    @Override
+    public List<Flight> getFlightsByName(String name) {
         if(name == null) throw new IllegalArgumentException("Name can not be null");
-        return (List<Flight>) getHibernateTemplate().findByNamedQueryAndNamedParam("Flight.findByName", "name", name);
+        return entityManager.createNamedQuery("Flight.findByName", Flight.class).setParameter("name", name).getResultList();
     }
 
-    @Override public List<Flight> getAllFlights() {
-        return (List<Flight>) getHibernateTemplate().findByNamedQuery("Flight.findAll");
+    @Override
+    public List<Flight> getAllFlights() {
+        return entityManager.createNamedQuery("Flight.findAll", Flight.class).getResultList();
     }
 }

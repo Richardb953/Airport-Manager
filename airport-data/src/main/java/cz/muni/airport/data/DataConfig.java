@@ -17,16 +17,9 @@ import cz.muni.airport.database.Config;
  * @author Richard Bariny, github name:Richardb953
  */
 
-@Configuration
-@Import(Config.class)
-@ComponentScan(basePackageClasses = {LoadFacadeImpl.class})
 public class DataConfig {
 
-    @Autowired
-    private LoadFacade loadFacade;
-
-    @PostConstruct
     public void dataLoading() throws IOException {
-        loadFacade.loadData();
+      //  loadFacade.loadData();
     }
 }

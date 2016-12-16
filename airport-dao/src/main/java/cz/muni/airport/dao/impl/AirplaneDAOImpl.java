@@ -1,13 +1,12 @@
 package cz.muni.airport.dao.impl;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.model.Airplane;
@@ -19,46 +18,49 @@ import cz.muni.airport.model.Airplane;
  * @author Karolína Božková, github name: Kayeeec 
  * @see AirplaneDAO documentation.
  */
-@Transactional
-@Repository("airplaneDAO")
-public class AirplaneDAOImpl extends HibernateDaoSupport implements AirplaneDAO {
+@Repository
+public class AirplaneDAOImpl implements AirplaneDAO {
 //
-    @Autowired
-    private SessionFactory sessionFactory;
-
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<Airplane> getAllAirplanes() {
-        return (List<Airplane>) getHibernateTemplate().find("from Airplane ");
+
+        return entityManager.createQuery("from Airplane", Airplane.class).getResultList();
     }
     
     @Override
     public Airplane getAirplaneById(Long id) {
         if(id == null) throw new IllegalArgumentException("id is null");
-        return getHibernateTemplate().get(Airplane.class, id);
+        return entityManager.find(Airplane.class, id);
     }
     
     @Override
     public List<Airplane> getAirplaneByName(String name) {
         if(name == null) throw new IllegalArgumentException("name is null");
-        return (List<Airplane>) getHibernateTemplate().find("from Airplane where name = '" +name+"'");
+        return entityManager.createQuery("from Airplane where name = '" +name+"'", Airplane.class).getResultList();
     }
 
     @Override
+    @Transactional
+
     public Airplane addAirplane(Airplane airplane) {
-        getHibernateTemplate().save(airplane);
+        entityManager.persist(airplane);
         return airplane;
     }
 
     @Override
+    @Transactional
     public Airplane updateAirplane(Airplane airplane) {
-        getHibernateTemplate().update(airplane);
+        entityManager.merge(airplane);
         return airplane;
     }
 
     @Override
+    @Transactional
     public void removeAirplane(Airplane airplane) {
-        getHibernateTemplate().delete(airplane);
+      entityManager.remove(airplane);
     }
     
 }
