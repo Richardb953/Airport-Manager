@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 8 ]><html lang="cs" class="ie7"> <![endif]-->
+<!--[if lt IE 9 ]><html lang="cs" class="ie8"> <![endif]-->
+<!--[if lt IE 10 ]><html lang="cs" class="ie9"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html lang="cs"> <!--<![endif]-->
+	<head>
+		<!-- charset and title -->
+		<meta charset="utf-8">
+		<title>Airport Manager</title>
+
+		<!-- meta tags -->
+		<meta name="keywords" content="">
+		<meta name="robots" content="all,follow">
+		<meta name="author" content="">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="static/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css">
+
+		<!-- JS -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="static/js/scripts.js"></script>
+	</head>
+
+	<body>
+		<header class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h1 class="nav-brand"><img src="static/img/airplane-takeoff.svg" alt="">&nbsp;Airport Manager</h1>
+						<nav class="main-nav" role="navigation">
+							<ul>
+								<li><a href="/">Flights</a></li>
+								<li><a href="/">Airports</a></li>
+								<li><a href="/">Airplanes</a></li>
+								<li><a href="/">Stewards</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="card card-block">
+							<table id="airplanes" class="datatable table table-striped table-responsive" data-disabled="4,5">
+								<thead>
+									<tr>
+										<th>
+											Airplane id
+										</th>
+										<th>
+											Name
+										</th>
+										<th>
+											Capacity
+										</th>
+										<th>
+											Type
+										</th>
+										<th>
+											
+										</th>
+										<th>
+											
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td data-name="id">
+											2
+										</td>
+										<td data-name="name">
+											Airplane1
+										</td>
+										<td data-name="capacity">
+											50
+										</td>
+										<td data-name="type" data-type="select" data-option="1">
+											Business Jet
+										</td>
+										<td>
+											<button class="btn btn-danger" data-id="2">Remove</button>
+										</td>
+										<td>
+											<button class="btn btn-success btn-update"data-id="2">Update</button>
+										</td>
+									</tr>
+									<tr>
+										<td data-name="id">
+											10
+										</td>
+										<td data-name="name">
+											Airplane2
+										</td>
+										<td data-name="capacity">
+											55
+										</td>
+										<td data-name="type" data-type="select" data-option="2">
+											Airliner
+										</td>
+										<td>
+											<button class="btn btn-danger" data-id="10">Remove</button>
+										</td>
+										<td>
+											<button class="btn btn-success btn-update"data-id="10">Update</button>
+										</td>
+									</tr>
+									<tr>
+										<td data-name="id">
+											5
+										</td>
+										<td data-name="name">
+											Airplane3
+										</td>
+										<td data-name="capacity">
+											60
+										</td>
+										<td data-name="type" data-type="select" data-option="3">
+											Cargo
+										</td>
+										<td>
+											<button class="btn btn-danger" data-id="5">Remove</button>
+										</td>
+										<td>
+											<button class="btn btn-success btn-update"data-id="5">Update</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-md-6 push-md-6">
+						<div id="update" class="hidden">
+							<div class="card card-block">
+								<h4>Update airplane</h4>
+								<form class="form" id="update-form" method="post" action="">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Name</label>
+												<input type="text" class="form-control" id="name" name="name" required>
+											</div>
+											<div class="form-group">
+												<label for="">Type</label>
+												<select class="custom-select form-control" id="type" name="type">
+												<option value="1">Business Jet</option>
+												<option value="2">Airliner</option>
+												<option value="3">Cargo</option>
+											</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Capacity</label>
+												<input type="text" class="form-control" id="capacity" name="capacity" required>
+											</div>
+											<div class="form-group">
+												<label for="">Id</label>
+												<input type="text" disabled class="form-control" id="id" name="id">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 text-right">
+											<button class="btn btn-default btn-cancel" type="reset">Cancel</button>
+											<button class="btn btn-success" type="submit">Update</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 pull-md-6">
+						<div class="card card-block">
+							<h4>Add airplane</h4>
+							<form class="form" id="add-form" method="post" action="">
+								<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Name</label>
+												<input type="text" class="form-control" id="name" name="name" required>
+											</div>
+											<div class="form-group">
+												<label for="">Type</label>
+												<select class="custom-select form-control" id="type" name="type">
+												<option value="1">Business Jet</option>
+												<option value="2">Airliner</option>
+												<option value="3">Cargo</option>
+											</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Capacity</label>
+												<input type="text" class="form-control" id="capacity" name="capacity" required>
+											</div>
+										</div>
+									</div>
+								<div class="row">
+									<div class="col-xs-12 text-right">
+										<button class="btn btn-success" type="submit">Add</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-right">
+						<p>Airport Manager / PV165</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

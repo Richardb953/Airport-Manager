@@ -1,0 +1,45 @@
+a { color: $gray; text-decoration: underline; }
+a:hover, a:active { text-decoration: none; color: $gray; }
+
+/* Heading */
+
+h1, .h1 { font-weight: 300; color: $lightBlue; font-size: 2em; line-height: 1.2; margin: 0 0 0.5em 0; }
+h2, .h2 { font-weight: 400; color: $lightBlue; font-size: 1.5em; line-height: 1.2; margin: 0 0 0.75em 0; }
+h3, .h3 { font-weight: 400; color: $lightBlue; font-size: 1.25em; line-height: 1.3; margin: 0 0 0.75em 0; }
+h4, .h4 { font-weight: 400; color: $lightBlue; font-size: 1.25em; line-height: 1.5; margin: 0 0 1em 0; }
+h5, .h5 { font-weight: 400; color: $lightBlue; font-size: 1em; line-height: 1.5; margin: 0 0 1em 0; }
+h6, .h6 { font-weight: 400; color: $lightBlue; font-size: 1em; line-height: 1.5; margin: 0 0 1em 0; }
+
+/* Paragraphs */
+
+p { margin: 0 0 1em 0; }
+address { font-style: normal; }
+cite { font-style: normal; }
+
+/* Lists */
+
+ul, ol { list-style: none;  }
+ul li { }
+
+ol { counter-reset: counter; margin-left: 0; *margin-left: 54px; }
+ol li { margin: 0 0 0.5em 0; padding: 0 0 0 1em; *list-style-type: decimal; counter-increment: counter; position: relative; }
+ol li:before { color: $gray; content: counter(counter)'. '; position: absolute; left: 0; top: 0; }
+
+
+.text-small { font-size: 0.7em; }
+.text-big { font-size: 1.3em; }
+
+.text-light { font-weight: 200; }
+.text-bold { font-weight: 600; }
+strong { font-weight: 600; }
+
+.text-uppercase { text-transform: uppercase; }
+.text-nowrap { white-space: nowrap; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.color-gray { color: $gray !important; }
+.color-white { color: $white !important; }
+.color-light-blue { color: $lightBlue !important; }
