@@ -40,4 +40,12 @@ public class FlightController {
         model.addAttribute("flights", airportFacade.getAllAirports());
         return "flight";
     }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public String flights(Model model) {
+        return "flights";
+    }
+
+
+
 }
