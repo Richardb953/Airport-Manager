@@ -17,7 +17,6 @@ import cz.muni.airport.services.BeanMappingService;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @Service
-@Transactional
 public class AirportFacadeImpl implements AirportFacade {
 
     @Autowired

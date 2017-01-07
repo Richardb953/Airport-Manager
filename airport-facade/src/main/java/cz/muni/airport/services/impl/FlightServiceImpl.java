@@ -34,7 +34,6 @@ public class FlightServiceImpl implements FlightService {
     private StewardService stewardService;
 
     @Override
-    @Transactional
     public Flight saveFlight(Flight flight) {
         try {
             return flightDao.addFlight(flight);
@@ -45,7 +44,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public Flight updateFlight(Flight flight) {
         try {
             return flightDao.updateFlight(flight);
@@ -56,7 +54,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public void removeFlight(Flight flight) {
         try {
             flightDao.removeFlight(flight);
@@ -67,7 +64,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public Flight getFlight(Long id) throws DataAccessException{
         try {
             return flightDao.getFlightById(id);
@@ -78,7 +74,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public List<Flight> findAllFlights() {
         try {
             return flightDao.getAllFlights();
@@ -119,7 +114,6 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    @Transactional
     public List<Flight> findFlightByName(String name) throws DataAccessException {
         try {
             return flightDao.getFlightsByName(name);

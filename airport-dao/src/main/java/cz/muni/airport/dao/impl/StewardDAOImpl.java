@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Steward;
@@ -17,25 +18,23 @@ import cz.muni.airport.model.Steward;
  */
 
 @Repository
+@Transactional
 public class StewardDAOImpl implements StewardDAO {
-	@PersistenceContext
+	@PersistenceContext(name= "stewardUnit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
     @Override
-	@Transactional
 	public Steward addSteward(Steward steward) {
 		entityManager.persist(steward);
 		return steward;
 	}
 
 	@Override
-	@Transactional
 	public void removeSteward(Steward steward) {
 		entityManager.remove(steward);
 	}
 
 	@Override
-	@Transactional
 	public Steward updateSteward(Steward steward) {
 		entityManager.merge(steward);
 		return steward;

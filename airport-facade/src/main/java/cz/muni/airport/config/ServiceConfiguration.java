@@ -27,7 +27,6 @@ import cz.muni.airport.model.Steward;
 
 @Configuration
 @Import(Config.class)
-@ComponentScan(basePackages = {"cz.muni.airport.facade.impl","cz.muni.airport.services.impl"})
 public class ServiceConfiguration {
     @Bean
     public Mapper dozer(){

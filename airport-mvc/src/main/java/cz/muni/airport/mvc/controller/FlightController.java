@@ -2,10 +2,14 @@ package cz.muni.airport.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cz.muni.airport.dto.AirportDTO;
+import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 
 /**
@@ -16,10 +20,14 @@ import cz.muni.airport.facadeApi.FlightFacade;
 
 @Controller
 @RequestMapping("/flight")
+@Transactional
 public class FlightController {
 
     @Autowired
     private FlightFacade flightFacade;
+
+    @Autowired
+    private AirportFacade airportFacade;
 
     /**
      * Shows a list of products with the ability to add, delete or edit.
@@ -29,7 +37,13 @@ public class FlightController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("flights", flightFacade.getAllFlights());
+        AirportDTO airportDTO = new AirportDTO();
+        airportDTO.setName("letadlo a prasek");
+        airportDTO.setCity("BA");
+        airportDTO.setIata("1681");
+        airportDTO.setCountry("Slovensko");
+        airportFacade.createAirport(airportDTO);
+        model.addAttribute("flights", airportFacade.getAllAirports());
         return "flight";
     }
 }

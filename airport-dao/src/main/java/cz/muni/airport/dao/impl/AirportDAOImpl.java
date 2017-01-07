@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.model.Airport;
@@ -18,26 +19,24 @@ import cz.muni.airport.model.Airport;
  */
 
 @Repository
+@Transactional
 public class AirportDAOImpl implements AirportDAO {
-    @PersistenceContext
+    @PersistenceContext(name= "airportUnit",type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public Airport addAirport(Airport airport) {
         entityManager.persist(airport);
         return airport;
     }
 
     @Override
-    @Transactional
     public Airport updateAirport(Airport airport) {
         entityManager.merge(airport);
         return airport;
     }
 
     @Override
-    @Transactional
     public void removeAirport(Airport airport) {
         entityManager.remove(airport);
     }

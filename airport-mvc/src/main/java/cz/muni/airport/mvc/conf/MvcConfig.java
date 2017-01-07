@@ -6,6 +6,7 @@ import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +26,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.validation.Validator;
 
+import cz.muni.airport.config.ServiceConfiguration;
 import cz.muni.airport.database.Config;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -39,8 +41,8 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "cz.muni.airport.mvc.controller")
-@Import(Config.class)
+@SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
+@Import(ServiceConfiguration.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);

@@ -31,7 +31,6 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Service
-@Transactional
 public class FlightFacadeImpl implements FlightFacade {
 
     @Autowired

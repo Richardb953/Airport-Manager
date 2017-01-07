@@ -41,7 +41,6 @@ public class AirportServiceImpl implements AirportService {
     //        this.flightDAO = flightDAO;
     //    }
     @Override
-    @Transactional
     public Airport saveAirport(Airport airport) {
         try {
             airportDAO.addAirport(airport);
@@ -53,7 +52,6 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    @Transactional
     public Airport updateAirport(Airport airport) {
         try {
             airportDAO.updateAirport(airport);
@@ -65,7 +63,6 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    @Transactional
     public void removeAirport(Airport airport) {
         try {
             airportDAO.removeAirport(airport);

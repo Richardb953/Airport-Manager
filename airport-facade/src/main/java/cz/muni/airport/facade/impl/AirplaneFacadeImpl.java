@@ -19,7 +19,6 @@ import cz.muni.airport.services.BeanMappingService;
  * @author Karolína Božková, github name: Kayeeec
  */
 @Service
-@Transactional
 public class AirplaneFacadeImpl implements AirplaneFacade{
 
     @Autowired

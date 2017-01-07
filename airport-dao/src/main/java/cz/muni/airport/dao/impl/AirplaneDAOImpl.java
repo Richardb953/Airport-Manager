@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.model.Airplane;
@@ -19,9 +20,10 @@ import cz.muni.airport.model.Airplane;
  * @see AirplaneDAO documentation.
  */
 @Repository
+@Transactional
 public class AirplaneDAOImpl implements AirplaneDAO {
 //
-    @PersistenceContext
+    @PersistenceContext(name= "airplaneUnit",type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
 
     @Override
@@ -43,22 +45,18 @@ public class AirplaneDAOImpl implements AirplaneDAO {
     }
 
     @Override
-    @Transactional
-
     public Airplane addAirplane(Airplane airplane) {
         entityManager.persist(airplane);
         return airplane;
     }
 
     @Override
-    @Transactional
     public Airplane updateAirplane(Airplane airplane) {
         entityManager.merge(airplane);
         return airplane;
     }
 
     @Override
-    @Transactional
     public void removeAirplane(Airplane airplane) {
       entityManager.remove(airplane);
     }

@@ -21,7 +21,6 @@ import cz.muni.airport.services.StewardService;
  */
 
 @Service
-@Transactional
 public class StewardFacadeImpl implements StewardFacade {
     @Autowired
     private StewardService stewardService;

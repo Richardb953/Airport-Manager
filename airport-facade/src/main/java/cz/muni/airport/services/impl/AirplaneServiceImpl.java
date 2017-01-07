@@ -27,7 +27,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     private AirplaneDAO airplaneDAO;
 
     @Override
-    @Transactional
     public Airplane saveAirplane(Airplane airplane) {
         try {
             return airplaneDAO.addAirplane(airplane);
@@ -37,7 +36,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    @Transactional
     public Airplane updateAirplane(Airplane airplane) {
         try {
             return airplaneDAO.updateAirplane(airplane);
@@ -47,7 +45,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    @Transactional
     public void removeAirplane(Airplane airplane) {
         try {
             airplaneDAO.removeAirplane(airplane);

@@ -24,19 +24,16 @@ public class StewardServiceImpl implements StewardService {
     private StewardDAO stewardDAO;
 
 	@Override
-	@Transactional
 	public Steward addSteward(Steward steward) {
         return stewardDAO.addSteward(steward);
     }
 
 	@Override
-	@Transactional
 	public void removeSteward(Steward steward) {
         stewardDAO.removeSteward(steward);
     }
 
 	@Override
-	@Transactional
 	public Steward updateSteward(Steward steward) {
         return stewardDAO.updateSteward(steward);
     }
