@@ -37,12 +37,6 @@ public class FlightController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        AirportDTO airportDTO = new AirportDTO();
-        airportDTO.setName("letadlo a prasek");
-        airportDTO.setCity("BA");
-        airportDTO.setIata("1681");
-        airportDTO.setCountry("Slovensko");
-        airportFacade.createAirport(airportDTO);
         model.addAttribute("flights", airportFacade.getAllAirports());
         return "flight";
     }

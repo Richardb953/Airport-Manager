@@ -106,7 +106,6 @@ public class LoadFacadeImpl implements LoadFacade {
         Flight flight3 = createFlight(toDate(2017, 1, 5, 3, 50),toDate(2017, 1, 7, 7, 45), "dialkovy Let Rio", airport2, airport7, airplane1, 478, stewardList, FlightState.OPEN);
         Flight flight4 = createFlight(toDate(2017, 1, 5, 5, 55),toDate(2017, 1, 5, 6, 55), "kratky Let Slovensko", airport1, airport2, airplane2, 8, stewardList, FlightState.ACCEPTED);
 
-
     }
     private static Date toDate(int year, int month, int day, int hours, int minutes) {
         Calendar calendar = Calendar.getInstance();

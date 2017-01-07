@@ -1,6 +1,7 @@
 package cz.muni.airport.model;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Flight {
     private Airport sourcePort;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "flights")
-    private List<Steward> stewards;
+    private List<Steward> stewards = new ArrayList<>();
 
 
     public Flight() {

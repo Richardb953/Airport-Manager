@@ -1,5 +1,6 @@
 package cz.muni.airport.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class Steward {
     private String lastName;
 
     @ManyToMany()
-    private List<Flight> flights;
+    private List<Flight> flights = new ArrayList<>();
 
     public Steward() {
     }
@@ -65,6 +66,10 @@ public class Steward {
 
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
+	}
+
+	public void addFligth(Flight flight){
+		this.flights.add(flight);
 	}
 
 	@Override
