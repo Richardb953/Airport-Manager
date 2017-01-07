@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&subset=latin-ext');
+$baseFont: 'Source Sans Pro', sans-serif;
+$baseFontSize: 15px;
+$baseLineHeight: 1.5;
+$baseFontWeight: 300;
+
+$baseFontColor: #000;
+$headingColor: #000;
+
+$white: #fff;
+$black: #1d1d1b;
+$gray: #949494;
+$darkBlue: #2e3b4e;
+$darkestBlue: #1a2638;
+$lightBlue: #10bffc;
+$lightestBlue: #e1f6fd;
+$green: #63d861;
+$red: #fc0000;
+$lightGray: darken(#f3f3f5, 1%);
+
+$lg: 1399px;
+$md: 1199px;
+$sm: 991px;
+$xs: 767px;
+$xxs: 479px;
