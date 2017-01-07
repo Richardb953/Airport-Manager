@@ -5,27 +5,27 @@
 <!--[if (gte IE 10)|!(IE)]><!--><html lang="cs"> <!--<![endif]-->
 	<head>
 		<!-- charset and title -->
-		<meta charset="utf-8">
+		<meta charset="utf-8"/>
 		<title>Airport Manager</title>
 
 		<!-- meta tags -->
-		<meta name="keywords" content="">
-		<meta name="robots" content="all,follow">
-		<meta name="author" content="">
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="keywords" content=""/>
+		<meta name="robots" content="all,follow"/>
+		<meta name="author" content=""/>
+		<meta name="description" content=""/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
 
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="static/css/styles.css">
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css" />
 
 		<!-- JS -->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="static/js/scripts.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/scripts.js"></script>
 	</head>
 
 	<body>
@@ -33,13 +33,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-						<h1 class="nav-brand"><img src="static/img/airplane-takeoff.svg" alt="">&nbsp;Airport Manager</h1>
+						<h1 class="nav-brand"><img src="/pa165/static/img/airplane-takeoff.svg" alt="" />&nbsp;Airport Manager</h1>
 						<nav class="main-nav" role="navigation">
 							<ul>
-								<li><a href="/">Flights</a></li>
-								<li><a href="/">Airports</a></li>
-								<li><a href="/">Airplanes</a></li>
-								<li><a href="/">Stewards</a></li>
+								<li><a href="/pa165/flight/all">Flights</a></li>
+								<li><a href="/pa165/airport/all">Airports</a></li>
+								<li class="active"><a href="/pa165/airplane/all">Airplanes</a></li>
+								<li><a href="/pa165/steward/all">Stewards</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -87,52 +87,16 @@
 										</td>
 										<td data-name="type" data-type="select" data-option="1">
 											Business Jet
+											<!-- do data-option prosim vypsat cislo daneho typu letadla (aby
+												 to sedelo s options v selectu ve formulari dole!!!-->
 										</td>
 										<td>
 											<button class="btn btn-danger" data-id="2">Remove</button>
+											<!-- do data-id prosim id letadla!!! -->
 										</td>
 										<td>
-											<button class="btn btn-success btn-update"data-id="2">Update</button>
-										</td>
-									</tr>
-									<tr>
-										<td data-name="id">
-											10
-										</td>
-										<td data-name="name">
-											Airplane2
-										</td>
-										<td data-name="capacity">
-											55
-										</td>
-										<td data-name="type" data-type="select" data-option="2">
-											Airliner
-										</td>
-										<td>
-											<button class="btn btn-danger" data-id="10">Remove</button>
-										</td>
-										<td>
-											<button class="btn btn-success btn-update"data-id="10">Update</button>
-										</td>
-									</tr>
-									<tr>
-										<td data-name="id">
-											5
-										</td>
-										<td data-name="name">
-											Airplane3
-										</td>
-										<td data-name="capacity">
-											60
-										</td>
-										<td data-name="type" data-type="select" data-option="3">
-											Cargo
-										</td>
-										<td>
-											<button class="btn btn-danger" data-id="5">Remove</button>
-										</td>
-										<td>
-											<button class="btn btn-success btn-update"data-id="5">Update</button>
+											<button class="btn btn-success btn-update" data-id="2">Update</button>
+											<!-- do data-id prosim id letadla!!! -->
 										</td>
 									</tr>
 								</tbody>
@@ -150,25 +114,25 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="">Name</label>
-												<input type="text" class="form-control" id="name" name="name" required>
+												<input type="text" class="form-control" id="name" name="name" required="required"/>
 											</div>
 											<div class="form-group">
 												<label for="">Type</label>
-												<select class="custom-select form-control" id="type" name="type">
-												<option value="1">Business Jet</option>
-												<option value="2">Airliner</option>
-												<option value="3">Cargo</option>
-											</select>
+													<select class="custom-select form-control" id="type" name="type">
+													<option value="1">Business Jet</option>
+													<option value="2">Airliner</option>
+													<option value="3">Cargo</option>
+												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="">Capacity</label>
-												<input type="text" class="form-control" id="capacity" name="capacity" required>
+												<input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
 											</div>
 											<div class="form-group">
 												<label for="">Id</label>
-												<input type="text" disabled class="form-control" id="id" name="id">
+												<input type="text" disabled="disabled" class="form-control" id="id" name="id"/>
 											</div>
 										</div>
 									</div>
@@ -190,21 +154,21 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="">Name</label>
-												<input type="text" class="form-control" id="name" name="name" required>
+												<input type="text" class="form-control" id="name" name="name" required="required"/>
 											</div>
 											<div class="form-group">
 												<label for="">Type</label>
 												<select class="custom-select form-control" id="type" name="type">
-												<option value="1">Business Jet</option>
-												<option value="2">Airliner</option>
-												<option value="3">Cargo</option>
-											</select>
+													<option value="1">Business Jet</option>
+													<option value="2">Airliner</option>
+													<option value="3">Cargo</option>
+												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="">Capacity</label>
-												<input type="text" class="form-control" id="capacity" name="capacity" required>
+												<input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
 											</div>
 										</div>
 									</div>

@@ -43,6 +43,7 @@ public class FlightController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String flights(Model model) {
+		model.addAttribute("flights", airportFacade.getAllAirports());
         return "flights";
     }
 

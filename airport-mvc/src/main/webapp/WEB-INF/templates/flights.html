@@ -16,8 +16,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/styles.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css" />
 
 		<!-- JS -->
@@ -25,7 +25,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="static/js/scripts.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/scripts.js"></script>
 	</head>
 
 	<body>
@@ -33,13 +33,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-						<h1 class="nav-brand"><img src="static/img/airplane-takeoff.svg" alt="" />&nbsp;Airport Manager</h1>
+						<h1 class="nav-brand"><img src="/pa165/static/img/airplane-takeoff.svg" alt="" />&nbsp;Airport Manager</h1>
 						<nav class="main-nav" role="navigation">
 							<ul>
-								<li><a href="/">Flights</a></li>
-								<li><a href="/">Airports</a></li>
-								<li><a href="/">Airplanes</a></li>
-								<li><a href="/">Stewards</a></li>
+								<li class="active"><a href="/pa165/flight/all">Flights</a></li>
+								<li><a href="/pa165/airport/all">Airports</a></li>
+								<li><a href="/pa165/airplane/all">Airplanes</a></li>
+								<li><a href="/pa165/steward/all">Stewards</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -87,100 +87,36 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td data-name="id">
-											2
+									<tr th:each="prod: ${flights}">
+										<td data-name="id" th:text="${prod.id}">
+											
 										</td>
 										<td data-name="source">
-											Brno
+											
 										</td>
 										<td data-name="destination">
-											Paris
+											
 										</td>
 										<td data-name="departure">
-											24.1.2017 16:00
+											
 										</td>
 										<td data-name="arrival">
-											25.1.2017 18:00
+											
 										</td>
-										<td data-name="airplane" data-type="select" data-option="1">
-											Airplane1
+										<td data-name="airplane" data-type="select" data-option="1"> <!--do data-option prijde id letadla-->
+											
 										</td>
-										<td data-name="steward" data-type="select" data-option="1">
-											Jan Novák
-										</td>
-										<td data-name="passengers">
-											50
-										</td>
-										<td>
-											<button class="btn btn-danger" data-id="2">Remove</button>
-										</td>
-										<td>
-											<button class="btn btn-success btn-update" data-id="2">Update</button>
-										</td>
-									</tr>
-									<tr>
-										<td data-name="id">
-											10
-										</td>
-										<td data-name="source">
-											Paris
-										</td>
-										<td data-name="destination">
-											Brno
-										</td>
-										<td data-name="departure">
-											27.1.2017 16:00
-										</td>
-										<td data-name="arrival">
-											27.1.2017 18:00
-										</td>
-										<td data-name="airplane" data-type="select" data-option="3">
-											Airplane3
-										</td>
-										<td data-name="steward" data-type="select" data-option="1">
-											John Doe
+										<td data-name="steward" data-type="select" data-option="1"> <!--do data-option prijde id stewarda-->
+											
 										</td>
 										<td data-name="passengers">
-											52
+											
 										</td>
 										<td>
-											<button class="btn btn-danger" data-id="10">Remove</button>
+											<button class="btn btn-danger" th:attr="data-id=${prod.id}">Remove</button>
 										</td>
 										<td>
-											<button class="btn btn-success btn-update" data-id="10">Update</button>
-										</td>
-									</tr>
-									<tr>
-										<td data-name="id">
-											5
-										</td>
-										<td data-name="source">
-											Prague
-										</td>
-										<td data-name="destination">
-											New York
-										</td>
-										<td data-name="departure">
-											14.2.2017 17:00
-										</td>
-										<td data-name="arrival">
-											14.2.2017 23:00
-										</td>
-										<td data-name="airplane" data-type="select" data-option="2">
-											Airplane2
-										</td>
-										<td data-name="steward" data-type="select" data-option="1">
-											Jan Novák
-										</td>
-										<td data-name="passengers">
-											40
-										</td>
-										<td>
-											<button class="btn btn-danger" data-id="5">Remove</button>
-										</td>
-										<td>
-											<button class="btn btn-success btn-update" data-id="5">Update</button>
+											<button class="btn btn-success btn-update" th:attr="data-id=${prod.id}">Update</button>
 										</td>
 									</tr>
 								</tbody>
@@ -272,7 +208,7 @@
 										<div class="form-group">
 											<label for="">Airplane</label>
 											<select class="custom-select form-control" id="airplane" name="airplane">
-												<option value="1">Airplane1</option>
+												<option value="1">Airplane1</option><!--value by melo byt id letadla-->
 												<option value="2">Airplane2</option>
 												<option value="3">Airplane3</option>
 											</select>
@@ -290,7 +226,7 @@
 										<div class="form-group">
 											<label for="">Steward</label>
 											<select class="custom-select form-control" id="steward" name="steward">
-												<option value="1">Jan Novák</option>
+												<option value="1">Jan Novák</option><!--value by melo byt id stewarda-->
 												<option value="2">John Doe</option>
 											</select>
 										</div>
