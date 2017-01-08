@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cz.muni.airport.dto.AirportDTO;
-import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 
