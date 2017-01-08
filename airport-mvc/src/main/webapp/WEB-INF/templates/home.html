@@ -1,11 +1,23 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-<div>
-    <span layout:fragment="contentTitle">UEFIS</span>
-</div>
 
+<main class="content">
+    <p layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="home">
+                    <h1>Welcome to Airport management system</h1>
+                    <img src="static/img/airplane.png" height="70%" width="70%" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </p>
+</main>
 
 </html>
