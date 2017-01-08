@@ -1,35 +1,98 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<!--[if lt IE 8 ]>
+<html lang="cs" class="ie7" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if lt IE 9 ]>
+<html lang="cs" class="ie8" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if lt IE 10 ]>
+<html lang="cs" class="ie9" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="cs" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--<![endif]-->
+
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-		<title>UEFIS</title>
+		<!-- charset and title -->
+		<meta charset="utf-8"/>
+		<title>Airport Manager</title>
+		<!-- meta tags -->
+		<meta name="keywords" content=""/>
+		<meta name="robots" content="all,follow"/>
+		<meta name="author" content=""/>
+		<meta name="description" content=""/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css" />
+
+		<!-- JS -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/scripts.js"></script>
   	</head>
 	
 	<body>
-		<!-- #wrap -->
-		<div id="wrap" class="container-fluid">
-			<!-- /#top -->
-			
-			<!-- #left -->
+	<header class="header">
+		<div class="container">
 			<div class="row">
-
-				<!-- #content -->
-				<div id="content" class="col-xs-12 col-sm-10">
+				<div class="col-xs-12">
+					<h1 class="nav-brand">
+						<a href="/pa165">
+							<img src="/pa165/static/img/airplane-takeoff.svg" alt="" />
+							&nbsp;Airport Manager
+						</a>
+					</h1>
+					<nav class="main-nav" role="navigation">
+						<ul>
+							<li><a href="/pa165/flight/all">Flights</a></li>
+							<li><a href="/pa165/airport/all">Airports</a></li>
+							<li class="active"><a href="/pa165/airplane/all">Airplanes</a></li>
+							<li><a href="/pa165/steward/all">Stewards</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+		<!-- #wrap -->
+	<div id="wrap" class="container-fluid">
+		<!-- /#top -->
+		<!-- #left -->
+		<div class="row">
+			<!-- #content -->
+			<div id="content" class="col-xs-12 col-sm-10">
+				<div class="container">
 					<div class="outer">
 						<div class="inner">
 							<div class="row">
-								<div layout:fragment="content">Default content</div>
+								<div layout:fragment="content">Welcome to Airport Management system</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /#content -->
 			</div>
-		<!-- /#wrap -->
+			<!-- /#content -->
 		</div>
+	<!-- /#wrap -->
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 text-right">
+					<p>Airport Manager / PV165</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 	</body>
 
 </html>
