@@ -1,5 +1,7 @@
 package cz.muni.airport.mvc.controller;
 
+import cz.muni.airport.facadeApi.AirplaneFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/airplane")
 @Transactional
 public class AirplaneController {
-
+    
+    @Autowired
+    private AirplaneFacade airplaneFacade;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String airplanes(Model model) {
+        model.addAttribute("airplanes", airplaneFacade.getAllAirplanes());
         return "airplanes";
     }
 }

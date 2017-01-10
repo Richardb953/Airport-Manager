@@ -1,147 +1,142 @@
 ﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="layouts/simpleLayout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
 
-	<main class="content">
-		<p layout:fragment="content">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="card card-block">
-						<table id="airplanes" class="datatable table table-striped table-responsive" data-disabled="4,5">
-							<thead>
-								<tr>
-									<th>
-										Airplane id
-									</th>
-									<th>
-										Name
-									</th>
-									<th>
-										Capacity
-									</th>
-									<th>
-										Type
-									</th>
-									<th>
+    <main class="content">
+        <p layout:fragment="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card card-block">
+                            <table id="airplanes" class="datatable table table-striped table-responsive" data-disabled="4,5">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Airplane id
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Capacity
+                                        </th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
 
-									</th>
-									<th>
+                                        </th>
+                                        <th>
 
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td data-name="id">
-										2
-									</td>
-									<td data-name="name">
-										Airplane1
-									</td>
-									<td data-name="capacity">
-										50
-									</td>
-									<td data-name="type" data-type="select" data-option="1">
-										Business Jet
-										<!-- do data-option prosim vypsat cislo daneho typu letadla (aby
-											 to sedelo s options v selectu ve formulari dole!!!-->
-									</td>
-									<td>
-										<button class="btn btn-danger" data-id="2">Remove</button>
-										<!-- do data-id prosim id letadla!!! -->
-									</td>
-									<td>
-										<button class="btn btn-success btn-update" data-id="2">Update</button>
-										<!-- do data-id prosim id letadla!!! -->
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="row mt-2">
-				<div class="col-md-6 push-md-6">
-					<div id="update" class="hidden">
-						<div class="card card-block">
-							<h4>Update airplane</h4>
-							<form class="form" id="update-form" method="post" action="">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Name</label>
-											<input type="text" class="form-control" id="name" name="name" required="required"/>
-										</div>
-										<div class="form-group">
-											<label for="">Type</label>
-												<select class="custom-select form-control" id="type" name="type">
-												<option value="1">Business Jet</option>
-												<option value="2">Airliner</option>
-												<option value="3">Cargo</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Capacity</label>
-											<input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
-										</div>
-										<div class="form-group">
-											<label for="">Id</label>
-											<input type="text" disabled="disabled" class="form-control" id="id" name="id"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12 text-right">
-										<button class="btn btn-default btn-cancel" type="reset">Cancel</button>
-										<button class="btn btn-success" type="submit">Update</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 pull-md-6">
-					<div class="card card-block">
-						<h4>Add airplane</h4>
-						<form class="form" id="add-form" method="post" action="">
-							<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Name</label>
-											<input type="text" class="form-control" id="name" name="name" required="required"/>
-										</div>
-										<div class="form-group">
-											<label for="">Type</label>
-											<select class="custom-select form-control" id="type" name="type">
-												<option value="1">Business Jet</option>
-												<option value="2">Airliner</option>
-												<option value="3">Cargo</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Capacity</label>
-											<input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
-										</div>
-									</div>
-								</div>
-							<div class="row">
-								<div class="col-xs-12 text-right">
-									<button class="btn btn-success" type="submit">Add</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</p>
-</main>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="airplane: ${airplanes}">
+                                        <td data-name="id" th:text="${airplane.id}">
+                                        </td>
+                                        <td data-name="name" th:text="${airplane.name}">
+                                        </td>
+                                        <td data-name="capacity"  th:text="${airplane.capacity}">
+                                        </td>
+                                        <td data-name="type" data-type="select" data-option="1">
+                                            BusinessJet
+                                            <!-- do data-option prosim vypsat cislo daneho typu letadla (aby
+                                                     to sedelo s options v selectu ve formulari dole!!!-->
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger" data-id="${airplane.id}">Remove</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-update" data-id="${airplane.id}">Update</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 push-md-6">
+                        <div id="update" class="hidden">
+                            <div class="card card-block">
+                                <h4>Update airplane</h4>
+                                <form class="form" id="update-form" method="post" action="">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" required="required"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Type</label>
+                                                <select class="custom-select form-control" id="type" name="type">
+                                                    <option value="1">Business Jet</option>
+                                                    <option value="2">Airliner</option>
+                                                    <option value="3">Cargo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Capacity</label>
+                                                <input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Id</label>
+                                                <input type="text" disabled="disabled" class="form-control" id="id" name="id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-right">
+                                            <button class="btn btn-default btn-cancel" type="reset">Cancel</button>
+                                            <button class="btn btn-success" type="submit">Update</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pull-md-6">
+                        <div class="card card-block">
+                            <h4>Add airplane</h4>
+                            <form class="form" id="add-form" method="post" action="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Type</label>
+                                            <select class="custom-select form-control" id="type" name="type">
+                                                <option value="1">Business Jet</option>
+                                                <option value="2">Airliner</option>
+                                                <option value="3">Cargo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Capacity</label>
+                                            <input type="text" class="form-control" id="capacity" name="capacity" required="required"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 text-right">
+                                        <button class="btn btn-success" type="submit">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p>
+    </main>
 
 </html>
