@@ -109,6 +109,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.dandelion</groupId>
@@ -165,6 +175,19 @@
     </properties>
 
     <build>
+        <filters>
+            <filter>src/main/resources/log4j.properties</filter>
+        </filters>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>log4j.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <!-- what to do when only "mvn" is run -->
         <defaultGoal>tomcat7:run</defaultGoal>
         <plugins>
@@ -187,7 +210,6 @@
                     <useTestClasspath>true</useTestClasspath>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

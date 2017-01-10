@@ -5,25 +5,25 @@
       layout:decorator="layouts/simpleLayout">
 
 
-<div>
+
+<main class="content">
     <p layout:fragment="content">
-    <div  class="row">
-        <div class="col-md-12 col-xs-12">
-            <div id="task-panel" class="list-panel">
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>name</th>
-                    </tr>
-                    <tr th:each="prod: ${flights}">
-                        <td th:text="${prod.id}">Oranges</td>
-                        <td th:text="${prod.name}">0.99</td>
-                    </tr>
-                </table>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="task-panel" class="list-panel">
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>name</th>
+                        </tr>
+                        <tr th:each="prod: ${flights}">
+                            <td th:text="${prod.id}">Oranges</td>
+                            <td th:text="${prod.name}">0.99</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-</div>
     </p>
-
-</div>
+</main>
 </html>

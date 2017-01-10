@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&subset=latin-ext");
+html, body {
+  height: 100%;
+  font-size: 15px;
+  position: relative;
+  -moz-text-size-adjust:100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
 .content {
   padding: 3em 0;
+  min-height: 80%;
+  height:auto !important;
 }
 
 .hidden {
@@ -24,11 +36,13 @@ form label {
   background: #1a2638;
   padding: 1em 0;
   color: #fff;
+  text-align: center;
+  bottom: 0; /* stick to bottom */
+
 }
 
-html {
-  height: 100%;
-  font-size: 15px;
+#wrap {
+  min-height: 87%;
 }
 
 body {
@@ -40,7 +54,6 @@ body {
   font-weight: 300;
   margin: 0;
   padding: 0;
-  min-height: 100%;
 }
 
 /* Box sizing */
@@ -86,8 +99,16 @@ a, a:hover, a:active, a:focus {
   background: #1a2638;
 }
 
-.nav-brand {
+.nav-brand a {
+  color: #10bffc;
+  text-underline: none;
   padding-top: 0.25em;
+  text-decoration: none;
+}
+
+.home {
+  min-height: 70%;
+  text-align: center;
 }
 
 /* Main navigation */
@@ -116,7 +137,7 @@ a, a:hover, a:active, a:focus {
   font-size: 1em;
   display: block;
   line-height: 3.5em;
-  white-space: no-wrap;
+  white-space: nowrap;
   padding: 0 0.5em;
 }
 

@@ -21,7 +21,6 @@ public class Config {
 
     final static Logger log = LoggerFactory.getLogger(Config.class);
 
-//
 //    spring.jpa.database=POSTGRESQL
 //    spring.jpa.show-sql=true
 //    spring.jpa.hibernate.ddl-auto=create
@@ -32,8 +31,5 @@ public class Config {
 //    spring.jpa.generate-ddl=true
 //    spring.jpa.open-in-view=true
 //    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.HSQLDialect
-
-
-
 
 }
