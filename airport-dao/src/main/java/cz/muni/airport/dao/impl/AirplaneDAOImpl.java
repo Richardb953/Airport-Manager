@@ -19,6 +19,8 @@ import cz.muni.airport.model.Airplane;
  * @author Karolína Božková, github name: Kayeeec 
  * @see AirplaneDAO documentation.
  */
+
+
 @Repository
 @Transactional
 public class AirplaneDAOImpl implements AirplaneDAO {

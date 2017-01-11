@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Airplane;
@@ -12,6 +14,7 @@ import cz.muni.airport.model.Airplane;
  *
  * @author Karolína Božková, github name: Kayeeec 
  */
+@Repository
 public interface AirplaneDAO {
     /**
      * Returns all Airplanes from the database.

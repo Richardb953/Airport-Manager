@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Steward;
@@ -9,6 +11,7 @@ import cz.muni.airport.model.Steward;
  * DAO for Steward entity
  * @author Andrea Navratilova, github name: andrea-n
  */
+@Repository
 public interface StewardDAO {
 
 	/**

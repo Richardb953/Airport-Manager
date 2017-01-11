@@ -6,10 +6,10 @@ import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -28,17 +28,13 @@ import javax.validation.Validator;
 import cz.muni.airport.config.ServiceConfiguration;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
-/**
- * The central Spring context and Spring MVC configuration.
- * The @Configuration annotation declares it as Spring configuration.
- * The @EnableWebMvc enables default  MVC config for using @Controller, @RequestMapping and so on,
- * see http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-config-enable
- *
- * @author Martin Kuba makub@ics.muni.cz
- */
 
+/**
+ * Application MAIN configuration file, icnludes other modules configs and set MVC controllers
+ *
+ * @author Richard Bariny, github: Richardb953
+ */
 @EnableWebMvc
-@Configuration
 @SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
 @Import(ServiceConfiguration.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
@@ -46,6 +42,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
 
     private static final String TEXTS = "translations";
+
+    public static void main(String[] args) {
+        SpringApplication.run(MvcConfig.class, args);
+    }
 
     /**
      * Maps the main page to a specific view.

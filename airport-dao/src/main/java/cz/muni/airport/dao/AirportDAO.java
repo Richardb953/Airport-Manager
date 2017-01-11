@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Airport;
@@ -9,6 +11,7 @@ import cz.muni.airport.model.Airport;
  * 
  * @author Jiri Krejci, github name: xkrejci7
  */
+@Repository
 public interface AirportDAO {
 
     /**

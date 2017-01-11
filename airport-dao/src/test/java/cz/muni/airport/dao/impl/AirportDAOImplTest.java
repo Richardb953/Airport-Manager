@@ -7,14 +7,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.database.Config;
+import cz.muni.airport.database.testConfig;
 import cz.muni.airport.model.Airport;
 
 import static org.junit.Assert.assertEquals;
@@ -25,13 +29,15 @@ import static org.junit.Assert.assertNull;
  * @author Andrea Navratilova, github name: andrea-n
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@ContextConfiguration(classes = {Config.class})
-@Import(Config.class)
+@SpringApplicationConfiguration(testConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-
+@PropertySource("/application.properties")
+// Enable JMX so we can test the MBeans (you can't do this in a properties file)
+@TestPropertySource(properties = { "spring.jmx.enabled:true",
+		"spring.datasource.jmx-enabled:true" })
 public class AirportDAOImplTest {
 	
-	@Autowired()
+	@Autowired
 	private AirportDAO airportDAO;
 
 	@BeforeClass

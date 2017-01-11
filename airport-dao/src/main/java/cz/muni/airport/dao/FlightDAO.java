@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Flight;
@@ -9,7 +11,7 @@ import cz.muni.airport.model.Flight;
  * created by Richard Bariny on 25.10.2016
  * @author Richard Bariny, github name: Richardb953
  */
-
+@Repository
 public interface FlightDAO {
 
     /**
