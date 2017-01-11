@@ -13,18 +13,17 @@ import cz.muni.airport.facadeApi.StewardFacade;
  *
  * @author Andrea Navratilova, github name: andrea-n
  */
-
 @Controller
 @RequestMapping("/steward")
 @Transactional
 public class StewardController {
-	
-	@Autowired
+
+    @Autowired
     private StewardFacade stewardFacade;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String stewards(Model model) {
-		model.addAttribute("stewards", stewardFacade.getAllStewards());
+        model.addAttribute("stewards", stewardFacade.getAllStewards());
         return "stewards";
     }
 }

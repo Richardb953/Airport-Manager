@@ -41,8 +41,7 @@
                                         </td>
                                         <td data-name="capacity"  th:text="${airplane.capacity}">
                                         </td>
-                                        <td data-name="type" data-type="select" data-option="1">
-                                            BusinessJet
+                                        <td data-name="type" data-type="select" th:attr="data-option=${airplane.type.ordinal()}" th:text="${airplane.type}">
                                             <!-- do data-option prosim vypsat cislo daneho typu letadla (aby
                                                      to sedelo s options v selectu ve formulari dole!!!-->
                                         </td>
@@ -76,6 +75,8 @@
                                                     <option value="1">Business Jet</option>
                                                     <option value="2">Airliner</option>
                                                     <option value="3">Cargo</option>
+                                                    <option value="4">Twin piston</option>
+                                                    <option value="5">Helicopter</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -116,6 +117,8 @@
                                                 <option value="1">Business Jet</option>
                                                 <option value="2">Airliner</option>
                                                 <option value="3">Cargo</option>
+                                                <option value="4">Twin piston</option>
+                                                <option value="5">Helicopter</option>
                                             </select>
                                         </div>
                                     </div>

@@ -49,10 +49,10 @@
                                         <td data-name="city" th:text="${airport.city}">
                                         </td>
                                         <td>
-                                            <button class="btn btn-danger" data-id="${airport.id}">Remove</button>
+                                            <button class="btn btn-danger" th:attr="data-id=${airport.id}">Remove</button>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success btn-update" data-id="${airport.id}">Update</button>
+                                            <button class="btn btn-success btn-update" th:attr="data-id=${airport.id}">Update</button>
                                         </td>
                                     </tr>
                                 </tbody>
