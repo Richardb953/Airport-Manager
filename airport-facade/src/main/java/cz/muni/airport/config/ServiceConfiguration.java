@@ -38,7 +38,7 @@ public class ServiceConfiguration {
         @Override
         protected void configure() {
             mapping(Flight.class, FlightDTO.class);
-            mapping(Airplane.class, AirplaneDTO.class);
+            mapping(Airplane.class, AirplaneDTO.class).exclude("flights");
             mapping(Steward.class, StewardDTO.class);
             mapping(Airport.class, AirportDTO.class);
             mapping(Flight.class, FlightCreateDTO.class);
