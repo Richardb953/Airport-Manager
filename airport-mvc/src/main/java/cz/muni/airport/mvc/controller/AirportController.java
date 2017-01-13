@@ -37,27 +37,27 @@ public class AirportController {
         return "airports";
     }
     
-//    @RequestMapping(value = "/create", method = RequestMethod.POST)
-//    public String create(@Valid @ModelAttribute("airportCreate") AirportDTO formBean, BindingResult bindingResult,
-//                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-//
-////        log.debug("create(formBean={})", formBean);
-//        //in case of validation error forward back to the the form
-//        if (bindingResult.hasErrors()) {
-//            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-////                log.trace("ObjectError: {}", ge);
-//            }
-//            for (FieldError fe : bindingResult.getFieldErrors()) {
-//                model.addAttribute(fe.getField() + "_error", true);
-////                log.trace("FieldError: {}", fe);
-//            }
-//            return "airport/new";
-//        }
-//        //create product
-//        
-//        Long id = airportFacade.createAirport(formBean).getId();
-//        //report success
-//        redirectAttributes.addFlashAttribute("alert_success", "Airport " + id + " was created");
-//        return "redirect:" + uriBuilder.path("/airport/all").toUriString();
-//    }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("airportCreate") AirportDTO formBean, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+
+//        log.debug("create(formBean={})", formBean);
+        //in case of validation error forward back to the the form
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+//                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+//                log.trace("FieldError: {}", fe);
+            }
+            return "airpors_add";
+        }
+        //create product
+        
+        Long id = airportFacade.createAirport(formBean).getId();
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Airport " + id + " was created");
+        return "redirect:" + uriBuilder.path("/airport/all").toUriString();
+    }
 }
