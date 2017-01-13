@@ -1,0 +1,114 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
+
+<main class="content">
+    <p layout:fragment="content">
+    <div class="row">
+        <h1 th:text="#{flight.aiport.table}">Flight</h1>
+        <table id="flights" class="datatable table table-striped table-responsive">
+            <thead>
+            <tr>
+                <th th:text="#{flight.id}">
+                    Flight ID
+                </th>
+                <th th:text="#{flight.name}">
+                    Flight Name
+                </th>
+                <th th:text="#{flight.source}">
+                    Source port
+                </th>
+                <th th:text="#{flight.destination}">
+                    Destination port
+                </th>
+                <th th:text="#{flight.departure}">
+                    Departure
+                </th>
+                <th th:text="#{flight.arrival}">
+                    Arrival
+                </th>
+            </tr>
+            </thead>
+            <tbody th:object="flight">
+                <tr>
+                    <td data-name="id" th:text="${flight.id}">
+                        Flight ID
+                    </td>
+                    <td data-name="name" th:text="${flight.name}">
+                        Flight name
+                    </td>
+                    <td data-name="source" th:text="${flight.sourceport}">
+                        Source Port
+                    </td>
+                    <td data-name="destination" th:text="${flight.destinationport}">
+                        Destination Port
+                    </td>
+                    <td data-name="departure" th:text="${flight.departure}">
+                        Departure Time
+                    </td>
+                    <td data-name="arrival" th:text="${flight.arrival}">
+                        Arrival Time
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3 th:text="#{flight.airport.choose}">Choose Aiport</h3>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card card-block">
+                <table id="airports" class="datatable table table-striped table-responsive" data-disabled="8,9">
+                    <thead>
+                        <tr>
+                            <th th:text="#{aiport.id}">
+                                Airport ID
+                            </th>
+                            <th th:text="#{aiport.iata}">
+                                Airport iata
+                            </th>
+                            <th th:text="#{aiport.name}">
+                                Airport name
+                            </th>
+                            <th th:text="#{aiport.country}">
+                                Airport country
+                            </th>
+                            <th th:text="#{aiport.city}">
+                                Airport city
+                            </th>
+                            <
+                        </tr>
+                    </thead>
+                    <tbody th:object="aiports">
+                        <tr th:each="airport : ${aiports}">
+                            <td th:class="radio-button">
+                                <span>Choose</span>
+                            </td>
+                            <td data-name="id" th:text="${airport.id}">
+                                Airport ID
+                            </td>
+                            <td data-name="name" th:text="${airport.iata}">
+                                Airport iata
+                            </td>
+                            <td data-name="source" th:text="${airport.name}">
+                                Airport name
+                            </td>
+                            <td data-name="destination" th:text="${airport.country}">
+                                Airport country
+                            </td>
+                            <td data-name="departure" th:text="${airport.city}">
+                                Airport city
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <button class="btn btn-success" th:attr="${airport}, ${flight}">Update</button>
+                </div>>
+            </div>
+        </div>
+    </div>
+    </p>
+</main>
+</html>
