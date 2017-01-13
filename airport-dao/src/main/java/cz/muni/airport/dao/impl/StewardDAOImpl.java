@@ -16,43 +16,51 @@ import cz.muni.airport.model.Steward;
  *
  * @author Andrea Navratilova, github name: andrea-n
  */
-
 @Repository
 @Transactional
 public class StewardDAOImpl implements StewardDAO {
-	@PersistenceContext(name= "stewardUnit", type = PersistenceContextType.TRANSACTION)
-	private EntityManager entityManager;
+
+    @PersistenceContext(name = "stewardUnit", type = PersistenceContextType.TRANSACTION)
+    private EntityManager entityManager;
 
     @Override
-	public Steward addSteward(Steward steward) {
-		entityManager.persist(steward);
-		return steward;
-	}
+    public Steward addSteward(Steward steward) {
+        if (steward == null) throw new  IllegalArgumentException("Steward can't be null");
+        entityManager.persist(steward);
+        return steward;
+    }
 
-	@Override
-	public void removeSteward(Steward steward) {
-		entityManager.remove(steward);
-	}
+    @Override
+    public void removeSteward(Steward steward) {
+        if (steward == null) throw new  IllegalArgumentException("Steward can't be null");
+        entityManager.remove(entityManager.merge(steward));
+    }
 
-	@Override
-	public Steward updateSteward(Steward steward) {
-		entityManager.merge(steward);
-		return steward;
-	}
+    @Override
+    public Steward updateSteward(Steward steward) {
+        if (steward == null) throw new  IllegalArgumentException("Steward can't be null");
+        entityManager.merge(steward);
+        return steward;
+    }
 
-	@Override
-	public Steward getStewardById(Long stewardId) {
-		return entityManager.find(Steward.class, stewardId);
-	}
+    @Override
+    public Steward getStewardById(Long stewardId) {
+        if (stewardId == null) {
+            throw new IllegalArgumentException("ID can't be null");
+        }
+        return entityManager.find(Steward.class, stewardId);
+    }
 
-	@Override
-	public List<Steward> getAllStewards() {
-		return entityManager.createQuery("from Steward", Steward.class).getResultList();
-	}
+    @Override
+    public List<Steward> getAllStewards() {
+        return entityManager.createQuery("from Steward", Steward.class).getResultList();
+    }
 
-	@Override
-	public List<Steward> getStewardByName(String firstName, String lastName) {
-		if(firstName == null || lastName == null) throw new IllegalArgumentException("Firstname and lastname params can't be null");
-		return entityManager.createQuery("from Steward where firstName = '" + firstName +"' and lastName = '" + lastName + "'", Steward.class).getResultList();
-	}
+    @Override
+    public List<Steward> getStewardByName(String firstName, String lastName) {
+        if (firstName == null || lastName == null) {
+            throw new IllegalArgumentException("Firstname and lastname params can't be null");
+        }
+        return entityManager.createQuery("from Steward where firstName = '" + firstName + "' and lastName = '" + lastName + "'", Steward.class).getResultList();
+    }
 }
