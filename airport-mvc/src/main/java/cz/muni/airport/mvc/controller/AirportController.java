@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,43 +22,34 @@ import org.springframework.web.util.UriComponentsBuilder;
  *
  * @author Richard Bariny, github name:Richardb953
  */
-
 @Controller
 @RequestMapping("/airport")
 @Transactional
 public class AirportController {
 
-
     @Autowired
     private AirportFacade airportFacade;
-    
+
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String airports(Model model) {
         model.addAttribute("airports", airportFacade.getAllAirports());
         return "airports";
     }
-    
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("airportCreate") AirportDTO formBean, BindingResult bindingResult,
-                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 
-//        log.debug("create(formBean={})", formBean);
-        //in case of validation error forward back to the the form
-        if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-//                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-//                log.trace("FieldError: {}", fe);
-            }
-            return "airpors_add";
-        }
-        //create product
-        
-        Long id = airportFacade.createAirport(formBean).getId();
-        //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Airport " + id + " was created");
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("airportCreate") AirportDTO formBean, BindingResult bindingResult,
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+
+        AirportDTO airportDTO = airportFacade.createAirport(formBean);
+        redirectAttributes.addFlashAttribute("alert_success", "Airport " + airportDTO.getName() + " was created.");
         return "redirect:" + uriBuilder.path("/airport/all").toUriString();
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Model model, UriComponentsBuilder uriBuilder) {
+        airportFacade.removeAirport(id);
+        model.addAttribute("airports", airportFacade.getAllAirports());
+        redirectAttributes.addFlashAttribute("alert_warning", "Airport " + id + " was deleted");
+        return "redirect:" + uriBuilder.path("/airport/all").buildAndExpand().encode().toUriString();
     }
 }

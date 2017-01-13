@@ -49,7 +49,9 @@
                                         <td data-name="city" th:text="${airport.city}">
                                         </td>
                                         <td>
-                                            <button class="btn btn-danger" th:attr="data-id=${airport.id}">Remove</button>
+                                            <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airport/delete/'+${airport.id}">
+                                                <button class="btn btn-danger" th:attr="data-id=${airport.id}">Remove</button>
+                                            </form>
                                         </td>
                                         <td>
                                             <button class="btn btn-success btn-update" th:attr="data-id=${airport.id}">Update</button>
@@ -109,7 +111,7 @@
                     <div class="col-md-6 pull-md-6">
                         <div class="card card-block">
                             <h4>Add airport</h4>
-                            <form class="form" id="add-form" method="post" action="/pa165/airport/add">
+                            <form class="form" id="add-form" method="post" action="/pa165/airport/create">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
