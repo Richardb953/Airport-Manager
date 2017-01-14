@@ -117,11 +117,11 @@ public class FlightController {
     ) {
         if ( !result.hasErrors() ) {
             FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
-            flightDTO.setName(flight.getName());
-            flightDTO.setDeparture(flight.getDeparture());
-            flightDTO.setArrival(flight.getArrival());
+            //flightDTO.setName(flight.getName());
+            //flightDTO.setDeparture(flight.getDeparture());
+            //flightDTO.setArrival(flight.getArrival());
 
-            flightFacade.updateFlight(flightDTO);
+            flightFacade.updateFlight(flight);
             return "redirect:/flight/all";
         } else{
             for(ObjectError err : result.getAllErrors()) {
