@@ -41,7 +41,7 @@
 									</th>
 								</tr>
 							</thead>
-							<tbody th:object="flights">
+							<tbody >
 								<tr th:each="flight : ${flights}">
 									<td data-name="id" th:text="${flight.id}">
 										Flight ID
@@ -49,10 +49,10 @@
 									<td data-name="name" th:text="${flight.name}">
                                         Flight name
 									</td>
-									<td data-name="source" th:text="${flight.sourceport}">
+									<td data-name="source" th:text="${flight.sourceport != null} ? ${flight.sourceport.getName()}">
                                         Source Port
 									</td>
-									<td data-name="destination" th:text="${flight.destinationport}">
+									<td data-name="destination" th:text="${flight.destinationport != null} ? ${flight.destinationport.getName()}">
                                         Destination Port
 									</td>
 									<td data-name="departure" th:text="${flight.departure}">
@@ -61,7 +61,7 @@
 									<td data-name="arrival" th:text="${flight.arrival}">
                                         Arrival Time
 									</td>
-									<td data-name="airplane" th:text="${flight.airplane}">
+									<td data-name="airplane" th:text="${flight.airplane != null} ? ${flight.airplane.name}">
                                         Airplane
 									</td>
 									<td data-name="stewards" th:text="${flight.stewards.size()}">
@@ -80,133 +80,11 @@
 										<button class="btn btn-danger" th:attr="data-id=${flight.id}">Remove</button>
 									</td>
 									<td>
-										<button class="btn btn-success btn-update" th:attr="data-id=${flight.id}">Update</button>
+										<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-				</div>
-			</div>
-			<div class="row mt-2">
-				<div class="col-md-6 push-md-6">
-					<div id="update" class="hidden">
-						<div class="card card-block">
-							<h4 th:text="#{flight.update}">Update flight</h4>
-							<form class="form" id="update-form" method="post" action="">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label th:text="#{flight.name}">Name</label>
-                                            <input type="text" disabled="disabled" class="form-control" id="flight_name" name="id" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label th:text="#{flight.passagers}">Passengers</label>
-                                            <input type="number" class="form-control" id="flight_passengers" name="passengers" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label th:text="#{flight.id}">Id</label>
-                                            <input type="text" disabled="disabled" class="form-control" id="id" name="id" />
-                                        </div>
-                                    </div>
-                                </div>
-								<div class="row">
-									<!--
-									Letiska sa pridavaju v inej obrazovke
-									<div class="col-md-6">-->
-										<!--<div class="form-group">-->
-											<!--<label th:text="#{flight.source}">Source port</label>-->
-											<!--<input type="text" class="form-control" id="flight_sourceport" name="source" required="required" />-->
-										<!--</div>-->
-
-                                        <!--<div class="form-group">-->
-                                            <!--<label th:text="#{flight.destination}">Destination port</label>-->
-                                            <!--<input type="text" class="form-control" id="flight_destinationport" name="destination" required="required" />-->
-                                        <!--</div>-->
-									<!--</div>-->
-									<div class="col-md-6">
-                                        <div class="form-group">
-                                            <label th:text="#{flight.departure}">Departure</label>
-                                            <input type="datetime" class="form-control" id="fligth_departure" name="departure" required="required" />
-                                        </div>
-										<div class="form-group">
-											<label th:text="#{flight.arrival}">Arrival</label>
-											<input type="datetime" class="form-control" id="fligth_arrival" name="arrival" required="required" />
-                                        </div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-xs-12 text-right">
-										<button class="btn btn-default btn-cancel" type="reset" th:text="#{flight.btn.cancel}">Cancel</button>
-										<button class="btn btn-success" type="submit" th:text="#{flight.btn.update}">Update</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 pull-md-6">
-					<div class="card card-block">
-						<h4 th:text="#{flight.add}">Add flight</h4>
-						<form class="form" id="add-form" method="post" action="">
-							<div class="row">
-								<div class="col-md-6">
-                                    <!--
-                                    Letiska sa pridavaju v inej obrazovke
-                                    <div class="col-md-6">-->
-                                        <!--<div class="form-group">-->
-                                        <!--<label th:text="#{flight.source}">Source port</label>-->
-                                        <!--<input type="text" class="form-control" id="flight_sourceport" name="source" required="required" />-->
-                                        <!--</div>-->
-
-                                        <!--<div class="form-group">-->
-                                        <!--<label th:text="#{flight.destination}">Destination port</label>-->
-                                        <!--<input type="text" class="form-control" id="flight_destinationport" name="destination" required="required" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-								</div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{flight.departure}">Departure</label>
-                                        <input type="datetime" class="form-control" id="fligth_departure_add" name="departure" required="required" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label th:text="#{flight.arrival}">Arrival</label>
-                                        <input type="datetime" class="form-control" id="fligth_arrival_add" name="arrival" required="required" />
-                                    </div>
-                                </div>
-							</div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{flight.name}">Name</label>
-                                        <input type="text" disabled="disabled" class="form-control" id="flight_name_add" name="id" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{flight.passagers}">Passengers</label>
-                                        <input type="number" class="form-control" id="flight_passengers_add" name="passengers" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{flight.id}">Id</label>
-                                        <input type="text" disabled="disabled" class="form-control" id="id_add" name="id" />
-                                    </div>
-                                </div>
-                            </div>
-							<div class="row">
-								<div class="col-xs-12 text-right">
-									<button class="btn btn-success" type="submit" th:text="#{flight.btn.add}">Add</button>
-								</div>
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>

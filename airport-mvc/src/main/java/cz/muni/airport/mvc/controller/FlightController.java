@@ -1,5 +1,7 @@
 package cz.muni.airport.mvc.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Flight;
@@ -29,12 +37,14 @@ import cz.muni.airport.model.Flight;
 @RequestMapping("/flight")
 @Transactional
 public class FlightController {
+    private static final String DATE_FORMAT = "YYYY-MM-DD'T'hh:mm";
 
     @Autowired
     private FlightFacade flightFacade;
 
     @Autowired
     private AirportFacade airportFacade;
+    private final static Logger log = LoggerFactory.getLogger(FlightController.class);
 
     /**
      * Shows a list of products with the ability to add, delete or edit.
@@ -54,20 +64,30 @@ public class FlightController {
      * @return formular
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addFlightGet(Model model) {
+    public String addFlight(Model model) {
+
         FlightDTO flightDTO  = new FlightDTO();
-        model.addAttribute( "flight", flightDTO);
+        flightDTO.setArrival(new Date());
+        flightDTO.setDeparture(new Date());
+
+        model.addAttribute("formatter", new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH));
+        model.addAttribute("flight", flightDTO);
         return "flight_add";
     }
-    @RequestMapping(value = "/add/", method = RequestMethod.POST)
-    public String addFlightPost(
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addFlight(
             @Valid @ModelAttribute(value = "flight") FlightDTO flight,
             BindingResult result,
             Model model
     ) {
         if ( !result.hasErrors() ) {
-            flightFacade.createFlight(flight);
-            return "redirect:/flight/list";
+            flight.setFlightState(FlightState.OPEN);
+            flightFacade.createNewFlight(flight);
+            return "redirect:/flight/all";
+        } else{
+            for(ObjectError err : result.getAllErrors()) {
+                log.warn("Template problem: "  + err.getDefaultMessage());
+            }
         }
 
         return "flight_add";
@@ -80,24 +100,33 @@ public class FlightController {
      * @return formular
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String updateFlightGet(
+    public String updateFlight(
             @PathVariable(value = "id") Long flightId,
             Model model
     ) {
-
+        model.addAttribute("formatter", new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH));
         model.addAttribute("flight", flightFacade.getFlightById(flightId));
         return "flight_update";
     }
 
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
-    public String updateFlightPost(
-            @Valid @ModelAttribute(value = "flight") FlightDTO flight,
+    public String updateFlight(
+            @Valid FlightDTO flight,
             BindingResult result,
             Model model
     ) {
         if ( !result.hasErrors() ) {
-            flightFacade.updateFlight(flight);
-            return "redirect:/flight/list/";
+            FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+            flightDTO.setName(flight.getName());
+            flightDTO.setDeparture(flight.getDeparture());
+            flightDTO.setArrival(flight.getArrival());
+
+            flightFacade.updateFlight(flightDTO);
+            return "redirect:/flight/all";
+        } else{
+            for(ObjectError err : result.getAllErrors()) {
+                log.warn("Template problem: "  + err.getDefaultMessage());
+            }
         }
 
         return "flight_update";
@@ -110,7 +139,7 @@ public class FlightController {
      * @return formular
      */
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.GET)
-    public String sourceAirportGet(
+    public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
@@ -122,7 +151,7 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
-    public String sourceAirportPost( @ModelAttribute(value = "flight") FlightDTO flight,
+    public String sourceAirport( @ModelAttribute(value = "flight") FlightDTO flight,
                                  @ModelAttribute(value = "airport") AirportDTO airport,
                                  BindingResult result,
                                  Model model
@@ -143,7 +172,7 @@ public class FlightController {
      * @return formular
      */
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.GET)
-    public String destinationAirportGet(
+    public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
@@ -154,7 +183,7 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
-    public String destinationAirportPost(
+    public String destinationAirport(
             @ModelAttribute(value = "flight") FlightDTO flight,
             @ModelAttribute(value = "airport") AirportDTO airport,
             BindingResult result,
@@ -164,14 +193,11 @@ public class FlightController {
             if(airport != null){
                 flight.setDestinationport(airport);
                 flightFacade.updateFlight(flight);
-                return "redirect:/flight/list";
+                return "redirect:/flight/all";
 
             }
         }
         return "flight_add_airport";
     }
-
-
-
 
 }

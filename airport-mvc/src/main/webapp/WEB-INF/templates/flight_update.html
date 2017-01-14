@@ -10,49 +10,35 @@
         <div id="update">
             <div class="card card-block">
                 <h4 th:text="#{flight.update}">Update flight</h4>
-                <form class="form" id="update-form" method="post" action="" th:object="flight">
+                <form class="form" id="update-form" method="post" th:object="${flight}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label th:text="#{flight.id}">Id</label>
+                                <input type="text" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label th:text="#{flight.name}">Name</label>
-                                <input type="text" disabled="disabled" class="form-control" id="flight_name" name="id" />
+                                <input type="text" class="form-control" id="flight_name" name="name"  th:field="*{name}" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label th:text="#{flight.passagers}">Passengers</label>
-                                <input type="number" class="form-control" id="flight_passengers" name="passengers" />
+                                <input type="number" class="form-control" id="flight_passengers" name="passengers" th:field="*{passagers}" />
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label th:text="#{flight.id}">Id</label>
-                                <input type="text" disabled="disabled" class="form-control" id="id" name="id" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!--
-                        Letiska sa pridavaju v inej obrazovke
-                        <div class="col-md-6">-->
-                        <!--<div class="form-group">-->
-                        <!--<label th:text="#{flight.source}">Source port</label>-->
-                        <!--<input type="text" class="form-control" id="flight_sourceport" name="source" required="required" />-->
-                        <!--</div>-->
 
-                        <!--<div class="form-group">-->
-                        <!--<label th:text="#{flight.destination}">Destination port</label>-->
-                        <!--<input type="text" class="form-control" id="flight_destinationport" name="destination" required="required" />-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label th:text="#{flight.departure}">Departure</label>
-                                <input type="datetime" class="form-control" id="fligth_departure" name="departure" required="required" />
+                                <input type="datetime-local" class="form-control" id="fligth_departure_add" name="departure" th:field="*{{departure}}"/>
                             </div>
                             <div class="form-group">
                                 <label th:text="#{flight.arrival}">Arrival</label>
-                                <input type="datetime" class="form-control" id="fligth_arrival" name="arrival" required="required" />
+                                <input type="datetime-local" class="form-control" id="fligth_arrival_add" name="arrival" th:field="*{{arrival}}"/>
                             </div>
                         </div>
                     </div>
