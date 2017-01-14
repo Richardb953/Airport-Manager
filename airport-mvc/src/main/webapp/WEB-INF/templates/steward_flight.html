@@ -59,6 +59,8 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="card card-block">
+                <form class="form" id="steward-form" method="post" action="">
+
                 <table id="airports" class="datatable table table-striped table-responsive">
                     <thead>
                     <tr>
@@ -76,30 +78,32 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="steward : ${stewards}">
-                        <td>
-                            <input title="check" type="checkbox" th:checked="${checkedItem.contains(steward.id)}"
-                                   th:field="*{checkedItem}"
-                                   th:value="${steward.id}"
-                            />
-                        </td>
-                        <td data-name="id" th:text="${steward.id}">
-                            Steward ID
-                        </td>
-                        <td data-name="name" th:text="${steward.firstName}">
-                            Steward firstname
-                        </td>
-                        <td data-name="source" th:text="${steward.lastName}">
-                            Steward lastname
-                        </td>
+                        <tbody>
+                        <tr th:each="steward : ${stewards}">
+                            <td>
+                                <input title="check" type="checkbox" th:checked="${checkedItem.contains(steward.id)}"
+                                       th:field="*{checkedItem}"
+                                       th:value="${steward.id}"
+                                       name="checkedItem[]"
+                                />
+                            </td>
+                            <td data-name="id" th:text="${steward.id}">
+                                Steward ID
+                            </td>
+                            <td data-name="name" th:text="${steward.firstName}">
+                                Steward firstname
+                            </td>
+                            <td data-name="source" th:text="${steward.lastName}">
+                                Steward lastname
+                            </td>
 
-                    </tr>
-                    </tbody>
+                        </tr>
+                        </tbody>
                 </table>
-                <form th:action="@{'steward'}" class="row" th:method="post" th:field="*{checkedItem}">
                     <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}">Update</button>
+
                 </form>
+
             </div>
         </div>
     </div>

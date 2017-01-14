@@ -146,7 +146,7 @@ public class FlightController {
         return "flight_update";
     }
 
-    @RequestMapping(value = "remnove/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "remove/{id}", method = RequestMethod.POST)
     public String removeFlight(
             @PathVariable(value = "id") Long flightId,
             BindingResult result,
@@ -186,13 +186,13 @@ public class FlightController {
 
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
     public String sourceAirport(
-            FlightDTO flight,
+            @PathVariable(value = "id") Long flightId,
             BindingResult result,
-            long checkedItem,
+            Long checkedItem,
             Model model
     ){
         if ( !result.hasErrors() ) {
-            FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+            FlightDTO flightDTO = flightFacade.getFlightById(flightId);
             AirportDTO airportDTO = airportFacade.getAirportById(checkedItem);
             flightDTO.setSourceport(airportDTO);
             flightFacade.updateFlight(flightDTO);
@@ -228,13 +228,13 @@ public class FlightController {
 
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
     public String destinationAirport(
-            FlightDTO flight,
+            @PathVariable(value = "id") Long flightId,
             Long checkedItem,
             BindingResult result,
             Model model
     ){
         if ( !result.hasErrors() ) {
-                FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+                FlightDTO flightDTO = flightFacade.getFlightById(flightId);
                 flightDTO.setDestinationport(airportFacade.getAirportById(checkedItem));
                 flightFacade.updateFlight(flightDTO);
                 return "redirect:/flight/all";

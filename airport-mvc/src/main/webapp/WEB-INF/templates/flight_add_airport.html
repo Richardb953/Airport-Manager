@@ -59,55 +59,57 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="card card-block">
-                <table id="airports" class="datatable table table-striped table-responsive" >
-                    <thead>
-                        <tr>
-                            <th th:text="#{aiport.id}">
-                                Airport ID
-                            </th>
-                            <th th:text="#{aiport.iata}">
-                                Airport iata
-                            </th>
-                            <th th:text="#{aiport.name}">
-                                Airport name
-                            </th>
-                            <th th:text="#{aiport.country}">
-                                Airport country
-                            </th>
-                            <th th:text="#{aiport.city}">
-                                Airport city
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="airport : ${airports}">
-                            <td>
-                                <input type="radio" th:checked="${checkedItem.equals(airport.id)}" title="check"
-                                       th:field="*{checkedItem}"
-                                       th:value="${airport.id}"
-                                />
-                            </td>
-                            <td data-name="id" th:text="${airport.id}">
-                                Airport ID
-                            </td>
-                            <td data-name="name" th:text="${airport.iata}">
-                                Airport iata
-                            </td>
-                            <td data-name="source" th:text="${airport.name}">
-                                Airport name
-                            </td>
-                            <td data-name="destination" th:text="${airport.country}">
-                                Airport country
-                            </td>
-                            <td data-name="departure" th:text="${airport.city}">
-                                Airport city
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}" th:action="post" >Update</button>
-                </div>
+                <form class="form" id="port-form" method="post" th:object="${checkedItem}">
+                    <table id="airports" class="datatable table table-striped table-responsive" >
+                        <thead>
+                            <tr>
+                                <th th:text="#{aiport.id}">
+                                    Airport ID
+                                </th>
+                                <th th:text="#{aiport.iata}">
+                                    Airport iata
+                                </th>
+                                <th th:text="#{aiport.name}">
+                                    Airport name
+                                </th>
+                                <th th:text="#{aiport.country}">
+                                    Airport country
+                                </th>
+                                <th th:text="#{aiport.city}">
+                                    Airport city
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="airport : ${airports}">
+                                <td>
+                                    <input type="radio" th:checked="${checkedItem.equals(airport.id)}" title="check"
+                                           th:field="${checkedItem}"
+                                           th:value="${airport.id}"
+                                    />
+                                </td>
+                                <td data-name="id" th:text="${airport.id}">
+                                    Airport ID
+                                </td>
+                                <td data-name="name" th:text="${airport.iata}">
+                                    Airport iata
+                                </td>
+                                <td data-name="source" th:text="${airport.name}">
+                                    Airport name
+                                </td>
+                                <td data-name="destination" th:text="${airport.country}">
+                                    Airport country
+                                </td>
+                                <td data-name="departure" th:text="${airport.city}">
+                                    Airport city
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}" >Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
