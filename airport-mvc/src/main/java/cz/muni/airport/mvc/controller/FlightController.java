@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -253,25 +254,33 @@ public class FlightController {
             Model model
     ){
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-        model.addAttribute("stewards", stewardFacade.getAvailableStewards(flightDTO));
+        List<Long> checkedItem = flightDTO.getStewards().stream().map(StewardDTO::getId).collect(Collectors.toList());
+
+        //todo len available stewards
+        model.addAttribute("stewards", stewardFacade.getAllStewards());
         model.addAttribute("flight", flightDTO);
+        model.addAttribute("checkedItem", checkedItem);
         return "steward_flight";
 
     }
 
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
     public String stewardFlight(
-            @ModelAttribute(value = "flight") FlightDTO flight,
-            @ModelAttribute(value = "stewards") List<StewardDTO> stewards,
+            @PathVariable(value = "id") Long flightId,
+            List<Long> checkedItem,
             BindingResult result,
             Model model
     ){
         if ( !result.hasErrors() ) {
-            if(stewards != null){
+            if(checkedItem != null){
                 //load basic
-                FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+                FlightDTO flightDTO = flightFacade.getFlightById(flightId);
                 //update just stewards nor other fields
-                flightDTO.setStewards(stewards);
+                List<StewardDTO> stewardDTOs = new ArrayList<>();
+                for(Long item : checkedItem){
+                    stewardDTOs.add(stewardFacade.getSteward(item));
+                }
+                flightDTO.setStewards(stewardDTOs);
                 flightFacade.updateFlight(flightDTO);
                 return "redirect:/flight/all";
 

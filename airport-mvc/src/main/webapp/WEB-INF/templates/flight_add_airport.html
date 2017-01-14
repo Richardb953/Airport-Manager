@@ -59,7 +59,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="card card-block">
-                <table id="airports" class="datatable table table-striped table-responsive" data-disabled="8,9">
+                <table id="airports" class="datatable table table-striped table-responsive" >
                     <thead>
                         <tr>
                             <th th:text="#{aiport.id}">
@@ -82,7 +82,10 @@
                     <tbody>
                         <tr th:each="airport : ${airports}">
                             <td>
-                                <input type="radio" th:checked="${checkedItem == airport.id} ? 'checked' : 'none'"/>
+                                <input type="radio" th:checked="${checkedItem.equals(airport.id)}" title="check"
+                                       th:field="*{checkedItem}"
+                                       th:value="${airport.id}"
+                                />
                             </td>
                             <td data-name="id" th:text="${airport.id}">
                                 Airport ID
@@ -103,7 +106,7 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    <button class="btn btn-success">Update</button>
+                    <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}" th:action="post" >Update</button>
                 </div>
             </div>
         </div>
