@@ -69,8 +69,8 @@ public class FlightFacadeImpl implements FlightFacade {
 
         flight.setStewards(stewards);
 
-        Date departure = new Date(flightCreateDTO.getDeparture());
-        Date arrival = new Date(flightCreateDTO.getArrival());
+        Date departure =   (flightCreateDTO.getDeparture());
+        Date arrival = (flightCreateDTO.getArrival());
         flight.setArrival(arrival);
         flight.setDeparture(departure);
         flight.setFlightState(flightState);
@@ -91,8 +91,8 @@ public class FlightFacadeImpl implements FlightFacade {
         flight.setDestinationPort(destAirport);
         flight.setSourcePort(sourcAirport);
 
-        Date departure = new Date(flightCreateDTO.getDeparture());
-        Date arrival = new Date(flightCreateDTO.getArrival());
+        Date departure = flightCreateDTO.getDeparture();
+        Date arrival = flightCreateDTO.getArrival();
         flight.setArrival(arrival);
         flight.setDeparture(departure);
         flight.setFlightState(flightState);
