@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Steward;
@@ -9,6 +11,7 @@ import cz.muni.airport.model.Steward;
  * DAO for Steward entity
  * @author Andrea Navratilova, github name: andrea-n
  */
+@Repository
 public interface StewardDAO {
 
 	/**
@@ -16,27 +19,27 @@ public interface StewardDAO {
 	 * @param steward the steward object to add
 	 * @return added steward object
 	 */
-	public Steward addSteward(Steward steward);
+	public Steward addSteward(Steward steward) throws IllegalArgumentException;
 
 	/**
 	 *
 	 * @param steward the steward object to remove
 	 */
-	public void removeSteward(Steward steward);
+	public void removeSteward(Steward steward) throws IllegalArgumentException;
 
 	/**
 	 *
 	 * @param steward the steward object to update
 	 * @return updated steward object
 	 */
-	public Steward updateSteward(Steward steward);
+	public Steward updateSteward(Steward steward) throws IllegalArgumentException;
 
 	/**
 	 *
 	 * @param id the id of steward object
 	 * @return steward object by id
 	 */
-	public Steward getStewardById(Long id);
+	public Steward getStewardById(Long id) throws IllegalArgumentException;
 
 	/**
 	 *
@@ -50,5 +53,5 @@ public interface StewardDAO {
 	 * @param lastName the last name of steward
 	 * @return list of steward objects with specified first and last name
 	 */
-	public List<Steward> getStewardByName(String firstName, String lastName);
+	public List<Steward> getStewardByName(String firstName, String lastName) throws IllegalArgumentException;
 }

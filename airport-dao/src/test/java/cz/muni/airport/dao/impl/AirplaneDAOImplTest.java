@@ -3,13 +3,14 @@ package cz.muni.airport.dao.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.muni.airport.dao.AirplaneDAO;
-import cz.muni.airport.database.Config;
+import cz.muni.airport.database.testConfig;
 import cz.muni.airport.model.Airplane;
 
 import static org.junit.Assert.assertEquals;
@@ -22,14 +23,17 @@ import static org.junit.Assert.assertNull;
  * Test for Airplane DAO class
  *
  */
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@ContextConfiguration(classes = {Config.class})
-@Import(Config.class)
+@SpringApplicationConfiguration(testConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
+@PropertySource("/application.properties")
+// Enable JMX so we can test the MBeans (you can't do this in a properties file)
+@TestPropertySource(properties = { "spring.jmx.enabled:true",
+        "spring.datasource.jmx-enabled:true" })
+
 public class AirplaneDAOImplTest {
 
-    @Autowired(required = true)
+    @Autowired
     private AirplaneDAO airplaneDAO;
 
     /**
