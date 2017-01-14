@@ -101,8 +101,8 @@ public class AirplaneFacadeTestImpl {
         flightDTO = new FlightDTO();
         flightDTO.setName("LetCislo42");
         flightDTO.setAirplane(airplaneDTO);
-        flightDTO.setArrival(arrival.getTime().getTime());
-        flightDTO.setDeparture(departure.getTime().getTime());
+        flightDTO.setArrival(arrival.getTime());
+        flightDTO.setDeparture(departure.getTime());
         flightDTO.setPassagers(50);
 
         airplaneDTO.addFlight(flightDTO);

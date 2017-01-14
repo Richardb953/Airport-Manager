@@ -3,210 +3,89 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorator="layouts/simpleLayout">
-
-	<main class="content">
-		<p layout:fragment="content">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="card card-block">
-						<table id="flights" class="datatable table table-striped table-responsive" data-disabled="8,9">
-							<thead>
-								<tr>
-									<th>
-										Flight id
-									</th>
-									<th>
-										Source port
-									</th>
-									<th>
-										Destination port
-									</th>
-									<th>
-										Departure
-									</th>
-									<th>
-										Arrival
-									</th>
-									<th>
-										Airplane
-									</th>
-									<th>
-										Steward
-									</th>
-									<th>
-										Passengers
-									</th>
-									<th>
-
-									</th>
-									<th>
-
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="prod: ${flights}">
-									<td data-name="id" th:text="${prod.id}">
-
-									</td>
-									<td data-name="source">
-
-									</td>
-									<td data-name="destination">
-
-									</td>
-									<td data-name="departure">
-
-									</td>
-									<td data-name="arrival">
-
-									</td>
-									<td data-name="airplane" data-type="select" data-option="1"> <!--do data-option prijde id letadla-->
-
-									</td>
-									<td data-name="steward" data-type="select" data-option="1"> <!--do data-option prijde id stewarda-->
-
-									</td>
-									<td data-name="passengers">
-
-									</td>
-									<td>
-										<button class="btn btn-danger" th:attr="data-id=${prod.id}">Remove</button>
-									</td>
-									<td>
-										<button class="btn btn-success btn-update" th:attr="data-id=${prod.id}">Update</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+	
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="card card-block">
+					<table id="flights" class="datatable table table-striped table-responsive" data-disabled="9,10">
+						<thead>
+							<tr>
+								<th th:text="#{flight.id}">
+									Flight ID
+								</th>
+								<th th:text="#{flight.name}">
+									Flight Name
+								</th>
+								<th th:text="#{flight.source}">
+									Source port
+								</th>
+								<th th:text="#{flight.destination}">
+									Destination port
+								</th>
+								<th th:text="#{flight.departure}">
+									Departure
+								</th>
+								<th th:text="#{flight.arrival}">
+									Arrival
+								</th>
+								<th th:text="#{flight.airplane}">
+									Airplane
+								</th>
+								<th th:text="#{flight.stewards}">
+									Steward
+								</th>
+								<th th:text="#{flight.passagers}">
+									Passengers
+								</th>
+							</tr>
+						</thead>
+						<tbody >
+							<tr th:each="flight : ${flights}">
+								<td data-name="id" th:text="${flight.id}">
+									Flight ID
+								</td>
+								<td data-name="name" th:text="${flight.name}">
+									Flight name
+								</td>
+								<td data-name="source" th:text="${flight.sourceport != null} ? ${flight.sourceport.getName()}">
+									Source Port
+								</td>
+								<td data-name="destination" th:text="${flight.destinationport != null} ? ${flight.destinationport.getName()}">
+									Destination Port
+								</td>
+								<td data-name="departure" th:text="${flight.departure}">
+									Departure Time
+								</td>
+								<td data-name="arrival" th:text="${flight.arrival}">
+									Arrival Time
+								</td>
+								<td data-name="airplane" th:text="${flight.airplane != null} ? ${flight.airplane.name}">
+									Airplane
+								</td>
+								<td data-name="stewards" th:text="${flight.stewards.size()}">
+									Stewards
+									<span>
+										<button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.steward.add}">Add Steward</button>
+									</span>
+								</td>
+								<td data-name="passengers" th:text="${flight.passagers}">
+									Passengers
+									<span>
+										<button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.passagers.add}">Add Passenger</button>
+									</span>
+								</td>
+								<td>
+									<button class="btn btn-danger" th:attr="data-id=${flight.id}">Remove</button>
+								</td>
+								<td>
+									<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-			<div class="row mt-2">
-				<div class="col-md-6 push-md-6">
-					<div id="update" class="hidden">
-						<div class="card card-block">
-							<h4>Update flight</h4>
-							<form class="form" id="update-form" method="post" action="">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Source port</label>
-											<input type="text" class="form-control" id="source" name="source" required="required" />
-										</div>
-										<div class="form-group">
-											<label for="">Departure</label>
-											<input type="text" class="form-control" id="departure" name="departure" required="required" />
-										</div>
-										<div class="form-group">
-											<label for="">Airplane</label>
-											<select class="custom-select form-control" id="airplane" name="airplane">
-												<option value="1">Airplane1</option>
-												<option value="2">Airplane2</option>
-												<option value="3">Airplane3</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Destination port</label>
-											<input type="text" class="form-control" id="destination" name="destination" required="required" />
-										</div>
-										<div class="form-group">
-											<label for="">Arrival</label>
-											<input type="text" class="form-control" id="arrival" name="arrival" required="required" />
-										</div>
-										<div class="form-group">
-											<label for="">Steward</label>
-											<select class="custom-select form-control" id="steward" name="steward">
-												<option value="1">Jan Novák</option>
-												<option value="2">John Doe</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Passengers</label>
-											<input type="number" class="form-control" id="passengers" name="passengers" />
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Id</label>
-											<input type="text" disabled="disabled" class="form-control" id="id" name="id" />
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12 text-right">
-										<button class="btn btn-default btn-cancel" type="reset">Cancel</button>
-										<button class="btn btn-success" type="submit">Update</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 pull-md-6">
-					<div class="card card-block">
-						<h4>Add flight</h4>
-						<form class="form" id="add-form" method="post" action="">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">Source port</label>
-										<input type="text" class="form-control" id="source" name="source" required="required" />
-									</div>
-									<div class="form-group">
-										<label for="">Departure</label>
-										<input type="text" class="form-control" id="departure" name="departure" required="required" />
-									</div>
-									<div class="form-group">
-										<label for="">Airplane</label>
-										<select class="custom-select form-control" id="airplane" name="airplane">
-											<option value="1">Airplane1</option><!--value by melo byt id letadla-->
-											<option value="2">Airplane2</option>
-											<option value="3">Airplane3</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">Destination port</label>
-										<input type="text" class="form-control" id="destination" name="destination" required="required" />
-									</div>
-									<div class="form-group">
-										<label for="">Arrival</label>
-										<input type="text" class="form-control" id="arrival" name="arrival" required="required" />
-									</div>
-									<div class="form-group">
-										<label for="">Steward</label>
-										<select class="custom-select form-control" id="steward" name="steward">
-											<option value="1">Jan Novák</option><!--value by melo byt id stewarda-->
-											<option value="2">John Doe</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">Passengers</label>
-										<input type="number" class="form-control" id="departure" name="passengers" />
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 text-right">
-									<button class="btn btn-success" type="submit">Add</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</p>
-	</main>
+		</div>
+	</div>
 </html>

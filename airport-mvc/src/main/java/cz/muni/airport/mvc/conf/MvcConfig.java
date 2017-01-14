@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -71,6 +74,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Override
+    public void addFormatters(final FormatterRegistry registry) {
+        super.addFormatters(registry);
+       // registry.addFormatter(dateFormatter());
+        registry.addFormatter(dateFormatterr());
+    }
     /**
      * Enables default Tomcat servlet that serves static files.
      */
@@ -104,7 +113,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return dialect;
     }
 
+    @Bean
+    public DateFormatter dateFormatter() {
+        return new DateFormatter();
+    }
 
+    @Bean
+    public cz.muni.airport.mvc.conf.DateFormatter dateFormatterr() {
+        return new cz.muni.airport.mvc.conf.DateFormatter();
+    }
     @Bean
     public SpringTemplateEngine getSpringTemplateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -113,6 +130,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         templateEngine.addDialect(getDandelionDialect());
         templateEngine.addDialect(getDataTablesDialect());
         templateEngine.addDialect(getSpringSecurityDialect());
+        templateEngine.addDialect(new Java8TimeDialect());
+
         return templateEngine;
     }
 

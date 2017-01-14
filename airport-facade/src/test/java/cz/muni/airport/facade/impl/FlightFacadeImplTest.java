@@ -8,6 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import cz.muni.airport.dto.AirplaneDTO;
@@ -97,8 +98,8 @@ public class FlightFacadeImplTest {
 
         FlightDTO flight = new FlightDTO();
         flight.setName("Flight1");
-        flight.setArrival(arrival.getTimeInMillis());
-        flight.setDeparture(departure.getTimeInMillis());
+        flight.setArrival(arrival.getTime());
+        flight.setDeparture(departure.getTime());
         flight.setPassagers(50);
         flight.setAirplane(airplane);
         flight.setDestinationport(destination);
