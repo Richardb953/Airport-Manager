@@ -1,4 +1,19 @@
-$(document).ready(function ($) {
+$(document).ready(function(){
+	$('.datetime').each(function() {
+		var picker = $(this).datetimepicker({
+	       format: 'YYYY-MM-DDTHH:mm',
+		   sideBySide: true
+	    });
+	});
+    $('.datatable').each(function() {
+    	$(this).dataTable( {
+		"columnDefs": [
+				{ "orderable": false, "targets": $(this).data('disabled').split(',').map(function(item) { return parseInt(item, 10); }) }
+			]
+		} );
+    });
+} );
+/*$(document).ready(function ($) {
 
 	$('.btn-update').each(function() {
 		$(this).on('click', function() {
@@ -59,5 +74,6 @@ $(document).ready(function() {
 			]
 		} );
     });
-	$('.dropdown-toggle').dropdown();
 } );
+
+    */

@@ -4,55 +4,55 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-<main class="content">
-    <p layout:fragment="content">
-    <div class="row">
-        <div id="update">
-            <div class="card card-block">
-                <h4 th:text="#{flight.update}">Update flight</h4>
-                <form class="form" id="update-form" method="post" th:object="${flight}">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label th:text="#{flight.id}">Id</label>
-                                <input type="text" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label th:text="#{flight.name}">Name</label>
-                                <input type="text" class="form-control" id="flight_name" name="name"  th:field="*{name}" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label th:text="#{flight.passagers}">Passengers</label>
-                                <input type="number" class="form-control" id="flight_passengers" name="passengers" th:field="*{passagers}" />
-                            </div>
-                        </div>
+    <div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-6 offset-md-3 mt-1 offset-sm-0">
+				<div id="update">
+					<div class="card card-block">
+						<h4 th:text="#{flight.update}">Update flight</h4>
+						<form class="form" id="update-form" method="post" th:object="${flight}">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{flight.id}">Id</label>
+										<input type="text" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{flight.name}">Name</label>
+										<input type="text" class="form-control" id="flight_name" name="name"  th:field="*{name}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{flight.passagers}">Passengers</label>
+										<input type="number" class="form-control" id="flight_passengers" name="passengers" th:field="*{passagers}" />
+									</div>
+								</div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label th:text="#{flight.departure}">Departure</label>
-                                <input type="datetime-local" class="form-control" id="fligth_departure_add" name="departure" th:field="*{{departure}}"/>
-                            </div>
-                            <div class="form-group">
-                                <label th:text="#{flight.arrival}">Arrival</label>
-                                <input type="datetime-local" class="form-control" id="fligth_arrival_add" name="arrival" th:field="*{{arrival}}"/>
-                            </div>
-                        </div>
-                    </div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{flight.departure}">Departure</label>
+										<input type="text" class="form-control datetime" id="fligth_departure_add" name="departure" th:field="*{{departure}}"/>
+									</div>
+									<div class="form-group">
+										<label th:text="#{flight.arrival}">Arrival</label>
+										<input type="text" class="form-control datetime" id="fligth_arrival_add" name="arrival" th:field="*{{arrival}}"/>
+									</div>
+								</div>
+							</div>
 
-                    <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <a class="btn btn-default btn-cancel" th:href="@{'/flight/all'}" type="reset" th:text="#{flight.btn.cancel}">Cancel</a>
-                            <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}">Update</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+							<div class="row">
+								<div class="col-xs-12 text-right">
+                                    <a class="btn btn-default btn-cancel" th:href="@{'/flight/all'}" type="reset" th:text="#{flight.btn.cancel}">Cancel</a>
+									<button class="btn btn-success" type="submit" th:text="#{flight.btn.update}">Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
-    </p>
-</main>
 </html>

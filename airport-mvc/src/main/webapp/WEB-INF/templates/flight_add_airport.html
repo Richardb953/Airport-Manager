@@ -4,8 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-<main class="content">
-    <p layout:fragment="content">
+    <div layout:fragment="content">
     <div class="row">
         <h1 th:text="#{flight.aiport.table}">Flight</h1>
         <table id="flights" class="datatable table table-striped table-responsive">
@@ -113,6 +112,5 @@
             </div>
         </div>
     </div>
-    </p>
-</main>
+    </div>
 </html>

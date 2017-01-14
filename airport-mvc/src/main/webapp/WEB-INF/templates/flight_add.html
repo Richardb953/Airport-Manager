@@ -4,8 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
 
-<main class="content">
-    <p layout:fragment="content">
+    <div layout:fragment="content">
     <div class="row">
         <div class="card card-block">
             <h4 th:text="#{flight.add}">Add flight</h4>
@@ -43,6 +42,5 @@
             </form>
         </div>
     </div>
-    </p>
-</main>
+    </div>
 </html>
