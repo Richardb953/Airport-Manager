@@ -76,22 +76,33 @@
                                             <button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.passagers.add}">Add Passenger</button>
                                         </span>
                                     </td>
-									<td>
-										<button class="btn btn-danger" th:attr="data-id=${flight.id}">Remove</button>
-									</td>
-									<td>
-										<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
-									</td>
-									<td>
-										<a class="btn btn-success btn-update" th:href="@{${flight.id} + '/airport/source'}">SourcePort</a>
-									</td>
-									<td>
-										<a class="btn btn-success btn-update" th:href="@{${flight.id} + '/airport/destination'}">DestinationPort</a>
-									</td>
-									<td>
-										<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
-									</td>
-								</tr>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                                    th:text="#{flight.options}">
+                                                Option
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a th:href="@{'/flight/remove/' +${flight.id}}">Remove</a>
+                                                </li>
+                                                <li>
+                                                    <a  th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
+                                                </li>
+                                                <li>
+                                                    <a  th:href="@{${flight.id} + '/airport/source'}">SourcePort</a>
+                                                </li>
+                                                <li>
+                                                    <a  th:href="@{${flight.id} + '/airport/destination'}">DestinationPort</a>
+                                                </li>
+                                                <li>
+                                                    <a  th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
 							</tbody>
 						</table>
 					</div>

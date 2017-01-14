@@ -145,6 +145,19 @@ public class FlightController {
         return "flight_update";
     }
 
+    @RequestMapping(value = "remnove/{id}", method = RequestMethod.POST)
+    public String removeFlight(
+            @PathVariable(value = "id") Long flightId,
+            BindingResult result,
+            Model model
+    ) {
+       if( flightId != null ){
+           flightFacade.removeFlight(flightId);
+       }
+
+        return "redirect:/flight/all";
+    }
+
     /**
      * *********************************************************************************************************************************
      * Set source port for flight
