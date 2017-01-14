@@ -146,6 +146,18 @@ public class FlightController {
         return "flight_update";
     }
 
+    @RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
+    public String removeFlight(
+            @PathVariable(value = "id") Long flightId,
+            Model model
+    ) {
+        if( flightId != null ){
+            flightFacade.removeFlight(flightId);
+        }
+
+        return "redirect:/flight/all";
+    }
+
     @RequestMapping(value = "remove/{id}", method = RequestMethod.POST)
     public String removeFlight(
             @PathVariable(value = "id") Long flightId,
