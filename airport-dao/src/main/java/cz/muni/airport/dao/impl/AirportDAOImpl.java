@@ -17,28 +17,37 @@ import cz.muni.airport.model.Airport;
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-
 @Repository
 @Transactional
 public class AirportDAOImpl implements AirportDAO {
-    @PersistenceContext(name= "airportUnit",type = PersistenceContextType.TRANSACTION)
+
+    @PersistenceContext(name = "airportUnit", type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
 
     @Override
     public Airport addAirport(Airport airport) {
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
         entityManager.persist(airport);
         return airport;
     }
 
     @Override
     public Airport updateAirport(Airport airport) {
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
         entityManager.merge(airport);
         return airport;
     }
 
     @Override
     public void removeAirport(Airport airport) {
-        entityManager.remove(airport);
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
+        entityManager.remove(entityManager.merge(airport));
     }
 
     @Override
