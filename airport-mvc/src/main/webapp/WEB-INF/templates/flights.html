@@ -82,6 +82,15 @@
 									<td>
 										<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
 									</td>
+									<td>
+										<a class="btn btn-success btn-update" th:href="@{${flight.id} + '/airport/source'}">SourcePort</a>
+									</td>
+									<td>
+										<a class="btn btn-success btn-update" th:href="@{${flight.id} + '/airport/destination'}">DestinationPort</a>
+									</td>
+									<td>
+										<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>

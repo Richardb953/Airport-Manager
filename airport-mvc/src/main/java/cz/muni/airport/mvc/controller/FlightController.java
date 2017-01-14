@@ -15,17 +15,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
+import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
+import cz.muni.airport.facadeApi.StewardFacade;
+import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
+import cz.muni.airport.model.Steward;
 
 /**
  * Created by Richard Bariny on 10.12.2016.
@@ -44,6 +51,10 @@ public class FlightController {
 
     @Autowired
     private AirportFacade airportFacade;
+
+    @Autowired
+    private StewardFacade stewardFacade;
+
     private final static Logger log = LoggerFactory.getLogger(FlightController.class);
 
     /**
@@ -59,6 +70,7 @@ public class FlightController {
     }
 
     /**
+     * **********************************************************************************************************
      * Create new Flight formular
      * @param model of formular
      * @return formular
@@ -94,6 +106,7 @@ public class FlightController {
     }
 
     /***
+     * ****************************************************************************************************************************
      * UPDATE FLIGHT formular
      * @param flightId ID of flight entity
      * @param model formular
@@ -133,6 +146,7 @@ public class FlightController {
     }
 
     /**
+     * *********************************************************************************************************************************
      * Set source port for flight
      * @param flightId flight
      * @param model formular model
@@ -143,29 +157,38 @@ public class FlightController {
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
-        //todo vracia letiska
-        model.addAttribute("aiports", airportFacade.getAllAirports());
-        model.addAttribute("flight", flightFacade.getFlightById(flightId));
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        Long checkedItem = 0L;
+        if(flightDTO.getSourceport() != null )
+            checkedItem = flightDTO.getSourceport().getId();
+
+        model.addAttribute("airports", airportFacade.getAllAirports());
+        model.addAttribute("flight", flightDTO);
+        model.addAttribute("checkedItem", checkedItem );
+
         return "flight_add_airport";
 
     }
 
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
-    public String sourceAirport( @ModelAttribute(value = "flight") FlightDTO flight,
-                                 @ModelAttribute(value = "airport") AirportDTO airport,
-                                 BindingResult result,
-                                 Model model
+    public String sourceAirport(
+            FlightDTO flight,
+            BindingResult result,
+            long checkedItem,
+            Model model
     ){
         if ( !result.hasErrors() ) {
-            if(airport != null){
-                flight.setSourceport(airport);
-                flightFacade.updateFlight(flight);
-            }
+            FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+            AirportDTO airportDTO = airportFacade.getAirportById(checkedItem);
+            flightDTO.setSourceport(airportDTO);
+            flightFacade.updateFlight(flightDTO);
+            return "redirect:/flight/all";
         }
         return "flight_add_airport";
     }
 
     /**
+     * **************************************************************************************************************************
      * Add destination airport to flight
      * @param flightId flight id
      * @param model formular model
@@ -176,28 +199,72 @@ public class FlightController {
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
-        model.addAttribute("aiports", airportFacade.getAllAirports());
-        model.addAttribute("flight", flightFacade.getFlightById(flightId));
+        Long  checkedItem = 0L;
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        if(flightDTO.getDestinationport() != null)
+            checkedItem = flightDTO.getDestinationport().getId();
+
+        model.addAttribute("airports", airportFacade.getAllAirports());
+        model.addAttribute("flight", flightDTO);
+        model.addAttribute("checkedItem", checkedItem );
+
         return "flight_add_airport";
 
     }
 
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
     public String destinationAirport(
-            @ModelAttribute(value = "flight") FlightDTO flight,
-            @ModelAttribute(value = "airport") AirportDTO airport,
+            FlightDTO flight,
+            Long checkedItem,
             BindingResult result,
             Model model
     ){
         if ( !result.hasErrors() ) {
-            if(airport != null){
-                flight.setDestinationport(airport);
-                flightFacade.updateFlight(flight);
+                FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+                flightDTO.setDestinationport(airportFacade.getAirportById(checkedItem));
+                flightFacade.updateFlight(flightDTO);
+                return "redirect:/flight/all";
+        }
+        return "flight_add_airport";
+    }
+
+    /**
+     * Add steward to flight
+     * @param flightId flight id
+     * @param model formular model
+     * @return formular
+     */
+    @RequestMapping(value = "/{id}/steward", method = RequestMethod.GET)
+    public String stewardFlight(
+            @PathVariable(value = "id") Long flightId,
+            Model model
+    ){
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        model.addAttribute("stewards", stewardFacade.getAvailableStewards(flightDTO));
+        model.addAttribute("flight", flightDTO);
+        return "steward_flight";
+
+    }
+
+    @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
+    public String stewardFlight(
+            @ModelAttribute(value = "flight") FlightDTO flight,
+            @ModelAttribute(value = "stewards") List<StewardDTO> stewards,
+            BindingResult result,
+            Model model
+    ){
+        if ( !result.hasErrors() ) {
+            if(stewards != null){
+                //load basic
+                FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+                //update just stewards nor other fields
+                flightDTO.setStewards(stewards);
+                flightFacade.updateFlight(flightDTO);
                 return "redirect:/flight/all";
 
             }
         }
-        return "flight_add_airport";
+        return "steward_flight";
     }
 
 }

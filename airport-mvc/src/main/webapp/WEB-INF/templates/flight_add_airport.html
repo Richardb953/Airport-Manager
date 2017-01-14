@@ -31,24 +31,24 @@
                 </th>
             </tr>
             </thead>
-            <tbody th:object="flight">
+            <tbody th:object="${flight}">
                 <tr>
-                    <td data-name="id" th:text="${flight.id}">
+                    <td data-name="id" th:text="*{id}">
                         Flight ID
                     </td>
-                    <td data-name="name" th:text="${flight.name}">
+                    <td data-name="name" th:text="*{name}">
                         Flight name
                     </td>
-                    <td data-name="source" th:text="${flight.sourceport}">
+                    <td data-name="source" th:text="*{sourceport != null} ? *{sourceport.name} : ''">
                         Source Port
                     </td>
-                    <td data-name="destination" th:text="${flight.destinationport}">
+                    <td data-name="destination" th:text="*{destinationport != null} ? *{destinationport.name} : ''">
                         Destination Port
                     </td>
-                    <td data-name="departure" th:text="${flight.departure}">
+                    <td data-name="departure" th:text="*{departure}">
                         Departure Time
                     </td>
-                    <td data-name="arrival" th:text="${flight.arrival}">
+                    <td data-name="arrival" th:text="*{arrival}">
                         Arrival Time
                     </td>
                 </tr>
@@ -77,13 +77,12 @@
                             <th th:text="#{aiport.city}">
                                 Airport city
                             </th>
-                            <
                         </tr>
                     </thead>
-                    <tbody th:object="aiports">
-                        <tr th:each="airport : ${aiports}">
-                            <td th:class="radio-button">
-                                <span>Choose</span>
+                    <tbody>
+                        <tr th:each="airport : ${airports}">
+                            <td>
+                                <input type="radio" th:checked="${checkedItem == airport.id} ? 'checked' : 'none'"/>
                             </td>
                             <td data-name="id" th:text="${airport.id}">
                                 Airport ID
@@ -104,8 +103,8 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    <button class="btn btn-success" th:attr="${airport}, ${flight}">Update</button>
-                </div>>
+                    <button class="btn btn-success">Update</button>
+                </div>
             </div>
         </div>
     </div>

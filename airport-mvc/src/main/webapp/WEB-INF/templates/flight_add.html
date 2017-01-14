@@ -14,25 +14,29 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label th:text="#{flight.departure}">Departure</label>
-                            <input type="datetime-local" class="form-control" id="fligth_departure_add" name="departure" th:value="${{flight.departure}}"/>
+                            <input type="datetime-local" class="form-control" id="fligth_departure_add"
+                                   name="departure" th:field="*{{departure}}"/>
                         </div>
                         <div class="form-group">
                             <label th:text="#{flight.arrival}">Arrival</label>
-                            <input type="datetime-local" class="form-control" id="fligth_arrival_add" name="arrival" th:value="${{flight.arrival}}"/>
+                            <input type="datetime-local" class="form-control" id="fligth_arrival_add"
+                                   name="arrival" th:field="*{{arrival}}"/>
                         </div>
                         <div class="form-group">
                             <label th:text="#{flight.name}">Name</label>
-                            <input type="text" class="form-control" id="flight_name_add" name="name" />
+                            <input type="text" class="form-control" id="flight_name_add" name="name"
+                                    th:field="*{name}"/>
                         </div>
                         <div class="form-group">
                             <label th:text="#{flight.passagers}">Passengers</label>
-                            <input type="number" class="form-control" id="flight_passengers_add" name="passengers" />
+                            <input type="number" class="form-control" id="flight_passengers_add"
+                                   name="passengers" th:field="*{passagers}" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 text-right">
-                        <button class="btn btn-default btn-cancel" type="reset" th:text="#{flight.btn.cancel}">Cancel</button>
+                        <a class="btn btn-default btn-cancel" th:href="@{'/flight/all'}" type="reset" th:text="#{flight.btn.cancel}">Cancel</a>
                         <button class="btn btn-success" type="submit" th:text="#{flight.btn.add}">Add</button>
                     </div>
                 </div>
