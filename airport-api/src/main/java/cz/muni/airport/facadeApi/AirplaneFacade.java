@@ -18,6 +18,7 @@ public interface AirplaneFacade {
     AirplaneDTO createAirplane(AirplaneDTO airplaneDTO);
     AirplaneDTO updateAirplane(AirplaneDTO airplaneDTO);
     void deleteAirplane(AirplaneDTO airplaneDTO);
+    public void deleteAirplane(long id);
     List<AirplaneDTO> getAllAirplanes();
     List<AirplaneDTO> getAirplaneByName(String name);
     AirplaneDTO getAirplaneById(Long id);
