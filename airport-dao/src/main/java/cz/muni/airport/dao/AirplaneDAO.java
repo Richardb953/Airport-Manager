@@ -30,7 +30,7 @@ public interface AirplaneDAO {
      * @return Airplane     Airplane object with given id or null if such entry does not exist.
      * @throws IllegalArgumentException     If id is null or not Long.
      */
-    public Airplane getAirplaneById(Long id);
+    public Airplane getAirplaneById(Long id) throws IllegalArgumentException;
     
     /**
      * Returns all Airplane entries with given name. Empty List if not in the database.
@@ -40,7 +40,7 @@ public interface AirplaneDAO {
      *                          collection if no such entries present.
      * @throws IllegalArgumentException     If name is null or not String.
      */
-    public List<Airplane> getAirplaneByName(String name);
+    public List<Airplane> getAirplaneByName(String name)  throws IllegalArgumentException;
     
     /**
      * Adds Airplane entry to the database. Returns added entry.
@@ -49,7 +49,7 @@ public interface AirplaneDAO {
      * @return Airplane Entry that has been added to the database.
      * @throws IllegalArgumentException If airplane is null or not Airplane object.
      */
-    public Airplane addAirplane(Airplane airplane);
+    public Airplane addAirplane(Airplane airplane) throws IllegalArgumentException;
     
     /**
      * Updates/changes data of an entry in the database.
@@ -58,7 +58,7 @@ public interface AirplaneDAO {
      * @return  Airplane    Modified airplane.
      * @throws IllegalArgumentException     If airplane was null or not an Airplane object.
      */
-    public Airplane updateAirplane(Airplane airplane);
+    public Airplane updateAirplane(Airplane airplane) throws IllegalArgumentException;
     
     /**
      * Removes Airplane entry from the database.
@@ -66,6 +66,6 @@ public interface AirplaneDAO {
      * @param airplane  Airplane to be deleted.
      * @throws IllegalArgumentException     If airplane was null or not an Airplane object.
      */
-    public void removeAirplane(Airplane airplane);
+    public void removeAirplane(Airplane airplane) throws IllegalArgumentException;
     
 }
