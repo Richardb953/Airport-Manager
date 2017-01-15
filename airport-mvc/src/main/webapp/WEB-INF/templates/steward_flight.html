@@ -7,14 +7,17 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(document).ready(function () {
-          $('.button_accept').on('click', function (e) {
+        console.log("ready");
+        $('.button_accept').on('click', function (e) {
               e.preventDefault();
               var stewards = [[${checkedItem}]];
               $('.steward_table input:checked').each(function () {
                   stewards.push($(this).parent().parent().find($('.steward_id')).text());
               });
               alert(stewards);
-              $('#steward-form').submit();
+            console.log("DONEEEEEEEEEEEEEE");
+
+            $('#steward-form').submit();
           })
       }
     );
