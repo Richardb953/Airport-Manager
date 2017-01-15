@@ -139,7 +139,7 @@ public class Flight {
     }
 
     public List<Steward> getStewards() {
-        return Collections.unmodifiableList(stewards);
+        return (stewards);
     }
 
     public void setStewards(List<Steward> stewards) {
