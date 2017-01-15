@@ -110,7 +110,7 @@ public class AirportController {
     }
 
     /**
-     * Create a new product by POST method curl -X POST -i -H "Content-Type:
+     * Create a new airport by POST method curl -X POST -i -H "Content-Type:
      * application/json" --data '{"iata": "iata", "name": "name", "country":
      * "country", "city": "city" }'
      * http://localhost:8082/pa165/rest/airports/create
