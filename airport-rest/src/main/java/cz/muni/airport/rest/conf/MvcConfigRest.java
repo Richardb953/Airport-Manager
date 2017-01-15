@@ -1,10 +1,8 @@
 package cz.muni.airport.rest.conf;
 
 import cz.muni.airport.config.ServiceConfiguration;
-import org.springframework.boot.SpringApplication;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.util.Locale;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,9 +26,9 @@ public class MvcConfigRest extends WebMvcConfigurerAdapter {
 //    private static final String TEXTS = "properties";
 
     public static void main(String[] args) {
-        Locale.setDefault(Locale.ENGLISH);
-        SpringApplication.run(
-                MvcConfigRest.class, args);
+//        Locale.setDefault(Locale.ENGLISH);
+//        SpringApplication.run(
+//                MvcConfigRest.class, args);
     }
 
 //    /**
