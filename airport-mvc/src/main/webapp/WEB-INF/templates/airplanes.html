@@ -44,7 +44,7 @@
                             </tbody>
                             <tbody th:if="${#lists.isEmpty(airplanes)}">
                                 <tr>
-                                    <td>No airplanes found</td>
+                                    <td th:text="#{airplane.noAirplanesFound.msg}">No airplanes found</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -59,7 +59,7 @@
             <div class="row mt-2">
                 <div class="col-md-6">
                     <div class="card card-block">
-                        <h4>Add airplane</h4>
+                        <h4 th:text="#{airplane.add.msg}">Add airplane</h4>
                         <form class="form" id="add-form" method="post" action="#" th:action="@{/airplane/add}" th:object="${newAirplane}">
                             <div class="row">
                                 <div class="col-md-6">
