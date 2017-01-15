@@ -1,6 +1,7 @@
 package cz.muni.airport.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,11 +12,11 @@ import cz.muni.airport.enums.FlightState;
  * Created by Richard Bariny on 9.11.2016.
  * @author github:Richardb953
  */
-public class FlightDTO {
+public class FlightDTO extends FlightCreateDTO {
     private Long id;
     private String name;
-    private Long arrival;
-    private Long departure;
+    private Date arrival;
+    private Date departure;
     private int passagers;
     private FlightState flightState;
     private AirplaneDTO airplane;
@@ -42,19 +43,19 @@ public class FlightDTO {
         this.name = name;
     }
 
-    public Long getArrival() {
+    public Date getArrival() {
         return arrival;
     }
 
-    public void setArrival(Long arrival) {
+    public void setArrival(Date arrival) {
         this.arrival = arrival;
     }
 
-    public Long getDeparture() {
+    public Date getDeparture() {
         return departure;
     }
 
-    public void setDeparture(Long departure) {
+    public void setDeparture(Date departure) {
         this.departure = departure;
     }
 
@@ -129,7 +130,7 @@ public class FlightDTO {
         result = prime * result + ((name == null) ? 0 : name.hashCode())
                 + ((destinationport == null) ? 0 : destinationport.hashCode())
                 + ((sourceport == null) ? 0 : sourceport.hashCode())
-                + ((airplane == null) ? 0 : airplane.hashCode());
+                + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 

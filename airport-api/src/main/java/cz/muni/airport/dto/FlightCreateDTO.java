@@ -1,5 +1,6 @@
 package cz.muni.airport.dto;
 
+import java.util.Date;
 import java.util.Objects;
 
 import cz.muni.airport.enums.FlightState;
@@ -12,8 +13,8 @@ import cz.muni.airport.enums.FlightState;
 public class FlightCreateDTO {
 
     private String name;
-    private Long arrival;
-    private Long departure;
+    private Date arrival;
+    private Date departure;
     private int passagers;
     private FlightState flightState = FlightState.OPEN;
     private AirportDTO destinationport;
@@ -30,19 +31,19 @@ public class FlightCreateDTO {
         this.name = name;
     }
 
-    public Long getArrival() {
+    public Date getArrival() {
         return arrival;
     }
 
-    public void setArrival(Long arrival) {
+    public void setArrival(Date arrival) {
         this.arrival = arrival;
     }
 
-    public Long getDeparture() {
+    public Date getDeparture() {
         return departure;
     }
 
-    public void setDeparture(Long departure) {
+    public void setDeparture(Date departure) {
         this.departure = departure;
     }
 

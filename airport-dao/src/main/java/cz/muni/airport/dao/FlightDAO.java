@@ -1,5 +1,7 @@
 package cz.muni.airport.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import cz.muni.airport.model.Flight;
@@ -9,7 +11,7 @@ import cz.muni.airport.model.Flight;
  * created by Richard Bariny on 25.10.2016
  * @author Richard Bariny, github name: Richardb953
  */
-
+@Repository
 public interface FlightDAO {
 
     /**
@@ -17,7 +19,7 @@ public interface FlightDAO {
      * @param flight entity of flight object
      * @return Flight object
      */
-    Flight addFlight(Flight flight);
+    Flight addFlight(Flight flight) throws IllegalArgumentException;
 
     /**
      * READ FLIGHT
@@ -25,20 +27,20 @@ public interface FlightDAO {
      * @return Flight object
      * @throws IllegalArgumentException if id is null
      */
-    Flight getFlightById(Long id) ;
+    Flight getFlightById(Long id) throws IllegalArgumentException ;
 
     /**
      * UPDATE FLIGHT
      * @param flight entity of flight object
      * @return Flight object
      */
-    Flight updateFlight(Flight flight);
+    Flight updateFlight(Flight flight) throws IllegalArgumentException;
 
     /**
      * DELETE FLIGHT
      * @param flight flight entity of flight object
      */
-    void removeFlight(Flight flight);
+    void removeFlight(Flight flight) throws IllegalArgumentException;;
 
     /**
      * FIND FLIGHT BY NAME
@@ -46,7 +48,7 @@ public interface FlightDAO {
      * @return List of Flight objects
      * @throws IllegalArgumentException if name is null
      */
-    List<Flight> getFlightsByName(String name);
+    List<Flight> getFlightsByName(String name) throws IllegalArgumentException;
 
     /**
      * FIND ALL FLIGHTS
