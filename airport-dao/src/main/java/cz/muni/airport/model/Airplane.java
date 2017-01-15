@@ -130,7 +130,7 @@ public class Airplane {
         if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
         if (!Objects.equals(this.getName(), other.getName())) return false;
         if (!Objects.equals(this.getType(), other.getType())) return false;
-        if (!Objects.equals(this.getId(), other.getId())) return false;
+        //if (!Objects.equals(this.getId(), other.getId())) return false;
 //        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
         
         return true;
