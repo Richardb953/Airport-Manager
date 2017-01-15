@@ -78,16 +78,12 @@
                         </th>
                     </tr>
                     </thead>
-                        <tbody>
-                        <tr th:each="steward : ${stewards}">
+                    <tbody>
+                        <tr th:each="steward : ${stewards}" class="steward_table">
                             <td>
-                                <input title="check" type="checkbox" th:checked="${checkedItem.contains(steward.id)}"
-                                       th:field="*{checkedItem}"
-                                       th:value="${steward.id}"
-                                       name="checkedItem[]"
-                                />
+                                <input title="check" type="checkbox" th:checked="${checkedItem.contains(steward.id)}" />
                             </td>
-                            <td data-name="id" th:text="${steward.id}">
+                            <td data-name="id" class="steward_id" th:text="${steward.id}">
                                 Steward ID
                             </td>
                             <td data-name="name" th:text="${steward.firstName}">
@@ -98,15 +94,30 @@
                             </td>
 
                         </tr>
-                        </tbody>
+                    </tbody>
                 </table>
-                    <button class="btn btn-success" type="submit" th:text="#{flight.btn.update}">Update</button>
-
+                <button class="btn btn-success button_accept" th:text="#{flight.btn.update}">Update</button>
                 </form>
-
             </div>
         </div>
     </div>
     </p>
 </main>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(
+        $('.button_accept').on('click', function(e) {
+            e.preventDefault();
+            var stewards = [[${checkedItem}]];
+            $('.steward_table input:checked').each(function () {
+                stewards.push($(this).parent().parent().find($('.steward_id')).text());
+            });
+            alert(stewards);
+            $('#steward-form').submit();
+        })
+    );
+
+    /*]]>*/
+</script>
 </html>

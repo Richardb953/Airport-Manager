@@ -279,7 +279,7 @@ public class FlightController {
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
-            List<Long> checkedItem,
+            List<String> checkedItem,
             BindingResult result,
             Model model
     ){
@@ -289,8 +289,9 @@ public class FlightController {
                 FlightDTO flightDTO = flightFacade.getFlightById(flightId);
                 //update just stewards nor other fields
                 List<StewardDTO> stewardDTOs = new ArrayList<>();
-                for(Long item : checkedItem){
-                    stewardDTOs.add(stewardFacade.getSteward(item));
+                for(String item : checkedItem){
+                    long l = Long.parseLong(item);
+                    stewardDTOs.add(stewardFacade.getSteward(l));
                 }
                 flightDTO.setStewards(stewardDTOs);
                 flightFacade.updateFlight(flightDTO);
