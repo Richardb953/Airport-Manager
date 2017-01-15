@@ -12,24 +12,12 @@
                         <table id="airplanes" class="datatable table table-striped table-responsive" data-disabled="4,5">
                             <thead>
                                 <tr>
-                                    <th>
-                                        Airplane id
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Capacity
-                                    </th>
-                                    <th>
-                                        Type
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                    <th>
-
-                                    </th>
+                                    <th th:text="#{airplane.id}"> Id </th>
+                                    <th th:text="#{airplane.name}"> Name</th>
+                                    <th th:text="#{airplane.capacity}"> Capacity </th>
+                                    <th th:text="#{airplane.type}"> Type </th>
+                                    <th> </th>
+                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody th:if="${not #lists.isEmpty(airplanes)}">
@@ -37,20 +25,20 @@
                                     <td data-name="id" th:text="${airplane.id}" />
                                     <td data-name="name" th:text="${airplane.name}" />
                                     <td data-name="capacity" th:text="${airplane.capacity}" />
-                                    <td data-name="type" data-type="select" data-option="1" th:text="${airplane.type}">
+                                    <td data-name="type" data-type="select" data-option="1" th:text="#{${airplane.type}}">
                                         <!-- do data-option prosim vypsat cislo daneho typu letadla (aby
                                                  to sedelo s options v selectu ve formulari dole!!!-->
                                     </td>
                                     <td>
                                         <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airplane/delete/'+${airplane.id}">
-                                            <button class="btn btn-danger" th:attr="data-id=${airplane.id}">Remove</button>
+                                            <button class="btn btn-danger" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
                                         </form>
                                     </td>
                                     <td>
-                                         <button class="btn btn-success btn-update" th:attr="toUpdate=${airplane}, updateid=${airplane.id}, updateType=${airplane.type}">Update</button>
-<!--                                        <form class="form" id="update-form" method="get" th:attr="action='/pa165/airplane/update/'+${airplane.id}">
-                                            <button class="btn btn-success btn-update" th:attr="data-id=${airplane.id}">Update</button>
-                                        </form>-->
+<!--                                         <button class="btn btn-success btn-update" th:attr="toUpdate=${airplane}, updateid=${airplane.id}, updateType=${airplane.type}">Update</button>-->
+                                        <form class="form" id="update-form" method="get" th:attr="action='/pa165/airplane/semiupdate/'+${airplane.id}">
+                                            <button class="btn btn-success btn-update" th:attr="data-id=${airplane.id}" th:text="#{airplane.updatebtn}">Update</button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -69,72 +57,34 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-6 push-md-6">
-                    <div id="update" class="hidden"> <!--class="hidden"-->
-                        <div class="card card-block">
-                            <h4>Update airplane</h4>
-                            <form class="form" id="update-form" method="post" action="#" th:action="@{'/airplane/update/'+${updateid}}" th:object="${toUpdate}">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" required="required" th:text="*{name}" th:field="*{name}"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Type</label>
-                                            <select class="custom-select form-control" id="type" name="type" th:field="*{type}">
-                                                <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  th:value="${type}"  th:selected="${updateType}" th:text="${type}"></option>           
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Capacity</label>
-                                            <input type="number" class="form-control" id="capacity" name="capacity" required="required" th:value="*{capacity}"  th:text="*{capacity}"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Id</label>
-                                            <input type="number" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}" th:value="${updateid}"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 text-right">
-                                        <button class="btn btn-default btn-cancel" type="reset">Cancel</button>
-                                        <button class="btn btn-success" type="submit">Update</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 pull-md-6">
+                <div class="col-md-6">
                     <div class="card card-block">
                         <h4>Add airplane</h4>
                         <form class="form" id="add-form" method="post" action="#" th:action="@{/airplane/add}" th:object="${newAirplane}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Name</label>
+                                        <label for="" th:text="#{airplane.name}">Name</label>
                                         <input type="text" class="form-control" id="name" name="name" required="required" th:field="*{name}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Type</label>
+                                        <label for="" th:text="#{airplane.type}">Type</label>
                                         <select class="custom-select form-control" id="type" name="type" th:field="*{type}">
-                                            <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  th:value="${type}"  th:text="${type}"></option>           
+                                            <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
+                                                    th:value="${type}"  th:text="#{${type}}"></option>           
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Capacity</label>
+                                        <label for="" th:text="#{airplane.capacity}">Capacity</label>
                                         <input type="number" class="form-control" id="capacity" name="capacity" required="required" th:field="*{capacity}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 text-right">
-                                    <button class="btn btn-success" type="submit">Add</button>
+                                    <button class="btn btn-success" type="submit" th:text="#{airplane.addbtn}">Add</button>
                                 </div>
                             </div>
                         </form>

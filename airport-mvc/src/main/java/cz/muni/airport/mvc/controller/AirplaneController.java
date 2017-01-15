@@ -1,13 +1,14 @@
 package cz.muni.airport.mvc.controller;
 
 import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.enums.PlaneType;
 import cz.muni.airport.facadeApi.AirplaneFacade;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,41 +37,51 @@ public class AirplaneController {
     
     @Autowired
     private AirplaneFacade airplaneFacade;
+    private final static Logger log = LoggerFactory.getLogger(AirplaneController.class);
     
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(Model model) { 
         model.addAttribute("airplanes", airplaneFacade.getAllAirplanes());
         model.addAttribute("newAirplane", new AirplaneDTO());
-        model.addAttribute("toUpdate", new AirplaneDTO());
         return "airplanes";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addAirplane(@ModelAttribute("newAirplane") AirplaneDTO newAirplane, Model model, 
-            BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+    public String addAirplane(@Valid @ModelAttribute("newAirplane") AirplaneDTO newAirplane, Model model, 
+            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        
         AirplaneDTO airplaneDTO = airplaneFacade.createAirplane(newAirplane);
-        return "redirect:/airplane/list";
+            return "redirect:/airplane/all"; 
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteAirplane(@PathVariable long id, RedirectAttributes redirectAttributes) {
-        //AirplaneDTO toDelete = airplaneFacade.getAirplaneById(id);
         airplaneFacade.deleteAirplane(id);
-        return "redirect:/airplane/list";
+        return "redirect:/airplane/all";
     }
     
-    @RequestMapping(value = "/update/{updateid}", method = RequestMethod.POST)
-    public String updateAirplane(@PathVariable long updateid, @ModelAttribute("toUpdate") AirplaneDTO toUpdate, Model model) {
-        System.out.print("updateid>>>>........................................>>>>>>  ");
-                System.out.println(updateid);        
-        System.out.print("toUpdate>>>>>........................................>>>>>  ");
-                System.out.println(toUpdate.toString());
-        toUpdate.setId(updateid);
-        airplaneFacade.updateAirplane(toUpdate);
-        return "redirect:/airplane/list";
+    @RequestMapping(value = "/semiupdate/{id}", method = RequestMethod.GET)
+    public String update(@PathVariable long id, Model model){
+        model.addAttribute("airplaneToUpdate", airplaneFacade.getAirplaneById(id));
+        return "update_airplane";
     }
     
-   
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String updateAirplane(@PathVariable long id, @Valid @ModelAttribute("airplaneToUpdate") AirplaneDTO airplaneToUpdate, Model model,
+            BindingResult bindingResult) {
+        if(!bindingResult.hasErrors()){
+            AirplaneDTO original = airplaneFacade.getAirplaneById(id);
+            original.setCapacity(airplaneToUpdate.getCapacity());
+            original.setName(airplaneToUpdate.getName());
+            original.setType(airplaneToUpdate.getType());
+            
+            airplaneFacade.updateAirplane(original);
+            return "redirect:/airplane/all"; 
+        }
+        return "update_airplane";
+    }
+    
+    
     
     
 }
