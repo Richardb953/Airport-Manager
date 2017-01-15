@@ -12,18 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
@@ -31,9 +29,10 @@ import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.facadeApi.StewardFacade;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
+import cz.muni.airport.mvc.data.AirportSelection;
+import cz.muni.airport.mvc.data.ClientWithSelectionListWrapper;
+import cz.muni.airport.mvc.data.ClientWithSelectionLongWrapper;
+import cz.muni.airport.mvc.data.StewardSelection;
 
 /**
  * Created by Richard Bariny on 10.12.2016.
@@ -183,14 +182,32 @@ public class FlightController {
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
-        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-        Long checkedItem = 0L;
-        if(flightDTO.getSourceport() != null )
-            checkedItem = flightDTO.getSourceport().getId();
 
-        model.addAttribute("airports", airportFacade.getAllAirports());
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        List<AirportDTO> airportDTOs = airportFacade.getAllAirports();
+        AirportDTO choosed = null;
+        if(flightDTO.getSourceport() != null ){
+            choosed = flightDTO.getSourceport();
+        }
+
+        ClientWithSelectionLongWrapper wrapper = new ClientWithSelectionLongWrapper();
+        ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
+
+        for(AirportDTO airportDTO : airportDTOs){
+            AirportSelection airportSelection = new AirportSelection();
+            airportSelection.setSelected((choosed != null) && airportDTO.getId().equals(choosed.getId()));
+            airportSelection.setAirportID(airportDTO.getId().toString());
+            airportSelection.setCity(airportDTO.getCity());
+            airportSelection.setName(airportDTO.getName());
+            airportSelection.setCountry(airportDTO.getCountry());
+            allClientsWithSelection.add(airportSelection);
+        }
+
+        wrapper.setClientList(allClientsWithSelection);
+
+        model.addAttribute("airports", airportDTOs);
         model.addAttribute("flight", flightDTO);
-        model.addAttribute("checkedItem", checkedItem );
+        model.addAttribute("wrapper", wrapper);
 
         return "flight_add_airport";
 
@@ -199,16 +216,28 @@ public class FlightController {
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
     public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
+            @ModelAttribute ClientWithSelectionLongWrapper wrapper,
             BindingResult result,
-            Long checkedItem,
             Model model
-    ){
+            )
+    {
+        List<AirportDTO> choosedAirports = new ArrayList<>();
+        if(wrapper != null ) {
+            for (AirportSelection airportSelection : wrapper.getClientList()) {
+                if(airportSelection.getSelected()){
+                    choosedAirports.add(airportFacade.getAirportById(Long.parseLong(airportSelection.getAirportID())));
+                }
+            }
+        }
+
         if ( !result.hasErrors() ) {
+            //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-            AirportDTO airportDTO = airportFacade.getAirportById(checkedItem);
-            flightDTO.setSourceport(airportDTO);
+            //update just stewards nor other fields
+            flightDTO.setSourceport(choosedAirports.get(0));
             flightFacade.updateFlight(flightDTO);
             return "redirect:/flight/all";
+
         }
         return "flight_add_airport";
     }
@@ -225,14 +254,32 @@ public class FlightController {
             @PathVariable(value = "id") Long flightId,
             Model model
     ){
-        Long  checkedItem = 0L;
-        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-        if(flightDTO.getDestinationport() != null)
-            checkedItem = flightDTO.getDestinationport().getId();
 
-        model.addAttribute("airports", airportFacade.getAllAirports());
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        List<AirportDTO> airportDTOs = airportFacade.getAllAirports();
+        AirportDTO choosed = null;
+        if(flightDTO.getDestinationport() != null ){
+            choosed = flightDTO.getDestinationport();
+        }
+
+        ClientWithSelectionLongWrapper wrapper = new ClientWithSelectionLongWrapper();
+        ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
+
+        for(AirportDTO airportDTO : airportDTOs){
+            AirportSelection airportSelection = new AirportSelection();
+            airportSelection.setSelected((choosed != null) && airportDTO.getId().equals(choosed.getId()));
+            airportSelection.setAirportID(airportDTO.getId().toString());
+            airportSelection.setCity(airportDTO.getCity());
+            airportSelection.setName(airportDTO.getName());
+            airportSelection.setCountry(airportDTO.getCountry());
+            allClientsWithSelection.add(airportSelection);
+        }
+
+        wrapper.setClientList(allClientsWithSelection);
+
+        model.addAttribute("airports", airportDTOs);
         model.addAttribute("flight", flightDTO);
-        model.addAttribute("checkedItem", checkedItem );
+        model.addAttribute("wrapper", wrapper);
 
         return "flight_add_airport";
 
@@ -241,15 +288,28 @@ public class FlightController {
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
     public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
-            Long checkedItem,
+            @ModelAttribute ClientWithSelectionLongWrapper wrapper,
             BindingResult result,
             Model model
-    ){
+    )
+    {
+        List<AirportDTO> choosedAirports = new ArrayList<>();
+        if(wrapper != null ) {
+            for (AirportSelection airportSelection : wrapper.getClientList()) {
+                if(airportSelection.getSelected()){
+                    choosedAirports.add(airportFacade.getAirportById(Long.parseLong(airportSelection.getAirportID())));
+                }
+            }
+        }
+
         if ( !result.hasErrors() ) {
-                FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-                flightDTO.setDestinationport(airportFacade.getAirportById(checkedItem));
-                flightFacade.updateFlight(flightDTO);
-                return "redirect:/flight/all";
+            //load basic
+            FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+            //update just stewards nor other fields
+            flightDTO.setDestinationport(choosedAirports.get(0));
+            flightFacade.updateFlight(flightDTO);
+            return "redirect:/flight/all";
+
         }
         return "flight_add_airport";
     }
@@ -266,12 +326,25 @@ public class FlightController {
             Model model
     ){
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-        List<Long> checkedItem = flightDTO.getStewards().stream().map(StewardDTO::getId).collect(Collectors.toList());
+        List<StewardDTO> flightStewardDTOs = flightDTO.getStewards();
+        List<StewardDTO> allStewardsDTOs = stewardFacade.getAllStewards();
+        ClientWithSelectionListWrapper wrapper = new ClientWithSelectionListWrapper();
+        ArrayList<StewardSelection> allClientsWithSelection = new ArrayList<>();
 
+        for(StewardDTO stewardDTO : allStewardsDTOs){
+            StewardSelection clientWithSelection = new StewardSelection();
+            clientWithSelection.setSelected(flightStewardDTOs.contains(stewardDTO));
+            clientWithSelection.setStewardID(stewardDTO.getId().toString());
+            clientWithSelection.setFirstName(stewardDTO.getFirstName());
+            clientWithSelection.setSecondName(stewardDTO.getLastName());
+            allClientsWithSelection.add(clientWithSelection);
+        }
+
+        wrapper.setClientList(allClientsWithSelection);
         //todo len available stewards
-        model.addAttribute("stewards", stewardFacade.getAllStewards());
+        model.addAttribute("stewards", allStewardsDTOs);
         model.addAttribute("flight", flightDTO);
-        model.addAttribute("checkedItem", checkedItem);
+        model.addAttribute("wrapper", wrapper);
         return "steward_flight";
 
     }
@@ -279,25 +352,27 @@ public class FlightController {
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
-            List<String> checkedItem,
+            @ModelAttribute ClientWithSelectionListWrapper wrapper,
             BindingResult result,
             Model model
     ){
+        List<StewardDTO> choosedStewards = new ArrayList<>();
+        if(wrapper != null ) {
+            for (StewardSelection stewardSelection : wrapper.getClientList()) {
+                if(stewardSelection.getSelected()){
+                    choosedStewards.add(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+                }
+            }
+        }
+
         if ( !result.hasErrors() ) {
-            if(checkedItem != null){
                 //load basic
                 FlightDTO flightDTO = flightFacade.getFlightById(flightId);
                 //update just stewards nor other fields
-                List<StewardDTO> stewardDTOs = new ArrayList<>();
-                for(String item : checkedItem){
-                    long l = Long.parseLong(item);
-                    stewardDTOs.add(stewardFacade.getSteward(l));
-                }
-                flightDTO.setStewards(stewardDTOs);
+                flightDTO.setStewards(choosedStewards);
                 flightFacade.updateFlight(flightDTO);
                 return "redirect:/flight/all";
 
-            }
         }
         return "steward_flight";
     }

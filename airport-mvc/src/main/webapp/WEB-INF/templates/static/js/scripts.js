@@ -14,20 +14,6 @@ $(document).ready(function(){
     });
 } );
 
-/* add stewards to flight */
-$(document).ready(function(){
-	$('.button_accept').on('click', function (e) {
-		  e.preventDefault();
-		  var stewards = $('#steward-form').data('checkeditem');
-		  $('.steward_table input:checked').each(function () {
-			  stewards.push($(this).parent().parent().find($('.steward_id')).text());
-		  });
-		console.log(stewards);
-		alert(stewards);
-
-		$('#steward-form').submit();
-	  });
-  });
 
 /*$(document).ready(function ($) {
 
