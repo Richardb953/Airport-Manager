@@ -27,53 +27,57 @@
 <main class="content">
     <p layout:fragment="content">
     <div class="row">
-        <h1 th:text="#{flight.aiport.table}">Flight</h1>
-        <table id="flights" class="datatable table table-striped table-responsive">
-            <thead>
-            <tr>
-                <th th:text="#{flight.id}">
-                    Flight ID
-                </th>
-                <th th:text="#{flight.name}">
-                    Flight Name
-                </th>
-                <th th:text="#{flight.source}">
-                    Source port
-                </th>
-                <th th:text="#{flight.destination}">
-                    Destination port
-                </th>
-                <th th:text="#{flight.departure}">
-                    Departure
-                </th>
-                <th th:text="#{flight.arrival}">
-                    Arrival
-                </th>
-            </tr>
-            </thead>
-            <tbody th:object="${flight}">
-            <tr>
-                <td data-name="id" th:text="*{id}">
-                    Flight ID
-                </td>
-                <td data-name="name" th:text="*{name}">
-                    Flight name
-                </td>
-                <td data-name="source" th:text="*{sourceport != null} ? *{sourceport.name} : ''">
-                    Source Port
-                </td>
-                <td data-name="destination" th:text="*{destinationport != null} ? *{destinationport.name} : ''">
-                    Destination Port
-                </td>
-                <td data-name="departure" th:text="*{departure}">
-                    Departure Time
-                </td>
-                <td data-name="arrival" th:text="*{arrival}">
-                    Arrival Time
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="col-xs-12">
+            <div class="card card-block">
+            <h1 th:text="#{flight.aiport.table}">Flight</h1>
+                <table id="flights" class="table table-striped table-responsive">
+                    <thead>
+                    <tr>
+                        <th th:text="#{flight.id}">
+                            Flight ID
+                        </th>
+                        <th th:text="#{flight.name}">
+                            Flight Name
+                        </th>
+                        <th th:text="#{flight.source}">
+                            Source port
+                        </th>
+                        <th th:text="#{flight.destination}">
+                            Destination port
+                        </th>
+                        <th th:text="#{flight.departure}">
+                            Departure
+                        </th>
+                        <th th:text="#{flight.arrival}">
+                            Arrival
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody th:object="${flight}">
+                    <tr>
+                        <td data-name="id" th:text="*{id}">
+                            Flight ID
+                        </td>
+                        <td data-name="name" th:text="*{name}">
+                            Flight name
+                        </td>
+                        <td data-name="source" th:text="*{sourceport != null} ? *{sourceport.name} : ''">
+                            Source Port
+                        </td>
+                        <td data-name="destination" th:text="*{destinationport != null} ? *{destinationport.name} : ''">
+                            Destination Port
+                        </td>
+                        <td data-name="departure" th:text="*{departure}">
+                            Departure Time
+                        </td>
+                        <td data-name="arrival" th:text="*{arrival}">
+                            Arrival Time
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <h3 th:text="#{flight.steward.choose}">Choose Steward</h3>
     <div class="row">
@@ -81,7 +85,7 @@
             <div class="card card-block">
                 <form class="form" id="steward-form" method="post" action="">
 
-                <table id="airports" class="datatable table table-striped table-responsive">
+                <table id="airports" class="table table-striped table-responsive">
                     <thead>
                     <tr>
                         <th th:text="#{flight.steward.choose}">
