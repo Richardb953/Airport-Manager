@@ -22,7 +22,7 @@ public class Init extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{MvcConfig.class};
+        return new Class<?>[]{MvcConfigRest.class};
     }
 
     @Override

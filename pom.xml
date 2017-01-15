@@ -54,8 +54,8 @@
         <module>airport-dao</module>
         <module>airport-facade</module>
         <module>airport-api</module>
-        <module>airport-rest</module>
         <module>airport-mvc</module>
+        <module>airport-rest</module>
         <module>airport-data</module>
     </modules>
 
