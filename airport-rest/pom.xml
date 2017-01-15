@@ -21,11 +21,11 @@
             <artifactId>airport-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>cz.muni</groupId>
             <artifactId>airport-dao</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
+        </dependency>-->
 <!--        <dependency>
             <groupId>cz.muni</groupId>
             <artifactId>airport-mvc</artifactId>
@@ -171,7 +171,7 @@
             </resource>
         </resources>-->
         <!-- what to do when only "mvn" is run -->
-        <defaultGoal>tomcat7:run</defaultGoal>
+        <!--<defaultGoal>tomcat7:run</defaultGoal>-->
         <plugins>
             <!-- Servlet 3.0 allows no web.xml deployment descriptor -->
             <plugin>

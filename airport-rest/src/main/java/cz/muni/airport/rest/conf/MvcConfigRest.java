@@ -1,34 +1,32 @@
 package cz.muni.airport.rest.conf;
 
 import cz.muni.airport.config.ServiceConfiguration;
+import java.util.Locale;
+import org.springframework.boot.SpringApplication;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-
 //import cz.muni.airport.mvc.conf.MvcConfig;
-
-
 /**
- * Application MAIN configuration file, icnludes other modules configs and set MVC controllers
+ * Application MAIN configuration file, icnludes other modules configs and set
+ * MVC controllers
  *
  * @author Richard Bariny, github: Richardb953
  */
 @EnableWebMvc
-@SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
+@SpringBootApplication(scanBasePackages = {"cz.muni.airport"})
 @Import(ServiceConfiguration.class)
 public class MvcConfigRest extends WebMvcConfigurerAdapter {
 
 //    private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
-
 //    private static final String TEXTS = "properties";
-
     public static void main(String[] args) {
-//        Locale.setDefault(Locale.ENGLISH);
-//        SpringApplication.run(
-//                MvcConfigRest.class, args);
+        Locale.setDefault(Locale.ENGLISH);
+        SpringApplication.run(
+                MvcConfigRest.class, args);
     }
 
 //    /**
@@ -85,7 +83,6 @@ public class MvcConfigRest extends WebMvcConfigurerAdapter {
 //        SpringSecurityDialect dialect = new SpringSecurityDialect();
 //        return dialect;
 //    }
-
 //    @Bean
 //    public DateFormatter dateFormatter() {
 //        return new DateFormatter();
@@ -107,7 +104,6 @@ public class MvcConfigRest extends WebMvcConfigurerAdapter {
 //
 //        return templateEngine;
 //    }
-
 //    @Bean
 //    public ServletContextTemplateResolver getServletContextTtemplateResolver() {
 //        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
@@ -117,7 +113,6 @@ public class MvcConfigRest extends WebMvcConfigurerAdapter {
 //        templateResolver.setCacheable(false);
 //        return templateResolver;
 //    }
-
 //    /**
 //     * Setup prefix and sufix (destination) of views JSP files.
 //     */
@@ -160,14 +155,14 @@ public class MvcConfigRest extends WebMvcConfigurerAdapter {
 //    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(localeChangeInterceptor());
 //    }
-
-
     /**
-     * Replace default spring AcceptHeaderLocaleResolver with SessionLocaleResolver.
-     * Explanation: default locale resolver dont allow change locale.
+     * Replace default spring AcceptHeaderLocaleResolver with
+     * SessionLocaleResolver. Explanation: default locale resolver dont allow
+     * change locale.
      * {@link //www.mkyong.com/spring-mvc/cannot-change-http-accept-header-use-a-different-locale-resolution-strategy/}
      *
      * Bean name has to be "localResolver" !
+     *
      * @return solver
      */
 //    @Bean
