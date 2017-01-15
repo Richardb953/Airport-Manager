@@ -1,5 +1,6 @@
 package cz.muni.airport.facadeApi;
 
+import cz.muni.airport.dto.AirportCreateDTO;
 import java.util.List;
 
 import cz.muni.airport.dto.AirportDTO;
@@ -16,7 +17,7 @@ public interface AirportFacade {
      * @param airportDTO Airport object as DTO
      * @return id of created object
      */
-    AirportDTO createAirport(AirportDTO airportDTO);
+    AirportDTO createAirport(AirportCreateDTO airportDTO);
 
     /**
      * Get All Airports

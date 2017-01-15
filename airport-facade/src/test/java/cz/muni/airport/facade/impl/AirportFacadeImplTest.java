@@ -1,5 +1,6 @@
 package cz.muni.airport.facade.impl;
 
+import cz.muni.airport.dto.AirportCreateDTO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,15 @@ public class AirportFacadeImplTest {
 		airportDTO.setName("Brno letiste");
 		return airportDTO;
 	}
+        
+        private AirportCreateDTO createAirportCreateDTO1(){
+		AirportCreateDTO airportDTO = new AirportCreateDTO();
+		airportDTO.setCity("Brno");
+		airportDTO.setIata("BRN");
+		airportDTO.setCountry("Czech republic");
+		airportDTO.setName("Brno letiste");
+		return airportDTO;
+	}
 	private Airport createAirport1(){
 		Airport airport = new Airport();
 		airport.setCity("Brno");
@@ -73,14 +83,14 @@ public class AirportFacadeImplTest {
 		System.out.println("createAirport");
 
 		Airport airport = createAirport1();
-		AirportDTO airportDTO = createAirportDTO1();
+		AirportCreateDTO airportCreateDTO = createAirportCreateDTO1();
 
-		when(beanMapperService.mapTo(airportDTO, Airport.class)).thenReturn(airport);
-		when(beanMapperService.mapTo(airport, AirportDTO.class)).thenReturn(airportDTO);
+		when(beanMapperService.mapTo(airportCreateDTO, Airport.class)).thenReturn(airport);
+		when(beanMapperService.mapTo(airport, AirportCreateDTO.class)).thenReturn(airportCreateDTO);
 		when(airportService.saveAirport(airport)).thenReturn(airport);
 
-		AirportDTO created = airportFacade.createAirport(airportDTO);
-		assertEquals(airportDTO, created);
+		AirportDTO created = airportFacade.createAirport(airportCreateDTO);
+		assertEquals(airportCreateDTO, created);
 	}
 
 	/**

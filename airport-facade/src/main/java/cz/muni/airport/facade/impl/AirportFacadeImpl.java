@@ -1,5 +1,6 @@
 package cz.muni.airport.facade.impl;
 
+import cz.muni.airport.dto.AirportCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,20 +26,39 @@ public class AirportFacadeImpl implements AirportFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public AirportDTO createAirport(AirportDTO airportDTO) {
+    public AirportDTO createAirport(AirportCreateDTO airportCreateDTO) {
 
-        Airport airport = beanMappingService.mapTo(airportDTO, Airport.class);
+        Airport airport = beanMappingService.mapTo(airportCreateDTO, Airport.class);
         /*if (airportService.hasValidIata(airport)) {
 
-            Airport created = airportService.saveAirport(airport);
-            return beanMappingService.mapTo(created, AirportDTO.class);
-        } else {
-            throw new IllegalArgumentException("IATA code is invalid");
-        }*/
-		
-		Airport created = airportService.saveAirport(airport);
+         Airport created = airportService.saveAirport(airport);
+         return beanMappingService.mapTo(created, AirportDTO.class);
+         } else {
+         throw new IllegalArgumentException("IATA code is invalid");
+         }*/
+
+        Airport created = airportService.saveAirport(airport);
         return beanMappingService.mapTo(created, AirportDTO.class);
     }
+//    @Override
+//	public Long createProduct(ProductCreateDTO p) {
+//        Product mappedProduct = beanMappingService.mapTo(p, Product.class);
+//        //map price DTO to entity
+//        Price price = new Price();
+//        price.setValue(p.getPrice());
+//        price.setCurrency(p.getCurrency());
+//        Date now = new Date();
+//        price.setPriceStart(now);
+//        mappedProduct.setAddedDate(now);
+//        //set price on product entity
+//        mappedProduct.setCurrentPrice(price);
+//        mappedProduct.addHistoricalPrice(price);
+//        //add to category
+//        mappedProduct.addCategory(categoryService.findById(p.getCategoryId()));
+//        //save product
+//        Product newProduct = productService.createProduct(mappedProduct);
+//		return newProduct.getId();
+//	}
 
     @Override
     public List<AirportDTO> getAllAirports() {
