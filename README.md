@@ -1,4 +1,4 @@
-Airport-manage, a school project pro class PA165 Enterprise Java.
+Airport-Manager, a school project pro class PA165 Enterprise Java.
 
 ## Running Airport-Manager
 In folder Airport-Manager run:  `mvn clean install && tomcat7:run`    
