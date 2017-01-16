@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- *
+ * Steward Controller for steward templates
  * @author Andrea Navratilova, github name: andrea-n
  */
 
@@ -62,7 +62,6 @@ public class StewardController {
 
             stewardFacade.updateSteward(stewardDTO);
             return "redirect:/steward/all";
-        } else{
         }
         return "flight_update";
     }

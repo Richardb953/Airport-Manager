@@ -24,9 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Created by Richard Bariny on 7.1.2017.
+ * Created by Karolina Bozkova on 7.1.2017.
  *
- * @author Richard Bariny, github name:Richardb953
+ * Airplane Controller for Airplane Templates *
+ * @author Karolina Bozkova, githubname: Kayeeec
  */
 
 
