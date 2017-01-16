@@ -14,7 +14,7 @@ import cz.muni.airport.model.Airplane;
 
 /**
  * Implementation of AirplaneDAO. This Data Access Object provides access to
- * Airplane antries ant Airplane related data.
+ * Airplane entries and Airplane related data.
  *
  * @author Karolína Božková, github name: Kayeeec
  * @see AirplaneDAO documentation.
@@ -22,7 +22,6 @@ import cz.muni.airport.model.Airplane;
 @Repository
 @Transactional
 public class AirplaneDAOImpl implements AirplaneDAO {
-//
 
     @PersistenceContext(name = "airplaneUnit", type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
