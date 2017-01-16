@@ -362,7 +362,6 @@ public class FlightController {
             BindingResult result,
             Model model
     ){
-
         if ( !result.hasErrors() ) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
@@ -371,14 +370,16 @@ public class FlightController {
                 flightDTO = flightFacade.updateFlight(flightDTO);
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
                     if(stewardSelection.getSelected()){
-                        if(!flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))))
+                        if(!flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))){
                             flightDTO = flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                            System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+                        }
+                        System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
 
                     } else {
-                        if(flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))))
+                        if(flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))) {
                             flightDTO = flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                            System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+                        }
+                        System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
 
                     }
                 }
