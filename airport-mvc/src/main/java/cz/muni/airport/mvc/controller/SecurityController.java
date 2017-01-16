@@ -23,6 +23,6 @@ public class SecurityController {
     
     @RequestMapping(value="/accessDenied")
     public String accessDenied() {
-            return "accessDenied";
+            return "accessDeniedPage";
     }
 }

@@ -28,6 +28,7 @@
                             <div class="row"><div class="col-xs-12 text-center">
                                 <input type="submit" th:value="#{loginbtn}"/> 
                             </div></div>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                         </form>
                     </div>
                     <div class="align-middle mt-2 row card card-block" th:if="${#httpServletRequest.remoteUser}">
