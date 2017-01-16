@@ -140,10 +140,9 @@ public class FlightController {
     public String updateFlight(
             @Valid FlightDTO flight,
             BindingResult result,
-            Model model
-    ) {
+            @PathVariable("id") Long id) {
         if (!result.hasErrors()) {
-            FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
+            FlightDTO flightDTO = flightFacade.getFlightById(id);
             flightDTO.setName(flight.getName());
             flightDTO.setPassagers(flight.getPassagers());
             flightDTO.setDeparture(flight.getDeparture());
