@@ -22,7 +22,7 @@ public class Steward {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "steward_id")
     private Long id;
 
     @Column(nullable = false)

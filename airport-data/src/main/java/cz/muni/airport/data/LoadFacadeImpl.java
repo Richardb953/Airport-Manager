@@ -54,18 +54,18 @@ public class LoadFacadeImpl implements LoadFacade {
         Airplane airplane3 = createAirplane("MAC-555", PlaneType.TWIN_PISTON, 2);
         Airplane airplane4 = createAirplane("CARGO-96", PlaneType.CARGO, 12);
 
-        Steward steward = createSteward("Anna", "Hlucha", null);
-        Steward steward1 = createSteward("Zuzka", "Presibana", null);
-        Steward steward2 = createSteward("Mirko", "Supko", null);
-        Steward steward3 = createSteward("Lojzo", "Mrtvy", null);
-        Steward steward4 = createSteward("Jana", "Vyhladavana", null);
-        Steward steward5 = createSteward("Richard", "Mojzo", null);
-        Steward steward6 = createSteward("Lucia", "Meliskova", null);
-        Steward steward7 = createSteward("Maria", "Polna", null);
-        Steward steward8 = createSteward("Janko", "Hrasko", null);
-        Steward steward9 = createSteward("Peter", "Marek", null);
-        Steward steward10 = createSteward("Marek", "Petrovic", null);
-        Steward steward11 = createSteward("Karolina", "Svetoznama", null);
+        Steward steward = createSteward("Anna", "Hlucha", new ArrayList<>());
+        Steward steward1 = createSteward("Zuzka", "Presibana", new ArrayList<>());
+        Steward steward2 = createSteward("Mirko", "Supko", new ArrayList<>());
+        Steward steward3 = createSteward("Lojzo", "Mrtvy", new ArrayList<>());
+        Steward steward4 = createSteward("Jana", "Vyhladavana", new ArrayList<>());
+        Steward steward5 = createSteward("Richard", "Mojzo", new ArrayList<>());
+        Steward steward6 = createSteward("Lucia", "Meliskova", new ArrayList<>());
+        Steward steward7 = createSteward("Maria", "Polna", new ArrayList<>());
+        Steward steward8 = createSteward("Janko", "Hrasko", new ArrayList<>());
+        Steward steward9 = createSteward("Peter", "Marek", new ArrayList<>());
+        Steward steward10 = createSteward("Marek", "Petrovic", new ArrayList<>());
+        Steward steward11 = createSteward("Karolina", "Svetoznama", new ArrayList<>());
 
         Airport airport = createAirport("Dublin", "Dublin-888-aa-87", "Irsko", "Dublin");
         Airport airport1 = createAirport("Bratislava - Stefanik", "Bratislava-8sf-a-2001", "Slovensko", "Bratislava");
@@ -76,35 +76,35 @@ public class LoadFacadeImpl implements LoadFacade {
         Airport airport6 = createAirport("New York city", "NC-8cc-New-2017", "USA", "New York");
         Airport airport7 = createAirport("Rio", "DeJanEro-188-SA-87", "Brazilia", "Rio");
 
-        List<Steward> stewardList = new ArrayList<Steward>();
+        List<Steward> stewardList = new ArrayList<>();
         stewardList.add(steward);
         stewardList.add(steward1);
         stewardList.add(steward2);
         stewardList.add(steward3);
 
-        List<Steward> stewardList1 = new ArrayList<Steward>();
+        List<Steward> stewardList1 = new ArrayList<>();
         stewardList.add(steward4);
         stewardList.add(steward5);
         stewardList.add(steward6);
         stewardList.add(steward7);
 
-        List<Steward> stewardList2 = new ArrayList<Steward>();
+        List<Steward> stewardList2 = new ArrayList<>();
         stewardList.add(steward8);
         stewardList.add(steward9);
         stewardList.add(steward10);
         stewardList.add(steward10);
 
-        List<Steward> stewardList3 = new ArrayList<Steward>();
+        List<Steward> stewardList3 = new ArrayList<>();
         stewardList.add(steward);
         stewardList.add(steward5);
         stewardList.add(steward8);
         stewardList.add(steward10);
 
         Flight flight = createFlight(toDate(2017, 11, 31, 22, 0),toDate(2018, 0, 1, 1, 10), "Vianocny utocny Let Nemecko", airport, airport3, airplane3, 1, stewardList, FlightState.ACCEPTED);
-        Flight flight1 = createFlight(toDate(2017, 1, 1, 10, 20),toDate(2017, 1, 2, 12, 30), "Cestovny Let Vieden", airport1, airport5, airplane, 69, stewardList, FlightState.IN_VERIFY);
-        Flight flight2 = createFlight(toDate(2017, 1, 1, 1, 30),toDate(2017, 1, 1, 23, 10), "normalny Let USA", airport4, airport6, airplane4, 50, stewardList, FlightState.DECLINED);
-        Flight flight3 = createFlight(toDate(2017, 1, 5, 3, 50),toDate(2017, 1, 7, 7, 45), "dialkovy Let Rio", airport2, airport7, airplane1, 478, stewardList, FlightState.OPEN);
-        Flight flight4 = createFlight(toDate(2017, 1, 5, 5, 55),toDate(2017, 1, 5, 6, 55), "kratky Let Slovensko", airport1, airport2, airplane2, 8, stewardList, FlightState.ACCEPTED);
+        Flight flight1 = createFlight(toDate(2017, 1, 1, 10, 20),toDate(2017, 1, 2, 12, 30), "Cestovny Let Vieden", airport1, airport5, airplane, 69, stewardList1, FlightState.IN_VERIFY);
+        Flight flight2 = createFlight(toDate(2017, 1, 1, 1, 30),toDate(2017, 1, 1, 23, 10), "normalny Let USA", airport4, airport6, airplane4, 50, stewardList2, FlightState.DECLINED);
+        Flight flight3 = createFlight(toDate(2017, 1, 5, 3, 50),toDate(2017, 1, 7, 7, 45), "dialkovy Let Rio", airport2, airport7, airplane1, 478, stewardList3, FlightState.OPEN);
+        Flight flight4 = createFlight(toDate(2017, 1, 5, 5, 55),toDate(2017, 1, 5, 6, 55), "kratky Let Slovensko", airport1, airport2, airplane2, 8, null, FlightState.ACCEPTED);
 
     }
     private static Date toDate(int year, int month, int day, int hours, int minutes) {

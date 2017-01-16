@@ -43,7 +43,7 @@ public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "flight_id")
     private Long id;
 
     @Column(nullable = false)
@@ -72,8 +72,8 @@ public class Flight {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(joinColumns = {
-            @JoinColumn(nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(nullable = false, updatable = false) })
+            @JoinColumn(name = "flight_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name="steward_id", nullable = false, updatable = false) })
     private List<Steward> stewards = new ArrayList<>();
 
 
