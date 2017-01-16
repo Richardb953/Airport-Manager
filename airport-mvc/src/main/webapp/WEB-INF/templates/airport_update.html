@@ -10,27 +10,27 @@
                 <div class="col-md-6 offset-md-3 mt-1 offset-sm-0">
                     <div id="update">
                         <div class="card card-block">
-                            <h4>Update airport</h4>
+                            <h4 th:text="#{airport.updateLabel}">Update airport</h4>
                             <!--<form class="form" id="update-form" method="post" action="#" th:action="@{'/airplane/update/'+${airplaneToUpdate.id}}" th:object="${airplaneToUpdate}">-->
                             <form class="form" id="update-form" method="post" action="#"  th:object="${airportToUpdate}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Name</label>
+                                            <label for="" th:text="#{airport.name}">Name</label>
                                             <input type="text" class="form-control" id="name" name="name" required="required" th:field="*{name}" />
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Country</label>
+                                            <label for="" th:text="#{airport.country}">Country</label>
                                             <input type="text" class="form-control" id="country" name="country" required="required" th:field="*{country}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">IATA</label>
+                                            <label for="" th:text="#{airport.iata}">IATA</label>
                                             <input type="text" class="form-control" id="iata" name="iata" required="required" th:field="*{iata}" />
                                         </div>
                                         <div class="form-group">
-                                            <label for="">City</label>
+                                            <label for="" th:text="#{airport.city}">City</label>
                                             <input type="text" class="form-control" id="city" name="city" required="required" th:field="*{city}" />
                                         </div>
                                     </div>
@@ -38,17 +38,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Id</label>
+                                            <label for="" th:text="#{airport.id}">Id</label>
                                             <input type="text" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 text-right">
-                                        <button class="btn btn-default btn-cancel" type="reset">Reset</button>
-                                        <button class="btn btn-success" type="submit">Update</button>
+                                        <button class="btn btn-default btn-cancel" type="reset"  th:text="#{airport.resetbtn}">Reset</button>
+                                        <button class="btn btn-success" type="submit" th:text="#{airport.updatebtn}">Update</button>
                                         <form class="form" id="back-form" method="get" th:attr="action='/pa165/airpport/all'">
-                                            <button class="btn btn-default">Cancel</button>
+                                            <button class="btn btn-default" th:text="#{airport.cancelbtn}">Cancel</button>
                                         </form>
                                     </div>
                                 </div>
