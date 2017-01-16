@@ -369,21 +369,14 @@ public class FlightController {
             if(wrapper != null ) {
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
                     if(stewardSelection.getSelected()){
-                        try {
+                        if(!flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))))
                             flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                        } catch (Exception e){
-                            System.out.print("Steward already exists");
-                        }
                     } else {
-                        try {
+                        if(flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))))
                             flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                        } catch (Exception e){
-                            System.out.print("Steward non exists");
-                        }
                     }
                 }
             }
-
             //update just stewards nor other fields
             return "redirect:/flight/all";
         }
