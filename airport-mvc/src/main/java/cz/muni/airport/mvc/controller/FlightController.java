@@ -140,11 +140,12 @@ public class FlightController {
     ) {
         if (!result.hasErrors()) {
             FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
-            //flightDTO.setName(flight.getName());
-            //flightDTO.setDeparture(flight.getDeparture());
-            //flightDTO.setArrival(flight.getArrival());
+            flightDTO.setName(flight.getName());
+            flightDTO.setPassagers(flight.getPassagers());
+            flightDTO.setDeparture(flight.getDeparture());
+            flightDTO.setArrival(flight.getArrival());
 
-            flightFacade.updateFlight(flight);
+            flightFacade.updateFlight(flightDTO);
             return "redirect:/flight/all";
         } else {
             for (ObjectError err : result.getAllErrors()) {
