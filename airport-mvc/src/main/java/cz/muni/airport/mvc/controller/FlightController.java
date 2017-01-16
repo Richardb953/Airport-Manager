@@ -362,23 +362,21 @@ public class FlightController {
             BindingResult result,
             Model model
     ){
-        List<StewardDTO> choosedStewards = new ArrayList<>();
-        if(wrapper != null ) {
-            for (StewardSelection stewardSelection : wrapper.getClientList()) {
-                if(stewardSelection.getSelected()){
-                    choosedStewards.add(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
-                }
-            }
-        }
 
         if ( !result.hasErrors() ) {
-                //load basic
-                FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-                //update just stewards nor other fields
-                flightDTO.setStewards(choosedStewards);
-                flightFacade.updateFlight(flightDTO);
-                return "redirect:/flight/all";
+            //load basic
+            FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+            List<StewardDTO> choosedStewards = new ArrayList<>();
+            if(wrapper != null ) {
+                for (StewardSelection stewardSelection : wrapper.getClientList()) {
+                    if(stewardSelection.getSelected()){
+                        flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                    }
+                }
+            }
 
+            //update just stewards nor other fields
+            return "redirect:/flight/all";
         }
         return "steward_flight";
     }
