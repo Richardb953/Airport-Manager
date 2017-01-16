@@ -1,5 +1,4 @@
-Welcome to the Airport-Manager wiki!  
-This wiki provides further information about PA165 Enterprise Java project.
+Airport-manage, a school project pro class PA165 Enterprise Java.
 
 ## Running Airport-Manager
 In folder Airport-Manager run:  `mvn clean install && tomcat7:run`    
