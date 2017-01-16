@@ -70,7 +70,6 @@ public class AirplaneDTO {
         hash = 53 * hash + Objects.hashCode(this.getName());
         hash = 53 * hash + this.getCapacity();
         hash = 53 * hash + Objects.hashCode(this.getType());
-        hash = 53 * hash + this.getId().hashCode();
         return hash;
     }
 
