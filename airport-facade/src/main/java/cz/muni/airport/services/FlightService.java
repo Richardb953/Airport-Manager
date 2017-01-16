@@ -70,4 +70,5 @@ public interface FlightService {
      */
     boolean validateFlight(Flight flight);
 
+    Flight removeStewardToFlight(Flight flight, Steward steward);
 }

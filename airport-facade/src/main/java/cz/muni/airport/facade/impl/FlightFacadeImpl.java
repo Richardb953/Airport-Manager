@@ -138,6 +138,13 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
+    public FlightDTO removeStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO) {
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        Steward steward = beanMappingService.mapTo(stewardDTO, Steward.class);
+
+        return beanMappingService.mapTo(flightService.removeStewardToFlight(flight, steward), FlightDTO.class);    }
+
+    @Override
     public FlightDTO changeFlightState(FlightDTO flightDTO, cz.muni.airport.enums.FlightState newFlightState) {
         Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
         flight.setFlightState(convertFlightState(newFlightState));

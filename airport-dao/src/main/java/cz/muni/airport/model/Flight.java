@@ -156,6 +156,11 @@ public class Flight {
         this.stewards.add(steward);
     }
 
+    public void removeSteward(Steward steward) {
+        if(this.stewards.contains(steward)){
+            this.stewards.remove(steward);
+        }
+    }
     public FlightState getFlightState() {
         return flightState;
     }
@@ -193,5 +198,6 @@ public class Flight {
                 ", sourcePort=" + sourcePort +
                 '}';
     }
+
 
 }

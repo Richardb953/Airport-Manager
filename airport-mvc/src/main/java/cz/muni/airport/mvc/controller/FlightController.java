@@ -366,11 +366,20 @@ public class FlightController {
         if ( !result.hasErrors() ) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-            List<StewardDTO> choosedStewards = new ArrayList<>();
             if(wrapper != null ) {
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
                     if(stewardSelection.getSelected()){
-                        flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                        try {
+                            flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                        } catch (Exception e){
+                            System.out.print("Steward already exists");
+                        }
+                    } else {
+                        try {
+                            flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                        } catch (Exception e){
+                            System.out.print("Steward non exists");
+                        }
                     }
                 }
             }
@@ -410,7 +419,7 @@ public class FlightController {
             airplaneSelection.setAirplaneID(airplaneDTO.getId().toString());
             airplaneSelection.setName(airplaneDTO.getName());
             airplaneSelection.setCapacity(String.valueOf(airplaneDTO.getCapacity()));
-            airplaneSelection.setType(airplaneDTO.getType().getText());
+            airplaneSelection.setType(airplaneDTO.getType().toString());
             allClientsWithSelection.add(airplaneSelection);
         }
 
