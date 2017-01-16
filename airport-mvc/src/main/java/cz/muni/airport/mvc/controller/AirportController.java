@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * Created by Richard Bariny on 7.1.2017.
  *
- * @author Richard Bariny, github name:Richardb953
+ * @author Jiri Krejci, github name:xkrejci7
  */
 @Controller
 @RequestMapping("/airport")
@@ -61,11 +60,7 @@ public class AirportController {
     public String updateAirport(@PathVariable long id, @Valid @ModelAttribute("airportToUpdate") AirportDTO airportToUpdate, Model model,
             BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
-//            AirportDTO old = airportFacade.getAirportById(id);
             airportToUpdate.setId(id);
-//            old.setCapacity(airportToUpdate.getCapacity());
-//            old.setName(airportToUpdate.getName());
-//            old.setType(airportToUpdate.getType());
             
             airportFacade.updateAirport(airportToUpdate);
             return "redirect:/airport/all"; 
