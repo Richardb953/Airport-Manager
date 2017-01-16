@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
+
+
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="home mt-3">
+                    
+                    <h1 th:text="#{access.denied.title}"/>
+                    
+                    
+                    <div class="align-middle row mt-2 card card-block">
+                        <p th:text="#{access.denied.msg}"/>
+                    </div>
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</html>

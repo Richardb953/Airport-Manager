@@ -78,11 +78,26 @@
 		</div>
 		<footer class="footer">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12 text-right">
-						<p>Airport Manager / PV165</p>
-					</div>
-				</div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p style="display: inline;">
+                                        <table border="0" style="float:left;" th:if="${#httpServletRequest.remoteUser}">
+                                            <tr>
+                                                <td th:text="#{logged.as.msg}"/>
+                                                <td><b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b></td>
+                                                <td><pre> </pre></td>
+                                                <td align="right">
+                                                    <form class="form" id="logout-form" th:action="@{/appLogout}" method="POST">
+                                                        <input type="submit" th:value="#{logoutbtn}"/>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <span style="float:left;" th:unless="${#httpServletRequest.remoteUser}" th:text="#{unlogged.user}">Unlogged user</span>
+                                        <span style="float:right;">Airport Manager / PV165</span>
+                                    </p>     
+                                </div>
+                            </div>
 			</div>
 		</footer>
 	</body>
