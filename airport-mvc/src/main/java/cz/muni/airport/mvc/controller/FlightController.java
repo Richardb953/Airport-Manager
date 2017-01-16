@@ -375,28 +375,30 @@ public class FlightController {
 //                flightDTO.setStewards(null);
                 flightDTO = flightFacade.updateFlight(flightDTO);
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
+
                     if (stewardSelection.getSelected()) {
                         if (!flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))) {
                             try {
                                 flightDTO = flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                                System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+//                                System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
                             } catch (Exception e) {
                                 System.out.print("Steward already exists");
                             }
+
                         }
                     } else {
                         if (flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))) {
                             try {
                                 flightDTO = flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                                System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+//                                System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
                             } catch (Exception e) {
                                 System.out.print("Steward non exists");
                             }
+
                         }
                     }
                 }
             }
-
             //update just stewards nor other fields
             return "redirect:/flight/all";
         }
