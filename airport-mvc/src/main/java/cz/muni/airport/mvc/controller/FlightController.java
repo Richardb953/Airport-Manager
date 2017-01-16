@@ -140,20 +140,14 @@ public class FlightController {
     public String updateFlight(
             @Valid FlightDTO flight,
             BindingResult result,
-            @PathVariable("id") Long id) {
-
-        if ( !result.hasErrors() ) {
-            FlightDTO flightDTO = flightFacade.getFlightById(id);
+            Model model
+    ) {
+        if (!result.hasErrors()) {
+            FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
             flightDTO.setName(flight.getName());
+            flightDTO.setPassagers(flight.getPassagers());
             flightDTO.setDeparture(flight.getDeparture());
             flightDTO.setArrival(flight.getArrival());
-
-           // if (!result.hasErrors()) {
-             //   FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
-                //flightDTO.setName(flight.getName());
-                //flightDTO.setDeparture(flight.getDeparture());
-                //flightDTO.setArrival(flight.getArrival());
-
 
             flightFacade.updateFlight(flightDTO);
             return "redirect:/flight/all";
