@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,16 +21,20 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.enums.FlightState;
+import cz.muni.airport.facadeApi.AirplaneFacade;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.facadeApi.StewardFacade;
+import cz.muni.airport.mvc.data.AirplaneSelection;
+import cz.muni.airport.mvc.data.AirplaneWrapper;
 import cz.muni.airport.mvc.data.AirportSelection;
-import cz.muni.airport.mvc.data.ClientWithSelectionListWrapper;
-import cz.muni.airport.mvc.data.ClientWithSelectionLongWrapper;
+import cz.muni.airport.mvc.data.StewardWrapper;
+import cz.muni.airport.mvc.data.AirportWrapper;
 import cz.muni.airport.mvc.data.StewardSelection;
 
 /**
@@ -54,6 +57,9 @@ public class FlightController {
 
     @Autowired
     private StewardFacade stewardFacade;
+
+    @Autowired
+    private AirplaneFacade airplaneFacade;
 
     private final static Logger log = LoggerFactory.getLogger(FlightController.class);
 
@@ -190,7 +196,7 @@ public class FlightController {
             choosed = flightDTO.getSourceport();
         }
 
-        ClientWithSelectionLongWrapper wrapper = new ClientWithSelectionLongWrapper();
+        AirportWrapper wrapper = new AirportWrapper();
         ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
 
         for(AirportDTO airportDTO : airportDTOs){
@@ -216,7 +222,7 @@ public class FlightController {
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
     public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
-            @ModelAttribute ClientWithSelectionLongWrapper wrapper,
+            @ModelAttribute AirportWrapper wrapper,
             BindingResult result,
             Model model
             )
@@ -262,7 +268,7 @@ public class FlightController {
             choosed = flightDTO.getDestinationport();
         }
 
-        ClientWithSelectionLongWrapper wrapper = new ClientWithSelectionLongWrapper();
+        AirportWrapper wrapper = new AirportWrapper();
         ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
 
         for(AirportDTO airportDTO : airportDTOs){
@@ -288,7 +294,7 @@ public class FlightController {
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
     public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
-            @ModelAttribute ClientWithSelectionLongWrapper wrapper,
+            @ModelAttribute AirportWrapper wrapper,
             BindingResult result,
             Model model
     )
@@ -328,7 +334,7 @@ public class FlightController {
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
         List<StewardDTO> flightStewardDTOs = flightDTO.getStewards();
         List<StewardDTO> allStewardsDTOs = stewardFacade.getAllStewards();
-        ClientWithSelectionListWrapper wrapper = new ClientWithSelectionListWrapper();
+        StewardWrapper wrapper = new StewardWrapper();
         ArrayList<StewardSelection> allClientsWithSelection = new ArrayList<>();
 
         for(StewardDTO stewardDTO : allStewardsDTOs){
@@ -352,7 +358,7 @@ public class FlightController {
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
-            @ModelAttribute ClientWithSelectionListWrapper wrapper,
+            @ModelAttribute StewardWrapper wrapper,
             BindingResult result,
             Model model
     ){
@@ -375,6 +381,78 @@ public class FlightController {
 
         }
         return "steward_flight";
+    }
+    /**
+     * *********************************************************************************************************************************
+     * Set airplane for flight
+     * @param flightId flight
+     * @param model formular model
+     * @return formular
+     */
+    @RequestMapping(value = "/{id}/airplane", method = RequestMethod.GET)
+    public String airplane(
+            @PathVariable(value = "id") Long flightId,
+            Model model
+    ){
+
+        FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+        //todo just available
+        List<AirplaneDTO> airplanes = airplaneFacade.getAllAirplanes();
+        AirplaneDTO choosed = null;
+        if(flightDTO.getAirplane() != null ){
+            choosed = flightDTO.getAirplane();
+        }
+
+        AirplaneWrapper wrapper = new AirplaneWrapper();
+        ArrayList<AirplaneSelection> allClientsWithSelection = new ArrayList<>();
+
+        for(AirplaneDTO airplaneDTO : airplanes){
+            AirplaneSelection airplaneSelection = new AirplaneSelection();
+            airplaneSelection.setSelected((choosed != null) && airplaneDTO.getId().equals(choosed.getId()));
+            airplaneSelection.setAirplaneID(airplaneDTO.getId().toString());
+            airplaneSelection.setName(airplaneDTO.getName());
+            airplaneSelection.setCapacity(String.valueOf(airplaneDTO.getCapacity()));
+            airplaneSelection.setType(airplaneDTO.getType().getText());
+            allClientsWithSelection.add(airplaneSelection);
+        }
+
+        wrapper.setClientList(allClientsWithSelection);
+
+        model.addAttribute("airports", airplanes);
+        model.addAttribute("flight", flightDTO);
+        model.addAttribute("wrapper", wrapper);
+
+        return "flight_add_airplane";
+
+    }
+
+    @RequestMapping(value = "/{id}/airplane", method = RequestMethod.POST)
+    public String airplane(
+            @PathVariable(value = "id") Long flightId,
+            @ModelAttribute AirplaneWrapper wrapper,
+            BindingResult result,
+            Model model
+    )
+    {
+        List<AirplaneDTO> chooseAirplane = new ArrayList<>();
+        if(wrapper != null ) {
+            for (AirplaneSelection airplaneSelection : wrapper.getClientList()) {
+                if(airplaneSelection.getSelected()){
+                    chooseAirplane.add(airplaneFacade.getAirplaneById(Long.parseLong(airplaneSelection.getAirplaneID())));
+                }
+            }
+        }
+
+        if ( !result.hasErrors() ) {
+            //load basic
+            FlightDTO flightDTO = flightFacade.getFlightById(flightId);
+            //update just stewards nor other fields
+            flightDTO.setAirplane(chooseAirplane.get(0));
+            flightFacade.updateFlight(flightDTO);
+            return "redirect:/flight/all";
+
+        }
+        return "flight_add_airplane";
     }
 
 }

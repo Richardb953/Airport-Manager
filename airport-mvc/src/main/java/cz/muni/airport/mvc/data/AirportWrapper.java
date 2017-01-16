@@ -7,14 +7,13 @@ import java.util.ArrayList;
  *
  * @author Richard Bariny, github name:Richardb953
  */
-public class ClientWithSelectionListWrapper {
+public class AirportWrapper {
+    private ArrayList<AirportSelection> clientList;
 
-    private ArrayList<StewardSelection> clientList;
-
-    public ArrayList<StewardSelection> getClientList() {
+    public ArrayList<AirportSelection> getClientList() {
         return clientList;
     }
-    public void setClientList(ArrayList<StewardSelection> clients) {
+    public void setClientList(ArrayList<AirportSelection> clients) {
         this.clientList = clients;
     }
 }

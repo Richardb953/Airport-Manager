@@ -3,7 +3,14 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/simpleLayout">
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $('input[type="checkbox"]').on('change', function() {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    });
 
+    /*]]>*/
+</script>
     <div layout:fragment="content">
     <div class="row">
         <h1 th:text="#{flight.aiport.table}">Flight</h1>
@@ -54,35 +61,32 @@
             </tbody>
         </table>
     </div>
-    <h3 th:text="#{flight.airport.choose}">Choose Aiport</h3>
+    <h3 th:text="#{flight.airplane.choose}">Choose Airplane</h3>
     <div class="row">
         <div class="col-xs-12">
             <div class="card card-block">
-                <form class="form" id="port-form" method="post">
-                    <table id="airports" class="port-table table table-striped table-responsive" >
+                <form class="form" id="airplane-form" method="post">
+                    <table id="airplanes" class="port-table table table-striped table-responsive" >
                         <thead>
                             <tr>
-                                <th th:text="#{aiport.id}">
-                                    Airport ID
+                                <th th:text="#{airplane.id}">
+                                    Airplane ID
                                 </th>
-                                <th th:text="#{aiport.iata}">
-                                    Airport iata
+                                <th th:text="#{airplane.name}">
+                                    Airplane name
                                 </th>
-                                <th th:text="#{aiport.name}">
-                                    Airport name
+                                <th th:text="#{airplane.capacity}">
+                                    Airport capacity
                                 </th>
-                                <th th:text="#{aiport.country}">
-                                    Airport country
-                                </th>
-                                <th th:text="#{aiport.city}">
-                                    Airport city
+                                <th th:text="#{airplane.type}">
+                                    Airport type
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                         <tr th:each="currentClient, stat : ${wrapper.clientList}">
                             <td>
-                                <input th:contenteditable="true" type="radio"
+                                <input th:contenteditable="true" type="checkbox"
                                        th:value="${wrapper.clientList[__${stat.index}__].selected}"
                                        th:field="${wrapper.clientList[__${stat.index}__].selected}"
                                        th:checked="${wrapper.clientList[__${stat.index}__].selected}"
@@ -100,9 +104,6 @@
                                 </td>
                                 <td data-name="destination" th:text="${currentClient.country}">
                                     Airport country
-                                </td>
-                                <td data-name="departure" th:text="${currentClient.city}">
-                                    Airport city
                                 </td>
                             </tr>
                         </tbody>
