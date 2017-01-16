@@ -367,16 +367,20 @@ public class FlightController {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
             if(wrapper != null ) {
+//                flightDTO.setStewards(null);
+                flightDTO = flightFacade.updateFlight(flightDTO);
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
                     if(stewardSelection.getSelected()){
                         try {
-                            flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                            flightDTO = flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                            System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
                         } catch (Exception e){
                             System.out.print("Steward already exists");
                         }
                     } else {
                         try {
-                            flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                            flightDTO = flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                            System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
                         } catch (Exception e){
                             System.out.print("Steward non exists");
                         }
