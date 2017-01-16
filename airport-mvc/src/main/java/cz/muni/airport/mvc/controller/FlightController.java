@@ -42,11 +42,11 @@ import cz.muni.airport.mvc.data.StewardSelection;
  *
  * @author Richard Bariny, github name:Richardb953
  */
-
 @Controller
 @RequestMapping("/flight")
 @Transactional
 public class FlightController {
+
     private static final String DATE_FORMAT = "YYYY-MM-DD'T'hh:mm";
 
     @Autowired
@@ -78,13 +78,14 @@ public class FlightController {
     /**
      * **********************************************************************************************************
      * Create new Flight formular
+     *
      * @param model of formular
      * @return formular
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addFlight(Model model) {
 
-        FlightDTO flightDTO  = new FlightDTO();
+        FlightDTO flightDTO = new FlightDTO();
         flightDTO.setArrival(new Date());
         flightDTO.setDeparture(new Date());
 
@@ -92,28 +93,31 @@ public class FlightController {
         model.addAttribute("flight", flightDTO);
         return "flight_add";
     }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFlight(
             @Valid @ModelAttribute(value = "flight") FlightDTO flight,
             BindingResult result,
             Model model
     ) {
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             flight.setFlightState(FlightState.OPEN);
             flightFacade.createNewFlight(flight);
             return "redirect:/flight/all";
-        } else{
-            for(ObjectError err : result.getAllErrors()) {
-                log.warn("Template problem: "  + err.getDefaultMessage());
+        } else {
+            for (ObjectError err : result.getAllErrors()) {
+                log.warn("Template problem: " + err.getDefaultMessage());
             }
         }
 
         return "flight_add";
     }
 
-    /***
+    /**
+     * *
      * ****************************************************************************************************************************
      * UPDATE FLIGHT formular
+     *
      * @param flightId ID of flight entity
      * @param model formular
      * @return formular
@@ -134,7 +138,7 @@ public class FlightController {
             BindingResult result,
             Model model
     ) {
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             FlightDTO flightDTO = flightFacade.getFlightById(flight.getId());
             //flightDTO.setName(flight.getName());
             //flightDTO.setDeparture(flight.getDeparture());
@@ -142,9 +146,9 @@ public class FlightController {
 
             flightFacade.updateFlight(flight);
             return "redirect:/flight/all";
-        } else{
-            for(ObjectError err : result.getAllErrors()) {
-                log.warn("Template problem: "  + err.getDefaultMessage());
+        } else {
+            for (ObjectError err : result.getAllErrors()) {
+                log.warn("Template problem: " + err.getDefaultMessage());
             }
         }
 
@@ -156,7 +160,7 @@ public class FlightController {
             @PathVariable(value = "id") Long flightId,
             Model model
     ) {
-        if( flightId != null ){
+        if (flightId != null) {
             flightFacade.removeFlight(flightId);
         }
 
@@ -169,9 +173,9 @@ public class FlightController {
             BindingResult result,
             Model model
     ) {
-       if( flightId != null ){
-           flightFacade.removeFlight(flightId);
-       }
+        if (flightId != null) {
+            flightFacade.removeFlight(flightId);
+        }
 
         return "redirect:/flight/all";
     }
@@ -179,6 +183,7 @@ public class FlightController {
     /**
      * *********************************************************************************************************************************
      * Set source port for flight
+     *
      * @param flightId flight
      * @param model formular model
      * @return formular
@@ -187,19 +192,19 @@ public class FlightController {
     public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
             Model model
-    ){
+    ) {
 
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
         List<AirportDTO> airportDTOs = airportFacade.getAllAirports();
         AirportDTO choosed = null;
-        if(flightDTO.getSourceport() != null ){
+        if (flightDTO.getSourceport() != null) {
             choosed = flightDTO.getSourceport();
         }
 
         AirportWrapper wrapper = new AirportWrapper();
         ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
 
-        for(AirportDTO airportDTO : airportDTOs){
+        for (AirportDTO airportDTO : airportDTOs) {
             AirportSelection airportSelection = new AirportSelection();
             airportSelection.setSelected((choosed != null) && airportDTO.getId().equals(choosed.getId()));
             airportSelection.setAirportID(airportDTO.getId().toString());
@@ -225,18 +230,17 @@ public class FlightController {
             @ModelAttribute AirportWrapper wrapper,
             BindingResult result,
             Model model
-            )
-    {
+    ) {
         List<AirportDTO> choosedAirports = new ArrayList<>();
-        if(wrapper != null ) {
+        if (wrapper != null) {
             for (AirportSelection airportSelection : wrapper.getClientList()) {
-                if(airportSelection.getSelected()){
+                if (airportSelection.getSelected()) {
                     choosedAirports.add(airportFacade.getAirportById(Long.parseLong(airportSelection.getAirportID())));
                 }
             }
         }
 
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
             //update just stewards nor other fields
@@ -251,6 +255,7 @@ public class FlightController {
     /**
      * **************************************************************************************************************************
      * Add destination airport to flight
+     *
      * @param flightId flight id
      * @param model formular model
      * @return formular
@@ -259,19 +264,19 @@ public class FlightController {
     public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
             Model model
-    ){
+    ) {
 
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
         List<AirportDTO> airportDTOs = airportFacade.getAllAirports();
         AirportDTO choosed = null;
-        if(flightDTO.getDestinationport() != null ){
+        if (flightDTO.getDestinationport() != null) {
             choosed = flightDTO.getDestinationport();
         }
 
         AirportWrapper wrapper = new AirportWrapper();
         ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
 
-        for(AirportDTO airportDTO : airportDTOs){
+        for (AirportDTO airportDTO : airportDTOs) {
             AirportSelection airportSelection = new AirportSelection();
             airportSelection.setSelected((choosed != null) && airportDTO.getId().equals(choosed.getId()));
             airportSelection.setAirportID(airportDTO.getId().toString());
@@ -297,18 +302,17 @@ public class FlightController {
             @ModelAttribute AirportWrapper wrapper,
             BindingResult result,
             Model model
-    )
-    {
+    ) {
         List<AirportDTO> choosedAirports = new ArrayList<>();
-        if(wrapper != null ) {
+        if (wrapper != null) {
             for (AirportSelection airportSelection : wrapper.getClientList()) {
-                if(airportSelection.getSelected()){
+                if (airportSelection.getSelected()) {
                     choosedAirports.add(airportFacade.getAirportById(Long.parseLong(airportSelection.getAirportID())));
                 }
             }
         }
 
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
             //update just stewards nor other fields
@@ -322,6 +326,7 @@ public class FlightController {
 
     /**
      * Add steward to flight
+     *
      * @param flightId flight id
      * @param model formular model
      * @return formular
@@ -330,14 +335,14 @@ public class FlightController {
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
             Model model
-    ){
+    ) {
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
         List<StewardDTO> flightStewardDTOs = flightDTO.getStewards();
         List<StewardDTO> allStewardsDTOs = stewardFacade.getAllStewards();
         StewardWrapper wrapper = new StewardWrapper();
         ArrayList<StewardSelection> allClientsWithSelection = new ArrayList<>();
 
-        for(StewardDTO stewardDTO : allStewardsDTOs){
+        for (StewardDTO stewardDTO : allStewardsDTOs) {
             StewardSelection clientWithSelection = new StewardSelection();
             clientWithSelection.setSelected(flightStewardDTOs.contains(stewardDTO));
             clientWithSelection.setStewardID(stewardDTO.getId().toString());
@@ -361,28 +366,32 @@ public class FlightController {
             @ModelAttribute StewardWrapper wrapper,
             BindingResult result,
             Model model
-    ){
+    ) {
 
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
-            if(wrapper != null ) {
+            if (wrapper != null) {
 //                flightDTO.setStewards(null);
                 flightDTO = flightFacade.updateFlight(flightDTO);
                 for (StewardSelection stewardSelection : wrapper.getClientList()) {
-                    if(stewardSelection.getSelected()){
-                        try {
-                            flightDTO = flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                            System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
-                        } catch (Exception e){
-                            System.out.print("Steward already exists");
+                    if (stewardSelection.getSelected()) {
+                        if (!flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))) {
+                            try {
+                                flightDTO = flightFacade.addStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                                System.out.print("ADDING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+                            } catch (Exception e) {
+                                System.out.print("Steward already exists");
+                            }
                         }
                     } else {
-                        try {
-                            flightDTO = flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
-                            System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
-                        } catch (Exception e){
-                            System.out.print("Steward non exists");
+                        if (flightDTO.getStewards().contains(stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())))) {
+                            try {
+                                flightDTO = flightFacade.removeStewardToFlight(flightDTO, (stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID()))));
+                                System.out.print("REMOVING STEWARD " + stewardFacade.getSteward(Long.parseLong(stewardSelection.getStewardID())));
+                            } catch (Exception e) {
+                                System.out.print("Steward non exists");
+                            }
                         }
                     }
                 }
@@ -391,11 +400,14 @@ public class FlightController {
             //update just stewards nor other fields
             return "redirect:/flight/all";
         }
+
         return "steward_flight";
     }
+
     /**
      * *********************************************************************************************************************************
      * Set airplane for flight
+     *
      * @param flightId flight
      * @param model formular model
      * @return formular
@@ -404,20 +416,20 @@ public class FlightController {
     public String airplane(
             @PathVariable(value = "id") Long flightId,
             Model model
-    ){
+    ) {
 
         FlightDTO flightDTO = flightFacade.getFlightById(flightId);
         //todo just available
         List<AirplaneDTO> airplanes = airplaneFacade.getAllAirplanes();
         AirplaneDTO choosed = null;
-        if(flightDTO.getAirplane() != null ){
+        if (flightDTO.getAirplane() != null) {
             choosed = flightDTO.getAirplane();
         }
 
         AirplaneWrapper wrapper = new AirplaneWrapper();
         ArrayList<AirplaneSelection> allClientsWithSelection = new ArrayList<>();
 
-        for(AirplaneDTO airplaneDTO : airplanes){
+        for (AirplaneDTO airplaneDTO : airplanes) {
             AirplaneSelection airplaneSelection = new AirplaneSelection();
             airplaneSelection.setSelected((choosed != null) && airplaneDTO.getId().equals(choosed.getId()));
             airplaneSelection.setAirplaneID(airplaneDTO.getId().toString());
@@ -443,18 +455,17 @@ public class FlightController {
             @ModelAttribute AirplaneWrapper wrapper,
             BindingResult result,
             Model model
-    )
-    {
+    ) {
         List<AirplaneDTO> chooseAirplane = new ArrayList<>();
-        if(wrapper != null ) {
+        if (wrapper != null) {
             for (AirplaneSelection airplaneSelection : wrapper.getClientList()) {
-                if(airplaneSelection.getSelected()){
+                if (airplaneSelection.getSelected()) {
                     chooseAirplane.add(airplaneFacade.getAirplaneById(Long.parseLong(airplaneSelection.getAirplaneID())));
                 }
             }
         }
 
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             //load basic
             FlightDTO flightDTO = flightFacade.getFlightById(flightId);
             //update just stewards nor other fields
