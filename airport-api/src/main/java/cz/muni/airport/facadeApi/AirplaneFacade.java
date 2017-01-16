@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.airport.facadeApi;
 
 import java.util.List;
@@ -49,16 +44,34 @@ public interface AirplaneFacade {
     List<AirplaneDTO> getAllAirplanes();
 
     /**
-     * 
-     * @param name
-     * @return 
+     * Get list of airples specified by id
+     * @param name name to search for
+     * @return  list of airplanes
      */
     List<AirplaneDTO> getAirplaneByName(String name);
 
+    /**
+     * Get airplane specified by id
+     * @param id Airplane object id
+     * @return AirplaneDTO
+     */
     AirplaneDTO getAirplaneById(Long id);
 
+    /**
+     * Checks availibility of airplane for given flight.
+     * 
+     * @param airplaneDTO Airplane object as DTO
+     * @param flightDTO Flight object as DTO
+     * @return true if airplane is available for flight, otherwise false
+     */
     public boolean isAvailable(AirplaneDTO airplaneDTO, FlightDTO flightDTO);
 
+    /**
+     * Get list of all available airplanes for given flight
+     *
+     * @param flightDTO the flight to find available airplanes
+     * @return available airplanes for given flight
+     */
     public List<AirplaneDTO> getAvailableAirplanes(FlightDTO flightDTO);
 
 }
