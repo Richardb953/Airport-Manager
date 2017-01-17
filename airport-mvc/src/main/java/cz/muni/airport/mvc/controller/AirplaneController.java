@@ -3,6 +3,7 @@ package cz.muni.airport.mvc.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -34,14 +35,15 @@ public class AirplaneController {
     @Autowired
     private AirplaneFacade airplaneFacade;
     private final static Logger log = LoggerFactory.getLogger(AirplaneController.class);
-    
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(Model model) { 
         model.addAttribute("airplanes", airplaneFacade.getAllAirplanes());
         model.addAttribute("newAirplane", new AirplaneDTO());
         return "airplanes";
     }
-
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addAirplane(@Valid @ModelAttribute("newAirplane") AirplaneDTO newAirplane, Model model, 
             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -49,19 +51,19 @@ public class AirplaneController {
         AirplaneDTO airplaneDTO = airplaneFacade.createAirplane(newAirplane);
             return "redirect:/airplane/all"; 
     }
-    
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteAirplane(@PathVariable long id, RedirectAttributes redirectAttributes) {
         airplaneFacade.deleteAirplane(id);
         return "redirect:/airplane/all";
     }
-    
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/semiupdate/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model){
         model.addAttribute("airplaneToUpdate", airplaneFacade.getAirplaneById(id));
         return "update_airplane";
     }
-    
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String updateAirplane(@PathVariable long id, @Valid @ModelAttribute("airplaneToUpdate") AirplaneDTO airplaneToUpdate, Model model,
             BindingResult bindingResult) {

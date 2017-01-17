@@ -1,2 +1,26 @@
-# Airport-Manager
-Create an information system managing flight records at an airport. The system should allow the users to enter records about stewards, airplanes and destinations. It should also be possible to update and delete these records. A destination should contain at least the information about the location of an airport (country, city). Airplane details should contain the capacity of the plane and its name (and possibly its type as well). A steward is described by his first and last name. The system should also allow us to record a flight. When recording a flight, it is necessary to set the departure and arrival times, the origin, the destination and the plane. The system should also check that the plane does not have another flight scheduled during the time of the this flight. It should also be possible to assign (remove) stewards to (from) a flight while checking for the steward's availability. The ultimate goal is to have a system capable of listing flights ordered by date and displaying the flight details (origin, destination, departure time, arrival time, plane, list of stewards).
+Airport-Manager, a school project pro class PA165 Enterprise Java.
+
+## Running Airport-Manager
+In folder Airport-Manager run:  `mvn clean install && tomcat7:run`    
+Airport-manager runs on: [`http://localhost:8082/pa165`  ](http://localhost:8082/pa165)
+
+## Login credentials
+### Role MANAGER:     
+* _username_: `manager`   
+* _password_: `manager`   
+
+Manager has access to everything. Can create, update, delete all entities.
+
+### Role CASHIER:     
+* _username_: `cashier`   
+* _password_: `cashier`   
+
+Can view only Flights. Is able to create, update, delete flights with existing stewards, airplanes and airports. 
+
+## Rest interface
+
+## Team members
+* Richard Bariny - (učo: 461431,Github name: [Richardb953](https://github.com/Richardb953)) - team leader
+* Karolína Božková (učo: 422243, Github name: [Kayeeec](https://github.com/Kayeeec))
+* Andrea Navrátilová - (učo: 396484,Github name: [andrea-n](https://github.com/andrea-n)) 
+* Jiří Krejčí - (učo: 359640,Github name: [xkrejci7](https://github.com/xkrejci7))

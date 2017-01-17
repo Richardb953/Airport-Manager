@@ -3,6 +3,7 @@ package cz.muni.airport.mvc.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -73,6 +74,7 @@ public class FlightController {
      * @param model data to display
      * @return JSP page name
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("flights", flightFacade.getAllFlights());
@@ -86,6 +88,7 @@ public class FlightController {
      * @param model of formular
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addFlight(Model model) {
 
@@ -99,6 +102,7 @@ public class FlightController {
         return "flight_add";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFlight(
             @Valid @ModelAttribute(value = "flight") FlightDTO flight,
@@ -126,6 +130,7 @@ public class FlightController {
      * @param model formular
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updateFlight(
             @PathVariable(value = "id") Long flightId,
@@ -136,6 +141,7 @@ public class FlightController {
         return "flight_update";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
     public String updateFlight(
             @Valid FlightDTO flight,
@@ -165,6 +171,7 @@ public class FlightController {
      * @param flightId ID of removed flight
      * @return template
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
     public String removeFlight(
             @PathVariable(value = "id") Long flightId
@@ -176,6 +183,7 @@ public class FlightController {
         return "redirect:/flight/all";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "remove/{id}", method = RequestMethod.POST)
     public String removeFlight(
             @PathVariable(value = "id") Long flightId,
@@ -196,6 +204,7 @@ public class FlightController {
      * @param model formular model
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.GET)
     public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
@@ -221,7 +230,7 @@ public class FlightController {
         return "flight_add_airport";
 
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airport/source", method = RequestMethod.POST)
     public String sourceAirport(
             @PathVariable(value = "id") Long flightId,
@@ -256,6 +265,7 @@ public class FlightController {
      * @param model formular model
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.GET)
     public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
@@ -282,6 +292,7 @@ public class FlightController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airport/destination", method = RequestMethod.POST)
     public String destinationAirport(
             @PathVariable(value = "id") Long flightId,
@@ -317,6 +328,7 @@ public class FlightController {
      * @param model formular model
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.GET)
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
@@ -346,6 +358,7 @@ public class FlightController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/steward", method = RequestMethod.POST)
     public String stewardFlight(
             @PathVariable(value = "id") Long flightId,
@@ -388,6 +401,7 @@ public class FlightController {
      * @param model formular model
      * @return formular
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airplane", method = RequestMethod.GET)
     public String airplane(
             @PathVariable(value = "id") Long flightId,
@@ -424,7 +438,7 @@ public class FlightController {
         return "flight_add_airplane";
 
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/{id}/airplane", method = RequestMethod.POST)
     public String airplane(
             @PathVariable(value = "id") Long flightId,
@@ -457,6 +471,7 @@ public class FlightController {
      * @param choosed picked Airports
      * @return DataView
      */
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     private static ArrayList<AirportSelection> processData(List<AirportDTO> airportDTOs, AirportDTO choosed){
         ArrayList<AirportSelection> allClientsWithSelection = new ArrayList<>();
         for(AirportDTO airportDTO : airportDTOs){

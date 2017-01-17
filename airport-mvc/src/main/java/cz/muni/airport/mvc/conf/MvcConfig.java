@@ -46,7 +46,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  */
 @EnableWebMvc
 @SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
-@Import({ServiceConfiguration.class, RestConfig.class})
+@Import({ServiceConfiguration.class,RestConfig.class, SecurityConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);

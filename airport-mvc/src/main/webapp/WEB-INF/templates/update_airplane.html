@@ -12,6 +12,7 @@
                     <div class="card card-block">
                         <h4 th:text="#{airplane.update}">Update airplane</h4>
                         <form class="form" id="update-form" method="post" action="#" th:action="@{'/airplane/update/'+${airplaneToUpdate.id}}" th:object="${airplaneToUpdate}">
+                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -22,7 +23,7 @@
                                         <label for="" th:text="#{airplane.type}">Type</label>
                                         <select class="custom-select form-control" id="type" name="type" th:field="${airplaneToUpdate.type}">
                                             <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
-                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}"></option>           
+                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}" th:text="#{${type}}"></option>           
                                         </select>
                                     </div>
                                 </div>
