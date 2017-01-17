@@ -33,9 +33,9 @@ import cz.muni.airport.facadeApi.StewardFacade;
 import cz.muni.airport.mvc.data.AirplaneSelection;
 import cz.muni.airport.mvc.data.AirplaneWrapper;
 import cz.muni.airport.mvc.data.AirportSelection;
-import cz.muni.airport.mvc.data.StewardWrapper;
 import cz.muni.airport.mvc.data.AirportWrapper;
 import cz.muni.airport.mvc.data.StewardSelection;
+import cz.muni.airport.mvc.data.StewardWrapper;
 
 /**
  * Created by Richard Bariny on 10.12.2016.

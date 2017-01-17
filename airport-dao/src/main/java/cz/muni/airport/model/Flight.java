@@ -2,7 +2,6 @@ package cz.muni.airport.model;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -64,10 +63,10 @@ public class Flight {
     @ManyToOne()
     private Airplane airplane;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport destinationPort;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport sourcePort;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

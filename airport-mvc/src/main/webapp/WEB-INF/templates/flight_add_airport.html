@@ -65,25 +65,27 @@
 			</div>
 		</div>
     </div>
-    <h3 th:text="#{flight.airplane.choose}">Choose Airplane</h3>
     <div class="row">
         <div class="col-xs-12">
             <div class="card card-block">
+				<h3 th:text="#{flight.airport.choose}">Choose Airport</h3>
                 <form class="form single-checkbox" id="airplane-form" method="post">
                     <table id="airplanes" class="port-table table table-striped table-responsive" >
                         <thead>
                             <tr>
-                                <th th:text="#{airplane.id}">
-                                    Airplane ID
+								<th>
                                 </th>
-                                <th th:text="#{airplane.name}">
-                                    Airplane name
+                                <th th:text="#{airport.id}">
+                                   
                                 </th>
-                                <th th:text="#{airplane.capacity}">
-                                    Airport capacity
+                                <th th:text="#{airport.iata}">
+                                    
                                 </th>
-                                <th th:text="#{airplane.type}">
-                                    Airport type
+                                <th th:text="#{airport.name}">
+                                    
+                                </th>
+                                <th th:text="#{airport.country}">
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -112,9 +114,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="row">
-                        <button class="btn btn-success button_accept" th:text="#{flight.btn.update}" >Update</button>
-                    </div>
+                    <button class="btn btn-success button_accept" th:text="#{flight.btn.update}" >Update</button>
                 </form>
             </div>
         </div>

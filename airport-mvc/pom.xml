@@ -26,6 +26,11 @@
             <artifactId>airport-dao</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cz.muni</groupId>
+            <artifactId>airport-rest</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
 
         <dependency>

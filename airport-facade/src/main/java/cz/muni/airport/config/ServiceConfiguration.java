@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 
 import cz.muni.airport.database.Config;
 import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
@@ -41,6 +42,7 @@ public class ServiceConfiguration {
             mapping(Airplane.class, AirplaneDTO.class);
             mapping(Steward.class, StewardDTO.class);
             mapping(Airport.class, AirportDTO.class);
+            mapping(Airport.class, AirportCreateDTO.class);
             mapping(Flight.class, FlightCreateDTO.class);
         }
     }

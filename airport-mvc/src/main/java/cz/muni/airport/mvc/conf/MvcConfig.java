@@ -35,6 +35,7 @@ import java.util.Locale;
 import javax.validation.Validator;
 
 import cz.muni.airport.config.ServiceConfiguration;
+import cz.muni.airport.rest.conf.RestConfig;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 
@@ -45,7 +46,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  */
 @EnableWebMvc
 @SpringBootApplication(scanBasePackages = {"cz.muni.airport"} )
-@Import({ServiceConfiguration.class, SecurityConfig.class})
+@Import({ServiceConfiguration.class,RestConfig.class, SecurityConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
