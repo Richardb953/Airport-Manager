@@ -13,7 +13,8 @@
 <![endif]-->
 <!--[if (gte IE 10)|!(IE)]><!-->
 <html lang="cs" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!--<![endif]-->
 
 	<head>
@@ -30,6 +31,7 @@
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/flag-icon.min.css" />
 		<link rel="stylesheet" type="text/css" href="/pa165/static/css/styles.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css" />
 
@@ -81,7 +83,18 @@
 		<footer class="footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12 text-right">
+					<div class="col-xs-6 text-left">
+						<a href="?lang=en" class="lng-switch">
+							<span class="flag-icon flag-icon-gb"></span>
+						</a>
+						<a  href="?lang=cs" class="lng-switch">
+							<span class="flag-icon flag-icon-cz"></span>
+						</a>
+						<a  href="?lang=sk" class="lng-switch">
+							<span class="flag-icon flag-icon-sk"></span>
+						</a>
+					</div>
+					<div class="col-xs-6 text-right footer-copy">
 						<p>Airport Manager / PV165</p>
 					</div>
 				</div>
