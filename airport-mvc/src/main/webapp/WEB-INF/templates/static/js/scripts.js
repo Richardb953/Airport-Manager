@@ -25,15 +25,30 @@ $(document).ready(function(){
 		$(this).parent().find('.error-msg').fadeIn('fast');
     });
 	
+	jQuery.validator.addMethod("iata", function(value, element) {
+		return this.optional(element) || /^[A-Z][A-Z][A-Z]$/.test(value);
+	}, "Please enter correct IATA code");
+
+	
 	$("#add-form").validate({
 		submitHandler: function(form) {
 			form.submit();
-		}
+		},
+		rules: {
+            iata: {
+                iata: true
+            }
+        }
 	});
 
 	$("#update-form").validate({
 		submitHandler: function(form) {
 			form.submit();
-		}
+		},
+		rules: {
+            iata: {
+                iata: true
+            }
+        }
 	});
 } );

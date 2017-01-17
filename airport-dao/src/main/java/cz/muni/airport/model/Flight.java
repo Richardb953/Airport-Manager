@@ -64,10 +64,10 @@ public class Flight {
     @ManyToOne()
     private Airplane airplane;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport destinationPort;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport sourcePort;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
