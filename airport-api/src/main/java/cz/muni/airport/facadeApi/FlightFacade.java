@@ -62,7 +62,7 @@ public interface FlightFacade {
     FlightDTO updateFlight(FlightDTO flightDTO);
 
     /**
-     * Validate Flight - times, airports and airplane availibilitz The system should also check that
+     * Validate Flight - times, airports and airplane availibility. The system should also check that
      * the plane does not have another flight scheduled during the time of the this flight. It
      * should also checking for the steward's availability.
      *

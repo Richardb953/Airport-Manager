@@ -53,7 +53,6 @@ public class FlightFacadeImpl implements FlightFacade {
 
         FlightState flightState = convertFlightState(flightCreateDTO.getFlightState());
 
-        //todo premysliet ci moze byt letisko null ak ano state by nemal byt validated --skor vyhodit excptn
         Airport destAirport = flightCreateDTO.getDestinationport() == null ? null :  airportService.findAirportById(flightCreateDTO.getDestinationport().getId());
         Airport sourcAirport = flightCreateDTO.getSourceport() == null ? null :  airportService.findAirportById(flightCreateDTO.getSourceport().getId());
 

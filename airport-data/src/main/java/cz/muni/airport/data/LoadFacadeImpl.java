@@ -67,14 +67,14 @@ public class LoadFacadeImpl implements LoadFacade {
         Steward steward10 = createSteward("Marek", "Petrovic", new ArrayList<>());
         Steward steward11 = createSteward("Karolina", "Svetoznama", new ArrayList<>());
 
-        Airport airport = createAirport("Dublin", "Dublin-888-aa-87", "Irsko", "Dublin");
-        Airport airport1 = createAirport("Bratislava - Stefanik", "Bratislava-8sf-a-2001", "Slovensko", "Bratislava");
-        Airport airport2 = createAirport("Kosicke hlavne", "Kosice-7k8-KK-17", "Slovensko", "Kosice");
-        Airport airport3 = createAirport("Londyn Heatway", "London-ENG-HH-87", "Anglicko", "Londyn");
-        Airport airport4 = createAirport("Berlin neuer", "Berlin-NN8-7a-82", "Nemecko", "Berlin");
-        Airport airport5 = createAirport("Vieden BaufHaufen", "Vien-VV11-b-81", "Rakusko", "Vieden");
-        Airport airport6 = createAirport("New York city", "NC-8cc-New-2017", "USA", "New York");
-        Airport airport7 = createAirport("Rio", "DeJanEro-188-SA-87", "Brazilia", "Rio");
+        Airport airport = createAirport("Dublin", "DBL", "Irsko", "Dublin");
+        Airport airport1 = createAirport("Bratislava - Stefanik", "BRA", "Slovensko", "Bratislava");
+        Airport airport2 = createAirport("Kosicke hlavne", "KOS", "Slovensko", "Kosice");
+        Airport airport3 = createAirport("Londyn Heatway", "LON", "Anglicko", "Londyn");
+        Airport airport4 = createAirport("Berlin neuer", "BER", "Nemecko", "Berlin");
+        Airport airport5 = createAirport("Vieden BaufHaufen", "VIE", "Rakusko", "Vieden");
+        Airport airport6 = createAirport("New York city", "NCY", "USA", "New York");
+        Airport airport7 = createAirport("Rio", "RIO", "Brazilia", "Rio");
 
         List<Steward> stewardList = new ArrayList<>();
         stewardList.add(steward);

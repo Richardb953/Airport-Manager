@@ -18,6 +18,7 @@ public interface FlightDAO {
      * CREATE FLIGHT
      * @param flight entity of flight object
      * @return Flight object
+     * @throws IllegalArgumentException if flight is null
      */
     Flight addFlight(Flight flight) throws IllegalArgumentException;
 
@@ -33,12 +34,14 @@ public interface FlightDAO {
      * UPDATE FLIGHT
      * @param flight entity of flight object
      * @return Flight object
+     * @throws IllegalArgumentException if flight is null
      */
     Flight updateFlight(Flight flight) throws IllegalArgumentException;
 
     /**
      * DELETE FLIGHT
      * @param flight flight entity of flight object
+     * @throws IllegalArgumentException if flight is null
      */
     void removeFlight(Flight flight) throws IllegalArgumentException;;
 

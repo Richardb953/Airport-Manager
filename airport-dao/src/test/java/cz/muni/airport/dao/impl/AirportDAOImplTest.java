@@ -114,22 +114,6 @@ public class AirportDAOImplTest {
         airportDAO.updateAirport(null);
     }
 
-//	/**
-//	 * Test of removeAirport method, of class AirportDAOImpl.
-//	 */
-//	@Test(expected = HibernateOptimisticLockingFailureException.class)
-//	public void testUpdateAirportId() {
-//		Airport airport = new Airport();
-//		airport.setName("Brno letiste");
-//		airport.setCountry("Ceska republika");
-//		airport.setCity("Brno");
-//		airport.setIata("BRN");
-//		airportDAO.addAirport(airport);
-//		
-//		Airport airportUpdate = airportDAO.getAirportsByName("Brno letiste").get(0);
-//		airportUpdate.setId(new Long(10));
-//		airportDAO.updateAirport(airportUpdate);
-//	}
     /**
      * Test of removeAirport method, of class AirportDAOImpl.
      */
