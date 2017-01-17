@@ -7,17 +7,12 @@
 
     <div layout:fragment="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 offset-sm-0">
                 <div class="home mt-3">
-                    
-                    <h1 th:text="#{access.denied.title}"/>
-                    
-                    
-                    <div class="align-middle row mt-2 card card-block">
+                    <div class="align-middle mt-2 card card-block">
+						<h1 th:text="#{access.denied.title}"/>
                         <p th:text="#{access.denied.msg}"/>
                     </div>
-                        
-                    
                 </div>
             </div>
         </div>
