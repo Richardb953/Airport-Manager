@@ -185,7 +185,6 @@ public class Flight {
                 ", airplane=" + airplane +
                 ", destinationPort=" + destinationPort +
                 ", sourcePort=" + sourcePort +
-                ", stewards=" + stewards +
                 '}';
     }
 
