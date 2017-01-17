@@ -7,9 +7,10 @@ $(document).ready(function(){
 	});
 	
     $('.datatable').each(function() {
+		var target = $(this).data('disabled').split(',').map(function(item) { return parseInt(item, 10); });
     	$(this).dataTable( {
 		"columnDefs": [
-				{ "orderable": false, "targets": $(this).data('disabled').split(',').map(function(item) { return parseInt(item, 10); }) }
+				{ "orderable": false, "targets": target }
 			]
 		} );
     });
