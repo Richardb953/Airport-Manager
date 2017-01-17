@@ -4,7 +4,7 @@ package cz.muni.airport.dto;
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-public class AirportDTO {
+public class AirportDTO extends AirportCreateDTO {
 
     private Long id;
     private String iata;
