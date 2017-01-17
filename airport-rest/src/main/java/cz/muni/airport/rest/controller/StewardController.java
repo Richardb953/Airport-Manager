@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.StewardFacade;
+import java.util.ArrayList;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -38,7 +39,13 @@ public class StewardController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
     public Collection<StewardDTO> getAllStewards() {
-        return stewardFacade.getAllStewards();
+
+        Collection<StewardDTO> toReturn = new ArrayList<>();
+        for (StewardDTO s : stewardFacade.getAllStewards()) {
+            s.setFlights(new ArrayList<>());
+            toReturn.add(s);
+        }
+        return toReturn;
     }
 
     /**
@@ -50,7 +57,9 @@ public class StewardController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/id/{id}")
     public StewardDTO getStewardById(@PathVariable long id) {
-        return stewardFacade.getSteward(id);
+        StewardDTO toReturn = stewardFacade.getSteward(id);
+        toReturn.setFlights(new ArrayList<>());
+        return toReturn;
     }
 
     /**
@@ -63,7 +72,13 @@ public class StewardController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/name/{first}/{last}")
     public Collection<StewardDTO> getStewardByName(@PathVariable String first, @PathVariable String last) {
-        return stewardFacade.getStewardByName(first, last);
+
+        Collection<StewardDTO> toReturn = new ArrayList<>();
+        for (StewardDTO s : stewardFacade.getStewardByName(first, last)) {
+            s.setFlights(new ArrayList<>());
+            toReturn.add(s);
+        }
+        return toReturn;
     }
 
     /**

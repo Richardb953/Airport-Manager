@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
+import cz.muni.airport.dto.StewardDTO;
 import cz.muni.airport.facadeApi.FlightFacade;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -39,6 +41,15 @@ public class FlightController {
             AirplaneDTO plane = f.getAirplane();
             plane.setFlights(new ArrayList<>());
             f.setAirplane(plane);
+
+            List<StewardDTO> stewardToReturn = new ArrayList<>();
+            for (StewardDTO s : f.getStewards()) {
+                s.setFlights(new ArrayList<>());
+                stewardToReturn.add(s);
+            }
+            
+            f.setStewards(stewardToReturn);
+
             toReturn.add(f);
         }
         return toReturn;
