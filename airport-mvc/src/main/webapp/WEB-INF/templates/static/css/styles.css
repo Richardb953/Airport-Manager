@@ -387,4 +387,43 @@ strong {
 	position: absolute !important;
 }
 
+.lng-switch {
+	display: inline-block;
+	margin-right: 0.5em;
+	font-size: 1.25em;
+}
+
+@media screen and (max-width: 700px) {
+    .header {
+		font-size: 0.9em;
+	}
+	
+	.main-nav ul li a {
+		line-height: 3.9em;
+	}
+	
+	.nav-brand {
+		padding-top: 0.35em;
+	}
+}
+
+@media screen and (max-width: 540px) {
+    .header {
+		height: auto;
+	}
+	
+	.main-nav {
+		position: relative;
+		float: right;
+	}
+	
+	.main-nav ul {
+		padding-left: 0;
+	}
+	
+	.footer-copy {
+		font-size: 0.85em;
+	}
+}
+
 /*# sourceMappingURL=styles.css.map */

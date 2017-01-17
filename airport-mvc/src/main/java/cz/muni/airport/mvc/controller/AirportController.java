@@ -1,6 +1,7 @@
 package cz.muni.airport.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class AirportController {
     private AirportFacade airportFacade;
 
 //    private final static Logger log = LoggerFactory.getLogger(AirportController.class);
-
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String getAllAirports(Model model) {
         model.addAttribute("airports", airportFacade.getAllAirports());
@@ -37,6 +38,7 @@ public class AirportController {
         return "airports";
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String createAirport(@Valid @ModelAttribute("newAirport") AirportDTO newAirport, Model model,
             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -45,17 +47,21 @@ public class AirportController {
         return "redirect:/airport/all";
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String removeAirport(@PathVariable long id, RedirectAttributes redirectAttributes) {
         airportFacade.removeAirport(id);
         return "redirect:/airport/all";
     }
-    
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model){
         model.addAttribute("airportToUpdate", airportFacade.getAirportById(id));
         return "airport_update";
     }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String updateAirport(@PathVariable long id, @Valid @ModelAttribute("airportToUpdate") AirportDTO airportToUpdate, Model model,
             BindingResult bindingResult) {

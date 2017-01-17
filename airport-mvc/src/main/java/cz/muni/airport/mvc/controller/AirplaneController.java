@@ -35,8 +35,8 @@ public class AirplaneController {
     @Autowired
     private AirplaneFacade airplaneFacade;
     private final static Logger log = LoggerFactory.getLogger(AirplaneController.class);
-    
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(Model model) { 
         model.addAttribute("airplanes", airplaneFacade.getAllAirplanes());
