@@ -1,150 +1,95 @@
 ﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="layouts/simpleLayout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
 
-	<div layout:fragment="content">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="card card-block">
-					<table id="airports" class="datatable table table-striped table-responsive" data-disabled="5,6">
-						<thead>
-							<tr>
-								<th>
-									Airport id
-								</th>
-								<th>
-									IATA
-								</th>
-								<th>
-									Name
-								</th>
-								<th>
-									Country
-								</th>
-								<th>
-									City
-								</th>
-								<th>
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card card-block">
+                    <table id="airports" class="datatable table table-striped table-responsive" data-disabled="5,6">
+                        <thead>
+                            <tr>
+                                <th th:text="#{airport.id}" />
+                                <th th:text="#{airport.name}"  />
+                                <th th:text="#{airport.iata}" />
+                                <th th:text="#{airport.country}" />
+                                <th th:text="#{airport.city}" />
+                                <th />
+                                <th />
+                            </tr>
+                        </thead>
+                        <tbody th:if="${not #lists.isEmpty(airports)}">
+                            <tr th:each="airport: ${airports}">
+                                <td data-name="id" th:text="${airport.id}" />
+                                <td data-name="name"  th:text="${airport.name}" />
+                                <td data-name="iata"  th:text="${airport.iata}" />
+                                <td data-name="country"  th:text="${airport.country}" />
+                                <td data-name="city"  th:text="${airport.city}" />
+                                <td>
+                                    <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airport/delete/'+${airport.id}">
+                                        <button class="btn btn-danger" th:attr="data-id=${airport.id}" th:text="#{airport.removebtn}">Remove</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class="form" id="update-form" method="get" th:attr="action='/pa165/airport/update/'+${airport.id}">
+                                        <button class="btn btn-success btn-update" th:attr="data-id=${airport.id}"  th:text="#{airport.updatebtn}">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody th:if="${#lists.isEmpty(airports)}">
+                            <tr>
+                                <td th:text="#{airport.nothingFound}"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <div class="card card-block">
+                    <h4 th:text="#{airport.addLabel}">Add airport</h4>
+                    <form class="form" id="add-form" method="post" action="#" th:action="@{/airport/add}" th:object="${newAirport}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" th:text="#{airport.name}">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required="required" th:field="*{name}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" th:text="#{airport.iata}">IATA</label>
+                                    <input type="text" class="form-control" id="iata" name="iata" required="required" th:field="*{iata}"/>
+                                </div>
 
-								</th>
-								<th>
-
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td data-name="id">
-									2
-								</td>
-								<td data-name="iata">
-									BRN
-								</td>
-								<td data-name="name">
-									Brno airport
-								</td>
-								<td data-name="country">
-									Česká republika
-								</td>
-								<td data-name="city">
-									Brno
-								</td>
-								<td>
-									<button class="btn btn-danger" data-id="2">Remove</button>
-									<!-- do data-id prosim id letiste!!!-->
-								</td>
-								<td>
-									<button class="btn btn-success btn-update" data-id="2">Update</button>
-									<!-- do data-id prosim id letiste!!!-->
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-2">
-			<div class="col-md-6 push-md-6">
-				<div id="update" class="hidden">
-					<div class="card card-block">
-						<h4>Update airport</h4>
-						<form class="form" id="update-form" method="post" action="">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">IATA</label>
-										<input type="text" class="form-control" id="iata" name="iata" required="required"/>
-									</div>
-									<div class="form-group">
-										<label for="">Country</label>
-										<input type="text" class="form-control" id="country" name="country" required="required"/>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">Name</label>
-										<input type="text" class="form-control" id="name" name="name" required="required"/>
-									</div>
-									<div class="form-group">
-										<label for="">City</label>
-										<input type="text" class="form-control" id="city" name="city" required="required"/>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="">Id</label>
-										<input type="text" disabled="disabled" class="form-control" id="id" name="id"/>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 text-right">
-									<button class="btn btn-default btn-cancel" type="reset">Cancel</button>
-									<button class="btn btn-success" type="submit">Update</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 pull-md-6">
-				<div class="card card-block">
-					<h4>Add airport</h4>
-					<form class="form" id="add-form" method="post" action="">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">IATA</label>
-									<input type="text" class="form-control" id="iata" name="iata" required="required"/>
-								</div>
-								<div class="form-group">
-									<label for="">Country</label>
-									<input type="text" class="form-control" id="country" name="country" required="required"/>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Name</label>
-									<input type="text" class="form-control" id="name" name="name" required="required"/>
-								</div>
-								<div class="form-group">
-									<label for="">City</label>
-									<input type="text" class="form-control" id="city" name="city" required="required"/>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 text-right">
-								<button class="btn btn-success" type="submit">Add</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" th:text="#{airport.country}">Country</label>
+                                    <input type="text" class="form-control" id="country" name="country" required="required" th:field="*{country}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" th:text="#{airport.city}">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" required="required" th:field="*{city}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <button class="btn btn-success" type="submit" th:text="#{airport.addbtn}">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

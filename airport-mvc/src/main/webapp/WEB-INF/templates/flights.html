@@ -3,89 +3,107 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorator="layouts/simpleLayout">
-	
-	<div layout:fragment="content">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="card card-block">
-					<table id="flights" class="datatable table table-striped table-responsive" data-disabled="9,10">
-						<thead>
-							<tr>
-								<th th:text="#{flight.id}">
-									Flight ID
-								</th>
-								<th th:text="#{flight.name}">
-									Flight Name
-								</th>
-								<th th:text="#{flight.source}">
-									Source port
-								</th>
-								<th th:text="#{flight.destination}">
-									Destination port
-								</th>
-								<th th:text="#{flight.departure}">
-									Departure
-								</th>
-								<th th:text="#{flight.arrival}">
-									Arrival
-								</th>
-								<th th:text="#{flight.airplane}">
-									Airplane
-								</th>
-								<th th:text="#{flight.stewards}">
-									Steward
-								</th>
-								<th th:text="#{flight.passagers}">
-									Passengers
-								</th>
-							</tr>
-						</thead>
-						<tbody >
-							<tr th:each="flight : ${flights}">
-								<td data-name="id" th:text="${flight.id}">
-									Flight ID
-								</td>
-								<td data-name="name" th:text="${flight.name}">
-									Flight name
-								</td>
-								<td data-name="source" th:text="${flight.sourceport != null} ? ${flight.sourceport.getName()}">
-									Source Port
-								</td>
-								<td data-name="destination" th:text="${flight.destinationport != null} ? ${flight.destinationport.getName()}">
-									Destination Port
-								</td>
-								<td data-name="departure" th:text="${flight.departure}">
-									Departure Time
-								</td>
-								<td data-name="arrival" th:text="${flight.arrival}">
-									Arrival Time
-								</td>
-								<td data-name="airplane" th:text="${flight.airplane != null} ? ${flight.airplane.name}">
-									Airplane
-								</td>
-								<td data-name="stewards" th:text="${flight.stewards.size()}">
-									Stewards
-									<span>
-										<button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.steward.add}">Add Steward</button>
-									</span>
-								</td>
-								<td data-name="passengers" th:text="${flight.passagers}">
-									Passengers
-									<span>
-										<button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.passagers.add}">Add Passenger</button>
-									</span>
-								</td>
-								<td>
-									<button class="btn btn-danger" th:attr="data-id=${flight.id}">Remove</button>
-								</td>
-								<td>
-									<a class="btn btn-success btn-update" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+
+	<main class="content">
+		<p layout:fragment="content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="card card-block">
+						<table id="flights" class="datatable table table-striped table-responsive" data-disabled="8,9">
+							<thead>
+								<tr>
+									<th th:text="#{flight.id}">
+										Flight ID
+									</th>
+									<th th:text="#{flight.name}">
+										Flight Name
+									</th>
+                                    <th th:text="#{flight.source}">
+                                        Source port
+                                    </th>
+									<th th:text="#{flight.destination}">
+										Destination port
+									</th>
+									<th th:text="#{flight.departure}">
+										Departure
+									</th>
+									<th th:text="#{flight.arrival}">
+										Arrival
+									</th>
+									<th th:text="#{flight.airplane}">
+										Airplane
+									</th>
+									<th th:text="#{flight.stewards}">
+										Steward
+									</th>
+									<th th:text="#{flight.passagers}">
+										Passengers
+									</th>
+                                    <th th:text="#{flight.options}">
+                                        options
+                                    </th>
+								</tr>
+							</thead>
+							<tbody >
+								<tr th:each="flight : ${flights}">
+									<td data-name="id" th:text="${flight.id}">
+										Flight ID
+									</td>
+									<td data-name="name" th:text="${flight.name}">
+                                        Flight name
+									</td>
+									<td data-name="source" th:text="${flight.sourceport != null} ? ${flight.sourceport.getName()}">
+                                        Source Port
+									</td>
+									<td data-name="destination" th:text="${flight.destinationport != null} ? ${flight.destinationport.getName()}">
+                                        Destination Port
+									</td>
+									<td data-name="departure" th:text="${flight.departure}">
+                                        Departure Time
+									</td>
+									<td data-name="arrival" th:text="${flight.arrival}">
+                                        Arrival Time
+									</td>
+									<td data-name="airplane" th:text="${flight.airplane != null} ? ${flight.airplane.name}">
+                                        Airplane
+									</td>
+									<td data-name="stewards" th:text="${flight.stewards.size()}">
+                                        Stewards
+                                        <span>
+                                            <button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.steward.add}">Add Steward</button>
+                                        </span>
+                                    </td>
+                                    <td data-name="passengers" th:text="${flight.passagers}">
+                                        Passengers
+                                        <span>
+                                            <button class="btn" th:attr="data-id=${flight.id}" th:text="#{flight.passagers.add}">Add Passenger</button>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown-wrap">
+											<div class="dropdown">
+												<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+														th:text="#{flight.options}">
+													Option
+												<span class="caret"></span></button>
+												<div class="dropdown-menu">
+													<a class="dropdown-item" th:text="#{flight.remove}" th:href="@{'/flight/remove/' +${flight.id}}">Remove</a>
+													<a class="dropdown-item" th:text="#{flight.btn.update}" th:href="@{'/flight/update/' + ${flight.id}}">Update</a>
+													<a class="dropdown-item" th:text="#{flight.btn.source}" th:href="@{${flight.id} + '/airport/source'}">SourcePort</a>
+													<a class="dropdown-item" th:text="#{flight.btn.destination}" th:href="@{${flight.id} + '/airport/destination'}">DestinationPort</a>
+													<a class="dropdown-item" th:text="#{flight.btn.stewards}" th:href="@{'/flight/'+ ${flight.id} +'/steward'}">Update</a>
+													<a class="dropdown-item" th:text="#{flight.btn.airplane}" th:href="@{'/flight/'+ ${flight.id} +'/airplane'}">Airplane</a>
+												</div>
+											</div>
+										</div>
+                                    </td>
+
+                                </tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</p>
+	</main>
 </html>

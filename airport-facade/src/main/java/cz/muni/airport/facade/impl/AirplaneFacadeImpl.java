@@ -46,6 +46,12 @@ public class AirplaneFacadeImpl implements AirplaneFacade{
         Airplane airplane = beanMappingService.mapTo(airplaneDTO, Airplane.class);
         airplaneService.removeAirplane(airplane);
     }
+    
+    @Override
+    public void deleteAirplane(long id) {
+        Airplane airplane = airplaneService.getAirplaneById(id);
+        airplaneService.removeAirplane(airplane);
+    }
 
     @Override
     public List<AirplaneDTO> getAllAirplanes() {

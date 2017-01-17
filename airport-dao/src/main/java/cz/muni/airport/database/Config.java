@@ -24,15 +24,4 @@ public class Config {
         SpringApplication.run(Config.class, args);
     }
 
-//    spring.jpa.database=POSTGRESQL
-//    spring.jpa.show-sql=true
-//    spring.jpa.hibernate.ddl-auto=create
-//    spring.database.driverClassName=org.hsqldb.jdbcDriver
-//    spring.datasource.url=jdbc:hsqldb:mem:butterfly;create=true
-//    spring.jpa.properties.hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
-//    spring.data.jpa.repositories.enabled=true
-//    spring.jpa.generate-ddl=true
-//    spring.jpa.open-in-view=true
-//    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.HSQLDialect
-
 }

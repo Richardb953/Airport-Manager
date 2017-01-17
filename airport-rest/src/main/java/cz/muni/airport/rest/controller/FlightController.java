@@ -1,14 +1,16 @@
 package cz.muni.airport.rest.controller;
 
-import cz.muni.airport.dto.AirplaneDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.facadeApi.FlightFacade;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author Jiri Krejci, github name:xkrejci7
  */
-
 @RestController
 @RequestMapping("/flights")
 @Transactional
 public class FlightController {
+
     @Autowired
     FlightFacade flightFacade;
 

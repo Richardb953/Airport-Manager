@@ -70,7 +70,6 @@ public class AirplaneDTO {
         hash = 53 * hash + Objects.hashCode(this.getName());
         hash = 53 * hash + this.getCapacity();
         hash = 53 * hash + Objects.hashCode(this.getType());
-        hash = 53 * hash + this.getId().hashCode();
         return hash;
     }
 
@@ -84,10 +83,15 @@ public class AirplaneDTO {
         if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
         if (!Objects.equals(this.getName(), other.getName())) return false;
         if (!Objects.equals(this.getType(), other.getType())) return false;
-//        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
         
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "AirplaneDTO{" + "id=" + id + ", name=" + name + ", capacity=" + capacity + ", type=" + type + ", flights=" + flights + '}';
+    }
+    
     
     
     

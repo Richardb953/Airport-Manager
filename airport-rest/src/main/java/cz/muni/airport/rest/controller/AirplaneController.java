@@ -1,18 +1,19 @@
 package cz.muni.airport.rest.controller;
 
-import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.facadeApi.AirplaneFacade;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.bind.annotation.*;
+import java.util.Collection;
+
+import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.facadeApi.AirplaneFacade;
+import java.util.ArrayList;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * @author Jiri Krejci, github name:xkrejci7

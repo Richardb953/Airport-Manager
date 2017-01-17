@@ -53,7 +53,6 @@ public class FlightFacadeImpl implements FlightFacade {
 
         FlightState flightState = convertFlightState(flightCreateDTO.getFlightState());
 
-        //todo premysliet ci moze byt letisko null ak ano state by nemal byt validated --skor vyhodit excptn
         Airport destAirport = flightCreateDTO.getDestinationport() == null ? null :  airportService.findAirportById(flightCreateDTO.getDestinationport().getId());
         Airport sourcAirport = flightCreateDTO.getSourceport() == null ? null :  airportService.findAirportById(flightCreateDTO.getSourceport().getId());
 
@@ -136,6 +135,13 @@ public class FlightFacadeImpl implements FlightFacade {
 
         return beanMappingService.mapTo(flightService.addStewardToFlight(flight, steward), FlightDTO.class);
     }
+
+    @Override
+    public FlightDTO removeStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO) {
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        Steward steward = beanMappingService.mapTo(stewardDTO, Steward.class);
+
+        return beanMappingService.mapTo(flightService.removeStewardToFlight(flight, steward), FlightDTO.class);    }
 
     @Override
     public FlightDTO changeFlightState(FlightDTO flightDTO, cz.muni.airport.enums.FlightState newFlightState) {

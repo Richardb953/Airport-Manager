@@ -21,24 +21,6 @@ public class AirportServiceImpl implements AirportService {
     @Autowired
     private  AirportDAO airportDAO;
 
-    //    @Autowired
-    //    private StewardService stewardService;
-    //    @Autowired
-    //    private AirplaneService airplaneService;
-    //    @Autowired
-    //    private FlightDAO flightDAO;
-
-    //    public void setStewardService(StewardService stewardService) {
-    //        this.stewardService = stewardService;
-    //    }
-    //
-    //    public void setAirplaneService(AirplaneService airplaneService) {
-    //        this.airplaneService = airplaneService;
-    //    }
-    //
-    //    public void setFlightDAO(FlightDAO flightDAO) {
-    //        this.flightDAO = flightDAO;
-    //    }
     @Override
     public Airport saveAirport(Airport airport) {
         try {
@@ -131,38 +113,6 @@ public class AirportServiceImpl implements AirportService {
         }
     }
 
-//    @Override
-//    public List<Steward> getAvailableStewards(Flight flight) {
-//
-//        List<Steward> stewards = new ArrayList<>();
-//
-//        for (Steward steward : stewardService.getAllStewards()) {
-//
-////            if (stewardService.isAvalible(steward, flight)) {
-//            if (true) {
-//                stewards.add(steward);
-//            }
-//
-//        }
-//
-//        return stewards;
-//    }
-//
-//    @Override
-//    public List<Airplane> getAvailableAirplanes(Flight flight) {
-//
-//        List<Airplane> airplanes = new ArrayList<>();
-//
-//        for (Airplane airplane : airplaneService.getAllAirplanes()) {
-//
-//            if (airplaneService.isAvailable(airplane, flight)) {
-//                airplanes.add(airplane);
-//            }
-//        }
-//
-//        return airplanes;
-//
-//    }
     @Override
     public boolean hasValidIata(Airport airport) {
         try {

@@ -1,13 +1,14 @@
 package cz.muni.airport.rest.conf;
 
-import cz.muni.airport.config.ServiceConfiguration;
-import java.util.Locale;
 import org.springframework.boot.SpringApplication;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Locale;
+
+import cz.muni.airport.config.ServiceConfiguration;
 
 //import cz.muni.airport.mvc.conf.MvcConfig;
 /**
