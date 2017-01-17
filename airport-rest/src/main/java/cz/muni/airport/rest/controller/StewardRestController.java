@@ -24,9 +24,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
  * @author Andrea Navratilova, github name: andrea-n
  */
 @RestController
-@RequestMapping("/stewards")
+@RequestMapping("/rest/stewards")
 @Transactional
-public class StewardController {
+public class StewardRestController {
 
     @Autowired
     StewardFacade stewardFacade;

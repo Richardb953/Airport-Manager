@@ -23,9 +23,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
  * @author Jiri Krejci, github name:xkrejci7
  */
 @RestController
-@RequestMapping("/airports")
+@RequestMapping("/rest/airports")
 @Transactional
-public class AirportController {
+public class AirportRestController {
 
     @Autowired
     AirportFacade airportFacade;

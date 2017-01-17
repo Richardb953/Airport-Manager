@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jiri Krejci, github name:xkrejci7
  */
 @RestController
-@RequestMapping("/flights")
+@RequestMapping("/rest/flights")
 @Transactional
-public class FlightController {
+public class FlightRestController {
 
     @Autowired
     FlightFacade flightFacade;

@@ -19,9 +19,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @author Jiri Krejci, github name:xkrejci7
  */
 @RestController
-@RequestMapping("/airplanes")
+@RequestMapping("/rest/airplanes")
 @Transactional
-public class AirplaneController {
+public class AirplaneRestController {
 
     @Autowired
     AirplaneFacade airplaneFacade;
