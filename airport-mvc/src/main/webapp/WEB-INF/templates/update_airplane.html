@@ -23,7 +23,7 @@
                                         <label for="" th:text="#{airplane.type}">Type</label>
                                         <select class="custom-select form-control" id="type" name="type" th:field="${airplaneToUpdate.type}">
                                             <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
-                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}"></option>           
+                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}" th:text="#{${type}}"></option>           
                                         </select>
                                     </div>
                                 </div>
