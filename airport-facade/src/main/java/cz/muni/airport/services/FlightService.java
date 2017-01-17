@@ -59,6 +59,8 @@ public interface FlightService {
 
     /**
      * Add steward to flight
+     * @param flight Flight where to add Steward
+     * @param steward Steward to be add
      * @return List of Flight objects
      */
     Flight addStewardToFlight(Flight flight, Steward steward);
