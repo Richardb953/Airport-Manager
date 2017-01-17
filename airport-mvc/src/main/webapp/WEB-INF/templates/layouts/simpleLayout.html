@@ -13,7 +13,8 @@
 <![endif]-->
 <!--[if (gte IE 10)|!(IE)]><!-->
 <html lang="cs" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!--<![endif]-->
 
 	<head>
@@ -81,6 +82,18 @@
 		<footer class="footer">
 			<div class="container-fluid">
 				<div class="row">
+					<div class="col-xs-12 text-left">
+
+							<a href="?lang=en">
+								<span class="flag-icon flag-icon-us" th:text="#{language.english}">English</span>
+							</a>
+							<a  href="?lang=cs">
+								<span class="flag-icon flag-icon-cz" th:text="#{language.czech}">Czech</span>
+							</a>
+							<a  href="?lang=sk">
+								<span class="flag-icon flag-icon-sk" th:text="#{language.slovak}">Slovak</span>
+							</a>
+					</div>
 					<div class="col-xs-12 text-right">
 						<p>Airport Manager / PV165</p>
 					</div>
