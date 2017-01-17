@@ -12,7 +12,6 @@ import java.util.List;
 
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.AirportCreateDTO;
-import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirplaneFacade;

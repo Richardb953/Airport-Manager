@@ -1,22 +1,20 @@
 package cz.muni.airport.rest.controller;
 
-import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.dto.StewardDTO;
-import cz.muni.airport.facadeApi.AirplaneFacade;
-import cz.muni.airport.facadeApi.StewardFacade;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.bind.annotation.*;
+import java.util.Collection;
+
+import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.facadeApi.AirplaneFacade;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by Richard Bariny on 7.1.2017.

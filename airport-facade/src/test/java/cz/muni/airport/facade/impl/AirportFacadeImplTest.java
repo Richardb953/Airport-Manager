@@ -1,6 +1,5 @@
 package cz.muni.airport.facade.impl;
 
-import cz.muni.airport.dto.AirportCreateDTO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.model.Airport;

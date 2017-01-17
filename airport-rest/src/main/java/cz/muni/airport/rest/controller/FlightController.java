@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.FlightDTO;
-import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
-import cz.muni.airport.model.Flight;
 
 /**
  * Created by Richard Bariny on 10.12.2016.
