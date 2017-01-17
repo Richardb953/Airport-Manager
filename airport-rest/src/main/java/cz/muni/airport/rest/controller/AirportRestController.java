@@ -12,6 +12,7 @@ import java.util.Collection;
 import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.facadeApi.AirportFacade;
+import java.util.ArrayList;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -38,7 +39,13 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
     public Collection<AirportDTO> getAllAirports() {
-        return airportFacade.getAllAirports();
+        Collection<AirportDTO> toReturn = new ArrayList<>();
+        for (AirportDTO a : airportFacade.getAllAirports()) {
+            a.setFlightsDestinations(new ArrayList<>());
+            a.setFlightsSources(new ArrayList<>());
+            toReturn.add(a);
+        }
+        return toReturn;
     }
 
     /**
@@ -50,7 +57,10 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/id/{id}")
     public AirportDTO getAirportById(@PathVariable long id) {
-        return airportFacade.getAirportById(id);
+        AirportDTO toReturn = airportFacade.getAirportById(id);
+        toReturn.setFlightsDestinations(new ArrayList<>());
+        toReturn.setFlightsSources(new ArrayList<>());
+        return toReturn;
     }
 
     /**
@@ -62,7 +72,14 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/city/{city}")
     public Collection<AirportDTO> getAirportByCity(@PathVariable String city) {
-        return airportFacade.getAirportsByCity(city);
+
+        Collection<AirportDTO> toReturn = new ArrayList<>();
+        for (AirportDTO a : airportFacade.getAirportsByCity(city)) {
+            a.setFlightsDestinations(new ArrayList<>());
+            a.setFlightsSources(new ArrayList<>());
+            toReturn.add(a);
+        }
+        return toReturn;
     }
 
     /**
@@ -74,7 +91,13 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/country/{country}")
     public Collection<AirportDTO> getAirportsByCountry(@PathVariable String country) {
-        return airportFacade.getAirportsByCountry(country);
+        Collection<AirportDTO> toReturn = new ArrayList<>();
+        for (AirportDTO a : airportFacade.getAirportsByCountry(country)) {
+            a.setFlightsDestinations(new ArrayList<>());
+            a.setFlightsSources(new ArrayList<>());
+            toReturn.add(a);
+        }
+        return toReturn;
     }
 
     /**
@@ -86,7 +109,13 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/iata/{iata}")
     public Collection<AirportDTO> getAirportsByIata(@PathVariable String iata) {
-        return airportFacade.getAirportsByIata(iata);
+        Collection<AirportDTO> toReturn = new ArrayList<>();
+        for (AirportDTO a : airportFacade.getAirportsByIata(iata)) {
+            a.setFlightsDestinations(new ArrayList<>());
+            a.setFlightsSources(new ArrayList<>());
+            toReturn.add(a);
+        }
+        return toReturn;
     }
 
     /**
@@ -98,7 +127,13 @@ public class AirportRestController {
      */
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/name/{name}")
     public Collection<AirportDTO> getAirportsByName(@PathVariable String name) {
-        return airportFacade.getAirportsByName(name);
+        Collection<AirportDTO> toReturn = new ArrayList<>();
+        for (AirportDTO a : airportFacade.getAirportsByName(name)) {
+            a.setFlightsDestinations(new ArrayList<>());
+            a.setFlightsSources(new ArrayList<>());
+            toReturn.add(a);
+        }
+        return toReturn;
     }
 
     /**
@@ -140,6 +175,8 @@ public class AirportRestController {
     @RequestMapping(method = PUT, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE, value = "/id/{id}")
     public AirportDTO update(@PathVariable("id") long id, @RequestBody AirportDTO airport) {
         airport.setId(id);
+        airport.setFlightsDestinations(new ArrayList<>());
+        airport.setFlightsSources(new ArrayList<>());
         airportFacade.updateAirport(airport);
         return airportFacade.getAirportById(id);
     }
