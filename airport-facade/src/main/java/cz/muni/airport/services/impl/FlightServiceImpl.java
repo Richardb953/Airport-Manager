@@ -111,6 +111,12 @@ public class FlightServiceImpl implements FlightService {
         return true;
     }
 
+    @Override
+    public Flight removeStewardToFlight(Flight flight, Steward steward) {
+        flight.removeSteward(steward);
+        return updateFlight(flight);
+    }
+
 
     @Override
     public List<Flight> findFlightByName(String name) throws DataAccessException {

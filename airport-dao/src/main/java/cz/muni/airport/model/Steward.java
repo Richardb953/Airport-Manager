@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Steward {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "steward_id")
     private Long id;
 
     @Column(nullable = false)
@@ -30,7 +31,7 @@ public class Steward {
     @Column(nullable = false)
     private String lastName;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "stewards")
     private List<Flight> flights = new ArrayList<>();
 
     public Steward() {

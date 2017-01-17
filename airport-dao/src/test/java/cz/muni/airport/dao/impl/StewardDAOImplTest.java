@@ -94,31 +94,6 @@ public class StewardDAOImplTest {
         assertEquals(1, stewardDAO.getAllStewards().size());
     }
 
-//    /**
-//     * Tests if updateSteward() allows to change ID. Exception is expected. Id
-//     * must not be changed.
-//     */
-//    @Test(expected = HibernateOptimisticLockingFailureException.class)
-//    public void testUpdateSteward_ID() {
-//        System.out.println("testUpdateStewardID()");
-//        //setup
-//        Steward s1 = new Steward();
-//        s1.setFirstName("Alice");
-//        s1.setLastName("Dunham");
-//        Steward s2 = new Steward();
-//        s2.setFirstName("Dylan");
-//        s2.setLastName("Bob");
-//        stewardDAO.addSteward(s1);
-//        stewardDAO.addSteward(s2);
-//
-//        Steward toChange = stewardDAO.getStewardByName(s2.getFirstName(), s2.getLastName()).get(0);
-//        System.out.println(toChange.toString());
-//
-//        toChange.setId((long) 99);
-//        stewardDAO.updateSteward(toChange);
-//
-//    }
-
     /**
      * Tests if updateSteward() works properly on all attributes except from id
      * and flights and if it does not change unwanted entries.

@@ -13,7 +13,8 @@ import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Steward;
 
 /**
- *
+ * DAO Steward object
+ * 
  * @author Andrea Navratilova, github name: andrea-n
  */
 @Repository
