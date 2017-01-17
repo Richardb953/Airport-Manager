@@ -88,7 +88,6 @@ public class AirplaneDAOImplTest {
     /**
      * Testing update airplane, after update names should be equals
      */
-
     @Test
     public void testUpdateAirplane(){
         System.out.println("Testing update Airplane");
@@ -168,7 +167,6 @@ public class AirplaneDAOImplTest {
     /**
      * Airplanes with null name should not exist and method is throwin exp
      */
-
     @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void testAddAirplaneWithNullName(){
         System.out.println("Testing find Airplane by null name");

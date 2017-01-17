@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -13,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -40,7 +43,7 @@ public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "flight_id")
     private Long id;
 
     @Column(nullable = false)
@@ -67,7 +70,10 @@ public class Flight {
     @OneToOne(optional = true)
     private Airport sourcePort;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "flights")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = {
+            @JoinColumn(name = "flight_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name="steward_id", nullable = false, updatable = false) })
     private List<Steward> stewards = new ArrayList<>();
 
 
@@ -139,7 +145,7 @@ public class Flight {
     }
 
     public List<Steward> getStewards() {
-        return Collections.unmodifiableList(stewards);
+        return (stewards);
     }
 
     public void setStewards(List<Steward> stewards) {
@@ -150,6 +156,11 @@ public class Flight {
         this.stewards.add(steward);
     }
 
+    public void removeSteward(Steward steward) {
+        if(this.stewards.contains(steward)){
+            this.stewards.remove(steward);
+        }
+    }
     public FlightState getFlightState() {
         return flightState;
     }
@@ -187,5 +198,6 @@ public class Flight {
                 ", sourcePort=" + sourcePort +
                 '}';
     }
+
 
 }

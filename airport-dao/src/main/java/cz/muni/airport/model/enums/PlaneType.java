@@ -11,6 +11,5 @@ public enum PlaneType {
     TWIN_PISTON,
     HELICOPTER
     ;
-   
     
 }

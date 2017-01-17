@@ -358,4 +358,12 @@ strong {
   color: #10bffc !important;
 }
 
+.dropdown-wrap {
+	width: 11em;
+}
+
+.dropdown-wrap .dropdown {
+	position: absolute !important;
+}
+
 /*# sourceMappingURL=styles.css.map */

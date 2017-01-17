@@ -92,19 +92,4 @@ public interface AirportService {
      */
     public boolean hasValidIata(Airport airport);
 
-//    /**
-//     * Get all available stewards for given flight
-//     *
-//     * @param flight Flight to search for
-//     * @return List<Steward> of Steward objects
-//     */
-//    List<Steward> getAvailableStewards(Flight flight);
-//
-//    /**
-//     * Get all available stewards for given flight
-//     *
-//     * @param flight Flight to search for
-//     * @return List<Airplane> of Airplane objects
-//     */
-//    List<Airplane> getAvailableAirplanes(Flight flight);
 }

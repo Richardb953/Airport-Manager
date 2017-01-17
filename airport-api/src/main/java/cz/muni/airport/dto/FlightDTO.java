@@ -95,6 +95,10 @@ public class FlightDTO extends FlightCreateDTO {
         return stewards;
     }
 
+    public void addSteward(StewardDTO stewardDTO){
+        this.stewards.add(stewardDTO);
+    }
+
     public void setStewards(List<StewardDTO> stewards) {
         this.stewards = stewards;
     }
