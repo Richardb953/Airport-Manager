@@ -1,12 +1,5 @@
 package cz.muni.airport.mvc.controller;
 
-import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.facadeApi.AirplaneFacade;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +12,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.Valid;
+
+import cz.muni.airport.dto.AirplaneDTO;
+import cz.muni.airport.facadeApi.AirplaneFacade;
 
 /**
- * Created by Richard Bariny on 7.1.2017.
+ * Created by Karolina Bozkova on 7.1.2017.
  *
- * @author Richard Bariny, github name:Richardb953
+ * Airplane Controller for Airplane Templates *
+ * @author Karolina Bozkova, githubname: Kayeeec
  */
 
 

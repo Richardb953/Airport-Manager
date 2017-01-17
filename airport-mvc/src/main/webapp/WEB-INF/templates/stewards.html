@@ -38,7 +38,8 @@
 								<td data-name="lastname" th:text="${steward.lastName}">
 								</td>
 								<td>
-									<a class="btn btn-danger" data-id="2" th:href="@{'/steward/remove/' + ${steward.id}}" th:text="#{steward.removebtn}">Remove</a>
+									<a th:class="${!steward.flights.isEmpty()} ? 'btn btn-secondary btn-remove-disabled' : 'btn btn-danger'" data-id="2" th:href="@{'/steward/remove/' + ${steward.id}}" th:text="#{steward.removebtn}">Remove</a>
+									<p class="error-msg" th:if="${!steward.flights.isEmpty()}" th:text="#{steward.remove.errmsg}"></p>
 								</td>
 								<td>
 									<a class="btn btn-success btn-update" data-id="2" th:href="@{'/steward/update/' + ${steward.id}}" th:text="#{steward.updatebtn}">Update</a>

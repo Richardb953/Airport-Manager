@@ -77,6 +77,27 @@ input, select, button {
   vertical-align: top;
 }
 
+.btn {
+	text-decoration: none;
+}
+
+.btn-remove-disabled:hover {
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.error-msg {
+	color: #fc0000;
+	margin: 0.5em 0 0 0;
+	display: block;
+	width: 0;
+	height: 1.5em;
+	white-space: nowrap;
+	overflow: visible;
+	display: none;
+	font-size: 0.95em;
+}
+
 a, a:hover, a:active, a:focus {
   outline: 0;
 }
@@ -356,6 +377,14 @@ strong {
 
 .color-light-blue {
   color: #10bffc !important;
+}
+
+.dropdown-wrap {
+	width: 11em;
+}
+
+.dropdown-wrap .dropdown {
+	position: absolute !important;
 }
 
 /*# sourceMappingURL=styles.css.map */

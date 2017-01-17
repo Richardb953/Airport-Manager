@@ -31,9 +31,11 @@
                                     </td>
                                     <td>
                                         <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airplane/delete/'+${airplane.id}">
-                                            <button class="btn btn-danger" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
-                                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
+
+                                          <button th:class="${!airplane.flights.isEmpty()} ? 'btn btn-secondary btn-remove-disabled' : 'btn btn-danger'" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
+                                        	<p class="error-msg" th:if="${!airplane.flights.isEmpty()}" th:text="#{airplane.remove.errmsg}"></p>
                                         </form>
+
                                     </td>
                                     <td>
 <!--                                         <button class="btn btn-success btn-update" th:attr="toUpdate=${airplane}, updateid=${airplane.id}, updateType=${airplane.type}">Update</button>-->
@@ -72,8 +74,8 @@
                                     <div class="form-group">
                                         <label for="" th:text="#{airplane.type}">Type</label>
                                         <select class="custom-select form-control" id="type" name="type" th:field="*{type}">
-                                            <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
-                                                    th:value="${type}"  th:text="#{${type}}"></option>           
+                                            <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"
+                                                    th:value="${type}"  th:text="#{${type}}"></option>
                                         </select>
                                     </div>
                                 </div>

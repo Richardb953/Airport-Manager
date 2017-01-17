@@ -8,11 +8,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.dto.AirportDTO;
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.enums.FlightState;
 import cz.muni.airport.facadeApi.AirplaneFacade;
@@ -82,19 +81,19 @@ public class FlightFacadeImplTest {
         airplane.setType(cz.muni.airport.enums.PlaneType.CARGO);
         airplaneFacade.createAirplane(airplane);
 
-        AirportDTO destination = new AirportDTO();
+        AirportCreateDTO destination = new AirportCreateDTO();
         destination.setCity("Brno");
         destination.setIata("BRN");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
-        airportFacade.createAirport(destination);
+//        airportFacade.createAirport(destination);
 
-        AirportDTO source = new AirportDTO();
+        AirportCreateDTO source = new AirportCreateDTO();
         source.setCity("Praha");
         source.setIata("PRG");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
-        airportFacade.createAirport(source);
+//        airportFacade.createAirport(source);
 
         FlightDTO flight = new FlightDTO();
         flight.setName("Flight1");
@@ -102,8 +101,8 @@ public class FlightFacadeImplTest {
         flight.setDeparture(departure.getTime());
         flight.setPassagers(50);
         flight.setAirplane(airplane);
-        flight.setDestinationport(destination);
-        flight.setSourceport(source);
+        flight.setDestinationport(airportFacade.createAirport(destination));
+        flight.setSourceport(airportFacade.createAirport(source));
         flight.setFlightState(FlightState.OPEN);
 
         return flight;

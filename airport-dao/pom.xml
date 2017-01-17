@@ -12,7 +12,6 @@
 
     <artifactId>airport-dao</artifactId>
     <packaging>jar</packaging>
-    <!--<name>Dao layer of airport system</name>-->
 	
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
@@ -64,7 +63,6 @@
             <groupId>org.springframework.plugin</groupId>
             <artifactId>spring-plugin-core</artifactId>
         </dependency>
-        <!--/** **************/-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

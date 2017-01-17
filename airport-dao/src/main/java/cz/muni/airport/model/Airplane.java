@@ -1,7 +1,6 @@
 package cz.muni.airport.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -92,7 +91,7 @@ public class Airplane {
     }
 
     public List<Flight> getFlights() {
-        return Collections.unmodifiableList(flights);
+        return (flights);
     }
 
     public void setFlights(List<Flight> flights) {
