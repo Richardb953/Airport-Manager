@@ -1,6 +1,7 @@
 package cz.muni.airport.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ public class StewardController {
 	@Autowired
     private StewardFacade stewardFacade;
 
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String stewards(Model model) {
 		model.addAttribute("stewards", stewardFacade.getAllStewards());
@@ -36,8 +38,8 @@ public class StewardController {
         model.addAttribute("steward", stewardDTO);
         return "stewards";
     }
-	
-	@RequestMapping(value = "/all", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/all", method = RequestMethod.POST)
      public String addSteward(@Valid @ModelAttribute(value = "steward") StewardDTO steward, BindingResult result, Model model) {
         if ( !result.hasErrors() ) {
             stewardFacade.createSteward(steward);
@@ -46,13 +48,15 @@ public class StewardController {
 
         return "stewards";
     }
-	 
+
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updateSteward(@PathVariable(value = "id") Long stewardId, Model model) {
         model.addAttribute("steward", stewardFacade.getSteward(stewardId));
         return "steward_update";
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
     public String updateSteward(@Valid StewardDTO steward, BindingResult result, Model model) {
         if ( !result.hasErrors() ) {
@@ -66,6 +70,7 @@ public class StewardController {
         return "flight_update";
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String removeSteward(@PathVariable(value = "id") Long stewardId, Model model) {
 		StewardDTO stewardDTO = stewardFacade.getSteward(stewardId);
