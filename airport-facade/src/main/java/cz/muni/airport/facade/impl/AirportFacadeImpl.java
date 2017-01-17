@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.model.Airport;
@@ -25,9 +26,9 @@ public class AirportFacadeImpl implements AirportFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public AirportDTO createAirport(AirportDTO airportDTO) {
+    public AirportDTO createAirport(AirportCreateDTO airportCreateDTO) {
 
-        Airport airport = beanMappingService.mapTo(airportDTO, Airport.class);
+        Airport airport = beanMappingService.mapTo(airportCreateDTO, Airport.class);
         Airport created = airportService.saveAirport(airport);
         return beanMappingService.mapTo(created, AirportDTO.class);
     }
