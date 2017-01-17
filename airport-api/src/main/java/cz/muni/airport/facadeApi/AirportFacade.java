@@ -14,10 +14,10 @@ public interface AirportFacade {
     /**
      * Create Airport
      *
-     * @param airportDTO Airport object as DTO
+     * @param airportCreateDTO AirportCreateDTO object as DTOCreate
      * @return id of created object
      */
-    AirportDTO createAirport(AirportCreateDTO airportDTO);
+    AirportDTO createAirport(AirportCreateDTO airportCreateDTO);
 
     /**
      * Get All Airports
