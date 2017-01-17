@@ -32,12 +32,13 @@
                                     <td>
                                         <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airplane/delete/'+${airplane.id}">
                                             <button class="btn btn-danger" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
-                                            
+                                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
                                         </form>
                                     </td>
                                     <td>
 <!--                                         <button class="btn btn-success btn-update" th:attr="toUpdate=${airplane}, updateid=${airplane.id}, updateType=${airplane.type}">Update</button>-->
                                         <form class="form" id="update-form" method="get" th:attr="action='/pa165/airplane/semiupdate/'+${airplane.id}">
+                                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
                                             <button class="btn btn-success btn-update" th:attr="data-id=${airplane.id}" th:text="#{airplane.updatebtn}">Update</button>
                                         </form>
                                     </td>

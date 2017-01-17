@@ -12,6 +12,7 @@
                     <div class="card card-block">
                         <h4 th:text="#{airplane.update}">Update airplane</h4>
                         <form class="form" id="update-form" method="post" action="#" th:action="@{'/airplane/update/'+${airplaneToUpdate.id}}" th:object="${airplaneToUpdate}">
+                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

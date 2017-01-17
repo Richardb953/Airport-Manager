@@ -87,7 +87,7 @@
                                                 <td><b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b></td>
                                                 <td><pre> </pre></td>
                                                 <td align="right">
-                                                    <form class="form" id="logout-form" th:action="@{/appLogout}" method="POST">
+                                                    <form class="form" id="logout-form" th:action="@{/app/logout}" method="POST">
                                                         <input type="submit" th:value="#{logoutbtn}"/>
                                                     </form>
                                                 </td>
