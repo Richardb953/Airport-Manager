@@ -1,0 +1,119 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<!--[if lt IE 8 ]>
+<html lang="cs" class="ie7" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if lt IE 9 ]>
+<html lang="cs" class="ie8" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if lt IE 10 ]>
+<html lang="cs" class="ie9" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="cs" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--<![endif]-->
+
+	<head>
+		<!-- charset and title -->
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title>Airport Manager</title>
+		<!-- meta tags -->
+		<meta name="keywords" content=""/>
+		<meta name="robots" content="all,follow"/>
+		<meta name="author" content=""/>
+		<meta name="description" content=""/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/flag-icon.min.css" />
+		<link rel="stylesheet" type="text/css" href="/pa165/static/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css" />
+
+		<!-- JS -->
+		<script type="text/javascript" src="/pa165/static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/scripts.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/menu.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/moment.js"></script>
+		<script type="text/javascript" src="/pa165/static/js/bootstrap-datetime.js"></script>
+  	</head>
+	
+	<body>
+		<header class="header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h1 class="nav-brand">
+							<a href="/pa165">
+								<img src="/pa165/static/img/airplane-takeoff.svg" alt="" />
+								&nbsp;Airport Manager
+							</a>
+						</h1>
+						<nav id="nav" class="main-nav" role="navigation">
+							<ul>
+								<li><a href="/pa165/flight/all">Flights</a></li>
+								<li><a href="/pa165/airport/all">Airports</a></li>
+								<li><a href="/pa165/airplane/all">Airplanes</a></li>
+								<li><a href="/pa165/steward/all">Stewards</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div id="wrap" class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<main id="content" class="content">
+						<div layout:fragment="content"></div>
+					</main>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-4 text-left">
+						<a href="?lang=en" class="lng-switch">
+							<span class="flag-icon flag-icon-gb"></span>
+						</a>
+						<a  href="?lang=cs" class="lng-switch">
+							<span class="flag-icon flag-icon-cz"></span>
+						</a>
+						<a  href="?lang=sk" class="lng-switch">
+							<span class="flag-icon flag-icon-sk"></span>
+						</a>
+					</div>
+                    <div class="col-xs-4">
+                        <table border="0" style="float:left;" th:if="${#httpServletRequest.remoteUser}">
+                            <tr>
+                                <td th:text="#{logged.as.msg}"/>
+                                <td><b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b></td>
+                                <td><pre> </pre></td>
+                                <td align="right">
+                                    <form class="form" id="logout-form" th:action="@{/app/logout}" method="POST">
+                                        <input type="submit" th:value="#{logoutbtn}"/>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                        <span style="float:left;" th:unless="${#httpServletRequest.remoteUser}" th:text="#{unlogged.user}">Unlogged user</span>
+                    </div>
+					<div class="col-xs-4 text-right footer-copy">
+						<p>Airport Manager / PV165</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

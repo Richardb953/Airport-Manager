@@ -1,28 +1,35 @@
 package cz.muni.airport.facade.impl;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import cz.muni.airport.dto.AirplaneDTO;
-import cz.muni.airport.dto.AirportDTO;
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.enums.FlightState;
+import cz.muni.airport.facadeApi.AirplaneFacade;
+import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.facadeApi.FlightFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
 import cz.muni.airport.services.FlightService;
-import cz.muni.airport.services.impl.AirplaneServiceImpl;
-import cz.muni.airport.services.impl.AirportServiceImpl;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
+import cz.muni.airport.services.StewardService;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -35,29 +42,25 @@ public class FlightFacadeImplTest {
     private FlightService flightService;
 
     @Mock
-    private AirportFacadeImpl airportFacadeImpl;
+    private AirportFacade airportFacade;
 
     @Mock
-    private AirportServiceImpl airportServiceImpl;
+    private AirportService airportService;
 
     @Mock
-    private AirplaneFacadeImpl airplaneFacadeImpl;
+    private AirplaneFacade airplaneFacade;
 
     @Mock
-    private AirplaneServiceImpl airplaneServiceImpl;
+    private AirplaneService airplaneService;
 
     @Mock
     private BeanMappingService beanMapperService;
 
+    @Mock
+    private StewardService stewardService;
+
     @InjectMocks
     private FlightFacade flightFacade = new FlightFacadeImpl();
-
-    List<Flight> data;
-
-    @Before
-    public void initialize() {
-        data = new ArrayList<>();
-    }
 
     @Test
     public void shouldAutowireDependencies() {
@@ -75,31 +78,31 @@ public class FlightFacadeImplTest {
         airplane.setCapacity(100);
         airplane.setFlights(null);
         airplane.setName("Boeing 747");
-        airplane.setType(cz.muni.airport.model.enums.PlaneType.CARGO);
-        airplaneFacadeImpl.createAirplane(airplane);
+        airplane.setType(cz.muni.airport.enums.PlaneType.CARGO);
+        airplaneFacade.createAirplane(airplane);
 
-        AirportDTO destination = new AirportDTO();
+        AirportCreateDTO destination = new AirportCreateDTO();
         destination.setCity("Brno");
         destination.setIata("BRN");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
-        airportFacadeImpl.createAirport(destination);
+//        airportFacade.createAirport(destination);
 
-        AirportDTO source = new AirportDTO();
+        AirportCreateDTO source = new AirportCreateDTO();
         source.setCity("Praha");
         source.setIata("PRG");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
-        airportFacadeImpl.createAirport(source);
+//        airportFacade.createAirport(source);
 
         FlightDTO flight = new FlightDTO();
         flight.setName("Flight1");
-        flight.setArrival(arrival.getTimeInMillis());
-        flight.setDeparture(departure.getTimeInMillis());
+        flight.setArrival(arrival.getTime());
+        flight.setDeparture(departure.getTime());
         flight.setPassagers(50);
         flight.setAirplane(airplane);
-        flight.setDestinationport(destination);
-        flight.setSourceport(source);
+        flight.setDestinationport(airportFacade.createAirport(destination));
+        flight.setSourceport(airportFacade.createAirport(source));
         flight.setFlightState(FlightState.OPEN);
 
         return flight;
@@ -117,21 +120,21 @@ public class FlightFacadeImplTest {
         airplane.setFlights(null);
         airplane.setName("Boeing 747");
         airplane.setType(cz.muni.airport.model.enums.PlaneType.BUSINESS_JET);
-        airplane = airplaneServiceImpl.saveAirplane(airplane);
+        airplane = airplaneService.saveAirplane(airplane);
 
         Airport destination = new Airport();
         destination.setCity("Brno");
         destination.setIata("BRN");
         destination.setCountry("CZ");
         destination.setName("Letiste Turany");
-        destination = airportServiceImpl.saveAirport(destination);
+        destination = airportService.saveAirport(destination);
 
         Airport source = new Airport();
         source.setCity("Praha");
         source.setIata("PRG");
         source.setCountry("CZ");
         source.setName("Letiste Vaclava Havla");
-        source = airportServiceImpl.saveAirport(source);
+        source = airportService.saveAirport(source);
 
         Flight flight = new Flight();
         flight.setName("Flight1");

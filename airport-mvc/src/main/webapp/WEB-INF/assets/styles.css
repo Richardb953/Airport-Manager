@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&subset=latin-ext");
+.content {
+  padding: 3em 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden.active {
+  display: block;
+}
+
+form .error {
+  color: #fc0000;
+  font-weight: 300;
+}
+
+form label {
+  font-weight: 400;
+}
+
+.footer {
+  background: #1a2638;
+  padding: 1em 0;
+  color: #fff;
+}
+
+html {
+  height: 100%;
+  font-size: 15px;
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #000;
+  background: #f0f0f3;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+/* Box sizing */
+*, *:after, *:before {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/* Forms */
+form {
+  display: block;
+}
+
+fieldset {
+  border: none;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, select, button {
+  vertical-align: top;
+}
+
+a, a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+/* Layout */
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.header {
+  height: 3.5em;
+  padding: 0;
+  background: #1a2638;
+}
+
+.nav-brand {
+  padding-top: 0.25em;
+}
+
+/* Main navigation */
+.main-nav {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.main-nav ul {
+  margin: 0;
+}
+
+.main-nav ul li {
+  padding: 0;
+  margin: 0;
+  background: none;
+  display: inline-block;
+}
+
+.main-nav ul li a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  display: block;
+  line-height: 3.5em;
+  white-space: no-wrap;
+  padding: 0 0.5em;
+}
+
+.main-nav ul li a:hover, .main-nav ul li a:active {
+  color: #10bffc;
+}
+
+.main-nav ul li.active a {
+  color: #10bffc;
+}
+
+.main-nav ul li a:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.login {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.login ul {
+  margin: 0;
+}
+
+.login ul li {
+  margin: 0;
+  padding: 0 0.5em;
+  display: inline-block;
+}
+
+.login ul li a:not(.btn) {
+  color: #fff;
+  font-size: 0.9em;
+  display: block;
+  line-height: 5.55em;
+  white-space: nowrap;
+}
+
+.login ul li a.btn {
+  vertical-align: middle;
+}
+
+.table.dataTable {
+  width: 100%;
+  border-collapse: collapse !important;
+}
+
+.table th, .table td {
+  border: none !important;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1) {
+  background: #e1f6fd;
+}
+
+a {
+  color: #949494;
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  text-decoration: none;
+  color: #949494;
+}
+
+/* Heading */
+h1, .h1 {
+  font-weight: 300;
+  color: #10bffc;
+  font-size: 2em;
+  line-height: 1.2;
+  margin: 0 0 0.5em 0;
+}
+
+h2, .h2 {
+  font-weight: 400;
+  color: #10bffc;
+  font-size: 1.5em;
+  line-height: 1.2;
+  margin: 0 0 0.75em 0;
+}
+
+h3, .h3 {
+  font-weight: 400;
+  color: #10bffc;
+  font-size: 1.25em;
+  line-height: 1.3;
+  margin: 0 0 0.75em 0;
+}
+
+h4, .h4 {
+  font-weight: 400;
+  color: #10bffc;
+  font-size: 1.25em;
+  line-height: 1.5;
+  margin: 0 0 1em 0;
+}
+
+h5, .h5 {
+  font-weight: 400;
+  color: #10bffc;
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0 0 1em 0;
+}
+
+h6, .h6 {
+  font-weight: 400;
+  color: #10bffc;
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0 0 1em 0;
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 1em 0;
+}
+
+address {
+  font-style: normal;
+}
+
+cite {
+  font-style: normal;
+}
+
+/* Lists */
+ul, ol {
+  list-style: none;
+}
+
+ol {
+  counter-reset: counter;
+  margin-left: 0;
+  *margin-left: 54px;
+}
+
+ol li {
+  margin: 0 0 0.5em 0;
+  padding: 0 0 0 1em;
+  *list-style-type: decimal;
+  counter-increment: counter;
+  position: relative;
+}
+
+ol li:before {
+  color: #949494;
+  content: counter(counter) ". ";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.text-small {
+  font-size: 0.7em;
+}
+
+.text-big {
+  font-size: 1.3em;
+}
+
+.text-light {
+  font-weight: 200;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.color-gray {
+  color: #949494 !important;
+}
+
+.color-white {
+  color: #fff !important;
+}
+
+.color-light-blue {
+  color: #10bffc !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

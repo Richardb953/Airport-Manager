@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layouts/simpleLayout">
+
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="card card-block">
+					<table id="stewards" class="datatable table table-striped table-responsive" data-disabled="3,4">
+						<thead>
+							<tr>
+								<th th:text="#{steward.id}">
+									Steward id
+								</th>
+								<th th:text="#{steward.firstname}">
+									First name
+								</th>
+								<th th:text="#{steward.lastname}">
+									Last name
+								</th>
+								<th>
+
+								</th>
+								<th>
+
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="steward: ${stewards}">
+								<td data-name="id" th:text="${steward.id}">
+								</td>
+								<td data-name="firstname" th:text="${steward.firstName}">
+
+								</td>
+								<td data-name="lastname" th:text="${steward.lastName}">
+								</td>
+								<td>
+									<a th:class="${!steward.flights.isEmpty()} ? 'btn btn-secondary btn-remove-disabled' : 'btn btn-danger'" data-id="2" th:href="@{'/steward/remove/' + ${steward.id}}" th:text="#{steward.removebtn}">Remove</a>
+									<p class="error-msg" th:if="${!steward.flights.isEmpty()}" th:text="#{steward.remove.errmsg}"></p>
+								</td>
+								<td>
+									<a class="btn btn-success btn-update" data-id="2" th:href="@{'/steward/update/' + ${steward.id}}" th:text="#{steward.updatebtn}">Update</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-md-6">
+				<div class="card card-block">
+					<h4 th:text="#{steward.add}">Add steward</h4>
+					<form class="form" id="add-form" method="post" action="" th:object="${steward}">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" th:text="#{steward.firstname}">First name</label>
+									<input type="text" class="form-control" id="firstname" name="firstName" required="required"/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" th:text="#{steward.lastname}">Last name</label>
+									<input type="text" class="form-control" id="lastname" name="lastName" required="required"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 text-right">
+								<button class="btn btn-success" type="submit" th:text="#{steward.addbtn}">Add</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

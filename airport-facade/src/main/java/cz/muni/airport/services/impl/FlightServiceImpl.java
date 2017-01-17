@@ -1,23 +1,17 @@
 package cz.muni.airport.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import cz.muni.airport.dao.FlightDAO;
-import cz.muni.airport.dto.FlightCreateDTO;
-import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.FlightService;
 import cz.muni.airport.services.StewardService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  *
@@ -32,14 +26,13 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private FlightDAO flightDao;
 
-    @Inject
+    @Autowired
     private AirplaneService airplaneService;
 
-    @Inject
+    @Autowired
     private StewardService stewardService;
 
     @Override
-    @Transactional
     public Flight saveFlight(Flight flight) {
         try {
             return flightDao.addFlight(flight);
@@ -50,7 +43,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public Flight updateFlight(Flight flight) {
         try {
             return flightDao.updateFlight(flight);
@@ -61,7 +53,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public void removeFlight(Flight flight) {
         try {
             flightDao.removeFlight(flight);
@@ -72,7 +63,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public Flight getFlight(Long id) throws DataAccessException{
         try {
             return flightDao.getFlightById(id);
@@ -83,7 +73,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @Transactional
     public List<Flight> findAllFlights() {
         try {
             return flightDao.getAllFlights();
@@ -122,9 +111,14 @@ public class FlightServiceImpl implements FlightService {
         return true;
     }
 
+    @Override
+    public Flight removeStewardToFlight(Flight flight, Steward steward) {
+        flight.removeSteward(steward);
+        return updateFlight(flight);
+    }
+
 
     @Override
-    @Transactional
     public List<Flight> findFlightByName(String name) throws DataAccessException {
         try {
             return flightDao.getFlightsByName(name);

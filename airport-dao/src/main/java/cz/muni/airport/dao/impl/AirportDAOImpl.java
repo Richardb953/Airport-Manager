@@ -1,41 +1,58 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.model.Airport;
-import java.util.List;
-import cz.muni.airport.dao.AirportDAO;
-import cz.muni.airport.database.Connection;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
+import cz.muni.airport.dao.AirportDAO;
+import cz.muni.airport.model.Airport;
 
 /**
  * Implementation of Airport DAO interface
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
-@Repository("airportDAO")
+@Repository
 @Transactional
-public class AirportDAOImpl extends Connection implements AirportDAO {
+public class AirportDAOImpl implements AirportDAO {
+
+    @PersistenceContext(name = "airportUnit", type = PersistenceContextType.TRANSACTION)
+    private EntityManager entityManager;
 
     @Override
     public Airport addAirport(Airport airport) {
-        getHibernateTemplate().save(airport);
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
+        entityManager.persist(airport);
         return airport;
     }
 
     @Override
     public Airport updateAirport(Airport airport) {
-        getHibernateTemplate().update(airport);
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
+        entityManager.merge(airport);
         return airport;
     }
 
     @Override
     public void removeAirport(Airport airport) {
-        getHibernateTemplate().delete(airport);
+        if (airport == null) {
+            throw new IllegalArgumentException("airport can't be null");
+        }
+        entityManager.remove(entityManager.merge(airport));
     }
 
     @Override
     public List<Airport> getAllAirports() {
-        return (List<Airport>) getHibernateTemplate().findByNamedQuery("Airport.findAll");
+        return entityManager.createNamedQuery("Airport.findAll", Airport.class).getResultList();
     }
 
     @Override
@@ -43,7 +60,7 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
         if (id == null) {
             throw new IllegalArgumentException("Id can't be null");
         }
-        return getHibernateTemplate().get(Airport.class, id);
+        return entityManager.find(Airport.class, id);
     }
 
     @Override
@@ -51,7 +68,7 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
         if (city == null) {
             throw new IllegalArgumentException("City can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCity", "city", city);
+        return entityManager.createNamedQuery("Airport.findByCity", Airport.class).setParameter("city", city).getResultList();
     }
 
     @Override
@@ -59,7 +76,7 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
         if (name == null) {
             throw new IllegalArgumentException("Name can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByName", "name", name);
+        return entityManager.createNamedQuery("Airport.findByName", Airport.class).setParameter("name", name).getResultList();
     }
 
     @Override
@@ -67,7 +84,7 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
         if (country == null) {
             throw new IllegalArgumentException("Country can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByCountry", "country", country);
+        return entityManager.createNamedQuery("Airport.findByCountry", Airport.class).setParameter("country", country).getResultList();
     }
 
     @Override
@@ -75,7 +92,7 @@ public class AirportDAOImpl extends Connection implements AirportDAO {
         if (iata == null) {
             throw new IllegalArgumentException("Iata can't be null");
         }
-        return (List<Airport>) getHibernateTemplate().findByNamedQueryAndNamedParam("Airport.findByIata", "iata", iata);
+        return entityManager.createNamedQuery("Airport.findByIata", Airport.class).setParameter("iata", iata).getResultList();
     }
 
 }

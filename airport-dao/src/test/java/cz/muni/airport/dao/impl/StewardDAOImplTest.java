@@ -1,35 +1,45 @@
 package cz.muni.airport.dao.impl;
-import cz.muni.airport.dao.StewardDAO;
-import cz.muni.airport.model.Steward;
-import java.util.List;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateOptimisticLockingFailureException;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+
+import cz.muni.airport.dao.StewardDAO;
+import cz.muni.airport.database.testConfig;
+import cz.muni.airport.model.Steward;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This class tests all methods of StewardDAOImpl.
  *
- * @author Karolína Božková, github name: Kayeeec 
+ * @author Karolína Božková, github name: Kayeeec
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringApplicationConfiguration(testConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContextDao.xml"})
+@PropertySource("/application.properties")
+// Enable JMX so we can test the MBeans (you can't do this in a properties file)
+@TestPropertySource(properties = {"spring.jmx.enabled:true",
+    "spring.datasource.jmx-enabled:true"})
+
 public class StewardDAOImplTest {
-    
+
     @Autowired(required = true)
     private StewardDAO stewardDAO;
-    
-    public StewardDAOImplTest() {
-    }
 
     /**
-     * Tests wether addSteward() adds steward into the database. 
-     * Database is empty, after adding tests if it has one entry.
+     * Tests wether addSteward() adds steward into the database. Database is
+     * empty, after adding tests if it has one entry.
      */
     @Test
     public void testAddSteward() {
@@ -38,33 +48,35 @@ public class StewardDAOImplTest {
         steward.setFirstName("Monika");
         steward.setLastName("Ross");
         stewardDAO.addSteward(steward);
-        
-        assertEquals(1,stewardDAO.getAllStewards().size());
-        
+
+        assertEquals(1, stewardDAO.getAllStewards().size());
+
     }
-    
+
     /**
-     * Tests if addSteward() throws IllegalArgumentException when given null parameter. 
+     * Tests if addSteward() throws IllegalArgumentException when given null
+     * parameter.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddSteward_null() {
         Steward steward = null;
         stewardDAO.addSteward(steward);
-        
+
     }
-    
+
     /**
-     * Tests if removeSteward() throws IllegalArgumentException when given null parameter. 
+     * Tests if removeSteward() throws IllegalArgumentException when given null
+     * parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testRemoveSteward_null(){
+    public void testRemoveSteward_null() {
         Steward steward = null;
         stewardDAO.removeSteward(steward);
     }
-      
+
     /**
-     * Tests if removeSteward() removes entry from database. 
-     * Database is set up with two entities, after remove operation only one entry is expected.
+     * Tests if removeSteward() removes entry from database. Database is set up
+     * with two entities, after remove operation only one entry is expected.
      */
     @Test
     public void testRemoveSteward() {
@@ -76,42 +88,19 @@ public class StewardDAOImplTest {
         s2.setFirstName("Dylan");
         s2.setLastName("Bob");
         stewardDAO.addSteward(s1);
-        stewardDAO.addSteward(s2);
-        
+        s2 = stewardDAO.addSteward(s2);
         stewardDAO.removeSteward(s2);
-        
+
         assertEquals(1, stewardDAO.getAllStewards().size());
     }
 
     /**
-     * Tests if updateSteward() allows to change ID. Exception is expected. Id must not be changed.
-     */
-    @Test(expected = HibernateOptimisticLockingFailureException.class)
-    public void testUpdateSteward_ID() {   System.out.println("testUpdateStewardID()");   
-        //setup
-        Steward s1 = new Steward();
-        s1.setFirstName("Alice");
-        s1.setLastName("Dunham");
-        Steward s2 = new Steward();
-        s2.setFirstName("Dylan");
-        s2.setLastName("Bob");
-        stewardDAO.addSteward(s1);
-        stewardDAO.addSteward(s2);
-        
-        Steward toChange = stewardDAO.getStewardByName(s2.getFirstName(), s2.getLastName()).get(0);
-        System.out.println(toChange.toString());
-        
-        toChange.setId((long) 99);
-        stewardDAO.updateSteward(toChange);
-                
-    }
-    
-    /**
-     * Tests if updateSteward() works properly on all attributes except from id and flights and if it 
-     * does not change unwanted entries.
+     * Tests if updateSteward() works properly on all attributes except from id
+     * and flights and if it does not change unwanted entries.
      */
     @Test()
-    public void testUpdateSteward() {   System.out.println("testUpdateSteward()------------------");   
+    public void testUpdateSteward() {
+        System.out.println("testUpdateSteward()------------------");
         //setup
         Steward s1 = new Steward();
         s1.setFirstName("Alice");
@@ -121,62 +110,69 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         Steward unchanged = stewardDAO.getStewardByName(s1.getFirstName(), s1.getLastName()).get(0);
         Long unchangedID = unchanged.getId();
         Steward toChange = stewardDAO.getStewardByName(s2.getFirstName(), s2.getLastName()).get(0);
         Long toChangeID = toChange.getId();
-        
+
         //firstName
         toChange.setFirstName("Don");
         stewardDAO.updateSteward(toChange);
         assertEquals("Don", stewardDAO.getStewardById(toChangeID).getFirstName());
-        
+
         //lastName
         toChange.setLastName("Qichote");
         stewardDAO.updateSteward(toChange);
         assertEquals("Qichote", stewardDAO.getStewardById(toChangeID).getLastName());
-        
+
         //others unchanged
         assertEquals(unchanged, stewardDAO.getStewardById(unchangedID));
-                
+
     }
-    
+
     /**
-     * Tests if updateSteward() throws IllegalArgumentException if given null parameter.
+     * Tests if updateSteward() throws IllegalArgumentException if given null
+     * parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testUpdateSteward_Null(){ System.out.println("testUpdateStewardNull()");
+    public void testUpdateSteward_Null() {
+        System.out.println("testUpdateStewardNull()");
         Steward s = null;
         stewardDAO.updateSteward(s);
     }
 
     /**
-     * Tests if getStewardById() throws IllegalArgumentException if given null parameter.
+     * Tests if getStewardById() throws IllegalArgumentException if given null
+     * parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testGetStewardById_Null() { System.out.println("testGetStewardNull()");
+    public void testGetStewardById_Null() {
+
+        System.out.println("testGetStewardNull()");
         Long id = null;
         Steward steward = stewardDAO.getStewardById(id);
     }
-    
+
     /**
-     * Tests behavior of getStewardById() when searching for entry that is not in the database.
-     * Expexted result is null object.
+     * Tests behavior of getStewardById() when searching for entry that is not
+     * in the database. Expexted result is null object.
      */
     @Test
-    public void testGetStewardById_nonexistent(){ System.out.println("testGetStewardNonexistent()");
+    public void testGetStewardById_nonexistent() {
+        System.out.println("testGetStewardNonexistent()");
         //empty db
-        Steward s = stewardDAO.getStewardById((long) 3 );
+        Steward s = stewardDAO.getStewardById((long) 3);
         assertNull(s);
-        
+
     }
-    
+
     /**
-     * Tests proper behaviour of getStewardById() method. 
+     * Tests proper behaviour of getStewardById() method.
      */
     @Test
-    public void testGetStewardById(){ System.out.println("testGetSteward()");
+    public void testGetStewardById() {
+        System.out.println("testGetSteward()");
         //setup
         Steward s1 = new Steward();
         s1.setFirstName("Alice");
@@ -186,21 +182,21 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         Steward alice = stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         //test
         Steward aliceDB = stewardDAO.getStewardById(alice.getId());
-        
+
         assertEquals(alice, aliceDB);
-        
-        
+
     }
 
     /**
-     * Test of getAllStewards method, of class StewardDAOImpl.
-     * On empty database empty list of results expected.
+     * Test of getAllStewards method, of class StewardDAOImpl. On empty database
+     * empty list of results expected.
      */
     @Test
-    public void testGetAllStewards() { System.out.println("testGetAllStewards()");
+    public void testGetAllStewards() {
+        System.out.println("testGetAllStewards()");
         // emty db
         assertEquals(0, stewardDAO.getAllStewards().size());
         //one
@@ -222,8 +218,9 @@ public class StewardDAOImplTest {
      * Test of getStewardByName method, of class StewardDAOImpl.
      */
     @Test
-    public void testGetStewardByName() { System.out.println("testGetStewardByName()");
-    //setup
+    public void testGetStewardByName() {
+        System.out.println("testGetStewardByName()");
+        //setup
         Steward s1 = new Steward();
         s1.setFirstName("Alice");
         s1.setLastName("Dunham");
@@ -232,15 +229,16 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         Steward alice = stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         List<Steward> results = stewardDAO.getStewardByName("Alice", "Dunham");
         assertEquals(1, results.size());
         assertEquals(alice, results.get(0));
-  
+
     }
-    
+
     /**
-     * Tests if getStewardByName method throws exception if one of the parameters is null.
+     * Tests if getStewardByName method throws exception if one of the
+     * parameters is null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_firstNull() {
@@ -253,14 +251,14 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         stewardDAO.getStewardByName(null, "Bob");
-        
-        
+
     }
-    
+
     /**
-     * Tests if getStewardByName method throws exception if one of the parameters is null.
+     * Tests if getStewardByName method throws exception if one of the
+     * parameters is null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_secondNull() {
@@ -272,22 +270,23 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         stewardDAO.getStewardByName("Alice", null);
     }
-    
+
     /**
-     * Tests if getStewardByName method throws exception if both parameters are null.
+     * Tests if getStewardByName method throws exception if both parameters are
+     * null.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStewardByName_bothNull() {
         stewardDAO.getStewardByName(null, null);
-        
+
     }
-    
+
     /**
-     * Tests behaviour of getStewardByName method if given entry is not in the database.
-     * Expected result is empty list. 
+     * Tests behaviour of getStewardByName method if given entry is not in the
+     * database. Expected result is empty list.
      */
     @Test
     public void testGetStewardByName_nonexistent() {
@@ -300,9 +299,9 @@ public class StewardDAOImplTest {
         s2.setLastName("Bob");
         stewardDAO.addSteward(s1);
         stewardDAO.addSteward(s2);
-        
+
         List<Steward> gottenByName = stewardDAO.getStewardByName("Tom", "Hardy");
         assertTrue(gottenByName.isEmpty());
     }
-    
+
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
+
+    <div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-6 offset-md-3 mt-1 offset-sm-0">
+				<div id="update">
+					<div class="card card-block">
+						<h4 th:text="#{steward.update}">Update steward</h4>
+						<form class="form" id="update-form" method="post" action="" th:object="${steward}">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="" th:text="#{steward.firstname}">First name</label>
+										<input type="text" class="form-control" id="firstname" name="firstName" required="required" th:field="*{firstName}"/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="" th:text="#{steward.lastname}">Last name</label>
+										<input type="text" class="form-control" id="lastname" name="lastName" required="required" th:field="*{lastName}"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="" th:text="#{steward.id}">Id</label>
+										<input type="text" disabled="disabled" class="form-control" id="id" name="id" th:field="*{id}"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 text-right">
+									<a class="btn btn-default btn-cancel" th:href="@{'/steward/all/'}" th:text="#{steward.cancelbtn}">Cancel</a>
+									<button class="btn btn-success" type="submit" th:text="#{steward.updatebtn}">Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</html>

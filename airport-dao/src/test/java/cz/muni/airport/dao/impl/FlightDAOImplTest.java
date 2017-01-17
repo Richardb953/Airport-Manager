@@ -1,23 +1,30 @@
 package cz.muni.airport.dao.impl;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Calendar;
+import java.util.List;
+
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.AirportDAO;
 import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.database.testConfig;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.enums.PlaneType;
 import cz.muni.airport.model.enums.FlightState;
-import java.util.Calendar;
+import cz.muni.airport.model.enums.PlaneType;
 
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests all methods of FlightDAOImpl.
@@ -25,8 +32,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Jiri Krejci, github name: xkrejci7
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringApplicationConfiguration(testConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContextDao.xml"})
+@PropertySource("/application.properties")
+// Enable JMX so we can test the MBeans (you can't do this in a properties file)
+@TestPropertySource(properties = { "spring.jmx.enabled:true",
+        "spring.datasource.jmx-enabled:true" })
+
 public class FlightDAOImplTest {
 
     @Autowired(required = true)
@@ -37,9 +49,6 @@ public class FlightDAOImplTest {
 
     @Autowired(required = true)
     private AirportDAO airportDAO;
-
-    public FlightDAOImplTest() {
-    }
 
     @Test
     public void testAddFlight() throws Exception {

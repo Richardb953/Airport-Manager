@@ -1,1 +1,0 @@
-folder contains basic service interfaces implemented in ./impl

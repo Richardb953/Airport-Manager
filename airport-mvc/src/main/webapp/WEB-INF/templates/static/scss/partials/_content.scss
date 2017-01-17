@@ -1,0 +1,24 @@
+.content { padding: 3em 0; }
+
+.hidden { display: none; }
+.hidden.active { display: block; }
+
+form .error { color: $red; font-weight: 300; }
+form label { font-weight: 400; }
+
+
+@media screen and (max-width: $md) {
+	
+}
+
+@media screen and (max-width: $sm) {
+	
+}
+
+@media screen and (max-width: $xs) {
+	
+}
+
+@media screen and (max-width: $xxs) {
+	
+}

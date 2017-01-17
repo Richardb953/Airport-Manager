@@ -1,6 +1,11 @@
 package cz.muni.airport.model;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -8,17 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.NotNull;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 import cz.muni.airport.model.enums.FlightState;
 
@@ -41,7 +42,7 @@ public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "flight_id")
     private Long id;
 
     @Column(nullable = false)
@@ -62,14 +63,17 @@ public class Flight {
     @ManyToOne()
     private Airplane airplane;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport destinationPort;
 
-    @OneToOne(optional = true)
+    @ManyToOne()
     private Airport sourcePort;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "flights")
-    private List<Steward> stewards;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = {
+            @JoinColumn(name = "flight_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name="steward_id", nullable = false, updatable = false) })
+    private List<Steward> stewards = new ArrayList<>();
 
 
     public Flight() {
@@ -140,7 +144,7 @@ public class Flight {
     }
 
     public List<Steward> getStewards() {
-        return Collections.unmodifiableList(stewards);
+        return (stewards);
     }
 
     public void setStewards(List<Steward> stewards) {
@@ -151,6 +155,11 @@ public class Flight {
         this.stewards.add(steward);
     }
 
+    public void removeSteward(Steward steward) {
+        if(this.stewards.contains(steward)){
+            this.stewards.remove(steward);
+        }
+    }
     public FlightState getFlightState() {
         return flightState;
     }
@@ -188,5 +197,6 @@ public class Flight {
                 ", sourcePort=" + sourcePort +
                 '}';
     }
+
 
 }

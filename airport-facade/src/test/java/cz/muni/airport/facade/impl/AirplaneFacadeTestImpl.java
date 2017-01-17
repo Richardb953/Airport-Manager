@@ -16,7 +16,7 @@ import java.util.List;
 
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
-import cz.muni.airport.facade.impl.AirplaneFacadeImpl;
+import cz.muni.airport.facadeApi.AirplaneFacade;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.enums.PlaneType;
@@ -36,6 +36,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AirplaneFacadeTestImpl {
+
     @Mock
     private AirplaneService airplaneService;
 
@@ -46,7 +47,7 @@ public class AirplaneFacadeTestImpl {
     private BeanMappingService beanMapperService;
 
     @InjectMocks
-    private AirplaneFacadeImpl airplaneFacade = new AirplaneFacadeImpl();
+    private AirplaneFacade airplaneFacade = new AirplaneFacadeImpl();
 
     public AirplaneFacadeTestImpl() {
     }
@@ -78,7 +79,7 @@ public class AirplaneFacadeTestImpl {
         airplaneDTO.setId(1L);
         airplaneDTO.setName("Boening-477");
         airplaneDTO.setCapacity(50);
-        airplaneDTO.setType(PlaneType.AIRLINER);
+        airplaneDTO.setType(cz.muni.airport.enums.PlaneType.AIRLINER);
 
 
         allAirplanes.add(airplane);
@@ -100,8 +101,8 @@ public class AirplaneFacadeTestImpl {
         flightDTO = new FlightDTO();
         flightDTO.setName("LetCislo42");
         flightDTO.setAirplane(airplaneDTO);
-        flightDTO.setArrival(arrival.getTime().getTime());
-        flightDTO.setDeparture(departure.getTime().getTime());
+        flightDTO.setArrival(arrival.getTime());
+        flightDTO.setDeparture(departure.getTime());
         flightDTO.setPassagers(50);
 
         airplaneDTO.addFlight(flightDTO);

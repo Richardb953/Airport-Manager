@@ -1,34 +1,31 @@
 package cz.muni.airport.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.AirplaneService;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of AirplaneService interface.
  * @author Karolína Božková, github name: Kayeeec 
  * @see AirplaneService documentation.
  */
-@Service("airplaneService")
-public class AirplaneServiceImpl implements AirplaneService {
-    @Autowired
-    AirplaneDAO airplaneDAO;
 
-    public void setAirplaneDAO(AirplaneDAO airplaneDAO) {
-        this.airplaneDAO = airplaneDAO;
-    }
-   
+@Service
+public class AirplaneServiceImpl implements AirplaneService {
+
+    @Autowired
+    private AirplaneDAO airplaneDAO;
+
     @Override
-    @Transactional
     public Airplane saveAirplane(Airplane airplane) {
         try {
             return airplaneDAO.addAirplane(airplane);
@@ -38,7 +35,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    @Transactional
     public Airplane updateAirplane(Airplane airplane) {
         try {
             return airplaneDAO.updateAirplane(airplane);
@@ -48,7 +44,6 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    @Transactional
     public void removeAirplane(Airplane airplane) {
         try {
             airplaneDAO.removeAirplane(airplane);

@@ -11,20 +11,18 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import cz.muni.airport.dao.AirplaneDAO;
 import cz.muni.airport.dao.FlightDAO;
+import cz.muni.airport.dao.StewardDAO;
 import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.enums.PlaneType;
-import cz.muni.airport.services.impl.AirplaneServiceImpl;
-import cz.muni.airport.services.impl.FlightServiceImpl;
-
-import static org.mockito.Mockito.when;
+import cz.muni.airport.services.AirplaneService;
+import cz.muni.airport.services.FlightService;
+import cz.muni.airport.services.StewardService;
 
 /**
  * Created by Richard Bariny on 25.11.2016.
@@ -39,37 +37,39 @@ public class AirplaneServiceImplTest {
     @Mock
     private FlightDAO flightDAO;
 
-    @InjectMocks
-    private AirplaneServiceImpl airplaneService = new AirplaneServiceImpl();
+    @Mock
+    private StewardDAO stewardDAO;
 
     @InjectMocks
-    private FlightServiceImpl flightService = new FlightServiceImpl();
+    private AirplaneService airplaneService = new AirplaneServiceImpl();
+
+    @InjectMocks
+    private StewardService stewardService = new StewardServiceImpl();
+
+    @InjectMocks
+    private FlightService flightService = new FlightServiceImpl();
 
     public AirplaneServiceImplTest(){}
 
-    private Airplane airplane, airplane1, airplane2;
-    private Flight flight, flight2;
-    private Airport bratiska, kosice;
-    private List<Airplane> allAirplanes = new ArrayList<>(3);
+    private Airplane airplane2;
+    private Flight flight2;
     private List<Flight> allFlights = new ArrayList<>(2);
-    Calendar arrival;
-    Calendar departure;
 
     @BeforeMethod
     public void prepareObjects() {
 
-        bratiska = new Airport();
-        kosice = new Airport();
+        Airport bratiska = new Airport();
+        Airport kosice = new Airport();
         bratiska.setName("Bratislava");
         kosice.setName("Kosice");
 
-        allAirplanes = new ArrayList<>(3);
-        airplane = new Airplane();
+        List<Airplane> allAirplanes = new ArrayList<>(3);
+        Airplane airplane = new Airplane();
         airplane.setName("Boening-477");
         airplane.setCapacity(50);
         airplane.setType(PlaneType.AIRLINER);
 
-        airplane1 = new Airplane();
+        Airplane airplane1 = new Airplane();
         airplane.setName("Boening-478");
         airplane.setCapacity(50);
         airplane.setType(PlaneType.AIRLINER);
@@ -83,14 +83,14 @@ public class AirplaneServiceImplTest {
         allAirplanes.add(airplane1);
         allAirplanes.add(airplane2);
 
-        flight = new Flight();
+        Flight flight = new Flight();
         flight.setName("LetCislo42");
         flight.setAirplane(airplane);
 
-        arrival = Calendar.getInstance();
+        Calendar arrival = Calendar.getInstance();
         arrival.set(2016, Calendar.DECEMBER, 20, 10, 22);
 
-        departure = Calendar.getInstance();
+        Calendar departure = Calendar.getInstance();
         departure.set(2016, Calendar.DECEMBER, 20, 11, 22);
 
         flight.setArrival(arrival.getTime());

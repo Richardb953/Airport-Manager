@@ -1,55 +1,77 @@
 package cz.muni.airport.dao.impl;
 
-import cz.muni.airport.model.Airplane;
-import java.util.List;
-import cz.muni.airport.dao.AirplaneDAO;
 import org.springframework.stereotype.Repository;
-import cz.muni.airport.database.Connection;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
+import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.model.Airplane;
+
 /**
- * Implementation of AirplaneDAO. This Data Access Object provides access 
- * to Airplane antries ant Airplane related data.
- * 
- * @author Karolína Božková, github name: Kayeeec 
+ * Implementation of AirplaneDAO. This Data Access Object provides access to
+ * Airplane entries and Airplane related data.
+ *
+ * @author Karolína Božková, github name: Kayeeec
  * @see AirplaneDAO documentation.
  */
+@Repository
 @Transactional
-@Repository("airplaneDAO")
-public class AirplaneDAOImpl extends Connection implements AirplaneDAO {
+public class AirplaneDAOImpl implements AirplaneDAO {
+
+    @PersistenceContext(name = "airplaneUnit", type = PersistenceContextType.TRANSACTION)
+    private EntityManager entityManager;
 
     @Override
     public List<Airplane> getAllAirplanes() {
-        return (List<Airplane>) getHibernateTemplate().find("from Airplane ");
+
+        return entityManager.createQuery("from Airplane", Airplane.class).getResultList();
     }
-    
+
     @Override
     public Airplane getAirplaneById(Long id) {
-        if(id == null) throw new IllegalArgumentException("id is null");
-        return getHibernateTemplate().get(Airplane.class, id);
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
+        return entityManager.find(Airplane.class, id);
     }
-    
+
     @Override
     public List<Airplane> getAirplaneByName(String name) {
-        if(name == null) throw new IllegalArgumentException("name is null");
-        return (List<Airplane>) getHibernateTemplate().find("from Airplane where name = '" +name+"'");
+        if (name == null) {
+            throw new IllegalArgumentException("name is null");
+        }
+        return entityManager.createQuery("from Airplane where name = '" + name + "'", Airplane.class).getResultList();
     }
 
     @Override
     public Airplane addAirplane(Airplane airplane) {
-        getHibernateTemplate().save(airplane);
+        if (airplane == null) {
+            throw new IllegalArgumentException("airplane is null");
+        }
+        entityManager.persist(airplane);
         return airplane;
     }
 
     @Override
     public Airplane updateAirplane(Airplane airplane) {
-        getHibernateTemplate().update(airplane);
+        if (null == airplane) {
+            throw new IllegalArgumentException("airplane is null");
+        }
+        entityManager.merge(airplane);
         return airplane;
     }
 
     @Override
     public void removeAirplane(Airplane airplane) {
-        getHibernateTemplate().delete(airplane);
+        if (airplane == null) {
+            throw new IllegalArgumentException("airplane is null");
+        }
+        entityManager.remove(entityManager.merge(airplane));
     }
-    
+
 }

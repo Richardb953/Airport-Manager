@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/simpleLayout">
+
+    <main class="content">
+    <p layout:fragment="content">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-1 offset-sm-0">
+                <div id="update">
+                    <div class="card card-block">
+                        <h4 th:text="#{airplane.update}">Update airplane</h4>
+                        <form class="form" id="update-form" method="post" action="#" th:action="@{'/airplane/update/'+${airplaneToUpdate.id}}" th:object="${airplaneToUpdate}">
+                            <!--<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" th:text="#{airplane.name}">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" required="required" th:field="*{name}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" th:text="#{airplane.type}">Type</label>
+                                        <select class="custom-select form-control" id="type" name="type" th:field="${airplaneToUpdate.type}">
+                                            <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
+                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}" th:text="#{${type}}"></option>           
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" th:text="#{airplane.capacity}">Capacity</label>
+                                        <input type="number" min="0" class="form-control" id="capacity" name="capacity" required="required" 
+                                               th:value="*{capacity}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" th:text="#{airplane.id}">Id</label>
+                                        <input type="number" disabled="disabled" class="form-control" id="id" name="id" 
+                                               th:field="*{id}" th:value="*{id}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-right">
+                                    <button class="btn btn-default btn-cancel" type="reset" th:text="#{airplane.resetbtn}">Reset</button>
+                                    <button class="btn btn-success" type="submit" th:text="#{airplane.updatebtn}">Update</button>
+                                    <form class="form" id="back-form" method="get" th:attr="action='/pa165/airplane/all'">
+                                        <button class="btn btn-default" th:text="#{airplane.cancelbtn}">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p>
+    </main>
+</html>

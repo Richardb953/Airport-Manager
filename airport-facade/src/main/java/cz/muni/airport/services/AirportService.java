@@ -1,11 +1,10 @@
 package cz.muni.airport.services;
 
-import cz.muni.airport.model.Airplane;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.Flight;
-import cz.muni.airport.model.Steward;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import cz.muni.airport.model.Airport;
 
 /**
  * Interface for Airport service
@@ -93,19 +92,4 @@ public interface AirportService {
      */
     public boolean hasValidIata(Airport airport);
 
-//    /**
-//     * Get all available stewards for given flight
-//     *
-//     * @param flight Flight to search for
-//     * @return List<Steward> of Steward objects
-//     */
-//    List<Steward> getAvailableStewards(Flight flight);
-//
-//    /**
-//     * Get all available stewards for given flight
-//     *
-//     * @param flight Flight to search for
-//     * @return List<Airplane> of Airplane objects
-//     */
-//    List<Airplane> getAvailableAirplanes(Flight flight);
 }

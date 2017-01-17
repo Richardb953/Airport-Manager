@@ -2,11 +2,10 @@ package cz.muni.airport.facadeApi;
 
 import java.util.List;
 
-import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
-import cz.muni.airport.model.enums.FlightState;
+import cz.muni.airport.enums.FlightState;
 
 /**
  * Created by Richard Bariny on 9.11.2016.
@@ -63,7 +62,7 @@ public interface FlightFacade {
     FlightDTO updateFlight(FlightDTO flightDTO);
 
     /**
-     * Validate Flight - times, airports and airplane availibilitz The system should also check that
+     * Validate Flight - times, airports and airplane availibility. The system should also check that
      * the plane does not have another flight scheduled during the time of the this flight. It
      * should also checking for the steward's availability.
      *
@@ -80,6 +79,16 @@ public interface FlightFacade {
      * @return updated Flight DTO
      */
     FlightDTO addStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO);
+
+    /**
+     * Add steward to Flight
+     *
+     * @param flightDTO  Flight object as DTO
+     * @param stewardDTO steward object as DTO
+     * @return updated Flight DTO
+     */
+    FlightDTO removeStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO);
+
 
     /**
      * Change state of flight

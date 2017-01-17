@@ -18,6 +18,7 @@ import cz.muni.airport.services.BeanMappingService;
 
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService{
+
     @Autowired
     private Mapper dozer;
 

@@ -1,20 +1,19 @@
 package cz.muni.airport.model;
 
-import cz.muni.airport.model.enums.PlaneType;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+
+import cz.muni.airport.model.enums.PlaneType;
 
 /**
  * Class representing the Airplane entity.
@@ -92,7 +91,7 @@ public class Airplane {
     }
 
     public List<Flight> getFlights() {
-        return Collections.unmodifiableList(flights);
+        return (flights);
     }
 
     public void setFlights(List<Flight> flights) {
@@ -108,8 +107,7 @@ public class Airplane {
         int hash = 7;
         hash = 67 * hash + getName().hashCode()
                 + Objects.hashCode(getCapacity()) 
-                + getType().toString().hashCode()
-                + getFlights().hashCode();
+                + getType().toString().hashCode();
         return hash;
     }
     
@@ -130,7 +128,6 @@ public class Airplane {
         if (!Objects.equals(this.getCapacity(), other.getCapacity())) return false;
         if (!Objects.equals(this.getName(), other.getName())) return false;
         if (!Objects.equals(this.getType(), other.getType())) return false;
-//        if (!Objects.equals(this.getFlights(), other.getFlights())) return false;
         
         return true;
     }

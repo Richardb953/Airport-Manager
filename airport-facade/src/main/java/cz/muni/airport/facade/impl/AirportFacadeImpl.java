@@ -1,39 +1,35 @@
 package cz.muni.airport.facade.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import cz.muni.airport.dto.AirportCreateDTO;
 import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.facadeApi.AirportFacade;
 import cz.muni.airport.model.Airport;
 import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
-import java.util.List;
-import javax.inject.Inject;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Jiri Krejci, github name: xkrejci7
  */
+@Service
 public class AirportFacadeImpl implements AirportFacade {
 
-    @Inject
-    AirportService airportService;
+    @Autowired
+    private AirportService airportService;
 
     @Autowired
     private BeanMappingService beanMappingService;
 
     @Override
-    public AirportDTO createAirport(AirportDTO airportDTO) {
+    public AirportDTO createAirport(AirportCreateDTO airportCreateDTO) {
 
-        Airport airport = beanMappingService.mapTo(airportDTO, Airport.class);
-        /*if (airportService.hasValidIata(airport)) {
-
-            Airport created = airportService.saveAirport(airport);
-            return beanMappingService.mapTo(created, AirportDTO.class);
-        } else {
-            throw new IllegalArgumentException("IATA code is invalid");
-        }*/
-		
-		Airport created = airportService.saveAirport(airport);
+        Airport airport = beanMappingService.mapTo(airportCreateDTO, Airport.class);
+        Airport created = airportService.saveAirport(airport);
         return beanMappingService.mapTo(created, AirportDTO.class);
     }
 

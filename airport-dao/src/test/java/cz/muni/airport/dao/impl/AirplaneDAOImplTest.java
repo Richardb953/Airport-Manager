@@ -3,11 +3,14 @@ package cz.muni.airport.dao.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.muni.airport.dao.AirplaneDAO;
+import cz.muni.airport.database.testConfig;
 import cz.muni.airport.model.Airplane;
 
 import static org.junit.Assert.assertEquals;
@@ -20,13 +23,17 @@ import static org.junit.Assert.assertNull;
  * Test for Airplane DAO class
  *
  */
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringApplicationConfiguration(testConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:WEB-INF/applicationContextDao.xml"})
+@PropertySource("/application.properties")
+// Enable JMX so we can test the MBeans (you can't do this in a properties file)
+@TestPropertySource(properties = { "spring.jmx.enabled:true",
+        "spring.datasource.jmx-enabled:true" })
+
 public class AirplaneDAOImplTest {
 
-    @Autowired(required = true)
+    @Autowired
     private AirplaneDAO airplaneDAO;
 
     /**
@@ -81,7 +88,6 @@ public class AirplaneDAOImplTest {
     /**
      * Testing update airplane, after update names should be equals
      */
-
     @Test
     public void testUpdateAirplane(){
         System.out.println("Testing update Airplane");
@@ -161,7 +167,6 @@ public class AirplaneDAOImplTest {
     /**
      * Airplanes with null name should not exist and method is throwin exp
      */
-
     @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void testAddAirplaneWithNullName(){
         System.out.println("Testing find Airplane by null name");

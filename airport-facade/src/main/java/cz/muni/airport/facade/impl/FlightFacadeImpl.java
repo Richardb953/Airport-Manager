@@ -7,17 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import cz.muni.airport.dao.FlightDAO;
 import cz.muni.airport.dto.FlightCreateDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.dto.StewardDTO;
-import cz.muni.airport.model.Airport;
-import cz.muni.airport.model.enums.FlightState;
 import cz.muni.airport.facadeApi.FlightFacade;
+import cz.muni.airport.model.Airport;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.model.Steward;
+import cz.muni.airport.model.enums.FlightState;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.AirportService;
 import cz.muni.airport.services.BeanMappingService;
@@ -35,16 +32,16 @@ import cz.muni.airport.services.StewardService;
 @Service
 public class FlightFacadeImpl implements FlightFacade {
 
-    @Inject
+    @Autowired
     private FlightService flightService;
 
-    @Inject
+    @Autowired
     private AirportService airportService;
 
-    @Inject
+    @Autowired
     private AirplaneService airplaneService;
 
-    @Inject
+    @Autowired
     private StewardService stewardService;
 
     @Autowired
@@ -56,7 +53,6 @@ public class FlightFacadeImpl implements FlightFacade {
 
         FlightState flightState = convertFlightState(flightCreateDTO.getFlightState());
 
-        //todo premysliet ci moze byt letisko null ak ano state by nemal byt validated --skor vyhodit excptn
         Airport destAirport = flightCreateDTO.getDestinationport() == null ? null :  airportService.findAirportById(flightCreateDTO.getDestinationport().getId());
         Airport sourcAirport = flightCreateDTO.getSourceport() == null ? null :  airportService.findAirportById(flightCreateDTO.getSourceport().getId());
 
@@ -72,8 +68,8 @@ public class FlightFacadeImpl implements FlightFacade {
 
         flight.setStewards(stewards);
 
-        Date departure = new Date(flightCreateDTO.getDeparture());
-        Date arrival = new Date(flightCreateDTO.getArrival());
+        Date departure =   (flightCreateDTO.getDeparture());
+        Date arrival = (flightCreateDTO.getArrival());
         flight.setArrival(arrival);
         flight.setDeparture(departure);
         flight.setFlightState(flightState);
@@ -94,8 +90,8 @@ public class FlightFacadeImpl implements FlightFacade {
         flight.setDestinationPort(destAirport);
         flight.setSourcePort(sourcAirport);
 
-        Date departure = new Date(flightCreateDTO.getDeparture());
-        Date arrival = new Date(flightCreateDTO.getArrival());
+        Date departure = flightCreateDTO.getDeparture();
+        Date arrival = flightCreateDTO.getArrival();
         flight.setArrival(arrival);
         flight.setDeparture(departure);
         flight.setFlightState(flightState);
@@ -141,9 +137,16 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightDTO changeFlightState(FlightDTO flightDTO, FlightState newFlightState) {
+    public FlightDTO removeStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO) {
         Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
-        flight.setFlightState(newFlightState);
+        Steward steward = beanMappingService.mapTo(stewardDTO, Steward.class);
+
+        return beanMappingService.mapTo(flightService.removeStewardToFlight(flight, steward), FlightDTO.class);    }
+
+    @Override
+    public FlightDTO changeFlightState(FlightDTO flightDTO, cz.muni.airport.enums.FlightState newFlightState) {
+        Flight flight = beanMappingService.mapTo(flightDTO, Flight.class);
+        flight.setFlightState(convertFlightState(newFlightState));
         flight = flightService.updateFlight(flight);
         return beanMappingService.mapTo(flight, FlightDTO.class);
     }

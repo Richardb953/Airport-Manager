@@ -1,0 +1,4 @@
+.table.dataTable { width: 100%; border-collapse: collapse !important; }
+.table th, .table td { border: none !important; }
+
+.table-striped tbody tr:nth-of-type(2n+1) { background: $lightestBlue; }

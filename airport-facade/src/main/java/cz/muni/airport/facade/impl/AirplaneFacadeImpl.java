@@ -1,5 +1,10 @@
 package cz.muni.airport.facade.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import cz.muni.airport.dto.AirplaneDTO;
 import cz.muni.airport.dto.FlightDTO;
 import cz.muni.airport.facadeApi.AirplaneFacade;
@@ -7,14 +12,14 @@ import cz.muni.airport.model.Airplane;
 import cz.muni.airport.model.Flight;
 import cz.muni.airport.services.AirplaneService;
 import cz.muni.airport.services.BeanMappingService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Karolína Božková, github name: Kayeeec
  */
+@Service
 public class AirplaneFacadeImpl implements AirplaneFacade{
+
     @Autowired
     private AirplaneService airplaneService;
 
@@ -39,6 +44,12 @@ public class AirplaneFacadeImpl implements AirplaneFacade{
     @Override
     public void deleteAirplane(AirplaneDTO airplaneDTO) {
         Airplane airplane = beanMappingService.mapTo(airplaneDTO, Airplane.class);
+        airplaneService.removeAirplane(airplane);
+    }
+    
+    @Override
+    public void deleteAirplane(long id) {
+        Airplane airplane = airplaneService.getAirplaneById(id);
         airplaneService.removeAirplane(airplane);
     }
 

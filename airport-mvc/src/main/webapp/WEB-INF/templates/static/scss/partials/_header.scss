@@ -1,0 +1,18 @@
+.header { height: 3.5em; padding: 0; background: $darkestBlue; }
+.nav-brand { padding-top: 0.25em; }
+
+/* Main navigation */
+
+.main-nav { margin: 0; position: absolute; right: 0; top: 0; }
+.main-nav ul { margin: 0; }
+.main-nav ul li { padding: 0; margin: 0; background: none; display: inline-block; }
+.main-nav ul li a { position: relative; color: $white; text-decoration: none; font-size: 1em; display: block; line-height: 3.5em; white-space: no-wrap; padding: 0 0.5em; }
+.main-nav ul li a:hover, .main-nav ul li a:active { color: $lightBlue; }
+.main-nav ul li.active a { color: $lightBlue; }
+.main-nav ul li a:after { content: ""; display: block; width: 100%; height: 3px; background: $white; position: absolute; left: 0; bottom: 0; }
+
+.login { margin: 0; position: absolute; right: 0; top: 0; }
+.login ul { margin: 0; }
+.login ul li { margin: 0; padding: 0 0.5em; display: inline-block; }
+.login ul li a:not(.btn) { color: $white; font-size: 0.9em; display: block; line-height: 5.55em; white-space: nowrap; }
+.login ul li a.btn { vertical-align: middle; }
