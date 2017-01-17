@@ -29,8 +29,9 @@
                                 <td data-name="city"  th:text="${airport.city}" />
                                 <td>
                                     <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airport/delete/'+${airport.id}">
-                                        <button class="btn btn-danger" th:attr="data-id=${airport.id}" th:text="#{airport.removebtn}">Remove</button>
-                                    </form>
+                                        <button th:class="${!airport.flightsSources.isEmpty() or !airport.flightsDestinations.isEmpty()} ? 'btn btn-secondary btn-remove-disabled' : 'btn btn-danger'" th:attr="data-id=${airport.id}" th:text="#{airport.removebtn}">Remove</button>
+										<p class="error-msg" th:if="${!airport.flightsSources.isEmpty() or !airport.flightsDestinations.isEmpty()}" th:text="#{airport.remove.errmsg}"></p>
+									</form>
                                 </td>
                                 <td>
                                     <form class="form" id="update-form" method="get" th:attr="action='/pa165/airport/update/'+${airport.id}">
