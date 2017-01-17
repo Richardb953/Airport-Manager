@@ -31,8 +31,9 @@
                                     </td>
                                     <td>
                                         <form class="form" id="remove-form" method="post" th:attr="action='/pa165/airplane/delete/'+${airplane.id}">
-                                            <button class="btn btn-danger" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
-                                        </form>
+                                            <button th:class="${!airplane.flights.isEmpty()} ? 'btn btn-secondary btn-remove-disabled' : 'btn btn-danger'" th:attr="data-id=${airplane.id}" th:text="#{airplane.removebtn}">Remove</button>
+                                        	<p class="error-msg" th:if="${!airplane.flights.isEmpty()}" th:text="#{airplane.remove.errmsg}"></p>
+										</form>
                                     </td>
                                     <td>
 <!--                                         <button class="btn btn-success btn-update" th:attr="toUpdate=${airplane}, updateid=${airplane.id}, updateType=${airplane.type}">Update</button>-->
