@@ -18,30 +18,32 @@ import cz.muni.airport.facadeApi.StewardFacade;
 
 /**
  * Steward Controller for steward templates
+ *
  * @author Andrea Navratilova, github name: andrea-n
  */
-
 @Controller
 @RequestMapping("/steward")
 @Transactional
 public class StewardController {
-	
-	@Autowired
+
+    @Autowired
     private StewardFacade stewardFacade;
 
     @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_CASHIER')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String stewards(Model model) {
-		model.addAttribute("stewards", stewardFacade.getAllStewards());
-		StewardDTO stewardDTO  = new StewardDTO();
+        model.addAttribute("stewards", stewardFacade.getAllStewards());
+        StewardDTO stewardDTO = new StewardDTO();
 
         model.addAttribute("steward", stewardDTO);
         return "stewards";
     }
 
+    
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "/all", method = RequestMethod.POST)
-     public String addSteward(@Valid @ModelAttribute(value = "steward") StewardDTO steward, BindingResult result, Model model) {
-        if ( !result.hasErrors() ) {
+    public String addSteward(@Valid @ModelAttribute(value = "steward") StewardDTO steward, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
             stewardFacade.createSteward(steward);
             return "redirect:/steward/all";
         }
@@ -50,7 +52,7 @@ public class StewardController {
     }
 
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updateSteward(@PathVariable(value = "id") Long stewardId, Model model) {
         model.addAttribute("steward", stewardFacade.getSteward(stewardId));
         return "steward_update";
@@ -59,7 +61,7 @@ public class StewardController {
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
     public String updateSteward(@Valid StewardDTO steward, BindingResult result, Model model) {
-        if ( !result.hasErrors() ) {
+        if (!result.hasErrors()) {
             StewardDTO stewardDTO = stewardFacade.getSteward(steward.getId());
             stewardDTO.setFirstName(steward.getFirstName());
             stewardDTO.setLastName(steward.getLastName());
@@ -71,10 +73,10 @@ public class StewardController {
     }
 
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String removeSteward(@PathVariable(value = "id") Long stewardId, Model model) {
-		StewardDTO stewardDTO = stewardFacade.getSteward(stewardId);
-		stewardFacade.deleteSteward(stewardDTO);
-		return "redirect:/steward/all";
+        StewardDTO stewardDTO = stewardFacade.getSteward(stewardId);
+        stewardFacade.deleteSteward(stewardDTO);
+        return "redirect:/steward/all";
     }
 }
