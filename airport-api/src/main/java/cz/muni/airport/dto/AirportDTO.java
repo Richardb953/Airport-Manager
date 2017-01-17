@@ -1,5 +1,8 @@
 package cz.muni.airport.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Jiri Krejci, github name: xkrejci7
@@ -11,6 +14,8 @@ public class AirportDTO {
     private String name;
     private String country;
     private String city;
+	private List<FlightDTO> flightsSources = new ArrayList<>();
+	private List<FlightDTO> flightsDestinations = new ArrayList<>();
 
     public AirportDTO() {
     }
@@ -21,6 +26,22 @@ public class AirportDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+	
+	public List<FlightDTO> getFlightsSources() {
+        return flightsSources;
+    }
+
+    public void setFlightsSources(List<FlightDTO> flights) {
+        this.flightsSources = flights;
+    }
+	
+	public List<FlightDTO> getFlightsDestinations() {
+        return flightsDestinations;
+    }
+
+    public void setFlightsDestinations(List<FlightDTO> flights) {
+        this.flightsDestinations = flights;
     }
 
     public String getIata() {

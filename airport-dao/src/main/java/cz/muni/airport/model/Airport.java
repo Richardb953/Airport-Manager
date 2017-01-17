@@ -1,5 +1,7 @@
 package cz.muni.airport.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * Airport entity class
@@ -38,8 +41,30 @@ public class Airport {
 
     @Column(nullable = false)
     private String city;
+	
+	@OneToMany(mappedBy = "sourcePort")
+    private List<Flight> flightsSources = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "destinationPort")
+    private List<Flight> flightsDestinations = new ArrayList<>();
 
     public Airport() {
+    }
+	
+	public List<Flight> getFlightsSources() {
+        return (flightsSources);
+    }
+
+    public void setFlightsSources(List<Flight> flights) {
+        this.flightsSources = flights;
+    }
+	
+	public List<Flight> getFlightsDestinations() {
+        return (flightsDestinations);
+    }
+
+    public void setFlightsDestinations(List<Flight> flights) {
+        this.flightsDestinations = flights;
     }
 
     public String getIata() {
