@@ -16,13 +16,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" th:text="#{airplane.name}">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" required="required" th:text="*{name}" th:field="*{name}"/>
+                                        <input type="text" class="form-control" id="name" name="name" required="required" th:field="*{name}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="" th:text="#{airplane.type}">Type</label>
                                         <select class="custom-select form-control" id="type" name="type" th:field="${airplaneToUpdate.type}">
                                             <option th:each="type : ${T(cz.muni.airport.enums.PlaneType).values()}"  
-                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}" th:text="#{${type}}"></option>           
+                                                    th:value="${type}"  th:selected="${airplaneToUpdate.type}"></option>           
                                         </select>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label for="" th:text="#{airplane.capacity}">Capacity</label>
                                         <input type="number" min="0" class="form-control" id="capacity" name="capacity" required="required" 
-                                               th:value="*{capacity}"  th:text="*{capacity}"/>
+                                               th:value="*{capacity}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="" th:text="#{airplane.id}">Id</label>
