@@ -88,7 +88,7 @@ public class AirportController {
 
     /**
      * Get Airports by name curl -i -X GET
-     * http://localhost:8082/pa165/rest/airports/city/Bratislava
+     * http://localhost:8082/pa165/rest/airports/name/Dublin
      *
      * @param name name of airport
      * @return AirportDTO

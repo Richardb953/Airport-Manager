@@ -1,6 +1,5 @@
 package cz.muni.airport.rest.controller;
 
-import cz.muni.airport.dto.AirportDTO;
 import cz.muni.airport.dto.StewardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,7 +88,7 @@ public class StewardController {
     public StewardDTO createAirport(@RequestBody StewardDTO steward) {
         return stewardFacade.createSteward(steward);
     }
-
+    
     /**
      * Update steward by PUT method curl -X PUT -i -H "Content-Type:
      * application/json" --data '{"firstName": "firstNameUpdate", "lastName":
