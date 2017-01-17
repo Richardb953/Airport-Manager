@@ -92,7 +92,7 @@ public class Airplane {
     }
 
     public List<Flight> getFlights() {
-        return Collections.unmodifiableList(flights);
+        return (flights);
     }
 
     public void setFlights(List<Flight> flights) {

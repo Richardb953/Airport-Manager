@@ -81,6 +81,16 @@ public interface FlightFacade {
     FlightDTO addStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO);
 
     /**
+     * Add steward to Flight
+     *
+     * @param flightDTO  Flight object as DTO
+     * @param stewardDTO steward object as DTO
+     * @return updated Flight DTO
+     */
+    FlightDTO removeStewardToFlight(FlightDTO flightDTO, StewardDTO stewardDTO);
+
+
+    /**
      * Change state of flight
      *
      * @param newFlightState new State
